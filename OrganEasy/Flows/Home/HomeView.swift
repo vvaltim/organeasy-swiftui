@@ -28,7 +28,7 @@ struct HomeView: View {
                 }
             }
             .navigationDestination(isPresented: $viewModel.goToTransactionView) {
-                TransactionView()
+                TransactionView(viewModel: TransactionViewModel())
             }
         }
     }

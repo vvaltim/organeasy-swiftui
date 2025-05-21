@@ -8,28 +8,41 @@
 import SwiftUI
 
 struct TransactionView: View {
-    
-    @State private var dueDate: Date = Date()
-    @State private var isIncome: Bool = true
+    @StateObject var viewModel: TransactionViewModel
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Transação")){
-                    TextField("Descrição", text: .constant(""))
-                    DatePicker("Data de Vencimento", selection: $dueDate, displayedComponents: .date)
-                    TextField("Valor", text: .constant("R$ 0,00")).keyboardType(.decimalPad)
-                    Picker("Tipo de movimentação", selection: $isIncome) {
-                        Text("Entrada").tag(true)
-                        Text("Saída").tag(false)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
+                    Picker(
+                        "Tipo de movimentação",
+                        selection: $viewModel.isIncome) {
+                            Text("Entrada").tag(true)
+                            Text("Saída").tag(false)
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                    
+                    TextField(
+                        "Descrição",
+                        text: $viewModel.description
+                    )
+                    
+                    CurrencyTextField(
+                        value: $viewModel.amount
+                    )
+                    
+                    DatePicker(
+                        "Data de Vencimento",
+                        selection: $viewModel.dueDate, displayedComponents: .date
+                    )
+                    
+                    
                 }
                 Section {
                     Button("Salvar") {
-                        
-                        print("Validar form, salvar e fechar a tela")
+                        viewModel.validadeTransaction()
                     }
+                    .disabled(viewModel.isDissabledSaveButton)
                 }
                 
                 .navigationBarTitle("Lançamento", displayMode: .inline)
@@ -39,5 +52,5 @@ struct TransactionView: View {
 }
 
 #Preview {
-    TransactionView()
+    TransactionView(viewModel: TransactionViewModel())
 }

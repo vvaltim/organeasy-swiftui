@@ -8,10 +8,10 @@
 import Foundation
 
 struct Transaction {
-    var id: UUID
-    var description: String
-    var dueDate: Date
+    var id: UUID?
+    var description: String?
+    var dueDate: Date?
     var paymentDate: Date?
-    var amount: Double
-    var isIncome: Bool
+    var amount: Double?
+    var isIncome: Bool = false
 }
