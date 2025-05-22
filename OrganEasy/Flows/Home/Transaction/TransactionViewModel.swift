@@ -14,6 +14,7 @@ class TransactionViewModel: ObservableObject {
     // MARK: - Variables
     
     private let context: NSManagedObjectContext
+    private let onClose: () -> Void
     
     @Published public var description: String = ""
     @Published public var dueDate: Date = Date()
@@ -26,8 +27,9 @@ class TransactionViewModel: ObservableObject {
     
     // MARK: - Initializer
     
-    init (context: NSManagedObjectContext) {
+    init (context: NSManagedObjectContext, onClose: @escaping () -> Void) {
         self.context = context
+        self.onClose = onClose
     }
     
     // MARK: - Methods
@@ -43,7 +45,7 @@ class TransactionViewModel: ObservableObject {
         do {
             try context.save()
             
-            // fechar a tela
+            onClose()
         } catch {
             print("Erro ao salvar a transação: \(error)")
         }

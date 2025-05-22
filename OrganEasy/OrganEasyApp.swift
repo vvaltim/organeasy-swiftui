@@ -12,6 +12,7 @@ struct OrganEasyApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabBar()
+                .accentColor(.purple)
         }
     }
 }

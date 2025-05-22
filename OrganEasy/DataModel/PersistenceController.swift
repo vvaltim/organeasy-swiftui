@@ -9,11 +9,30 @@ import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
+    
     let container: NSPersistentContainer
+    
     static var preview: PersistenceController = {
         let controller = PersistenceController(inMemory: true)
+        let viewContext = controller.container.viewContext
         
-        // Adicionar as coisas aqui pra simular
+        // Adicionando 5 itens para mockar
+        
+        for i in 0..<5 {
+                let transaction = Transaction(context: viewContext)
+                transaction.id = UUID()
+                transaction.descriptionText = "Transação \(i + 1)"
+                transaction.dueDate = Date().addingTimeInterval(Double(i) * 86400)
+                transaction.amount = Double(i) * 100.0
+                transaction.isIncome = (i % 2 == 0)
+            }
+
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Erro ao salvar contexto de preview: \(nsError), \(nsError.userInfo)")
+            }
         
         return controller
     }()

@@ -16,9 +16,9 @@ extension Transaction {
     }
 
     @NSManaged public var amount: Double
-    @NSManaged public var descriptionText: String?
-    @NSManaged public var dueDate: Date?
-    @NSManaged public var id: UUID?
+    @NSManaged public var descriptionText: String
+    @NSManaged public var dueDate: Date
+    @NSManaged public var id: UUID
     @NSManaged public var isIncome: Bool
     @NSManaged public var paymentDate: Date?
 

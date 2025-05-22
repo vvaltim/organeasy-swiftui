@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct MainTabBar: View {
+    
+    let persistenceController = PersistenceController.shared
+    
     var body: some View {
         TabView {
-            HomeView()
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("Início")
-                }
+            HomeView(
+                viewModel: HomeViewModel(
+                    context: persistenceController.container.viewContext
+                )
+            )
+            .tabItem {
+                Image(systemName: "house")
+                Text("Início")
+            }
             SettingView(viewModel: SettingViewModel())
                 .tabItem {
                     Image(systemName: "gear")
