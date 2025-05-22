@@ -7,10 +7,13 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 class TransactionViewModel: ObservableObject {
     
     // MARK: - Variables
+    
+    private let context: NSManagedObjectContext
     
     @Published public var description: String = ""
     @Published public var dueDate: Date = Date()
@@ -21,9 +24,28 @@ class TransactionViewModel: ObservableObject {
         description.isEmpty
     }
     
+    // MARK: - Initializer
+    
+    init (context: NSManagedObjectContext) {
+        self.context = context
+    }
+    
     // MARK: - Methods
     
-    func validadeTransaction() {
-        // salvar o valor
+    func saveAction() {
+        let transaction = Transaction(context: context)
+        transaction.id = UUID()
+        transaction.descriptionText = description
+        transaction.dueDate = dueDate
+        transaction.amount = amount.concurrenceToDouble()
+        transaction.isIncome = isIncome
+        
+        do {
+            try context.save()
+            
+            // fechar a tela
+        } catch {
+            print("Erro ao salvar a transação: \(error)")
+        }
     }
 }

@@ -40,7 +40,7 @@ struct TransactionView: View {
                 }
                 Section {
                     Button("Salvar") {
-                        viewModel.validadeTransaction()
+                        viewModel.saveAction()
                     }
                     .disabled(viewModel.isDissabledSaveButton)
                 }
@@ -52,5 +52,10 @@ struct TransactionView: View {
 }
 
 #Preview {
-    TransactionView(viewModel: TransactionViewModel())
+    let context = PersistenceController.preview.container.viewContext
+    TransactionView(
+        viewModel: TransactionViewModel(
+            context: context
+        )
+    )
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    let persistenceController = PersistenceController.shared
     
     var body: some View {
         NavigationStack {
@@ -28,7 +29,11 @@ struct HomeView: View {
                 }
             }
             .navigationDestination(isPresented: $viewModel.goToTransactionView) {
-                TransactionView(viewModel: TransactionViewModel())
+                TransactionView(
+                    viewModel: TransactionViewModel(
+                        context: persistenceController.container.viewContext
+                    )
+                )
             }
         }
     }
