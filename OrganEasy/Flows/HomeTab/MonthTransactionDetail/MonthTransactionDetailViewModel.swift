@@ -9,12 +9,42 @@ import SwiftUI
 
 class MonthTransactionDetailViewModel: ObservableObject {
     
+    private var repository: TransactionRepository
+    
     @Published var transactions: [Transaction] = []
     @Published var month: String = ""
     
-    init(transactions: [Transaction]) {
-        self.transactions = transactions
-        self.month = transactions.first?.getMonthTitle() ?? "Desconhecido"
+    init(repository: TransactionRepository, month: String) {
+        self.repository = repository
+        self.month = month
+        
+        getTransactionsPerMonth()
     }
     
+    // MARK: - Public Methods
+    
+    func markToPaid(transaction: Transaction) {
+        repository.markToPaid(transaction)
+        
+        getTransactionsPerMonth()
+    }
+    
+    func delete(transaction: Transaction) {
+        repository.remove(transaction)
+        
+        getTransactionsPerMonth()
+    }
+    
+    // MARK:  Private Methods
+    
+    private func getTransactionsPerMonth() {
+        let allTransactions = repository.fetchAll()
+        
+        transactions = allTransactions.filter {
+            $0.dueDate.formatToMonthYear() == month
+        }
+        print("Quantidade de transações: \(transactions.count)")
+        
+//        objectWillChange.send()
+    }
 }

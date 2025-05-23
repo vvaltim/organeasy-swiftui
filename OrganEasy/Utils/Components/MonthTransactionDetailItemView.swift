@@ -9,35 +9,50 @@ import CoreData
 import SwiftUI
 
 struct MonthTransactionDetailItemView: View {
-    let transaction: Transaction
-    
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        return formatter
-    }
+    var descriptionText: String
+    var dueDate: String
+    var paymentDate: String?
+    var ammount: String
+    var isIncome: Bool
     
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(isIncome ? Color.green.opacity(0.15) : Color.red.opacity(0.15))
+                    .frame(width: 36, height: 36)
+                
+                Image(systemName: isIncome ? "chevron.up.forward.dotted.2" : "chevron.up.forward.dotted.2")
+                    .foregroundColor(isIncome ? .green : .red)
+                    .font(.system(size: 22))
+                    .rotationEffect(isIncome ? .degrees(0) : .degrees(180))
+            }
+            
             VStack(alignment: .leading, spacing: 4) {
-                Text(transaction.descriptionText)
-                    .font(.headline)
-                
-                Text("Vencimento: \(transaction.dueDate, formatter: dateFormatter)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                
-                if let paymentDate = transaction.paymentDate {
-                    Text("Pago em: \(paymentDate, formatter: dateFormatter)")
-                        .font(.caption)
-                        .foregroundColor(.green)
+                HStack {
+                    Text(descriptionText)
+                        .font(.body)
+                    
+                    Spacer()
+                    
+                    if let paymentDate = paymentDate {
+                        Text(paymentDate)
+                            .font(.caption)
+                            .bold()
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.green.opacity(0.5))
+                            .foregroundColor(.green)
+                            .cornerRadius(8)
+                    }
                 }
                 
-                Spacer()
+                Text(ammount)
+                    .font(.headline)
                 
-                Text(transaction.amount, format: .currency(code: "BRL"))
-                    .font(.title3)
-                    .foregroundColor(transaction.isIncome ? .green : .red)
+                Text(dueDate)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
             }
             .padding(.top, 8)
             .padding(.bottom, 8)
@@ -45,15 +60,13 @@ struct MonthTransactionDetailItemView: View {
     }
 }
 
-#Preview {
-    var context = PersistenceController.preview.container.viewContext
-    
-    let transaction = Transaction(context: context)
-    transaction.id = UUID()
-    transaction.descriptionText = "Teste"
-    transaction.dueDate = Date()
-    transaction.amount = 100
-    transaction.isIncome = false
-    
-    return MonthTransactionDetailItemView(transaction: transaction)
+#Preview(traits: .sizeThatFitsLayout) {
+    return MonthTransactionDetailItemView(
+        descriptionText: "Spothirth",
+        dueDate: "10/11",
+        paymentDate: "25/11",
+        ammount: "R$ 666,66",
+        isIncome: true
+    )
+    .padding()
 }

@@ -15,4 +15,13 @@ extension String {
             .replacingOccurrences(of: ",", with: ".")
         return Double(cleaned) ?? 0.0
     }
+    
+    // MARK: - Deixa apenas a primeira letra como Maiuscula
+    
+    func captainizeFirstLetter() -> String {
+        guard let firstCharacter = first else {
+            return self
+        }
+        return String(firstCharacter).uppercased() + dropFirst()
+    }
 }

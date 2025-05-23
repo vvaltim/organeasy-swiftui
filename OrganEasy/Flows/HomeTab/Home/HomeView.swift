@@ -15,12 +15,12 @@ struct HomeView: View {
         NavigationStack {
             List(viewModel.firstTransactionPerMonth, id: \.self) { transaction in
                 HStack {
-                    Text(transaction.getMonthTitle())
+                    Text(transaction.dueDate.formatToMonthYear())
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    viewModel.detailItemTapped(transaction.getMonthTitle())
+                    viewModel.detailItemTapped(transaction.dueDate.formatToMonthYear())
                 }
             }
             .navigationTitle(Text("Início"))
@@ -38,9 +38,7 @@ struct HomeView: View {
             .navigationDestination(isPresented: $viewModel.goToTransactionView) {
                 TransactionView(
                     viewModel: TransactionViewModel(
-                        repository: TransactionRepository(
-                            context: persistenceController.container.viewContext
-                        ),
+                        repository: viewModel.repository,
                         onClose: {
                             viewModel.goToTransactionView = false
                             
@@ -52,7 +50,8 @@ struct HomeView: View {
             .navigationDestination(isPresented: $viewModel.goToTransactionDetailView) {
                 MonthTransactionDetailView(
                     viewModel: MonthTransactionDetailViewModel(
-                        transactions: viewModel.detailItems
+                        repository: viewModel.repository,
+                        month: viewModel.selectedMonth
                     )
                 )
             }

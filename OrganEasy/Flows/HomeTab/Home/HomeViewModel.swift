@@ -12,7 +12,7 @@ class HomeViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: TransactionRepository
+    let repository: TransactionRepository
     
     // MARK: - Items View
     
@@ -23,7 +23,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var goToTransactionView = false
     @Published var goToTransactionDetailView = false
-    var detailItems: [Transaction] = []
+    var selectedMonth: String = .init()
     
     var firstTransactionPerMonth: [Transaction] {
         groupedByMonth.values.compactMap {
@@ -47,7 +47,7 @@ class HomeViewModel: ObservableObject {
     
     func detailItemTapped(_ month: String) {
         goToTransactionDetailView = true
-        detailItems = groupedByMonth[month] ?? []
+        selectedMonth = month
     }
     
     func fetchTransactions() {
@@ -59,12 +59,9 @@ class HomeViewModel: ObservableObject {
     // MARK: - Private Methods
     
     private func groupedByMonthTransactions() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "pt_BR")
-        dateFormatter.dateFormat = "MMMM 'de' yyyy"
         
         groupedByMonth = Dictionary(grouping: transactions) { transaction in
-            return dateFormatter.string(from: transaction.dueDate).capitalized
+            return transaction.dueDate.formatToMonthYear()
         }
     }
 }

@@ -43,6 +43,18 @@ class TransactionRepository {
         save()
     }
     
+    func remove(_ transaction: Transaction) {
+        context.delete(transaction)
+        
+        save()
+    }
+    
+    func markToPaid(_ transaction: Transaction) {
+        transaction.paymentDate = Date()
+        
+        save()
+    }
+    
     // MARK: - Private Methods
     
     func save() {
