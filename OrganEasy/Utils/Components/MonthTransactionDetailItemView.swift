@@ -39,7 +39,8 @@ struct MonthTransactionDetailItemView: View {
                     .font(.title3)
                     .foregroundColor(transaction.isIncome ? .green : .red)
             }
-            .padding()
+            .padding(.top, 8)
+            .padding(.bottom, 8)
         }
     }
 }

@@ -12,7 +12,7 @@ class HomeViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let context: NSManagedObjectContext
+    private let repository: TransactionRepository
     
     // MARK: - Items View
     
@@ -33,13 +33,13 @@ class HomeViewModel: ObservableObject {
     
     // MARK: - Initializer
     
-    init (context: NSManagedObjectContext) {
-        self.context = context
+    init (repository: TransactionRepository) {
+        self.repository = repository
         
         fetchTransactions()
     }
     
-    // MARK: - Methods
+    // MARK: - Public Methods
     
     func addButtonTapped() {
         goToTransactionView = true
@@ -51,19 +51,14 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchTransactions() {
-        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Transaction.dueDate, ascending: false)]
-        do {
-            transactions = try context.fetch(request)
-            
-            groupedByMonthTransactions()
-        } catch {
-            print("Error fetching transactions: \(error)")
-            transactions = []
-        }
+        transactions = repository.fetchAll()
+        
+        groupedByMonthTransactions()
     }
     
-    func groupedByMonthTransactions() {
+    // MARK: - Private Methods
+    
+    private func groupedByMonthTransactions() {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "pt_BR")
         dateFormatter.dateFormat = "MMMM 'de' yyyy"

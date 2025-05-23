@@ -15,7 +15,9 @@ struct MainTabBar: View {
         TabView {
             HomeView(
                 viewModel: HomeViewModel(
-                    context: persistenceController.container.viewContext
+                    repository: TransactionRepository(
+                        context: persistenceController.container.viewContext
+                    )
                 )
             )
             .tabItem {

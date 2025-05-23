@@ -53,9 +53,10 @@ struct TransactionView: View {
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
+    let repository = TransactionRepository(context: context)
     TransactionView(
         viewModel: TransactionViewModel(
-            context: context,
+            repository: repository,
             onClose: { }
         )
     )

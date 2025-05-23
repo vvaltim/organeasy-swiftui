@@ -13,7 +13,7 @@ class TransactionViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let context: NSManagedObjectContext
+    private let repository: TransactionRepository
     private let onClose: () -> Void
     
     @Published public var description: String = ""
@@ -27,27 +27,23 @@ class TransactionViewModel: ObservableObject {
     
     // MARK: - Initializer
     
-    init (context: NSManagedObjectContext, onClose: @escaping () -> Void) {
-        self.context = context
+    init (repository: TransactionRepository, onClose: @escaping () -> Void) {
+        self.repository = repository
         self.onClose = onClose
     }
     
     // MARK: - Methods
     
     func saveAction() {
-        let transaction = Transaction(context: context)
-        transaction.id = UUID()
-        transaction.descriptionText = description
-        transaction.dueDate = dueDate
-        transaction.amount = amount.concurrenceToDouble()
-        transaction.isIncome = isIncome
+        let dto = TransactionDTO(
+            isIncome: isIncome,
+            descriptionText: description,
+            amount: amount.concurrenceToDouble(),
+            dueDate: dueDate
+        )
         
-        do {
-            try context.save()
-            
-            onClose()
-        } catch {
-            print("Erro ao salvar a transação: \(error)")
-        }
+        repository.add(dto)
+        
+        onClose()
     }
 }

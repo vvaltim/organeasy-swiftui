@@ -20,4 +20,7 @@ public class Transaction: NSManagedObject {
         return dateFormatter.string(from: self.dueDate).capitalized
     }
     
+    func add(transaction: Transaction) {
+        
+    }
 }

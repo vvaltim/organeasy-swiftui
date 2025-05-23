@@ -38,7 +38,9 @@ struct HomeView: View {
             .navigationDestination(isPresented: $viewModel.goToTransactionView) {
                 TransactionView(
                     viewModel: TransactionViewModel(
-                        context: persistenceController.container.viewContext,
+                        repository: TransactionRepository(
+                            context: persistenceController.container.viewContext
+                        ),
                         onClose: {
                             viewModel.goToTransactionView = false
                             
@@ -60,10 +62,11 @@ struct HomeView: View {
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
+    let repository = TransactionRepository(context: context)
     
     HomeView(
         viewModel: HomeViewModel(
-            context: context
+            repository: repository
         )
     )
 }
