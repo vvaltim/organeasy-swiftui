@@ -27,7 +27,8 @@ struct MonthTransactionDetailView: View {
                         dueDate: transaction.dueDate.formatTo(dateFormat: "dd/MM"),
                         paymentDate: transaction.paymentDate?.formatTo(dateFormat: "dd/MM"),
                         ammount: transaction.amount.toBRL(),
-                        isIncome: transaction.isIncome
+                        isIncome: transaction.isIncome,
+                        isSlash: transaction.isSlash
                     )
                         .swipeActions(edge: .leading, allowsFullSwipe: true) {
                             if transaction.paymentDate == nil && !transaction.isIncome {
@@ -41,6 +42,18 @@ struct MonthTransactionDetailView: View {
                                 }
                                 .tint(.green)
                             }
+                            
+                            Button {
+                                viewModel.changeSlash(
+                                    transaction: transaction
+                                )
+                            } label: {
+                                Label(
+                                    transaction.isSlash ? "Desrasurar" : "Rasurar" ,
+                                    systemImage: transaction.isSlash ? "pencil" : "pencil.slash"
+                                )
+                            }
+                            .tint(.teal)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button {

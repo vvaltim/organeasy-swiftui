@@ -39,7 +39,8 @@ class TransactionViewModel: ObservableObject {
             isIncome: isIncome,
             descriptionText: description,
             amount: amount.concurrenceToDouble(),
-            dueDate: dueDate
+            dueDate: dueDate,
+            isSlash: false  // Colocar um campo na tela para isso
         )
         
         repository.add(dto)

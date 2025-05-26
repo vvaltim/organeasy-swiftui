@@ -12,4 +12,5 @@ struct TransactionDTO {
     var descriptionText: String
     var amount: Double
     var dueDate: Date
+    var isSlash: Bool
 }

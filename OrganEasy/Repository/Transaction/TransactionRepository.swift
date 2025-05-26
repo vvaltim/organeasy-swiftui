@@ -39,6 +39,7 @@ class TransactionRepository {
         transaction.dueDate = dto.dueDate
         transaction.amount = dto.amount
         transaction.isIncome = dto.isIncome
+        transaction.isSlash = dto.isSlash
         
         save()
     }
@@ -51,6 +52,12 @@ class TransactionRepository {
     
     func markToPaid(_ transaction: Transaction) {
         transaction.paymentDate = Date()
+        
+        save()
+    }
+    
+    func changeSlash(_ transaction: Transaction) {
+        transaction.isSlash.toggle()
         
         save()
     }

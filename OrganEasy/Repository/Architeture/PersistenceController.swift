@@ -25,6 +25,7 @@ struct PersistenceController {
                 transaction.dueDate = Date().addingTimeInterval(Double(i) * 86400)
                 transaction.amount = Double(i) * 100.0
                 transaction.isIncome = (i % 2 == 0)
+                transaction.isSlash = (i % 2 != 0)
             }
 
             do {

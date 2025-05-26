@@ -14,6 +14,7 @@ struct MonthTransactionDetailItemView: View {
     var paymentDate: String?
     var ammount: String
     var isIncome: Bool
+    var isSlash: Bool
     
     var body: some View {
         HStack(spacing: 12) {
@@ -48,6 +49,7 @@ struct MonthTransactionDetailItemView: View {
                 }
                 
                 Text(ammount)
+                    .strikethrough(isSlash)
                     .font(.headline)
                 
                 Text(dueDate)
@@ -66,7 +68,8 @@ struct MonthTransactionDetailItemView: View {
         dueDate: "10/11",
         paymentDate: "25/11",
         ammount: "R$ 666,66",
-        isIncome: true
+        isIncome: true,
+        isSlash: true
     )
     .padding()
 }

@@ -12,7 +12,4 @@ import CoreData
 @objc(Transaction)
 public class Transaction: NSManagedObject {
     
-    func add(transaction: Transaction) {
-        
-    }
 }

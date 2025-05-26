@@ -21,6 +21,7 @@ extension Transaction {
     @NSManaged public var id: UUID
     @NSManaged public var isIncome: Bool
     @NSManaged public var paymentDate: Date?
+    @NSManaged public var isSlash: Bool
 
 }
 

@@ -55,6 +55,12 @@ class MonthTransactionDetailViewModel: ObservableObject {
         getTransactionsPerMonth()
     }
     
+    func changeSlash(transaction: Transaction) {
+        repository.changeSlash(transaction)
+        
+        getTransactionsPerMonth()
+    }
+    
     // MARK:  Private Methods
     
     private func getTransactionsPerMonth() {
