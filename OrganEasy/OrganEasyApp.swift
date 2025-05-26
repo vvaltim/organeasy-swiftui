@@ -13,6 +13,7 @@ struct OrganEasyApp: App {
         WindowGroup {
             MainTabBar()
                 .accentColor(.indigo)
+                .environment(\.locale, Locale(identifier: "pt_BR"))
         }
     }
 }

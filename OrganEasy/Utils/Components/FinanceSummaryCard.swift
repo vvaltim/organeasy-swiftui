@@ -1,0 +1,70 @@
+//
+//  FinanceSummaryCard.swift
+//  OrganEasy
+//
+//  Created by Walter Vânio dos Reis Júnior on 26/05/25.
+//
+
+import SwiftUI
+
+struct FinanceSummaryCard: View {
+    var input: Double
+    var output: Double
+    
+    var total: Double {
+        input - output
+    }
+    
+    var body: some View {
+        VStack (alignment: .leading, spacing: 16){
+            VStack{
+                HStack {
+                    Text("Entradas")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(input.toBRL())
+                        .font(.headline)
+                        .foregroundColor(.green)
+                }
+                
+                HStack{
+                    Text("Saídas")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text(output.toBRL())
+                        .font(.headline)
+                        .foregroundColor(.red)
+                }
+            }
+            Divider()
+            HStack{
+                Text("Saldo")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Spacer()
+                Text(total.toBRL())
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(total > 0 ? .green : .red)
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(
+                    Color.gray.opacity(0.3),
+                    lineWidth: 1
+                )
+        )
+        .padding(.vertical)
+    }
+}
+
+#Preview(traits: .sizeThatFitsLayout) {
+    FinanceSummaryCard(
+        input: 300.36,
+        output: 121.40
+    ).padding()
+}

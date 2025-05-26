@@ -14,6 +14,26 @@ class MonthTransactionDetailViewModel: ObservableObject {
     @Published var transactions: [Transaction] = []
     @Published var month: String = ""
     
+    var input: Double {
+        var sum: Double = 0
+        for item in transactions {
+            if item.isIncome {
+                sum += item.amount
+            }
+        }
+        return sum
+    }
+    
+    var output: Double {
+        var sum: Double = 0
+        for item in transactions {
+            if !item.isIncome {
+                sum += item.amount
+            }
+        }
+        return sum
+    }
+    
     init(repository: TransactionRepository, month: String) {
         self.repository = repository
         self.month = month
