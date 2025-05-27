@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
-    let persistenceController = PersistenceController.shared
     
     var body: some View {
         NavigationStack {

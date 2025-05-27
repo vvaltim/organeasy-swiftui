@@ -16,24 +16,33 @@ struct PersistenceController {
         let controller = PersistenceController(inMemory: true)
         let viewContext = controller.container.viewContext
         
-        // Adicionando 5 itens para mockar
+        // Add 5 transactions
         
         for i in 0..<5 {
-                let transaction = Transaction(context: viewContext)
-                transaction.id = UUID()
-                transaction.descriptionText = "Transação \(i + 1)"
-                transaction.dueDate = Date().addingTimeInterval(Double(i) * 86400)
-                transaction.amount = Double(i) * 100.0
-                transaction.isIncome = (i % 2 == 0)
-                transaction.isSlash = (i % 2 != 0)
-            }
-
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Erro ao salvar contexto de preview: \(nsError), \(nsError.userInfo)")
-            }
+            let transaction = Transaction(context: viewContext)
+            transaction.id = UUID()
+            transaction.descriptionText = "Transação \(i + 1)"
+            transaction.dueDate = Date().addingTimeInterval(Double(i) * 86400)
+            transaction.amount = Double(i) * 100.0
+            transaction.isIncome = (i % 2 == 0)
+            transaction.isSlash = (i % 2 != 0)
+        }
+        
+        // Add 2 banks
+        
+        for i in 0..<2 {
+            let bank = Bank(context: viewContext)
+            bank.id = UUID()
+            bank.name = "Banco \(i + 1)"
+            bank.isHidden = (i == 1)
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Erro ao salvar contexto de preview: \(nsError), \(nsError.userInfo)")
+        }
         
         return controller
     }()
