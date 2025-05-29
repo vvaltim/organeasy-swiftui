@@ -53,6 +53,7 @@ struct FinanceSummaryCard: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
                 .stroke(
                     Color.gray.opacity(0.3),
                     lineWidth: 1

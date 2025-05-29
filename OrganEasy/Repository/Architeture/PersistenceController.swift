@@ -17,7 +17,6 @@ struct PersistenceController {
         let viewContext = controller.container.viewContext
         
         // Add 5 transactions
-        
         for i in 0..<5 {
             let transaction = Transaction(context: viewContext)
             transaction.id = UUID()
@@ -29,13 +28,24 @@ struct PersistenceController {
         }
         
         // Add 2 banks
-        
+        var banks: [Bank] = []
         for i in 0..<2 {
             let bank = Bank(context: viewContext)
             bank.id = UUID()
             bank.name = "Banco \(i + 1)"
             bank.isHidden = (i == 1)
+            banks.append(bank)
         }
+        
+        // Add 5 evolutions, alternando entre os bancos criados
+        for i in 0..<5 {
+            let evolution = Evolution(context: viewContext)
+            evolution.id = UUID()
+            evolution.value = Double(i) * 50.0
+            evolution.date = Date().addingTimeInterval(Double(i) * 43200)
+            evolution.bank = banks[i % banks.count]
+        }
+        
         
         do {
             try viewContext.save()

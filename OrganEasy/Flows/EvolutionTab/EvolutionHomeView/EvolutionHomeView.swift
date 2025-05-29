@@ -25,7 +25,7 @@ struct EvolutionHomeView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                                    
+                            viewModel.openDetailsEvolution(evolution)
                         }
                     }
                 }
@@ -52,6 +52,16 @@ struct EvolutionHomeView: View {
                         onClose: {
                             viewModel.closeCreateEvolution()
                         }
+                    )
+                )
+            }
+            .navigationDestination(isPresented: $viewModel.goToDetailEvolution) {
+                MonthEvolutionDetailView(
+                    viewModel: MonthEvolutionDetailViewModel(
+                        repository: EvolutionRepository(
+                            context: persistenceController.container.viewContext
+                        ),
+                        month: viewModel.selectedMonth
                     )
                 )
             }

@@ -18,6 +18,8 @@ class EvolutionHomeViewModel: ObservableObject {
     // MARK: - Navigation
     
     @Published var goToCreateEvolution = false
+    @Published var goToDetailEvolution = false
+    var selectedMonth = ""
     
     // MARK: - ItemView
     
@@ -32,6 +34,8 @@ class EvolutionHomeViewModel: ObservableObject {
     
     init(repository: EvolutionRepository) {
         self.repository = repository
+        
+        fetchAll()
     }
     
     // MARK: - Public Functions
@@ -44,6 +48,11 @@ class EvolutionHomeViewModel: ObservableObject {
         goToCreateEvolution = false
         
         fetchAll()
+    }
+    
+    func openDetailsEvolution(_ evolution: Evolution) {
+        goToDetailEvolution = true
+        selectedMonth = evolution.date?.formatToMonthYear() ?? ""
     }
     
     func fetchAll() {
