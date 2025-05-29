@@ -1,0 +1,14 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo Indigo -->
+  <rect width="1024" height="1024" rx="0" fill="#4B0082"/>
+  <!-- Gráfico de Barras -->
+  <rect x="280" y="500" width="60" height="180" rx="16" fill="#FFFFFF"/>
+  <rect x="380" y="420" width="60" height="260" rx="16" fill="#FFFFFF"/>
+  <rect x="480" y="350" width="60" height="330" rx="16" fill="#FFFFFF"/>
+  <rect x="580" y="470" width="60" height="210" rx="16" fill="#FFFFFF"/>
+  <!-- Cifrão Central -->
+  <text x="512" y="600" text-anchor="middle" font-size="180" font-family="Arial, sans-serif" fill="#FFD700" font-weight="bold">$</text>
+  <!-- Check no canto inferior direito -->
+  <circle cx="900" cy="900" r="48" fill="#FFFFFF"/>
+  <polyline points="880,900 900,920 930,880" fill="none" stroke="#4B0082" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

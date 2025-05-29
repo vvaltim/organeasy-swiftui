@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct EvolutionHomeView: View {
+    let persistenceController = PersistenceController.shared
+    
+    @StateObject var viewModel: EvolutionHomeViewModel
+    
     var body: some View {
         NavigationStack {
             List {
@@ -27,15 +31,29 @@ struct EvolutionHomeView: View {
             .navigationTitle(Text("Evolução"))
             .toolbar {
                 ToolbarItem {
-                    Button(action: { }) {
+                    Button(action: {
+                        viewModel.openCreateEvolution()
+                    }) {
                         Image(systemName: "plus")
                     }
                 }
+            }
+            .navigationDestination(isPresented: $viewModel.goToCreateEvolution) {
+                CreateEvolutionView(
+                    viewModel: CreateEvolutionViewModel(
+                        bankRepository: BankRepository(
+                            context: persistenceController.container.viewContext
+                        ),
+                        evolutionRepository: EvolutionRepository(
+                            context: persistenceController.container.viewContext
+                        )
+                    )
+                )
             }
         }
     }
 }
 
 #Preview {
-    EvolutionHomeView()
+    EvolutionHomeView(viewModel: EvolutionHomeViewModel())
 }

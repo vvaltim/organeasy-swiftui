@@ -24,7 +24,9 @@ struct MainTabBar: View {
                 Image(systemName: "house")
                 Text("Início")
             }
-            EvolutionHomeView()
+            EvolutionHomeView(
+                viewModel: EvolutionHomeViewModel()
+            )
                 .tabItem {
                     Image(systemName: "chart.line.uptrend.xyaxis")
                     Text("Evolução")

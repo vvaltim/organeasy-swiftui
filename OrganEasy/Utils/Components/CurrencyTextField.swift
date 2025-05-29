@@ -23,20 +23,35 @@ struct CurrencyTextField: View {
     }()
 
     var body: some View {
-        TextField("Valor", text: $internalValue)
-            .keyboardType(.numberPad)
-            .onChange(of: internalValue, initial: false) { newValue, _ in
-                let digits = newValue.filter { "0123456789".contains($0) }
-                let doubleValue = (Double(digits) ?? 0) / 100
-                if let formatted = formatter.string(from: NSNumber(value: doubleValue)) {
-                    internalValue = formatted
-                    value = formatted
-                } else {
-                    value = newValue
+        HStack {
+            Text("Valor")
+            
+            TextField("Valor", text: $internalValue)
+                .multilineTextAlignment(.trailing)
+                .keyboardType(.numberPad)
+                .onChange(of: internalValue, initial: false) { newValue, _ in
+                    let digits = newValue.filter { "0123456789".contains($0) }
+                    let doubleValue = (Double(digits) ?? 0) / 100
+                    if let formatted = formatter.string(from: NSNumber(value: doubleValue)) {
+                        internalValue = formatted
+                        value = formatted
+                    } else {
+                        value = newValue
+                    }
                 }
-            }
-            .onAppear {
-                internalValue = value
-            }
+                .onAppear {
+                    internalValue = value
+                }
+        }
     }
+}
+
+#Preview {
+    struct PreviewWrapper: View {
+            @State private var value: String = "R$ 35,32"
+            var body: some View {
+                CurrencyTextField(value: $value)
+            }
+        }
+        return PreviewWrapper()
 }
