@@ -30,6 +30,26 @@ class EvolutionHomeViewModel: ObservableObject {
         }
     }
     
+    // MARK: Chart
+    
+    var chartData: [TestValues] {
+        var test: [TestValues] = []
+        
+        for evolutionKey in groupedByMonth.keys {
+            let month = groupedByMonth[evolutionKey]?.first?.date?.formatTo(dateFormat: "MMM/yy") ?? .init()
+            let value = groupedByMonth[evolutionKey]?.reduce(0) { $0 + $1.value } ?? 0.0
+            
+            let item = TestValues(
+                month: month,
+                value: value
+            )
+            
+            test.append(item)
+        }
+        
+        return test
+    }
+    
     // MARK: - Init
     
     init(repository: EvolutionRepository) {
@@ -63,4 +83,7 @@ class EvolutionHomeViewModel: ObservableObject {
         }
     }
     
+    func getTotalByMonth(month: String) -> Double {
+        groupedByMonth[month]?.reduce(0) { $0 + $1.value } ?? 0.0
+    }
 }

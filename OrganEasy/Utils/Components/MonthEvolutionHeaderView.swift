@@ -14,8 +14,12 @@ struct MonthEvolutionHeaderView: View {
     var body: some View {
         HStack {
             Text(label)
+                .font(.body)
+                .foregroundColor(.primary)
             Spacer()
             Text(value.toBRL())
+                .fontWeight(.bold)
+                .foregroundColor(.primary)
         }
         .padding()
         .background(

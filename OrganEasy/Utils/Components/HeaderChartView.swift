@@ -9,32 +9,40 @@ import Charts
 import SwiftUI
 
 struct HeaderChartView: View {
-    let chartData: [TestValues] = [
-        TestValues(month: "Jan/25", value: 100),
-        TestValues(month: "Feb/25", value: 200),
-        TestValues(month: "Mar/25", value: 300),
-    ]
+    let chartData: [TestValues]
     
     var body: some View {
-        Chart(chartData) { item in
-            LineMark(
-                x: .value("Mês", item.month),
-                y: .value("Saldo", item.value)
-            )
-        }
-        .chartYAxis {
-            AxisMarks() { value in
-                if let doubleValue = value.as(Double.self) {
-                    AxisGridLine()
-                    AxisTick()
-                    AxisValueLabel {
-                        Text(doubleValue.toBRL())
+        HStack {
+            Chart(chartData) { item in
+                LineMark(
+                    x: .value("Mês", item.month),
+                    y: .value("Saldo", item.value)
+                )
+            }
+            .chartYAxis {
+                AxisMarks() { value in
+                    if let doubleValue = value.as(Double.self) {
+                        AxisGridLine()
+                        AxisTick()
+                        AxisValueLabel {
+                            Text(doubleValue.toBRL())
+                        }
                     }
                 }
             }
+            .frame(height: 200)
+            .padding()
         }
-        .frame(height: 200)
         .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .stroke(
+                    Color.gray.opacity(0.3),
+                    lineWidth: 1
+                )
+        )
+        .padding(.vertical)
     }
 }
 
@@ -45,11 +53,11 @@ struct TestValues: Identifiable {
 }
 
 #Preview {
-//    let data = [
-//        TestValues(month: "Jan", value: 100),
-//        TestValues(month: "Feb", value: 200),
-//        TestValues(month: "Mar", value: 300),
-//    ]
-//    
-    HeaderChartView()//(chartData: data)
+    let data = [
+        TestValues(month: "Jan", value: 100),
+        TestValues(month: "Feb", value: 200),
+        TestValues(month: "Mar", value: 300),
+    ]
+    
+    HeaderChartView(chartData: data)
 }
