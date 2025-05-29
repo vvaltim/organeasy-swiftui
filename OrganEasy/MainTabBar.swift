@@ -25,12 +25,16 @@ struct MainTabBar: View {
                 Text("Início")
             }
             EvolutionHomeView(
-                viewModel: EvolutionHomeViewModel()
+                viewModel: EvolutionHomeViewModel(
+                    repository: EvolutionRepository(
+                        context: persistenceController.container.viewContext
+                    )
+                )
             )
-                .tabItem {
-                    Image(systemName: "chart.line.uptrend.xyaxis")
-                    Text("Evolução")
-                }
+            .tabItem {
+                Image(systemName: "chart.line.uptrend.xyaxis")
+                Text("Evolução")
+            }
             SettingView(viewModel: SettingViewModel())
                 .tabItem {
                     Image(systemName: "gear")

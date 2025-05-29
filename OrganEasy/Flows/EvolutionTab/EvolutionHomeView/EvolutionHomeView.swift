@@ -18,13 +18,15 @@ struct EvolutionHomeView: View {
                 Section(
                     header: HeaderChartView()
                 ) {
-                    HStack {
-                        Text(Date().formatToMonthYear())
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                                                
+                    ForEach(viewModel.firstEvolutionPerMonth, id: \.objectID) { evolution in
+                        HStack {
+                            Text(evolution.date?.formatToMonthYear() ?? "Vazio")
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                                                    
+                        }
                     }
                 }
             }
@@ -46,7 +48,10 @@ struct EvolutionHomeView: View {
                         ),
                         evolutionRepository: EvolutionRepository(
                             context: persistenceController.container.viewContext
-                        )
+                        ),
+                        onClose: {
+                            viewModel.closeCreateEvolution()
+                        }
                     )
                 )
             }
@@ -55,5 +60,13 @@ struct EvolutionHomeView: View {
 }
 
 #Preview {
-    EvolutionHomeView(viewModel: EvolutionHomeViewModel())
+    let container = PersistenceController.preview.container
+    
+    EvolutionHomeView(
+        viewModel: EvolutionHomeViewModel(
+            repository: EvolutionRepository(
+                context: container.viewContext
+            )
+        )
+    )
 }

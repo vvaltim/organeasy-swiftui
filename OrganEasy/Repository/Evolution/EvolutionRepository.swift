@@ -37,7 +37,7 @@ class EvolutionRepository {
         evolution.id = dto.id
         evolution.date = dto.date
         evolution.value = dto.value
-        evolution.bank?.id = dto.bank.id
+        evolution.bank = dto.bank
         
         save()
     }

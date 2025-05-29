@@ -30,42 +30,42 @@ struct MonthTransactionDetailView: View {
                         isIncome: transaction.isIncome,
                         isSlash: transaction.isSlash
                     )
-                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                            if transaction.paymentDate == nil && !transaction.isIncome {
-                                Button {
-                                    viewModel.markToPaid(transaction: transaction)
-                                } label: {
-                                    Label(
-                                        "Pagar",
-                                        systemImage: "checkmark.circle"
-                                    )
-                                }
-                                .tint(.green)
-                            }
-                            
+                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                        if transaction.paymentDate == nil && !transaction.isIncome {
                             Button {
-                                viewModel.changeSlash(
-                                    transaction: transaction
-                                )
+                                viewModel.markToPaid(transaction: transaction)
                             } label: {
                                 Label(
-                                    transaction.isSlash ? "Desrasurar" : "Rasurar" ,
-                                    systemImage: transaction.isSlash ? "pencil" : "pencil.slash"
+                                    "Pagar",
+                                    systemImage: "checkmark.circle"
                                 )
                             }
-                            .tint(.teal)
+                            .tint(.green)
                         }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button {
-                                viewModel.delete(transaction: transaction)
-                            } label: {
-                                Label(
-                                    "Excluir",
-                                    systemImage: "trash.fill"
-                                )
-                            }
-                            .tint(.red)
+                        
+                        Button {
+                            viewModel.changeSlash(
+                                transaction: transaction
+                            )
+                        } label: {
+                            Label(
+                                transaction.isSlash ? "Desrasurar" : "Rasurar" ,
+                                systemImage: transaction.isSlash ? "pencil" : "pencil.slash"
+                            )
                         }
+                        .tint(.teal)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button {
+                            viewModel.delete(transaction: transaction)
+                        } label: {
+                            Label(
+                                "Excluir",
+                                systemImage: "trash.fill"
+                            )
+                        }
+                        .tint(.red)
+                    }
                 }
             }
         }
@@ -83,7 +83,7 @@ struct MonthTransactionDetailView: View {
         repository: repository,
         month: month.formatToMonthYear()
     )
-
+    
     MonthTransactionDetailView(
         viewModel: viewModel
     )

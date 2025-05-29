@@ -25,15 +25,14 @@ struct CreateEvolutionView: View {
                         }
                     
                     CurrencyTextField(
-                        value: $viewModel.value
+                        value: $viewModel.amount
                     )
                     
                 }
                 Section {
                     Button("Salvar") {
-//                        viewModel.saveAction()
+                        viewModel.saveEvolution()
                     }
-                    //.disabled(viewModel.isDissabledSaveButton)
                 }
                 
                 .navigationBarTitle("Lançamento", displayMode: .inline)
@@ -54,7 +53,10 @@ struct CreateEvolutionView: View {
     CreateEvolutionView(
         viewModel: CreateEvolutionViewModel(
             bankRepository: bankRepository,
-            evolutionRepository: evolutionRepository
+            evolutionRepository: evolutionRepository,
+            onClose: {
+                
+            }
         )
     )
 }
