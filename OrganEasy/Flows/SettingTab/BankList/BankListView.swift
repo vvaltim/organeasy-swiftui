@@ -13,21 +13,33 @@ struct BankListView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.banks, id: \.self) { bank in
-                Text(bank.name ?? "")
-                    .opacity(bank.isHidden ? 0.3 : 1.0)
-                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                        Button {
-                            viewModel.changeVisibility(bank)
-                        } label: {
-                            Label(
-                                bank.isHidden ? "button_show" : "button_hide",
-                                systemImage: bank.isHidden ? "eye" : "eye.slash"
-                            )
-                            
-                        }
-                        .tint(.indigo)
+            Group {
+                if viewModel.banks.isEmpty {
+                    EmptyStateView(
+                        imageName: "tray",
+                        title: "Sem dados",
+                        message: "",
+                        actionTitle: nil,
+                        action: { }
+                    )
+                } else {
+                    List(viewModel.banks, id: \.self) { bank in
+                        Text(bank.name ?? "")
+                            .opacity(bank.isHidden ? 0.3 : 1.0)
+                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                Button {
+                                    viewModel.changeVisibility(bank)
+                                } label: {
+                                    Label(
+                                        bank.isHidden ? "button_show" : "button_hide",
+                                        systemImage: bank.isHidden ? "eye" : "eye.slash"
+                                    )
+                                    
+                                }
+                                .tint(.indigo)
+                            }
                     }
+                }
             }
             .navigationTitle("navigation_bank_list")
             .toolbar {

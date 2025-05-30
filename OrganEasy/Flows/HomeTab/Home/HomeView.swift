@@ -12,14 +12,26 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            List(viewModel.firstTransactionPerMonth, id: \.self) { transaction in
-                HStack {
-                    Text(transaction.dueDate.formatToMonthYear())
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    viewModel.detailItemTapped(transaction.dueDate.formatToMonthYear())
+            Group {
+                if viewModel.firstTransactionPerMonth.isEmpty {
+                    EmptyStateView(
+                        imageName: "tray",
+                        title: "Sem dados",
+                        message: "",
+                        actionTitle: nil,
+                        action: { }
+                    )
+                } else {
+                    List(viewModel.firstTransactionPerMonth, id: \.self) { transaction in
+                        HStack {
+                            Text(transaction.dueDate.formatToMonthYear())
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.detailItemTapped(transaction.dueDate.formatToMonthYear())
+                        }
+                    }
                 }
             }
             .navigationTitle(Text("tab_home"))
