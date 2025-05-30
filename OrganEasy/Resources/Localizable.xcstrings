@@ -1,8 +1,30 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
-    "Apagar" : {
+    "" : {
 
+    },
+    "action_delete_all_data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta ação irá apagar todos os dados do app. Deseja continuar?"
+          }
+        }
+      }
+    },
+    "alert_sure" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tem certeza?"
+          }
+        }
+      }
     },
     "button_bank_management" : {
       "extractionState" : "manual",
@@ -11,6 +33,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gerenciar Bancos"
+          }
+        }
+      }
+    },
+    "button_cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         }
       }
@@ -32,7 +65,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Excluir"
+            "value" : "Apagar"
           }
         }
       }
@@ -103,9 +136,6 @@
         }
       }
     },
-    "Cancelar" : {
-
-    },
     "currency_textfield_value" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -138,9 +168,6 @@
           }
         }
       }
-    },
-    "Esta ação irá apagar todos os dados do app. Deseja continuar?" : {
-
     },
     "finance_summary_card_balance" : {
       "extractionState" : "manual",
@@ -204,6 +231,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Total"
+          }
+        }
+      }
+    },
+    "label_empty_data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem dados"
           }
         }
       }
@@ -383,9 +421,6 @@
           }
         }
       }
-    },
-    "Tem certeza?" : {
-
     },
     "textfield_description" : {
       "extractionState" : "manual",

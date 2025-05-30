@@ -55,13 +55,13 @@ struct SettingView: View {
                         Text("button_clear_data")
                     }
                 }
-                .alert("Tem certeza?", isPresented: $showDeleteAlert) {
-                    Button("Apagar", role: .destructive) {
+                .alert("alert_sure", isPresented: $showDeleteAlert) {
+                    Button("button_delete", role: .destructive) {
                         viewModel.clearAllData()
                     }
-                    Button("Cancelar", role: .cancel) { }
+                    Button("button_cancel", role: .cancel) { }
                 } message: {
-                    Text("Esta ação irá apagar todos os dados do app. Deseja continuar?")
+                    Text("action_delete_all_data")
                 }
             }
             .navigationTitle(Text("tab_settings"))

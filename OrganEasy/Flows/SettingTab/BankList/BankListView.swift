@@ -17,7 +17,7 @@ struct BankListView: View {
                 if viewModel.banks.isEmpty {
                     EmptyStateView(
                         imageName: "tray",
-                        title: "Sem dados",
+                        title: "label_empty_data",
                         message: "",
                         actionTitle: nil,
                         action: { }

@@ -18,7 +18,7 @@ struct EvolutionHomeView: View {
                 if viewModel.groupedByMonth.isEmpty {
                     EmptyStateView(
                         imageName: "tray",
-                        title: "Sem dados",
+                        title: "label_empty_data",
                         message: "",
                         actionTitle: nil,
                         action: { }
