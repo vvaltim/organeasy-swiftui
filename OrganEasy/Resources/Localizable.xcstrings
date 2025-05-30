@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
+    "Apagar" : {
+
+    },
     "button_bank_management" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -8,6 +11,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gerenciar Bancos"
+          }
+        }
+      }
+    },
+    "button_clear_data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpar dados"
           }
         }
       }
@@ -89,6 +103,9 @@
         }
       }
     },
+    "Cancelar" : {
+
+    },
     "currency_textfield_value" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -121,6 +138,9 @@
           }
         }
       }
+    },
+    "Esta ação irá apagar todos os dados do app. Deseja continuar?" : {
+
     },
     "finance_summary_card_balance" : {
       "extractionState" : "manual",
@@ -188,6 +208,17 @@
         }
       }
     },
+    "label_icloud" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud"
+          }
+        }
+      }
+    },
     "label_transaction_type" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -195,6 +226,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tipo de movimentação"
+          }
+        }
+      }
+    },
+    "label_version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versão"
           }
         }
       }
@@ -243,13 +285,24 @@
         }
       }
     },
+    "section_about" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre"
+          }
+        }
+      }
+    },
     "section_appearance" : {
       "extractionState" : "manual",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appearance"
+            "value" : "Aparência"
           }
         }
       }
@@ -265,6 +318,17 @@
         }
       }
     },
+    "section_data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dados"
+          }
+        }
+      }
+    },
     "section_details" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -272,6 +336,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Detalhes"
+          }
+        }
+      }
+    },
+    "section_icloud_sync" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronização"
           }
         }
       }
@@ -308,6 +383,9 @@
           }
         }
       }
+    },
+    "Tem certeza?" : {
+
     },
     "textfield_description" : {
       "extractionState" : "manual",

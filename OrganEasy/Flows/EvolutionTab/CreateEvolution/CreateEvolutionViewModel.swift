@@ -20,7 +20,7 @@ class CreateEvolutionViewModel: ObservableObject {
     
     @Published public var bankList: [Bank] = []
     @Published public var selectedBank: Int = 0
-    @Published public var amount: String = "R$ 0,00"
+    @Published public var amount: String = 0.0.toBRL()
     @Published public var date: Date = Date()
     
     init(bankRepository: BankRepository, evolutionRepository: EvolutionRepository, onClose: @escaping () -> Void) {
@@ -32,14 +32,10 @@ class CreateEvolutionViewModel: ObservableObject {
     }
     
     func saveEvolution() {
-//        let calendar = Calendar.current
-//        let now = Date()
-//        let mockDate = calendar.date(byAdding: .month, value: 1, to: now)
-        
         let dto = EvolutionDTO(
             id: UUID(),
             value: amount.concurrenceToDouble(),
-            date: Date(),
+            date: date,
             bank: bankList[selectedBank]
         )
         
