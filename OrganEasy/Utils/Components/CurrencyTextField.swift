@@ -23,7 +23,7 @@ struct CurrencyTextField: View {
     }()
     
     var body: some View {
-        TextField("Valor", text: $internalValue)
+        TextField("currency_textfield_value", text: $internalValue)
             .keyboardType(.numberPad)
             .onChange(of: internalValue, initial: false) { newValue, _ in
                 let digits = newValue.filter { "0123456789".contains($0) }

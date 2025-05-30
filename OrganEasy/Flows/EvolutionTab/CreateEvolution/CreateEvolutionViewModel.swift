@@ -21,6 +21,7 @@ class CreateEvolutionViewModel: ObservableObject {
     @Published public var bankList: [Bank] = []
     @Published public var selectedBank: Int = 0
     @Published public var amount: String = "R$ 0,00"
+    @Published public var date: Date = Date()
     
     init(bankRepository: BankRepository, evolutionRepository: EvolutionRepository, onClose: @escaping () -> Void) {
         self.bankARepository = bankRepository

@@ -39,7 +39,7 @@ struct EvolutionHomeView: View {
                     }
                 }
             }
-            .navigationTitle(Text("Evolução"))
+            .navigationTitle(Text("tab_evolution"))
             .toolbar {
                 ToolbarItem {
                     Button(action: {

@@ -14,14 +14,14 @@ struct BankListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.banks, id: \.self) { bank in
-                Text(bank.name ?? "String")
+                Text(bank.name ?? "")
                     .opacity(bank.isHidden ? 0.3 : 1.0)
                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                         Button {
                             viewModel.changeVisibility(bank)
                         } label: {
                             Label(
-                                bank.isHidden ? "Exibir" : "Ocultar",
+                                bank.isHidden ? "button_show" : "button_hide",
                                 systemImage: bank.isHidden ? "eye" : "eye.slash"
                             )
                             
@@ -29,7 +29,7 @@ struct BankListView: View {
                         .tint(.indigo)
                     }
             }
-            .navigationTitle("Lista de Bancos")
+            .navigationTitle("navigation_bank_list")
             .toolbar {
                 ToolbarItem {
                     Button(

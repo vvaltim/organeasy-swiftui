@@ -14,15 +14,20 @@ struct CreateEvolutionView: View {
         NavigationView {
             Form {
                 Section(
-                    header: Text("Detalhes")
+                    header: Text("section_details")
                 ){
                     Picker(
-                        "Banco",
+                        "textfield_name",
                         selection: $viewModel.selectedBank) {
                             ForEach(0..<viewModel.bankList.count, id: \.self) { index in
                                 Text(viewModel.bankList[index].name ?? "Desconhecido")
                             }
                         }
+                    
+                    DatePicker(
+                        "date_picker_date",
+                        selection: $viewModel.date, displayedComponents: .date
+                    )
                     
                     CurrencyTextField(
                         value: $viewModel.amount
@@ -30,12 +35,12 @@ struct CreateEvolutionView: View {
                     
                 }
                 Section {
-                    Button("Salvar") {
+                    Button("button_save") {
                         viewModel.saveEvolution()
                     }
                 }
                 
-                .navigationBarTitle("Lançamento", displayMode: .inline)
+                .navigationBarTitle("navigation_transaction_title", displayMode: .inline)
             }
         }
     }

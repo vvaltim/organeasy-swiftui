@@ -19,7 +19,7 @@ struct FinanceSummaryCard: View {
         VStack (alignment: .leading, spacing: 16){
             VStack{
                 HStack {
-                    Text("Entradas")
+                    Text("finance_summary_card_input")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Spacer()
@@ -29,7 +29,7 @@ struct FinanceSummaryCard: View {
                 }
                 
                 HStack{
-                    Text("Saídas")
+                    Text("finance_summary_card_output")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Spacer()
@@ -40,7 +40,7 @@ struct FinanceSummaryCard: View {
             }
             Divider()
             HStack{
-                Text("Saldo")
+                Text("finance_summary_card_balance")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()

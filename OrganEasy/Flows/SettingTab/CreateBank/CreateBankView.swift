@@ -14,21 +14,21 @@ struct CreateBankView: View {
         NavigationView {
             Form {
                 Section(
-                    header: Text("Nome do Banco")
+                    header: Text("section_bank_name")
                 ){
                     TextField(
-                        "Nome",
+                        "textfield_name",
                         text: $viewModel.name
                     )
                 }
                 Section {
-                    Button("Salvar") {
+                    Button("button_save") {
                         viewModel.saveAction()
                     }
                     .disabled(viewModel.isDissabledSaveButton)
                 }
                 
-                .navigationBarTitle("Lançamento", displayMode: .inline)
+                .navigationBarTitle("navigation_transaction_title", displayMode: .inline)
             }
         }
     }

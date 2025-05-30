@@ -13,17 +13,17 @@ struct TransactionView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Transação")){
+                Section {
                     Picker(
-                        "Tipo de movimentação",
+                        "label_transaction_type",
                         selection: $viewModel.isIncome) {
-                            Text("Entrada").tag(true)
-                            Text("Saída").tag(false)
+                            Text("picker_input").tag(true)
+                            Text("picker_output").tag(false)
                         }
                         .pickerStyle(SegmentedPickerStyle())
                     
                     TextField(
-                        "Descrição",
+                        "textfield_description",
                         text: $viewModel.description
                     )
                     
@@ -32,20 +32,20 @@ struct TransactionView: View {
                     )
                     
                     DatePicker(
-                        "Data de Vencimento",
+                        "date_picker_due_date",
                         selection: $viewModel.dueDate, displayedComponents: .date
                     )
                     
                     
                 }
                 Section {
-                    Button("Salvar") {
+                    Button("button_save") {
                         viewModel.saveAction()
                     }
                     .disabled(viewModel.isDissabledSaveButton)
                 }
                 
-                .navigationBarTitle("Lançamento", displayMode: .inline)
+                .navigationBarTitle("navigation_transaction_title", displayMode: .inline)
             }
         }
     }

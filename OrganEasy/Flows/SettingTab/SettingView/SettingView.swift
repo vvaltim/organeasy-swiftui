@@ -15,22 +15,22 @@ struct SettingView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section(header: Text("Evolução")) {
+                Section(header: Text("tab_evolution")) {
                     Button {
                         viewModel.onTapBankList()
                     } label: {
-                        Text("Gerenciar Bancos")
+                        Text("button_bank_management")
                     }
                 }
                 
-                Section(header: Text("Appearance")) {
+                Section(header: Text("section_appearance")) {
                     Toggle(isOn: $viewModel.isDarkMode) {
-                        Text("Modo Escuro")
+                        Text("toggle_dark_mode")
                     }
                 }
                 
             }
-            .navigationTitle(Text("Ajustes"))
+            .navigationTitle(Text("tab_settings"))
             .navigationDestination(
                 isPresented: $viewModel.goToBankList
             ) {

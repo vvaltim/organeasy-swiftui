@@ -22,7 +22,7 @@ struct MainTabBar: View {
             )
             .tabItem {
                 Image(systemName: "house")
-                Text("Início")
+                Text("tab_home")
             }
             EvolutionHomeView(
                 viewModel: EvolutionHomeViewModel(
@@ -33,12 +33,12 @@ struct MainTabBar: View {
             )
             .tabItem {
                 Image(systemName: "chart.line.uptrend.xyaxis")
-                Text("Evolução")
+                Text("tab_evolution")
             }
             SettingView(viewModel: SettingViewModel())
                 .tabItem {
                     Image(systemName: "gear")
-                    Text("Ajustes")
+                    Text("tab_settings")
                 }
         }
     }

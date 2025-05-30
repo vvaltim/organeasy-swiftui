@@ -36,7 +36,7 @@ struct MonthTransactionDetailView: View {
                                 viewModel.markToPaid(transaction: transaction)
                             } label: {
                                 Label(
-                                    "Pagar",
+                                    "button_pay",
                                     systemImage: "checkmark.circle"
                                 )
                             }
@@ -49,7 +49,7 @@ struct MonthTransactionDetailView: View {
                             )
                         } label: {
                             Label(
-                                transaction.isSlash ? "Desrasurar" : "Rasurar" ,
+                                transaction.isSlash ? "button_strikethrough_off" : "button_strikethrough_on" ,
                                 systemImage: transaction.isSlash ? "pencil" : "pencil.slash"
                             )
                         }
@@ -60,7 +60,7 @@ struct MonthTransactionDetailView: View {
                             viewModel.delete(transaction: transaction)
                         } label: {
                             Label(
-                                "Excluir",
+                                "button_delete",
                                 systemImage: "trash.fill"
                             )
                         }

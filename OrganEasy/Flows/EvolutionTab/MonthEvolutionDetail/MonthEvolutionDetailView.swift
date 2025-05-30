@@ -15,7 +15,7 @@ struct MonthEvolutionDetailView: View {
         List {
             Section(
                 header: MonthEvolutionHeaderView(
-                    label: "Total",
+                    label: "header_evolution_sum",
                     value: viewModel.total
                 )
                 .listRowInsets(EdgeInsets())

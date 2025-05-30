@@ -15,8 +15,8 @@ struct HeaderChartView: View {
         HStack {
             Chart(chartData) { item in
                 LineMark(
-                    x: .value("Mês", item.month),
-                    y: .value("Saldo", item.value)
+                    x: .value("header_chart_view_month", item.month),
+                    y: .value("header_chart_view_balance", item.value)
                 )
             }
             .chartYAxis {

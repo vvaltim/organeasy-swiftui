@@ -22,7 +22,7 @@ struct HomeView: View {
                     viewModel.detailItemTapped(transaction.dueDate.formatToMonthYear())
                 }
             }
-            .navigationTitle(Text("Início"))
+            .navigationTitle(Text("tab_home"))
             .toolbar {
                 ToolbarItem {
                     Button(
