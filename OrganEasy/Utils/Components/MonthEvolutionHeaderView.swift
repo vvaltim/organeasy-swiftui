@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MonthEvolutionHeaderView: View {
-    let label: String
+    let label: LocalizedStringKey
     let value: Double
     
     var body: some View {
@@ -23,12 +23,8 @@ struct MonthEvolutionHeaderView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemBackground))
-                .stroke(
-                    Color.gray.opacity(0.3),
-                    lineWidth: 1
-                )
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.thickMaterial)
         )
         .padding(.vertical)
     }

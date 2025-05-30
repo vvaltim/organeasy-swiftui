@@ -35,12 +35,8 @@ struct HeaderChartView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemBackground))
-                .stroke(
-                    Color.gray.opacity(0.3),
-                    lineWidth: 1
-                )
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.thickMaterial)
         )
         .padding(.vertical)
     }
