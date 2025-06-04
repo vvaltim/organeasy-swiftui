@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct OrganEasyApp: App {
+    let repositoryProvider = RepositoryProvider(context: PersistenceController.shared.container.viewContext)
+    
     var body: some Scene {
         WindowGroup {
             MainTabBar()
+                .environmentObject(repositoryProvider)
                 .accentColor(.indigo)
         }
     }

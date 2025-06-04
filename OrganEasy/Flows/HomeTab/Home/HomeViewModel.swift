@@ -44,8 +44,8 @@ class HomeViewModel: ObservableObject {
     }
     
     func detailItemTapped(_ month: String) {
-        goToTransactionDetailView = true
         selectedMonth = month
+        goToTransactionDetailView = true
     }
     
     func fetchTransactions() {
