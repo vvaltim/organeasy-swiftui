@@ -26,9 +26,6 @@ struct MonthTransactionDetailView: View {
         }
         .animation(.default, value: viewModel.transactions)
         .navigationTitle(viewModel.month)
-        .onAppear {
-            viewModel.getTransactionsPerMonth()
-        }
     }
     
     @ViewBuilder
@@ -76,7 +73,6 @@ struct MonthTransactionDetailView: View {
                         systemImage: "trash.fill"
                     )
                 }
-                .tint(.red)
             }
         }
     }

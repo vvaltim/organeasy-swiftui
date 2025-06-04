@@ -37,6 +37,8 @@ class MonthTransactionDetailViewModel: ObservableObject {
     init(repository: TransactionRepositoryProtocol, month: String) {
         self.repository = repository
         self.month = month
+        
+        getTransactionsPerMonth()
     }
     
     // MARK: - Public Methods
