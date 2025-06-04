@@ -18,6 +18,7 @@ struct MonthEvolutionHeaderView: View {
                 .foregroundColor(.primary)
             Spacer()
             Text(value.toBRL())
+                .font(.body)
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
         }
