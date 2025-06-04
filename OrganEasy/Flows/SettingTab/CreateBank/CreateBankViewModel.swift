@@ -13,7 +13,7 @@ class CreateBankViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: BankRepository
+    private let repository: BankRepositoryProtocol
     private let onClose: () -> Void
     
     @Published public var name: String = ""
@@ -24,7 +24,7 @@ class CreateBankViewModel: ObservableObject {
     
     // MARK: - Initializer
     
-    init (repository: BankRepository, onClose: @escaping () -> Void) {
+    init (repository: BankRepositoryProtocol, onClose: @escaping () -> Void) {
         self.repository = repository
         self.onClose = onClose
     }
@@ -38,7 +38,7 @@ class CreateBankViewModel: ObservableObject {
             isHidden: false
         )
         
-        repository.add(dto)
+        repository.add(with: dto)
         
         onClose()
     }

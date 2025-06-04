@@ -13,7 +13,7 @@ class EvolutionHomeViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: EvolutionRepository
+    private let repository: EvolutionRepositoryProtocol
     
     // MARK: - Navigation
     
@@ -52,7 +52,7 @@ class EvolutionHomeViewModel: ObservableObject {
     
     // MARK: - Init
     
-    init(repository: EvolutionRepository) {
+    init(repository: EvolutionRepositoryProtocol) {
         self.repository = repository
         
         fetchAll()

@@ -13,7 +13,7 @@ class TransactionViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: TransactionRepository
+    private let repository: TransactionRepositoryProtocol
     private let onClose: () -> Void
     
     @Published public var description: String = ""
@@ -27,7 +27,7 @@ class TransactionViewModel: ObservableObject {
     
     // MARK: - Initializer
     
-    init (repository: TransactionRepository, onClose: @escaping () -> Void) {
+    init (repository: TransactionRepositoryProtocol, onClose: @escaping () -> Void) {
         self.repository = repository
         self.onClose = onClose
     }
@@ -43,7 +43,7 @@ class TransactionViewModel: ObservableObject {
             isSlash: false  // Colocar um campo na tela para isso
         )
         
-        repository.add(dto)
+        repository.add(with: dto)
         
         onClose()
     }

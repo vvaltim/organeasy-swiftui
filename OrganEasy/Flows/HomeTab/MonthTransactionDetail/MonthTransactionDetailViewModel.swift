@@ -9,7 +9,7 @@ import SwiftUI
 
 class MonthTransactionDetailViewModel: ObservableObject {
     
-    private var repository: TransactionRepository
+    private var repository: TransactionRepositoryProtocol
     
     @Published var transactions: [Transaction] = []
     @Published var month: String = ""
@@ -34,7 +34,7 @@ class MonthTransactionDetailViewModel: ObservableObject {
         return sum
     }
     
-    init(repository: TransactionRepository, month: String) {
+    init(repository: TransactionRepositoryProtocol, month: String) {
         self.repository = repository
         self.month = month
         
@@ -44,19 +44,19 @@ class MonthTransactionDetailViewModel: ObservableObject {
     // MARK: - Public Methods
     
     func markToPaid(transaction: Transaction) {
-        repository.markToPaid(transaction)
+        repository.markToPaid(with: transaction)
         
         getTransactionsPerMonth()
     }
     
     func delete(transaction: Transaction) {
-        repository.remove(transaction)
+        repository.remove(with: transaction)
         
         getTransactionsPerMonth()
     }
     
     func changeSlash(transaction: Transaction) {
-        repository.changeSlash(transaction)
+        repository.changeSlash(with: transaction)
         
         getTransactionsPerMonth()
     }

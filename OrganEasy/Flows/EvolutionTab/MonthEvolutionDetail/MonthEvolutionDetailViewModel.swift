@@ -11,7 +11,7 @@ class MonthEvolutionDetailViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: EvolutionRepository
+    private let repository: EvolutionRepositoryProtocol
     
     @Published var evolutions: [Evolution] = []
     @Published var month: String = ""
@@ -22,7 +22,7 @@ class MonthEvolutionDetailViewModel: ObservableObject {
     
     // MARK: - Init
     
-    init(repository: EvolutionRepository, month: String) {
+    init(repository: EvolutionRepositoryProtocol, month: String) {
         self.repository = repository
         self.month = month
         

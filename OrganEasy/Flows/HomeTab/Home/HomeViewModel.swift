@@ -12,7 +12,7 @@ class HomeViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    let repository: TransactionRepository
+    let repository: TransactionRepositoryProtocol
     
     // MARK: - Items View
     
@@ -33,7 +33,7 @@ class HomeViewModel: ObservableObject {
     
     // MARK: - Initializer
     
-    init (repository: TransactionRepository) {
+    init (repository: TransactionRepositoryProtocol) {
         self.repository = repository
         
         fetchTransactions()

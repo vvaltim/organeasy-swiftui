@@ -26,11 +26,11 @@ struct SettingView: View {
                     }
                 }
                 
-                Section(header: Text("section_appearance")) {
+                /*Section(header: Text("section_appearance")) {
                     Toggle(isOn: $viewModel.isDarkMode) {
                         Text("toggle_dark_mode")
                     }
-                }
+                }*/
                 
                 Section(header: Text("section_icloud_sync")) {
                     HStack {

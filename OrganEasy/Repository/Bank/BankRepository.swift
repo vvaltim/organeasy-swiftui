@@ -7,7 +7,13 @@
 
 import CoreData
 
-class BankRepository {
+protocol BankRepositoryProtocol {
+    func fetchAll() -> [Bank]
+    func add(with dto: BankDTO)
+    func changeVisibility(with dto: Bank)
+}
+
+class BankRepository: BankRepositoryProtocol {
     private let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {
@@ -33,7 +39,7 @@ class BankRepository {
         }
     }
     
-    func add(_ dto: BankDTO) {
+    func add(with dto: BankDTO) {
         let bank = Bank(context: context)
         bank.id = dto.id
         bank.name = dto.name
@@ -42,7 +48,7 @@ class BankRepository {
         save()
     }
     
-    func changeVisibility(_ bank: Bank) {
+    func changeVisibility(with bank: Bank) {
         bank.isHidden.toggle()
         
         save()

@@ -7,7 +7,12 @@
 
 import CoreData
 
-class EvolutionRepository {
+protocol EvolutionRepositoryProtocol {
+    func fetchAll() -> [Evolution]
+    func add(with dto: EvolutionDTO)
+}
+
+class EvolutionRepository: EvolutionRepositoryProtocol {
     private let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {
@@ -32,7 +37,7 @@ class EvolutionRepository {
         }
     }
     
-    func add(_ dto: EvolutionDTO) {
+    func add(with dto: EvolutionDTO) {
         let evolution = Evolution(context: context)
         evolution.id = dto.id
         evolution.date = dto.date

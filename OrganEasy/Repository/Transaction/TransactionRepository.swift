@@ -7,7 +7,15 @@
 
 import CoreData
 
-class TransactionRepository {
+protocol TransactionRepositoryProtocol {
+    func fetchAll() -> [Transaction]
+    func add(with dto: TransactionDTO)
+    func remove(with transaction: Transaction)
+    func markToPaid(with transaction: Transaction)
+    func changeSlash(with transaction: Transaction)
+}
+
+class TransactionRepository: TransactionRepositoryProtocol {
     private let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {
@@ -32,7 +40,7 @@ class TransactionRepository {
         }
     }
     
-    func add(_ dto: TransactionDTO) {
+    func add(with dto: TransactionDTO) {
         let transaction = Transaction(context: context)
         transaction.id = UUID()
         transaction.descriptionText = dto.descriptionText
@@ -44,19 +52,19 @@ class TransactionRepository {
         save()
     }
     
-    func remove(_ transaction: Transaction) {
+    func remove(with transaction: Transaction) {
         context.delete(transaction)
         
         save()
     }
     
-    func markToPaid(_ transaction: Transaction) {
+    func markToPaid(with transaction: Transaction) {
         transaction.paymentDate = Date()
         
         save()
     }
     
-    func changeSlash(_ transaction: Transaction) {
+    func changeSlash(with transaction: Transaction) {
         transaction.isSlash.toggle()
         
         save()
@@ -64,7 +72,7 @@ class TransactionRepository {
     
     // MARK: - Private Methods
     
-    func save() {
+    private func save() {
         do {
             try context.save()
         } catch {
