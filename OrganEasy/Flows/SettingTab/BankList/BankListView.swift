@@ -65,6 +65,9 @@ struct BankListView: View {
                 )
             }
         }
+        .onAppear {
+            viewModel.fetchAll()
+        }
     }
 }
 

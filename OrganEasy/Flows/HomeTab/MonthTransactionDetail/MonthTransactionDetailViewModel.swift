@@ -37,11 +37,17 @@ class MonthTransactionDetailViewModel: ObservableObject {
     init(repository: TransactionRepositoryProtocol, month: String) {
         self.repository = repository
         self.month = month
-        
-        getTransactionsPerMonth()
     }
     
     // MARK: - Public Methods
+    
+    func getTransactionsPerMonth() {
+        let allTransactions = repository.fetchAll()
+        
+        transactions = allTransactions.filter {
+            $0.dueDate.formatToMonthYear() == month
+        }
+    }
     
     func markToPaid(transaction: Transaction) {
         repository.markToPaid(with: transaction)
@@ -61,16 +67,4 @@ class MonthTransactionDetailViewModel: ObservableObject {
         getTransactionsPerMonth()
     }
     
-    // MARK:  Private Methods
-    
-    private func getTransactionsPerMonth() {
-        let allTransactions = repository.fetchAll()
-        
-        transactions = allTransactions.filter {
-            $0.dueDate.formatToMonthYear() == month
-        }
-        print("Quantidade de transações: \(transactions.count)")
-        
-//        objectWillChange.send()
-    }
 }

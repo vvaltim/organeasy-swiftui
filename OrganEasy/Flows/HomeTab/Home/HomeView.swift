@@ -66,6 +66,9 @@ struct HomeView: View {
                     )
                 )
             }
+            .onAppear {
+                viewModel.fetchTransactions()
+            }
         }
     }
 }

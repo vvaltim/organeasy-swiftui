@@ -35,8 +35,6 @@ class HomeViewModel: ObservableObject {
     
     init (repository: TransactionRepositoryProtocol) {
         self.repository = repository
-        
-        fetchTransactions()
     }
     
     // MARK: - Public Methods

@@ -23,8 +23,6 @@ class BankListViewModel: ObservableObject {
     
     init(repository: BankRepositoryProtocol) {
         self.repository = repository
-        
-        fetchAll()
     }
     
     // MARK:  Public Methods
