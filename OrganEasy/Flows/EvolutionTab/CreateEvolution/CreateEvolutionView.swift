@@ -11,7 +11,7 @@ struct CreateEvolutionView: View {
     @StateObject var viewModel: CreateEvolutionViewModel
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(
                     header: Text("section_details")
@@ -34,13 +34,20 @@ struct CreateEvolutionView: View {
                     )
                     
                 }
-                Section {
-                    Button("button_save") {
-                        viewModel.saveEvolution()
+            }
+            
+            .navigationTitle(Text("navigation_transaction_title"))
+            .toolbar {
+                ToolbarItem {
+                    Button(
+                        action: {
+                            viewModel.saveEvolution()
+                        }
+                    ) {
+                        Image(systemName: "checkmark")
                     }
+                    .buttonStyle(.borderedProminent)
                 }
-                
-                .navigationBarTitle("navigation_transaction_title", displayMode: .inline)
             }
         }
     }

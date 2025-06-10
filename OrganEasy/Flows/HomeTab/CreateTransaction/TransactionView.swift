@@ -11,9 +11,11 @@ struct TransactionView: View {
     @StateObject var viewModel: TransactionViewModel
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
-                Section {
+                Section(
+                    header: Text("section_details")
+                ) {
                     Picker(
                         "label_transaction_type",
                         selection: $viewModel.isIncome) {
@@ -35,17 +37,22 @@ struct TransactionView: View {
                         "date_picker_due_date",
                         selection: $viewModel.dueDate, displayedComponents: .date
                     )
-                    
-                    
                 }
-                Section {
-                    Button("button_save") {
-                        viewModel.saveAction()
+            }
+            
+            .navigationTitle(Text("navigation_transaction_title"))
+            .toolbar {
+                ToolbarItem {
+                    Button(
+                        action: {
+                            viewModel.saveAction()
+                        }
+                    ) {
+                        Image(systemName: "checkmark")
                     }
+                    .buttonStyle(.borderedProminent)
                     .disabled(viewModel.isDissabledSaveButton)
                 }
-                
-                .navigationBarTitle("navigation_transaction_title", displayMode: .inline)
             }
         }
     }

@@ -23,10 +23,7 @@ struct MonthEvolutionHeaderView: View {
                 .foregroundColor(.primary)
         }
         .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.thickMaterial)
-        )
+        .glassEffect(in: .rect(cornerRadius: 24.00))
         .padding(.vertical)
     }
 }

@@ -12,7 +12,7 @@ struct BankListView: View {
     @StateObject var viewModel: BankListViewModel
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Group {
                 if viewModel.banks.isEmpty {
                     EmptyStateView(
@@ -26,7 +26,7 @@ struct BankListView: View {
                     List(viewModel.banks, id: \.self) { bank in
                         Text(bank.name ?? "")
                             .opacity(bank.isHidden ? 0.3 : 1.0)
-                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                 Button {
                                     viewModel.changeVisibility(bank)
                                 } label: {
@@ -36,12 +36,12 @@ struct BankListView: View {
                                     )
                                     
                                 }
-                                .tint(.indigo)
+                                .tint(.orange)
                             }
                     }
                 }
             }
-            .navigationTitle("navigation_bank_list")
+            .navigationTitle(Text("navigation_bank_list"))
             .toolbar {
                 ToolbarItem {
                     Button(

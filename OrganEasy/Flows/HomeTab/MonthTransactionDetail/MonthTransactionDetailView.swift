@@ -19,7 +19,6 @@ struct MonthTransactionDetailView: View {
                     output: viewModel.output
                 )
                 .listRowInsets(EdgeInsets())
-                .background(Color.clear)
             ) {
                 transactionList
             }
@@ -40,7 +39,7 @@ struct MonthTransactionDetailView: View {
                 isSlash: transaction.isSlash
             )
             .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                if transaction.paymentDate == nil && !transaction.isIncome {
+                if transaction.canPay() {
                     Button {
                         viewModel.markToPaid(transaction: transaction)
                     } label: {
@@ -52,20 +51,22 @@ struct MonthTransactionDetailView: View {
                     .tint(.green)
                 }
                 
-                Button {
-                    viewModel.changeSlash(
-                        transaction: transaction
-                    )
-                } label: {
-                    Label(
-                        transaction.isSlash ? "button_strikethrough_off" : "button_strikethrough_on" ,
-                        systemImage: transaction.isSlash ? "pencil" : "pencil.slash"
-                    )
+                if transaction.canSlash() {
+                    Button {
+                        viewModel.changeSlash(
+                            transaction: transaction
+                        )
+                    } label: {
+                        Label(
+                            transaction.isSlash ? "button_strikethrough_off" : "button_strikethrough_on" ,
+                            systemImage: transaction.isSlash ? "pencil" : "pencil.slash"
+                        )
+                    }
+                    .tint(.gray)
                 }
-                .tint(.teal)
             }
             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                Button {
+                Button(role: .destructive) {
                     viewModel.delete(transaction: transaction)
                 } label: {
                     Label(

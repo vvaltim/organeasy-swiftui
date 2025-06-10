@@ -38,13 +38,11 @@ struct MonthTransactionDetailItemView: View {
                     
                     if let paymentDate = paymentDate {
                         Text(paymentDate)
-                            .font(.caption)
+                            .font(.subheadline)
                             .bold()
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
-                            .background(Color.green.opacity(0.5))
-                            .foregroundColor(.green)
-                            .cornerRadius(8)
+                            .glassEffect()
                     }
                 }
                 

@@ -23,6 +23,17 @@ extension Transaction {
     @NSManaged public var paymentDate: Date?
     @NSManaged public var isSlash: Bool
 
+    func canSlash() -> Bool {
+        return paymentDate == nil
+    }
+    
+    func canPay() -> Bool {
+        if paymentDate != nil {
+            return false
+        }
+        
+        return !isSlash
+    }
 }
 
 extension Transaction : Identifiable {
