@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct EvolutionHomeView: View {
-    let persistenceController = PersistenceController.shared
     
-    @StateObject var viewModel: EvolutionHomeViewModel
+    @EnvironmentObject var provider: RepositoryProvider
+    @StateObject var viewModel: EvolutionHomeViewModel = EvolutionHomeViewModel()
     
     var body: some View {
         NavigationStack {
@@ -63,28 +63,19 @@ struct EvolutionHomeView: View {
             }
             .navigationDestination(isPresented: $viewModel.goToCreateEvolution) {
                 CreateEvolutionView(
-                    viewModel: CreateEvolutionViewModel(
-                        bankRepository: BankRepository(
-                            context: persistenceController.container.viewContext
-                        ),
-                        evolutionRepository: EvolutionRepository(
-                            context: persistenceController.container.viewContext
-                        ),
-                        onClose: {
-                            viewModel.closeCreateEvolution()
-                        }
-                    )
+                    onClose: {
+                        viewModel.closeCreateEvolution()
+                    }
                 )
             }
             .navigationDestination(isPresented: $viewModel.goToDetailEvolution) {
                 MonthEvolutionDetailView(
-                    viewModel: MonthEvolutionDetailViewModel(
-                        repository: EvolutionRepository(
-                            context: persistenceController.container.viewContext
-                        ),
-                        month: viewModel.selectedMonth
-                    )
+                    month: viewModel.selectedMonth
                 )
+            }
+            .onAppear {
+                viewModel.setupProvider(with: provider)
+                viewModel.fetchAll()
             }
         }
     }
@@ -93,11 +84,5 @@ struct EvolutionHomeView: View {
 #Preview {
     let container = PersistenceController.preview.container
     
-    EvolutionHomeView(
-        viewModel: EvolutionHomeViewModel(
-            repository: EvolutionRepository(
-                context: container.viewContext
-            )
-        )
-    )
+    EvolutionHomeView()
 }

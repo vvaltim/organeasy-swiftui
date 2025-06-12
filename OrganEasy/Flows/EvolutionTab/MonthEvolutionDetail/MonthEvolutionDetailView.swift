@@ -9,7 +9,10 @@ import SwiftUI
 
 struct MonthEvolutionDetailView: View {
     
-    @StateObject var viewModel: MonthEvolutionDetailViewModel
+    @EnvironmentObject var provider: RepositoryProvider
+    @StateObject var viewModel: MonthEvolutionDetailViewModel = MonthEvolutionDetailViewModel()
+    
+    let month: String
     
     var body: some View {
         List {
@@ -29,6 +32,12 @@ struct MonthEvolutionDetailView: View {
                     }
                 }
             }
+            
+            .onAppear {
+                viewModel.setupProvider(with: provider)
+                viewModel.month = month
+                viewModel.getEvolutionsPerMonth()
+            }
         }
     }
 }
@@ -37,11 +46,6 @@ struct MonthEvolutionDetailView: View {
     let container = PersistenceController.preview.container
     
     MonthEvolutionDetailView(
-        viewModel: MonthEvolutionDetailViewModel(
-            repository: EvolutionRepository(
-                context: container.viewContext
-            ),
-            month: "Maio de 2025"
-        )
+        month: "Maio de 2025"
     )
 }

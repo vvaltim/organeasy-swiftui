@@ -13,29 +13,17 @@ struct MainTabBar: View {
     
     var body: some View {
         TabView {
-            HomeView(
-                viewModel: HomeViewModel(
-                    repository: TransactionRepository(
-                        context: persistenceController.container.viewContext
-                    )
-                )
-            )
-            .tabItem {
-                Image(systemName: "house")
-                Text("tab_home")
-            }
-            EvolutionHomeView(
-                viewModel: EvolutionHomeViewModel(
-                    repository: EvolutionRepository(
-                        context: persistenceController.container.viewContext
-                    )
-                )
-            )
-            .tabItem {
-                Image(systemName: "chart.line.uptrend.xyaxis")
-                Text("tab_evolution")
-            }
-            SettingView(viewModel: SettingViewModel())
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("tab_home")
+                }
+            EvolutionHomeView()
+                .tabItem {
+                    Image(systemName: "chart.line.uptrend.xyaxis")
+                    Text("tab_evolution")
+                }
+            SettingView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("tab_settings")

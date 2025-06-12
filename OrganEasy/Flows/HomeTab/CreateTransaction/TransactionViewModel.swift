@@ -13,8 +13,7 @@ class TransactionViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: TransactionRepositoryProtocol
-    private let onClose: () -> Void
+    private var repository: TransactionRepositoryProtocol?
     
     @Published public var description: String = ""
     @Published public var dueDate: Date = Date()
@@ -25,14 +24,11 @@ class TransactionViewModel: ObservableObject {
         description.isEmpty
     }
     
-    // MARK: - Initializer
-    
-    init (repository: TransactionRepositoryProtocol, onClose: @escaping () -> Void) {
-        self.repository = repository
-        self.onClose = onClose
-    }
-    
     // MARK: - Methods
+    
+    func setupProvider(with provider: RepositoryProvider) {
+        repository = provider.transactionRepository
+    }
     
     func saveAction() {
         let dto = TransactionDTO(
@@ -43,8 +39,6 @@ class TransactionViewModel: ObservableObject {
             isSlash: false  // Colocar um campo na tela para isso
         )
         
-        repository.add(with: dto)
-        
-        onClose()
+        repository?.add(with: dto)
     }
 }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel: HomeViewModel
+    @EnvironmentObject var provider: RepositoryProvider
+    @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
     var body: some View {
         NavigationStack {
@@ -48,25 +49,21 @@ struct HomeView: View {
             }
             .navigationDestination(isPresented: $viewModel.goToTransactionView) {
                 TransactionView(
-                    viewModel: TransactionViewModel(
-                        repository: viewModel.repository,
-                        onClose: {
-                            viewModel.goToTransactionView = false
-                            
-                            viewModel.fetchTransactions()
-                        }
-                    )
+                    onClose: {
+                        viewModel.goToTransactionView = false
+                        
+                        viewModel.fetchTransactions()
+                    }
                 )
             }
             .navigationDestination(isPresented: $viewModel.goToTransactionDetailView) {
                 MonthTransactionDetailView(
-                    viewModel: MonthTransactionDetailViewModel(
-                        repository: viewModel.repository,
-                        month: viewModel.selectedMonth
-                    )
+                    month: viewModel.selectedMonth
                 )
             }
             .onAppear {
+                viewModel.setupProvider(with: provider)
+                
                 viewModel.fetchTransactions()
             }
         }
@@ -77,9 +74,5 @@ struct HomeView: View {
     let context = PersistenceController.preview.container.viewContext
     let repository = TransactionRepository(context: context)
     
-    HomeView(
-        viewModel: HomeViewModel(
-            repository: repository
-        )
-    )
+    HomeView()
 }

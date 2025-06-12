@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct TransactionView: View {
-    @StateObject var viewModel: TransactionViewModel
+    
+    @EnvironmentObject var provider: RepositoryProvider
+    @StateObject var viewModel: TransactionViewModel = TransactionViewModel()
+    let onClose: () -> Void
     
     var body: some View {
         NavigationStack {
@@ -46,6 +49,8 @@ struct TransactionView: View {
                     Button(
                         action: {
                             viewModel.saveAction()
+                            
+                            onClose()
                         }
                     ) {
                         Image(systemName: "checkmark")
@@ -54,6 +59,9 @@ struct TransactionView: View {
                     .disabled(viewModel.isDissabledSaveButton)
                 }
             }
+            .onAppear {
+                viewModel.setupProvider(with: provider)
+            }
         }
     }
 }
@@ -61,10 +69,5 @@ struct TransactionView: View {
 #Preview {
     let context = PersistenceController.preview.container.viewContext
     let repository = TransactionRepository(context: context)
-    TransactionView(
-        viewModel: TransactionViewModel(
-            repository: repository,
-            onClose: { }
-        )
-    )
+    TransactionView(onClose: { })
 }

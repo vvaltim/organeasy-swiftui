@@ -11,7 +11,7 @@ struct SettingView: View {
     
     let persistenceController = PersistenceController.shared
     
-    @ObservedObject var viewModel: SettingViewModel
+    @ObservedObject var viewModel: SettingViewModel = SettingViewModel()
     
     @State private var showDeleteAlert = false
     

@@ -11,7 +11,7 @@ class MonthEvolutionDetailViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: EvolutionRepositoryProtocol
+    private var repository: EvolutionRepositoryProtocol?
     
     @Published var evolutions: [Evolution] = []
     @Published var month: String = ""
@@ -20,29 +20,19 @@ class MonthEvolutionDetailViewModel: ObservableObject {
         evolutions.reduce(0, { $0 + $1.value })
     }
     
-    // MARK: - Init
-    
-    init(repository: EvolutionRepositoryProtocol, month: String) {
-        self.repository = repository
-        self.month = month
-        
-        getEvolutionsPerMonth()
-    }
-    
     // MARK: - Public Functions
 
-    
+    func setupProvider(with provider: RepositoryProvider) {
+        repository = provider.evolutionRepository
+    }
     
     // MARK: - Private Functions
     
-    private func getEvolutionsPerMonth() {
-        let allEvaluations = repository.fetchAll()
+    func getEvolutionsPerMonth() {
+        let allEvaluations = repository?.fetchAll() ?? []
         
         evolutions = allEvaluations.filter {
             $0.date?.formatToMonthYear() == month
         }
-        print("Quantidade de evoluções: \(evolutions.count)")
-        
-//        objectWillChange.send()
     }
 }

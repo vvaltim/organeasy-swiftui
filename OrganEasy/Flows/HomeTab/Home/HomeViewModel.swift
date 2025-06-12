@@ -12,7 +12,7 @@ class HomeViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    let repository: TransactionRepositoryProtocol
+    private var repository: TransactionRepositoryProtocol?
     
     // MARK: - Items View
     
@@ -31,13 +31,11 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    // MARK: - Initializer
-    
-    init (repository: TransactionRepositoryProtocol) {
-        self.repository = repository
-    }
-    
     // MARK: - Public Methods
+    
+    func setupProvider(with provider: RepositoryProvider) {
+        repository = provider.transactionRepository
+    }
     
     func addButtonTapped() {
         goToTransactionView = true
@@ -49,7 +47,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchTransactions() {
-        transactions = repository.fetchAll()
+        transactions = repository?.fetchAll() ?? []
         
         groupedByMonthTransactions()
     }

@@ -13,22 +13,21 @@ class CreateEvolutionViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let bankARepository: BankRepositoryProtocol
-    private let evolutionRepository: EvolutionRepositoryProtocol
-    
-    private let onClose: () -> Void
+    private var bankRepository: BankRepositoryProtocol?
+    private var evolutionRepository: EvolutionRepositoryProtocol?
     
     @Published public var bankList: [Bank] = []
     @Published public var selectedBank: Int = 0
     @Published public var amount: String = 0.0.toBRL()
     @Published public var date: Date = Date()
     
-    init(bankRepository: BankRepositoryProtocol, evolutionRepository: EvolutionRepositoryProtocol, onClose: @escaping () -> Void) {
-        self.bankARepository = bankRepository
-        self.evolutionRepository = evolutionRepository
-        self.onClose = onClose
-        
-        self.bankList = bankRepository.fetchAll()
+    func setupProvider(with provider: RepositoryProvider) {
+        self.bankRepository = provider.bankRepository
+        self.evolutionRepository = provider.evolutionRepository
+    }
+    
+    func fetchBanks() {
+        bankList = bankRepository?.fetchAll() ?? []
     }
     
     func saveEvolution() {
@@ -39,8 +38,6 @@ class CreateEvolutionViewModel: ObservableObject {
             bank: bankList[selectedBank]
         )
         
-        evolutionRepository.add(with: dto)
-        
-        onClose()
+        evolutionRepository?.add(with: dto)
     }
 }

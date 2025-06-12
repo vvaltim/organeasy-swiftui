@@ -13,7 +13,7 @@ class EvolutionHomeViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: EvolutionRepositoryProtocol
+    private var repository: EvolutionRepositoryProtocol?
     
     // MARK: - Navigation
     
@@ -50,15 +50,11 @@ class EvolutionHomeViewModel: ObservableObject {
         return test
     }
     
-    // MARK: - Init
-    
-    init(repository: EvolutionRepositoryProtocol) {
-        self.repository = repository
-        
-        fetchAll()
-    }
-    
     // MARK: - Public Functions
+    
+    func setupProvider(with provider: RepositoryProvider) {
+        repository = provider.evolutionRepository
+    }
     
     func openCreateEvolution() {
         goToCreateEvolution = true
@@ -76,7 +72,7 @@ class EvolutionHomeViewModel: ObservableObject {
     }
     
     func fetchAll() {
-        let allEvolution = repository.fetchAll()
+        let allEvolution = repository?.fetchAll() ?? []
         
         groupedByMonth = Dictionary(grouping: allEvolution) { evolution in
             return evolution.date?.formatToMonthYear() ?? ""

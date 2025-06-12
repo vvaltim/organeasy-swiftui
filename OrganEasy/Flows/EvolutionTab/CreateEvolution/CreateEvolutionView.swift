@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct CreateEvolutionView: View {
-    @StateObject var viewModel: CreateEvolutionViewModel
+    
+    @EnvironmentObject var provider: RepositoryProvider
+    @StateObject var viewModel: CreateEvolutionViewModel = CreateEvolutionViewModel()
+    
+    let onClose: () -> Void
     
     var body: some View {
         NavigationStack {
@@ -42,6 +46,8 @@ struct CreateEvolutionView: View {
                     Button(
                         action: {
                             viewModel.saveEvolution()
+                            
+                            onClose()
                         }
                     ) {
                         Image(systemName: "checkmark")
@@ -49,26 +55,19 @@ struct CreateEvolutionView: View {
                     .buttonStyle(.borderedProminent)
                 }
             }
+            .onAppear {
+                viewModel.setupProvider(with: provider)
+                
+                viewModel.fetchBanks()
+            }
         }
     }
 }
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
-    let bankRepository: BankRepository = BankRepository(
-        context: context
-    )
-    let evolutionRepository: EvolutionRepository = EvolutionRepository(
-        context: context
-    )
     
     CreateEvolutionView(
-        viewModel: CreateEvolutionViewModel(
-            bankRepository: bankRepository,
-            evolutionRepository: evolutionRepository,
-            onClose: {
-                
-            }
-        )
+        onClose: { }
     )
 }

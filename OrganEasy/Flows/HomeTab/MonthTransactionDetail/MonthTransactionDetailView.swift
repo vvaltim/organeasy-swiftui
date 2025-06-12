@@ -9,7 +9,9 @@ import SwiftUI
 
 struct MonthTransactionDetailView: View {
     
-    @StateObject var viewModel: MonthTransactionDetailViewModel
+    @EnvironmentObject var provider: RepositoryProvider
+    @StateObject var viewModel: MonthTransactionDetailViewModel = MonthTransactionDetailViewModel()
+    let month: String
     
     var body: some View {
         List {
@@ -25,6 +27,11 @@ struct MonthTransactionDetailView: View {
         }
         .animation(.default, value: viewModel.transactions)
         .navigationTitle(viewModel.month)
+        .onAppear {
+            viewModel.setupProvider(with: provider)
+            viewModel.month = month
+            viewModel.getTransactionsPerMonth()
+        }
     }
     
     @ViewBuilder
@@ -84,12 +91,7 @@ struct MonthTransactionDetailView: View {
     let repository = TransactionRepository(context: context)
     let month = Date().addingTimeInterval(Double(1) * 86400)
     
-    let viewModel = MonthTransactionDetailViewModel(
-        repository: repository,
-        month: month.formatToMonthYear()
-    )
-    
     MonthTransactionDetailView(
-        viewModel: viewModel
+        month: month.formatToMonthYear()
     )
 }
