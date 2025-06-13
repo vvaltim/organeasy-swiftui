@@ -13,9 +13,12 @@ protocol TransactionRepositoryProtocol {
     func remove(with transaction: Transaction)
     func markToPaid(with transaction: Transaction)
     func changeSlash(with transaction: Transaction)
+    func saveEdit()
+    func getById(_ id: UUID) -> Transaction?
 }
 
 class TransactionRepository: TransactionRepositoryProtocol {
+        
     private let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {
@@ -68,6 +71,23 @@ class TransactionRepository: TransactionRepositoryProtocol {
         transaction.isSlash.toggle()
         
         save()
+    }
+    
+    func saveEdit() {
+        save()
+    }
+    
+    func getById(_ id: UUID) -> Transaction? {
+        let request = Transaction.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+        
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Error fetching transactions: \(error)")
+            return nil
+        }
     }
     
     // MARK: - Private Methods

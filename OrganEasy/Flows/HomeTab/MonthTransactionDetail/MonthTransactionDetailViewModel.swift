@@ -14,6 +14,11 @@ class MonthTransactionDetailViewModel: ObservableObject {
     @Published var transactions: [Transaction] = []
     @Published var month: String = ""
     
+    // MARK: - Navigation
+    
+    @Published var goToEditView = false
+    var selectedTransaction: Transaction?
+    
     var input: Double {
         var sum: Double = 0
         for item in transactions {
@@ -66,4 +71,8 @@ class MonthTransactionDetailViewModel: ObservableObject {
         getTransactionsPerMonth()
     }
     
+    func edit(with transaction: Transaction) {
+        selectedTransaction = transaction
+        goToEditView = true
+    }
 }

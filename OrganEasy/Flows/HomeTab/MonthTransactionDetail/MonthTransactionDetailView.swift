@@ -10,6 +10,7 @@ import SwiftUI
 struct MonthTransactionDetailView: View {
     
     @EnvironmentObject var provider: RepositoryProvider
+    @EnvironmentObject var navManager: HomeNavigationManager
     @StateObject var viewModel: MonthTransactionDetailViewModel = MonthTransactionDetailViewModel()
     let month: String
     
@@ -45,6 +46,9 @@ struct MonthTransactionDetailView: View {
                 isIncome: transaction.isIncome,
                 isSlash: transaction.isSlash
             )
+            .onTapGesture {
+                navManager.path.append(HomeRouter.transaction(transaction.id))
+            }
             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                 if transaction.canPay() {
                     Button {

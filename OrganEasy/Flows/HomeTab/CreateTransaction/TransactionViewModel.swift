@@ -14,10 +14,11 @@ class TransactionViewModel: ObservableObject {
     // MARK: - Variables
     
     private var repository: TransactionRepositoryProtocol?
+    var transaction: Transaction?
     
     @Published public var description: String = ""
     @Published public var dueDate: Date = Date()
-    @Published public var amount: String = "R$ 0,00"
+    @Published public var amount: String = 0.0.toBRL()
     @Published public var isIncome: Bool = false
     
     var isDissabledSaveButton: Bool {
@@ -30,15 +31,40 @@ class TransactionViewModel: ObservableObject {
         repository = provider.transactionRepository
     }
     
-    func saveAction() {
-        let dto = TransactionDTO(
-            isIncome: isIncome,
-            descriptionText: description,
-            amount: amount.concurrenceToDouble(),
-            dueDate: dueDate,
-            isSlash: false  // Colocar um campo na tela para isso
-        )
+    func setupTransaction(with id: UUID?) {
+        guard let id else {
+            return
+        }
         
-        repository?.add(with: dto)
+        self.transaction = repository?.getById(id)
+        
+        print(transaction?.descriptionText ?? "")
+        
+        description = transaction?.descriptionText ?? ""
+        dueDate = transaction?.dueDate ?? Date()
+//        amount = transaction?.amount.toBRL() ?? 0.0.toBRL() // ver como configurar o campo de texto aqui
+        isIncome = transaction?.isIncome ?? false
+    }
+    
+    func saveAction() {
+        guard let transaction else {
+            let dto = TransactionDTO(
+                isIncome: isIncome,
+                descriptionText: description,
+                amount: amount.concurrenceToDouble(),
+                dueDate: dueDate,
+                isSlash: false
+            )
+            
+            repository?.add(with: dto)
+            return
+        }
+        
+        transaction.isIncome = isIncome
+        transaction.descriptionText = description
+        transaction.amount = amount.concurrenceToDouble()
+        transaction.dueDate = dueDate
+        
+        repository?.saveEdit()
     }
 }

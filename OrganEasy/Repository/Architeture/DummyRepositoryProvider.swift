@@ -14,6 +14,14 @@ final class DummyRepositoryProvider: ObservableObject {
 }
 
 class DummyTransactionRepository: TransactionRepositoryProtocol {
+    func getById(_ id: UUID) -> Transaction? {
+        return nil
+    }
+    
+    func saveEdit() {
+        /* Intentionally unimplemented */
+    }
+    
     func add(with dto: TransactionDTO) {
         /* Intentionally unimplemented */
     }

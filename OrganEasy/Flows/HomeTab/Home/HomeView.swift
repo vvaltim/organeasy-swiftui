@@ -10,9 +10,10 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var provider: RepositoryProvider
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
+    @StateObject private var navManager = HomeNavigationManager()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navManager.path) {
             Group {
                 if viewModel.firstTransactionPerMonth.isEmpty {
                     EmptyStateView(
@@ -30,7 +31,7 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            viewModel.detailItemTapped(transaction.dueDate.formatToMonthYear())
+                            navManager.path.append(HomeRouter.month(transaction.dueDate.formatToMonthYear()))
                         }
                     }
                 }
@@ -40,26 +41,29 @@ struct HomeView: View {
                 ToolbarItem {
                     Button(
                         action: {
-                            viewModel.addButtonTapped()
+                            navManager.path.append(HomeRouter.transaction(nil))
                         }
                     ) {
                         Image(systemName: "plus")
                     }
                 }
             }
-            .navigationDestination(isPresented: $viewModel.goToTransactionView) {
-                TransactionView(
-                    onClose: {
-                        viewModel.goToTransactionView = false
-                        
-                        viewModel.fetchTransactions()
-                    }
-                )
-            }
-            .navigationDestination(isPresented: $viewModel.goToTransactionDetailView) {
-                MonthTransactionDetailView(
-                    month: viewModel.selectedMonth
-                )
+            .navigationDestination(for: HomeRouter.self) { router in
+                switch router {
+                case .month(let month):
+                    MonthTransactionDetailView(
+                        month: month
+                    )
+                case .transaction(let id):
+                    TransactionView(
+                        onClose: {
+                            navManager.path.removeLast()
+                            
+                            viewModel.fetchTransactions()
+                        },
+                        transactionID: id
+                    )
+                }
             }
             .onAppear {
                 viewModel.setupProvider(with: provider)
@@ -67,6 +71,7 @@ struct HomeView: View {
                 viewModel.fetchTransactions()
             }
         }
+        .environmentObject(navManager)
     }
 }
 

@@ -23,7 +23,6 @@ class HomeViewModel: ObservableObject {
     
     @Published var goToTransactionView = false
     @Published var goToTransactionDetailView = false
-    var selectedMonth: String = .init()
     
     var firstTransactionPerMonth: [Transaction] {
         groupedByMonth.values.compactMap {
@@ -39,11 +38,6 @@ class HomeViewModel: ObservableObject {
     
     func addButtonTapped() {
         goToTransactionView = true
-    }
-    
-    func detailItemTapped(_ month: String) {
-        selectedMonth = month
-        goToTransactionDetailView = true
     }
     
     func fetchTransactions() {
