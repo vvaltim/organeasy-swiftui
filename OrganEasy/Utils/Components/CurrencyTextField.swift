@@ -8,43 +8,63 @@
 import SwiftUI
 
 struct CurrencyTextField: View {
-    @Binding var value: String
-    @State private var internalValue: String = ""
+    @Binding var value: Double
+    @State private var text: String = ""
+    @FocusState private var isFocused: Bool
     
     private let formatter: NumberFormatter = {
         let f = NumberFormatter()
         f.numberStyle = .currency
-        f.locale = Locale(identifier: "pt_BR")
         f.currencySymbol = "R$ "
+        f.locale = Locale(identifier: "pt_BR")
         f.maximumFractionDigits = 2
         f.minimumFractionDigits = 2
-        
         return f
     }()
     
     var body: some View {
-        TextField("currency_textfield_value", text: $internalValue)
-            .keyboardType(.numberPad)
-            .onChange(of: internalValue, initial: false) { newValue, _ in
-                let digits = newValue.filter { "0123456789".contains($0) }
-                let doubleValue = (Double(digits) ?? 0) / 100
-                if let formatted = formatter.string(from: NSNumber(value: doubleValue)) {
-                    internalValue = formatted
-                    value = formatted
-                } else {
-                    value = newValue
+        HStack {
+            Text("R$")
+                .foregroundColor(.gray)
+            TextField("0,00", text: Binding(
+                get: {
+                    self.text
+                },
+                set: { newValue in
+                    let digits = newValue
+                        .components(separatedBy: CharacterSet.decimalDigits.inverted)
+                        .joined()
+                    let doubleValue = (Double(digits) ?? 0) / 100
+                    self.value = doubleValue
+                    if let formatted = formatter.string(from: NSNumber(value: doubleValue)) {
+                        self.text = formatted.replacingOccurrences(of: "R$ ", with: "")
+                    } else {
+                        self.text = ""
+                    }
                 }
+            ))
+            .keyboardType(.numberPad)
+            .multilineTextAlignment(.trailing)
+            .focused($isFocused)
+        }
+        .onChange(of: isFocused, initial: false) { focused, _ in
+            if !focused {
+                text = ""
+                value = 0
             }
-            .onAppear {
-                internalValue = value
+        }
+        .onAppear {
+            if let formatted = formatter.string(from: NSNumber(value: value)) {
+                self.text = formatted.replacingOccurrences(of: "R$ ", with: "")
             }
+        }
     }
 }
 
 
 #Preview {
     struct PreviewWrapper: View {
-        @State private var value: String = "R$ 35,32"
+        @State private var value: Double = 35.32
         var body: some View {
             CurrencyTextField(value: $value)
         }

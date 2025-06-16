@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "0,00" : {
+
+    },
     "action_delete_all_data" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -322,6 +325,9 @@
           }
         }
       }
+    },
+    "R$" : {
+
     },
     "section_about" : {
       "extractionState" : "manual",

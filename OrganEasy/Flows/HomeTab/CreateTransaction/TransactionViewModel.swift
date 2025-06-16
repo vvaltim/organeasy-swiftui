@@ -18,7 +18,7 @@ class TransactionViewModel: ObservableObject {
     
     @Published public var description: String = ""
     @Published public var dueDate: Date = Date()
-    @Published public var amount: String = 0.0.toBRL()
+    @Published public var amount: Double = 0.0
     @Published public var isIncome: Bool = false
     
     var isDissabledSaveButton: Bool {
@@ -42,7 +42,7 @@ class TransactionViewModel: ObservableObject {
         
         description = transaction?.descriptionText ?? ""
         dueDate = transaction?.dueDate ?? Date()
-//        amount = transaction?.amount.toBRL() ?? 0.0.toBRL() // ver como configurar o campo de texto aqui
+        amount = transaction?.amount ?? 0.0
         isIncome = transaction?.isIncome ?? false
     }
     
@@ -51,7 +51,7 @@ class TransactionViewModel: ObservableObject {
             let dto = TransactionDTO(
                 isIncome: isIncome,
                 descriptionText: description,
-                amount: amount.concurrenceToDouble(),
+                amount: amount,
                 dueDate: dueDate,
                 isSlash: false
             )
@@ -62,7 +62,7 @@ class TransactionViewModel: ObservableObject {
         
         transaction.isIncome = isIncome
         transaction.descriptionText = description
-        transaction.amount = amount.concurrenceToDouble()
+        transaction.amount = amount
         transaction.dueDate = dueDate
         
         repository?.saveEdit()

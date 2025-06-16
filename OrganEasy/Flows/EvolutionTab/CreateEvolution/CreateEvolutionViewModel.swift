@@ -18,7 +18,7 @@ class CreateEvolutionViewModel: ObservableObject {
     
     @Published public var bankList: [Bank] = []
     @Published public var selectedBank: Int = 0
-    @Published public var amount: String = 0.0.toBRL()
+    @Published public var amount: Double = 0.0
     @Published public var date: Date = Date()
     
     func setupProvider(with provider: RepositoryProvider) {
@@ -33,7 +33,7 @@ class CreateEvolutionViewModel: ObservableObject {
     func saveEvolution() {
         let dto = EvolutionDTO(
             id: UUID(),
-            value: amount.concurrenceToDouble(),
+            value: amount,
             date: date,
             bank: bankList[selectedBank]
         )
