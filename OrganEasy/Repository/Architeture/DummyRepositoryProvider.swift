@@ -44,6 +44,10 @@ class DummyTransactionRepository: TransactionRepositoryProtocol {
 }
 
 class DummyEvolutionRepository: EvolutionRepositoryProtocol {
+    func delete(with evolution: Evolution) {
+        /* Intentionally unimplemented */
+    }
+    
     
     func fetchAll() -> [Evolution] {
         return []

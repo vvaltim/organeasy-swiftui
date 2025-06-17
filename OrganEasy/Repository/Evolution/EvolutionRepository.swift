@@ -10,6 +10,7 @@ import CoreData
 protocol EvolutionRepositoryProtocol {
     func fetchAll() -> [Evolution]
     func add(with dto: EvolutionDTO)
+    func delete(with evolution: Evolution)
 }
 
 class EvolutionRepository: EvolutionRepositoryProtocol {
@@ -43,6 +44,12 @@ class EvolutionRepository: EvolutionRepositoryProtocol {
         evolution.date = dto.date
         evolution.value = dto.value
         evolution.bank = dto.bank
+        
+        save()
+    }
+    
+    func delete(with evolution: Evolution) {
+        context.delete(evolution)
         
         save()
     }

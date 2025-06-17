@@ -30,9 +30,19 @@ struct MonthEvolutionDetailView: View {
                         Spacer()
                         Text(evolution.value.toBRL())
                     }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        Button(role: .destructive) {
+                            viewModel.delete(with: evolution)
+                        } label: {
+                            Label(
+                                "button_delete",
+                                systemImage: "trash.fill"
+                            )
+                        }
+                    }
                 }
             }
-            
+            .navigationTitle(Text(viewModel.evolutions.first?.date?.formatTo() ?? ""))
             .onAppear {
                 viewModel.setupProvider(with: provider)
                 viewModel.month = month

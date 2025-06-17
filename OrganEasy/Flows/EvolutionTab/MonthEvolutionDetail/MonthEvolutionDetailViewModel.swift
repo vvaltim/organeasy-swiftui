@@ -26,6 +26,12 @@ class MonthEvolutionDetailViewModel: ObservableObject {
         repository = provider.evolutionRepository
     }
     
+    func delete(with evolution: Evolution) {
+        repository?.delete(with: evolution)
+        
+        getEvolutionsPerMonth()
+    }
+    
     // MARK: - Private Functions
     
     func getEvolutionsPerMonth() {
