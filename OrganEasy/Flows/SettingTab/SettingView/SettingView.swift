@@ -13,24 +13,25 @@ struct SettingView: View {
     
     @ObservedObject var viewModel: SettingViewModel = SettingViewModel()
     
+    @StateObject private var navManager = SettingNavigationManager()
     @State private var showDeleteAlert = false
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navManager.path) {
             List {
-                Section(header: Text("tab_evolution")) {
+                Section(header: Text("Gerenciar")) {
                     Button {
-                        viewModel.onTapBankList()
+                        navManager.path.append(SettingRouter.bank)
                     } label: {
                         Text("button_bank_management")
                     }
-                }
-                
-                /*Section(header: Text("section_appearance")) {
-                    Toggle(isOn: $viewModel.isDarkMode) {
-                        Text("toggle_dark_mode")
+                    
+                    Button {
+                        navManager.path.append(SettingRouter.recurringBillList)
+                    } label: {
+                        Text("button_recurring_bill")
                     }
-                }*/
+                }
                 
                 Section(header: Text("section_icloud_sync")) {
                     HStack {
@@ -65,23 +66,27 @@ struct SettingView: View {
                 }
             }
             .navigationTitle(Text("tab_settings"))
-            .navigationDestination(
-                isPresented: $viewModel.goToBankList
-            ) {
-                BankListView(
-                    viewModel: BankListViewModel(
-                        repository: BankRepository(
-                            context: persistenceController.container.viewContext
-                        )
-                    )
-                )
+            .navigationDestination(for: SettingRouter.self) { router in
+                switch router {
+                case .bank:
+                    BankListView()
+                case .recurringBillList:
+                    RecurrenceListView()
+                case .recurringBillForm(let id):
+                    RecurringBillForm()
+                }
             }
         }
+        .environmentObject(navManager)
     }
 }
 
 #Preview {
     let mock = SettingViewModel()
     
+    let context = PersistenceController.preview.container.viewContext
+    let provider = RepositoryProvider(context: context)
+    
     SettingView(viewModel: mock)
+        .environmentObject(provider)
 }

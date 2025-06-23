@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct CreateBankView: View {
-    @StateObject var viewModel: CreateBankViewModel
+    
+    @EnvironmentObject var provider: RepositoryProvider
+    @StateObject var viewModel: CreateBankViewModel = CreateBankViewModel()
+    
+    let onClose: () -> Void
     
     var body: some View {
         NavigationView {
@@ -28,6 +32,7 @@ struct CreateBankView: View {
                         Button(
                             action: {
                                 viewModel.saveAction()
+                                onClose()
                             }
                         ) {
                             Image(systemName: "checkmark")
@@ -38,19 +43,16 @@ struct CreateBankView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.setup(with: provider)
+        }
     }
 }
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
-    let repository: BankRepository = BankRepository(
-        context: context
-    )
+    let provider = RepositoryProvider(context: context)
     
-    CreateBankView(
-        viewModel: CreateBankViewModel(
-            repository: repository,
-            onClose: {}
-        )
-    )
+    CreateBankView(onClose: {})
+        .environmentObject(provider)
 }

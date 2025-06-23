@@ -13,8 +13,7 @@ class CreateBankViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    private let repository: BankRepositoryProtocol
-    private let onClose: () -> Void
+    private var repository: BankRepositoryProtocol?
     
     @Published public var name: String = ""
     
@@ -22,14 +21,11 @@ class CreateBankViewModel: ObservableObject {
         name.isEmpty
     }
     
-    // MARK: - Initializer
-    
-    init (repository: BankRepositoryProtocol, onClose: @escaping () -> Void) {
-        self.repository = repository
-        self.onClose = onClose
-    }
-    
     // MARK: - Methods
+    
+    func setup(with provider: RepositoryProvider) {
+        repository = provider.bankRepository
+    }
     
     func saveAction() {
         let dto = BankDTO(
@@ -38,8 +34,6 @@ class CreateBankViewModel: ObservableObject {
             isHidden: false
         )
         
-        repository.add(with: dto)
-        
-        onClose()
+        repository?.add(with: dto)
     }
 }

@@ -11,7 +11,7 @@ class BankListViewModel: ObservableObject {
     
     // MARK: - Variables
     
-    let repository: BankRepositoryProtocol
+    private var repository: BankRepositoryProtocol?
     
     @Published var goToCreateBankView = false
     
@@ -19,20 +19,18 @@ class BankListViewModel: ObservableObject {
     
     @Published var banks: [Bank] = []
     
-    // MARK: - Initializer
-    
-    init(repository: BankRepositoryProtocol) {
-        self.repository = repository
-    }
-    
     // MARK:  Public Methods
     
+    func setup(with provider: RepositoryProvider) {
+        repository = provider.bankRepository
+    }
+    
     func fetchAll() {
-        banks = repository.fetchAll()
+        banks = repository?.fetchAll() ?? []
     }
     
     func changeVisibility(_ bank : Bank) {
-        repository.changeVisibility(with: bank)
+        repository?.changeVisibility(with: bank)
         
         fetchAll()
     }

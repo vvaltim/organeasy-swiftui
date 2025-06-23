@@ -35,7 +35,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gerenciar Bancos"
+            "value" : "Bancos"
           }
         }
       }
@@ -91,6 +91,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pagar"
+          }
+        }
+      }
+    },
+    "button_recurring_bill" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recorrência"
           }
         }
       }
@@ -205,6 +216,9 @@
         }
       }
     },
+    "Gerenciar" : {
+
+    },
     "header_chart_view_balance" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -237,6 +251,9 @@
           }
         }
       }
+    },
+    "Hello, World!" : {
+
     },
     "label_empty_data" : {
       "extractionState" : "manual",
@@ -289,6 +306,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lista de Bancos"
+          }
+        }
+      }
+    },
+    "navigation_recurring_bill_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recorrências"
           }
         }
       }

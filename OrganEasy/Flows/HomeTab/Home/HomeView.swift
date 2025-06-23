@@ -77,7 +77,8 @@ struct HomeView: View {
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
-    let repository = TransactionRepository(context: context)
+    let provider = RepositoryProvider(context: context)
     
     HomeView()
+        .environmentObject(provider)
 }
