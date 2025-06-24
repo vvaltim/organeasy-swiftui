@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OrganEasy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkT-nh-p0U">
-                                <rect key="frame" x="155.33333333333334" y="415.66666666666669" width="82.666666666666657" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OrganEasy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkT-nh-p0U">
+                                <rect key="frame" x="24" y="83" width="345" height="711"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemIndigoColor"/>
                                 <nil key="highlightedColor"/>
@@ -26,8 +26,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="kkT-nh-p0U" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="ddY-CM-8XY"/>
-                            <constraint firstItem="kkT-nh-p0U" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="vWI-So-eJz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="kkT-nh-p0U" secondAttribute="bottom" constant="24" id="WcT-TL-Wjj"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kkT-nh-p0U" secondAttribute="trailing" constant="24" id="bJt-qg-8tI"/>
+                            <constraint firstItem="kkT-nh-p0U" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="lyJ-hb-zA2"/>
+                            <constraint firstItem="kkT-nh-p0U" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="sDK-14-5WB"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -41,7 +43,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
