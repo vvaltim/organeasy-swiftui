@@ -73,7 +73,12 @@ struct SettingView: View {
                 case .recurringBillList:
                     RecurrenceListView()
                 case .recurringBillForm(let id):
-                    RecurringBillForm()
+                    RecurringBillFormView(
+                        onClose: {
+                            navManager.path.removeLast()
+                        },
+                        recurringBillID: id
+                    )
                 }
             }
         }

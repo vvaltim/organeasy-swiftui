@@ -12,11 +12,11 @@ struct RecurrenceListView: View {
     @EnvironmentObject var provider: RepositoryProvider
     @EnvironmentObject var navManager: SettingNavigationManager
     
-    @StateObject var viewModel: RecurrenceListViewModel = RecurrenceListViewModel()
+    @StateObject var viewModel: RecurringBillListViewModel = RecurringBillListViewModel()
     
     var body: some View {
         Group {
-            if viewModel.recurrenceList.isEmpty {
+            if viewModel.recurringBillList.isEmpty {
                 EmptyStateView(
                     imageName: "tray",
                     title: "label_empty_data",
@@ -25,8 +25,12 @@ struct RecurrenceListView: View {
                     action: { }
                 )
             } else {
-                List(viewModel.recurrenceList, id: \.self) { recurrence in
-                    Text(recurrence)
+                List(viewModel.recurringBillList, id: \.self) { recurringBill in
+                    RecurringBillItemView(
+                        name: recurringBill.name ?? "",
+                        amount: recurringBill.amount,
+                        dueDay: recurringBill.dueDate ?? Date()
+                    )
                 }
             }
         }
@@ -44,6 +48,7 @@ struct RecurrenceListView: View {
         }
         .onAppear {
             viewModel.setup(with: provider.recurringBillRepository)
+            viewModel.fetchAll()
         }
     }
 }

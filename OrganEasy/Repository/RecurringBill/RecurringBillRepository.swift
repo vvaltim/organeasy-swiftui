@@ -10,6 +10,8 @@ import CoreData
 protocol RecurringBillRepositoryProtocol {
     func fetchAll() -> [RecurringBill]
     func add(with dto: RecurringBillDTO)
+    func getById(_ id: UUID) -> RecurringBill?
+    func saveEdit()
 }
 
 class RecurringBillRepository: RecurringBillRepositoryProtocol {
@@ -29,8 +31,25 @@ class RecurringBillRepository: RecurringBillRepositoryProtocol {
         let bill = RecurringBill(context: context)
         bill.name = dto.name
         bill.amount = dto.amount
-        bill.dueDate = dto.duyDate
+        bill.dueDate = dto.dueDate
         
+        save()
+    }
+    
+    func getById(_ id: UUID) -> RecurringBill? {
+        let request = RecurringBill.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+        
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Error fetching transactions: \(error)")
+            return nil
+        }
+    }
+    
+    func saveEdit() {
         save()
     }
     

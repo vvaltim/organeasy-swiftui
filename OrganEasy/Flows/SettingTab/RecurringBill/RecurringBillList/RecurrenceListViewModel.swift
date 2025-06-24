@@ -7,13 +7,17 @@
 
 import UIKit
 
-class RecurrenceListViewModel: ObservableObject {
+class RecurringBillListViewModel: ObservableObject {
     
     private var repository: RecurringBillRepositoryProtocol?
     
-    @Published var recurrenceList: [String] = ["Teste 1", "Teste 2", "Teste 3"]
+    @Published var recurringBillList: [RecurringBill] = []
     
     func setup(with repository: RecurringBillRepositoryProtocol) {
         self.repository = repository
+    }
+    
+    func fetchAll() {
+        recurringBillList = repository?.fetchAll() ?? []
     }
 }

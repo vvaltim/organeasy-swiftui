@@ -252,9 +252,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "label_empty_data" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -477,6 +474,9 @@
           }
         }
       }
+    },
+    "Todo dia %@" : {
+
     },
     "toggle_dark_mode" : {
       "extractionState" : "manual",

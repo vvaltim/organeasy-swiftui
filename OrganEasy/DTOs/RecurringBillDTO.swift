@@ -10,5 +10,5 @@ import Foundation
 struct RecurringBillDTO {
     let name: String
     let amount: Double
-    let duyDate: Date
+    let dueDate: Date
 }
