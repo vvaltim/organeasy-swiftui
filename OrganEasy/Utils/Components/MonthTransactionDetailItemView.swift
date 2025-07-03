@@ -42,7 +42,8 @@ struct MonthTransactionDetailItemView: View {
                             .bold()
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
-                            .glassEffect()
+//                            .glassEffect()
+                            .modifier(GlassEffectIfAvailable())
                     }
                 }
                 

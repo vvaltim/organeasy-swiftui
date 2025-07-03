@@ -23,7 +23,8 @@ struct MonthEvolutionHeaderView: View {
                 .foregroundColor(.primary)
         }
         .padding()
-        .glassEffect(in: .rect(cornerRadius: 24.00))
+//        .glassEffect(in: .rect(cornerRadius: 24.00))
+        .modifier(GlassEffectIfAvailable())
         .padding(.vertical)
     }
 }

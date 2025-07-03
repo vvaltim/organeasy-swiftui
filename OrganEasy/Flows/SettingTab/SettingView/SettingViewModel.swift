@@ -51,8 +51,7 @@ class SettingViewModel: ObservableObject {
     // MARK: Private Functions
     
     private func verifyUserCloudKit() {
-        // CloudKit não funciona na conta gratuita da apple
-        /*CKContainer.default().accountStatus { [weak self] status, error in
+        CKContainer.default().accountStatus { [weak self] status, error in
             guard let self = self else { return }
             
             switch status {
@@ -68,7 +67,7 @@ class SettingViewModel: ObservableObject {
                 self.iCloudStatus = "Desconhecido"
                 break
             }
-        }*/
+        }
     }
     
     private func verifyAppVersion() {
