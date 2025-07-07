@@ -9,8 +9,6 @@ import SwiftUI
 
 struct MainTabBar: View {
     
-    let persistenceController = PersistenceController.shared
-    
     var body: some View {
         TabView {
             HomeView()

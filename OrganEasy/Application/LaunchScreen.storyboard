@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24093.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24053.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,20 +16,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OrganEasy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkT-nh-p0U">
-                                <rect key="frame" x="24" y="83" width="345" height="711"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemIndigoColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkT-nh-p0U">
+                                <rect key="frame" x="123.00000000000001" y="407" width="147.33333333333337" height="38.333333333333314"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Organ">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="systemIndigoColor"/>
+                                            <font key="NSFont" metaFont="system" size="32"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Easy">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="systemIndigoColor"/>
+                                            <font key="NSFont" metaFont="systemBold" size="32"/>
+                                            <font key="NSOriginalFont" metaFont="systemBold" size="32"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="kkT-nh-p0U" secondAttribute="bottom" constant="24" id="WcT-TL-Wjj"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kkT-nh-p0U" secondAttribute="trailing" constant="24" id="bJt-qg-8tI"/>
-                            <constraint firstItem="kkT-nh-p0U" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="lyJ-hb-zA2"/>
-                            <constraint firstItem="kkT-nh-p0U" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="sDK-14-5WB"/>
+                            <constraint firstItem="kkT-nh-p0U" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Tw6-Fb-anr"/>
+                            <constraint firstItem="kkT-nh-p0U" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="h5x-V2-OtC"/>
                         </constraints>
                     </view>
                 </viewController>

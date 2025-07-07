@@ -69,6 +69,7 @@ struct HomeView: View {
                 viewModel.setupProvider(with: provider)
                 
                 viewModel.fetchTransactions()
+                viewModel.requestNotificationPermission()
             }
         }
         .environmentObject(navManager)

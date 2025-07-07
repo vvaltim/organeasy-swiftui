@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import UserNotifications
 
 class HomeViewModel: ObservableObject {
     
@@ -44,6 +45,12 @@ class HomeViewModel: ObservableObject {
         transactions = repository?.fetchAll() ?? []
         
         groupedByMonthTransactions()
+    }
+    
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            // Aqui você pode tratar o resultado, se quiser
+        }
     }
     
     // MARK: - Private Methods

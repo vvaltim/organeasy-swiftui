@@ -25,21 +25,21 @@ struct CreateBankView: View {
                         text: $viewModel.name
                     )
                 }
-                
-                .navigationTitle(Text("navigation_transaction_title"))
-                .toolbar {
-                    ToolbarItem {
-                        Button(
-                            action: {
-                                viewModel.saveAction()
-                                onClose()
-                            }
-                        ) {
-                            Image(systemName: "checkmark")
+            }
+            
+            .navigationTitle(Text("navigation_transaction_title"))
+            .toolbar {
+                ToolbarItem {
+                    Button(
+                        action: {
+                            viewModel.saveAction()
+                            onClose()
                         }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(viewModel.isDissabledSaveButton)
+                    ) {
+                        Image(systemName: "checkmark")
                     }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(viewModel.isDissabledSaveButton)
                 }
             }
         }
