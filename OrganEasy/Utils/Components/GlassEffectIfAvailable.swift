@@ -9,10 +9,12 @@ import SwiftUI
 
 struct GlassEffectIfAvailable: ViewModifier {
     func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
+        // Desativado até o update oficial do xcode 26
+        /*if #available(iOS 26.0, *) {
             content.glassEffect(in: .rect(cornerRadius: 24.00))
         } else {
             content
-        }
+        }*/
+        content
     }
 }
