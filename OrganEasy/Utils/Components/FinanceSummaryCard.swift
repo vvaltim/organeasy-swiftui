@@ -51,7 +51,6 @@ struct FinanceSummaryCard: View {
             }
         }
         .padding()
-//        .glassEffect(in: .rect(cornerRadius: 24.00))
         .modifier(GlassEffectIfAvailable())
         .padding(.vertical)
     }

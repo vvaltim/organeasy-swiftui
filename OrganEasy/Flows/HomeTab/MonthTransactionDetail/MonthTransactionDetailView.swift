@@ -12,6 +12,7 @@ struct MonthTransactionDetailView: View {
     @EnvironmentObject var provider: RepositoryProvider
     @EnvironmentObject var navManager: HomeNavigationManager
     @StateObject var viewModel: MonthTransactionDetailViewModel = MonthTransactionDetailViewModel()
+    @State private var showAlertDuplicate = false
     let month: String
     
     var body: some View {
@@ -28,6 +29,27 @@ struct MonthTransactionDetailView: View {
         }
         .animation(.default, value: viewModel.transactions)
         .navigationTitle(viewModel.month)
+        .toolbar {
+            if viewModel.showDuplicateButton {
+                ToolbarItem {
+                    Button(
+                        action: {
+                            showAlertDuplicate = true
+                        }
+                    ) {
+                        Image(systemName: "doc.on.doc")
+                    }
+                }
+            }
+        }
+        .alert("Deseja mesmo duplicar os itens do mês selecionado, e inserir no mês atual?", isPresented: $showAlertDuplicate) {
+            Button("button_yes", role: .destructive) {
+                viewModel.duplicateMonth()
+            }
+            Button("button_no", role: .cancel) {
+                showAlertDuplicate = false
+            }
+        }
         .onAppear {
             viewModel.setupProvider(with: provider)
             viewModel.month = month
@@ -92,10 +114,13 @@ struct MonthTransactionDetailView: View {
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
-    let repository = TransactionRepository(context: context)
+    let repository = RepositoryProvider(context: context)
+    let navManager = HomeNavigationManager()
     let month = Date().addingTimeInterval(Double(1) * 86400)
     
     MonthTransactionDetailView(
         month: month.formatToMonthYear()
     )
+    .environmentObject(repository)
+    .environmentObject(navManager)
 }

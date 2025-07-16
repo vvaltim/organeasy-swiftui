@@ -25,10 +25,32 @@ class HomeViewModel: ObservableObject {
     @Published var goToTransactionView = false
     @Published var goToTransactionDetailView = false
     
+    // MARK: - Computed Variable
+    
     var firstTransactionPerMonth: [Transaction] {
         groupedByMonth.values.compactMap {
             $0.first
         }
+    }
+    
+    var groupedByMonthSorted: [(String, [Transaction])] {
+        groupedByMonth
+            .map { (key, value) in
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MM/yyyy"
+                let date = formatter.date(from: key) ?? Date.distantPast
+                return (key, value, date)
+            }
+            .sorted {
+                $0.2 > $1.2
+            }
+            .map {
+                ($0.0, $0.1)
+            }
+    }
+    
+    var firstTransactionPerMonthSorted: [Transaction] {
+        groupedByMonthSorted.compactMap { $0.1.first }
     }
     
     // MARK: - Public Methods
@@ -56,9 +78,14 @@ class HomeViewModel: ObservableObject {
     // MARK: - Private Methods
     
     private func groupedByMonthTransactions() {
-        
-        groupedByMonth = Dictionary(grouping: transactions) { transaction in
+        let grouped = Dictionary(grouping: transactions) { transaction in
             return transaction.dueDate.formatToMonthYear()
+        }
+        
+        groupedByMonth = grouped.mapValues {
+            $0.sorted {
+                $0.dueDate > $1.dueDate
+            }
         }
     }
 }

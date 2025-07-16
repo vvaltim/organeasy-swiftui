@@ -19,6 +19,8 @@ class MonthTransactionDetailViewModel: ObservableObject {
     @Published var goToEditView = false
     var selectedTransaction: Transaction?
     
+    // MARK: Computable Variable
+    
     var input: Double {
         var sum: Double = 0
         for item in transactions {
@@ -37,6 +39,12 @@ class MonthTransactionDetailViewModel: ObservableObject {
             }
         }
         return sum
+    }
+    
+    var showDuplicateButton: Bool {
+        let now = Date()
+        let currentMonth = now.formatToMonthYear()
+        return currentMonth == month
     }
     
     // MARK: - Public Methods
@@ -74,5 +82,33 @@ class MonthTransactionDetailViewModel: ObservableObject {
     func edit(with transaction: Transaction) {
         selectedTransaction = transaction
         goToEditView = true
+    }
+    
+    func duplicateMonth() {
+        guard let repository = repository else { return }
+        let calendar = Calendar.current
+
+        var newMonth: Date?
+        
+        for transaction in transactions {
+            guard let newDueDate = calendar.date(byAdding: .month, value: 1, to: transaction.dueDate) else { continue }
+
+            let dto = TransactionDTO(
+                isIncome: transaction.isIncome,
+                descriptionText: transaction.descriptionText,
+                amount: transaction.amount,
+                dueDate: newDueDate,
+                isSlash: transaction.isSlash
+            )
+            repository.add(with: dto)
+            
+            newMonth = newDueDate
+        }
+        
+        if let newMonth = newMonth {
+            month = newMonth.formatToMonthYear()
+        }
+        
+        getTransactionsPerMonth()
     }
 }

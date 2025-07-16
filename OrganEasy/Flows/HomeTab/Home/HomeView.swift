@@ -24,7 +24,7 @@ struct HomeView: View {
                         action: { }
                     )
                 } else {
-                    List(viewModel.firstTransactionPerMonth, id: \.self) { transaction in
+                    List(viewModel.firstTransactionPerMonthSorted, id: \.self) { transaction in
                         HStack {
                             Text(transaction.dueDate.formatToMonthYear())
                         }

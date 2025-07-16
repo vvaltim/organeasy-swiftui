@@ -84,6 +84,17 @@
         }
       }
     },
+    "button_no" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não"
+          }
+        }
+      }
+    },
     "button_pay" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -150,6 +161,17 @@
         }
       }
     },
+    "button_yes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sim"
+          }
+        }
+      }
+    },
     "currency_textfield_value" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -182,6 +204,9 @@
           }
         }
       }
+    },
+    "Deseja mesmo duplicar os itens do mês selecionado, e inserir no mês atual?" : {
+
     },
     "finance_summary_card_balance" : {
       "extractionState" : "manual",
