@@ -14,6 +14,5 @@ struct GlassEffectIfAvailable: ViewModifier {
         } else {
             content
         }
-        content
     }
 }
