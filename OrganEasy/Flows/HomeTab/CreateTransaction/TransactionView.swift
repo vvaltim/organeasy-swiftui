@@ -28,11 +28,6 @@ struct TransactionView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 
-                TextField(
-                    "textfield_description",
-                    text: $viewModel.description
-                )
-                
                 CurrencyTextField(
                     value: $viewModel.amount
                 )
@@ -40,6 +35,12 @@ struct TransactionView: View {
                 DatePicker(
                     "date_picker_due_date",
                     selection: $viewModel.dueDate, displayedComponents: .date
+                )
+                .datePickerStyle(.wheel)
+                
+                TextField(
+                    "textfield_description",
+                    text: $viewModel.description
                 )
             }
         }

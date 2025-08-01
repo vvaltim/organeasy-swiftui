@@ -20,6 +20,16 @@ struct CreateEvolutionView: View {
                 Section(
                     header: Text("section_details")
                 ){
+                    CurrencyTextField(
+                        value: $viewModel.amount
+                    )
+                    
+                    DatePicker(
+                        "date_picker_date",
+                        selection: $viewModel.date, displayedComponents: .date
+                    )
+                    .datePickerStyle(.wheel)
+                    
                     Picker(
                         "textfield_name",
                         selection: $viewModel.selectedBank) {
@@ -27,16 +37,7 @@ struct CreateEvolutionView: View {
                                 Text(viewModel.bankList[index].name ?? "Desconhecido")
                             }
                         }
-                    
-                    DatePicker(
-                        "date_picker_date",
-                        selection: $viewModel.date, displayedComponents: .date
-                    )
-                    
-                    CurrencyTextField(
-                        value: $viewModel.amount
-                    )
-                    
+                        .pickerStyle(.wheel)
                 }
             }
             
@@ -66,8 +67,9 @@ struct CreateEvolutionView: View {
 
 #Preview {
     let context = PersistenceController.preview.container.viewContext
+    let provider = RepositoryProvider(context: context)
     
     CreateEvolutionView(
         onClose: { }
-    )
+    ).environmentObject(provider)
 }
