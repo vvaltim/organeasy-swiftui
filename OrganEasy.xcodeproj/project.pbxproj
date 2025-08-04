@@ -409,7 +409,7 @@
 		D135BEC62DDE3958005B1325 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "OrganEasy Colors";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OrganEasy/OrganEasy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -444,7 +444,7 @@
 		D135BEC72DDE3958005B1325 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "OrganEasy Colors";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OrganEasy/OrganEasy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
