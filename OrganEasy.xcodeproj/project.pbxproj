@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D1AAAE072E423F60000E710E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D1AAAE062E423F60000E710E /* FirebaseCrashlytics */; };
+		D1AAAE092E423F60000E710E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D1AAAE082E423F60000E710E /* FirebaseRemoteConfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D135BEB22DDE3958005B1325 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1AAAE072E423F60000E710E /* FirebaseCrashlytics in Frameworks */,
+				D1AAAE092E423F60000E710E /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +132,8 @@
 			);
 			name = OrganEasy;
 			packageProductDependencies = (
+				D1AAAE062E423F60000E710E /* FirebaseCrashlytics */,
+				D1AAAE082E423F60000E710E /* FirebaseRemoteConfig */,
 			);
 			productName = OrganEasy;
 			productReference = D135BEA42DDE3957005B1325 /* OrganEasy.app */;
@@ -209,6 +218,9 @@
 			);
 			mainGroup = D135BE9B2DDE3957005B1325;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D135BEA52DDE3957005B1325 /* Products */;
 			projectDirPath = "";
@@ -588,6 +600,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D1AAAE062E423F60000E710E /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		D1AAAE082E423F60000E710E /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D135BE9C2DDE3957005B1325 /* Project object */;
 }
