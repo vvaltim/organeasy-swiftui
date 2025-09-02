@@ -11,6 +11,7 @@ protocol EvolutionRepositoryProtocol {
     func fetchAll() -> [Evolution]
     func add(with dto: EvolutionDTO)
     func delete(with evolution: Evolution)
+    func getById(with id: UUID) -> Evolution?
 }
 
 class EvolutionRepository: EvolutionRepositoryProtocol {
@@ -52,6 +53,19 @@ class EvolutionRepository: EvolutionRepositoryProtocol {
         context.delete(evolution)
         
         save()
+    }
+    
+    func getById(with id: UUID) -> Evolution? {
+        let request = Evolution.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+        
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Error fetching transactions: \(error)")
+            return nil
+        }
     }
     
     // MARK: - Private Methods

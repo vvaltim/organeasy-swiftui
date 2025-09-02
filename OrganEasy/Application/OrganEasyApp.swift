@@ -5,16 +5,23 @@
 //  Created by Walter Vânio dos Reis Júnior on 21/05/25.
 //
 
+import FirebaseCore
 import SwiftUI
 
 @main
 struct OrganEasyApp: App {
     let repositoryProvider = RepositoryProvider(context: PersistenceController.shared.container.viewContext)
+    @StateObject var remoteConfig = RemoteConfigManager()
+    
+    init() {
+        FirebaseApp.configure()
+    }
     
     var body: some Scene {
         WindowGroup {
             MainTabBar()
                 .environmentObject(repositoryProvider)
+                .environmentObject(remoteConfig)
                 .accentColor(.indigo)
         }
     }

@@ -10,6 +10,7 @@ import SwiftUI
 struct MonthEvolutionDetailView: View {
     
     @EnvironmentObject var provider: RepositoryProvider
+    @EnvironmentObject var navManager: EvolutionNavigationManager
     @StateObject var viewModel: MonthEvolutionDetailViewModel = MonthEvolutionDetailViewModel()
     
     let month: String
@@ -29,6 +30,9 @@ struct MonthEvolutionDetailView: View {
                         Text(evolution.bank?.name ?? "")
                         Spacer()
                         Text(evolution.value.toBRL())
+                    }
+                    .onTapGesture {
+                        navManager.path.append(EvolutionRouter.evolution(evolution.id))
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {

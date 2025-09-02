@@ -11,6 +11,8 @@ struct SettingView: View {
     
     let persistenceController = PersistenceController.shared
     
+    @EnvironmentObject var remoteConfigManager: RemoteConfigManager
+    
     @ObservedObject var viewModel: SettingViewModel = SettingViewModel()
     
     @StateObject private var navManager = SettingNavigationManager()
@@ -26,10 +28,12 @@ struct SettingView: View {
                         Text("button_bank_management")
                     }
                     
-                    Button {
-                        navManager.path.append(SettingRouter.recurringBillList)
-                    } label: {
-                        Text("button_recurring_bill")
+                    if remoteConfigManager.isFeatureEnabled(.isEnableRecurrence) {
+                        Button {
+                            navManager.path.append(SettingRouter.recurringBillList)
+                        } label: {
+                            Text("button_recurring_bill")
+                        }
                     }
                 }
                 
@@ -91,7 +95,9 @@ struct SettingView: View {
     
     let context = PersistenceController.preview.container.viewContext
     let provider = RepositoryProvider(context: context)
+    let remoteConfig = RemoteConfigManager()
     
     SettingView(viewModel: mock)
         .environmentObject(provider)
+        .environmentObject(remoteConfig)
 }
