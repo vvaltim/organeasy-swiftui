@@ -15,12 +15,6 @@ class EvolutionHomeViewModel: ObservableObject {
     
     private var repository: EvolutionRepositoryProtocol?
     
-    // MARK: - Navigation
-    
-    @Published var goToCreateEvolution = false
-    @Published var goToDetailEvolution = false
-    var selectedMonth = ""
-    
     // MARK: - ItemView
     
     @Published var groupedByMonth: [String: [Evolution]] = [:]
@@ -54,21 +48,6 @@ class EvolutionHomeViewModel: ObservableObject {
     
     func setupProvider(with provider: RepositoryProvider) {
         repository = provider.evolutionRepository
-    }
-    
-    func openCreateEvolution() {
-        goToCreateEvolution = true
-    }
-    
-    func closeCreateEvolution() {
-        goToCreateEvolution = false
-        
-        fetchAll()
-    }
-    
-    func openDetailsEvolution(_ evolution: Evolution) {
-        goToDetailEvolution = true
-        selectedMonth = evolution.date?.formatToMonthYear() ?? ""
     }
     
     func fetchAll() {

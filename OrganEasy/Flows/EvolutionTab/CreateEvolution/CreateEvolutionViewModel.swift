@@ -15,7 +15,10 @@ class CreateEvolutionViewModel: ObservableObject {
     
     private var bankRepository: BankRepositoryProtocol?
     private var evolutionRepository: EvolutionRepositoryProtocol?
+    private var evolution: Evolution?
+    private var previewSelectedBank: Bank?
     
+    @Published public var showBanklist: Bool = true
     @Published public var bankList: [Bank] = []
     @Published public var selectedBank: Int = 0
     @Published public var amount: Double = 0.0
@@ -26,8 +29,19 @@ class CreateEvolutionViewModel: ObservableObject {
         self.evolutionRepository = provider.evolutionRepository
     }
     
-    func fetchBanks() {
-        bankList = bankRepository?.fetchAll() ?? []
+    func setupEvolution(with id: UUID?) {
+        fetchBanks()
+        
+        guard let id else {
+            return
+        }
+        
+        self.evolution = evolutionRepository?.getById(with: id)
+        
+        date = evolution?.date ?? Date()
+        amount = evolution?.value ?? 0.0
+        previewSelectedBank = evolution?.bank
+        showBanklist = false
     }
     
     func saveEvolution() {
@@ -35,9 +49,13 @@ class CreateEvolutionViewModel: ObservableObject {
             id: UUID(),
             value: amount,
             date: date,
-            bank: bankList[selectedBank]
+            bank: previewSelectedBank ?? bankList[selectedBank]
         )
         
         evolutionRepository?.add(with: dto)
+    }
+    
+    private func fetchBanks() {
+        bankList = bankRepository?.fetchAll() ?? []
     }
 }

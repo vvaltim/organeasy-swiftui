@@ -12,24 +12,24 @@ struct CreateEvolutionView: View {
     @EnvironmentObject var provider: RepositoryProvider
     @StateObject var viewModel: CreateEvolutionViewModel = CreateEvolutionViewModel()
     
-    let onClose: () -> Void
+    var uuid: UUID?
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section(
-                    header: Text("section_details")
-                ){
-                    CurrencyTextField(
-                        value: $viewModel.amount
-                    )
-                    
-                    DatePicker(
-                        "date_picker_date",
-                        selection: $viewModel.date, displayedComponents: .date
-                    )
-                    .datePickerStyle(.wheel)
-                    
+        Form {
+            Section(
+                header: Text("section_details")
+            ){
+                CurrencyTextField(
+                    value: $viewModel.amount
+                )
+                
+                DatePicker(
+                    "date_picker_date",
+                    selection: $viewModel.date, displayedComponents: .date
+                )
+                .datePickerStyle(.wheel)
+                
+                if viewModel.showBanklist {
                     Picker(
                         "textfield_name",
                         selection: $viewModel.selectedBank) {
@@ -40,27 +40,27 @@ struct CreateEvolutionView: View {
                         .pickerStyle(.wheel)
                 }
             }
-            
-            .navigationTitle(Text("navigation_transaction_title"))
-            .toolbar {
-                ToolbarItem {
-                    Button(
-                        action: {
-                            viewModel.saveEvolution()
-                            
-                            onClose()
-                        }
-                    ) {
-                        Image(systemName: "checkmark")
+        }
+        
+        .navigationTitle(Text("navigation_transaction_title"))
+        .toolbar {
+            ToolbarItem {
+                Button(
+                    action: {
+                        viewModel.saveEvolution()
+                        
+                        // dar push aqui
                     }
-                    .buttonStyle(.borderedProminent)
+                ) {
+                    Image(systemName: "checkmark")
                 }
+                .buttonStyle(.borderedProminent)
             }
-            .onAppear {
-                viewModel.setupProvider(with: provider)
-                
-                viewModel.fetchBanks()
-            }
+        }
+        .onAppear {
+            viewModel.setupProvider(with: provider)
+            
+            viewModel.setupEvolution(with: uuid)
         }
     }
 }
@@ -69,7 +69,5 @@ struct CreateEvolutionView: View {
     let context = PersistenceController.preview.container.viewContext
     let provider = RepositoryProvider(context: context)
     
-    CreateEvolutionView(
-        onClose: { }
-    ).environmentObject(provider)
+    CreateEvolutionView().environmentObject(provider)
 }

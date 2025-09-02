@@ -30,6 +30,9 @@ struct MonthEvolutionDetailView: View {
                         Spacer()
                         Text(evolution.value.toBRL())
                     }
+                    .onTapGesture {
+                        viewModel.edit(with: evolution)
+                    }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
                             viewModel.delete(with: evolution)

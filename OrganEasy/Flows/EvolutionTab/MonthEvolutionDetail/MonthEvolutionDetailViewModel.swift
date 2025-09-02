@@ -32,6 +32,10 @@ class MonthEvolutionDetailViewModel: ObservableObject {
         getEvolutionsPerMonth()
     }
     
+    func edit(with evolution: Evolution) {
+        
+    }
+    
     // MARK: - Private Functions
     
     func getEvolutionsPerMonth() {

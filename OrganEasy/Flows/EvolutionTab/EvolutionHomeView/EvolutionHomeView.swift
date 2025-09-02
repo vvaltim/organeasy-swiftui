@@ -10,10 +10,11 @@ import SwiftUI
 struct EvolutionHomeView: View {
     
     @EnvironmentObject var provider: RepositoryProvider
+    @StateObject private var navManager = EvolutionNavigationManager()
     @StateObject var viewModel: EvolutionHomeViewModel = EvolutionHomeViewModel()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navManager.path) {
             Group {
                 if viewModel.groupedByMonth.isEmpty {
                     EmptyStateView(
@@ -32,18 +33,18 @@ struct EvolutionHomeView: View {
                             .listRowInsets(EdgeInsets())
                             .background(Color.clear)
                         ) {
-                            ForEach(Array(viewModel.groupedByMonth.keys.sorted()), id: \.self) { month in
+                            let months = Array(viewModel.groupedByMonth.keys.sorted())
+                            
+                            ForEach(months, id: \.self) { month in
                                 let evolutions = viewModel.groupedByMonth[month] ?? []
-                                HStack {
-                                    Text(month)
-                                    Spacer()
-                                    Text(viewModel.getTotalByMonth(month: month).toBRL())
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    if let first = evolutions.first {
-                                        viewModel.openDetailsEvolution(first)
+                                
+                                MonthEvolutionRow(
+                                    month: month,
+                                    evolutions: evolutions,
+                                    total: viewModel.getTotalByMonth(month: month)
+                                ) {
+                                    if let first = evolutions.first, let dateFormatted = first.date?.formatToMonthYear() {
+                                        navManager.path.append(EvolutionRouter.month(dateFormatted))
                                     }
                                 }
                             }
@@ -51,33 +52,35 @@ struct EvolutionHomeView: View {
                     }
                 }
             }
+            
             .navigationTitle(Text("tab_evolution"))
             .toolbar {
                 ToolbarItem {
                     Button(action: {
-                        viewModel.openCreateEvolution()
+                        navManager.path.append(EvolutionRouter.evolution(nil))
                     }) {
                         Image(systemName: "plus")
                     }
                 }
             }
-            .navigationDestination(isPresented: $viewModel.goToCreateEvolution) {
-                CreateEvolutionView(
-                    onClose: {
-                        viewModel.closeCreateEvolution()
-                    }
-                )
-            }
-            .navigationDestination(isPresented: $viewModel.goToDetailEvolution) {
-                MonthEvolutionDetailView(
-                    month: viewModel.selectedMonth
-                )
+            .navigationDestination(for: EvolutionRouter.self) { router in
+                switch router {
+                case .evolution(let uuid):
+                    CreateEvolutionView(
+                        uuid: uuid
+                    )
+                case .month(let month):
+                    MonthEvolutionDetailView(
+                        month: month
+                    )
+                }
             }
             .onAppear {
                 viewModel.setupProvider(with: provider)
                 viewModel.fetchAll()
             }
         }
+        .environmentObject(navManager)
     }
 }
 
