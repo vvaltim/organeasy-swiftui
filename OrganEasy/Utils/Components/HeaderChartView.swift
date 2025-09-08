@@ -34,9 +34,10 @@ struct HeaderChartView: View {
             .padding()
         }
         .padding()
-//        .glassEffect(in: .rect(cornerRadius: 24.00))
-        .modifier(GlassEffectIfAvailable())
-        .padding(.vertical)
+        .background(
+            Color(UIColor.secondarySystemGroupedBackground)
+                .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        )
     }
 }
 

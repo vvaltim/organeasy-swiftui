@@ -51,8 +51,11 @@ struct FinanceSummaryCard: View {
             }
         }
         .padding()
-        .modifier(GlassEffectIfAvailable())
         .padding(.vertical)
+        .background(
+            Color(UIColor.secondarySystemGroupedBackground)
+                .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        )
     }
 }
 

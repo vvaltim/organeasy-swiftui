@@ -11,6 +11,7 @@ struct TransactionView: View {
     
     @EnvironmentObject var provider: RepositoryProvider
     @StateObject var viewModel: TransactionViewModel = TransactionViewModel()
+    @FocusState private var isAmountFieldFocused: Bool
     
     let onClose: () -> Void
     var transactionID: UUID? = nil
@@ -31,6 +32,7 @@ struct TransactionView: View {
                 CurrencyTextField(
                     value: $viewModel.amount
                 )
+                .focused($isAmountFieldFocused)
                 
                 DatePicker(
                     "date_picker_due_date",
@@ -65,6 +67,10 @@ struct TransactionView: View {
             viewModel.setupProvider(with: provider)
             
             viewModel.setupTransaction(with: transactionID)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isAmountFieldFocused = true
+            }
         }
     }
 }

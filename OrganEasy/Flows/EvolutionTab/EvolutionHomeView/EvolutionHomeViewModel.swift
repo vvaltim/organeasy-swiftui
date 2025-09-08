@@ -17,30 +17,24 @@ class EvolutionHomeViewModel: ObservableObject {
     
     // MARK: - ItemView
     
-    @Published var groupedByMonth: [String: [Evolution]] = [:]
-    var firstEvolutionPerMonth: [Evolution] {
-        groupedByMonth.values.compactMap {
-            $0.first
-        }
-    }
+    @Published var monthsWithTotal: [(Date, Double)] = []
+
+    var allEvolution = [Evolution]()
     
     // MARK: Chart
     
     var chartData: [TestValues] {
         var test: [TestValues] = []
         
-        for evolutionKey in groupedByMonth.keys {
-            let month = groupedByMonth[evolutionKey]?.first?.date?.formatTo(dateFormat: "MMM/yy") ?? .init()
-            let value = groupedByMonth[evolutionKey]?.reduce(0) { $0 + $1.value } ?? 0.0
-            
+        for item in monthsWithTotal {
             let item = TestValues(
-                month: month,
-                value: value
+                month: item.0.formatTo(dateFormat: "MMM/yy"),
+                value: item.1
             )
             
             test.append(item)
         }
-        
+
         return test
     }
     
@@ -51,14 +45,26 @@ class EvolutionHomeViewModel: ObservableObject {
     }
     
     func fetchAll() {
-        let allEvolution = repository?.fetchAll() ?? []
+        allEvolution = repository?.fetchAll() ?? []
         
-        groupedByMonth = Dictionary(grouping: allEvolution) { evolution in
-            return evolution.date?.formatToMonthYear() ?? ""
-        }
+        monthsWithTotal = allMonthsForFilter()
     }
     
-    func getTotalByMonth(month: String) -> Double {
-        groupedByMonth[month]?.reduce(0) { $0 + $1.value } ?? 0.0
+    // MARK: - Private Methods
+    
+    private func allMonthsForFilter() -> [(Date, Double)] {
+        let calendar = Calendar.current
+        let grouped = Dictionary(grouping: allEvolution) { (evolution) -> Date in
+            guard let date = evolution.date else { return Date() }
+            let components = calendar.dateComponents([.year, .month], from: date)
+            return calendar.date(from: components)!
+        }
+        
+        let result = grouped.map { (key, evolutions) -> (Date, Double) in
+            let total = evolutions.reduce(0) { $0 + $1.value }
+            return (key, total)
+        }
+        
+        return result.sorted { $0.0 < $1.0 }
     }
 }

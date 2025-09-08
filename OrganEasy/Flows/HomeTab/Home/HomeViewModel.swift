@@ -14,11 +14,12 @@ class HomeViewModel: ObservableObject {
     // MARK: - Variables
     
     private var repository: TransactionRepositoryProtocol?
+    private var allTransactions: [Transaction] = []
     
     // MARK: - Items View
     
     @Published var transactions: [Transaction] = []
-    @Published var groupedByMonth: [String: [Transaction]] = [:]
+    @Published var months: [Date] = []
     
     // MARK: - Navigation
     
@@ -26,32 +27,6 @@ class HomeViewModel: ObservableObject {
     @Published var goToTransactionDetailView = false
     
     // MARK: - Computed Variable
-    
-    var firstTransactionPerMonth: [Transaction] {
-        groupedByMonth.values.compactMap {
-            $0.first
-        }
-    }
-    
-    var groupedByMonthSorted: [(String, [Transaction])] {
-        groupedByMonth
-            .map { (key, value) in
-                let formatter = DateFormatter()
-                formatter.dateFormat = "MM/yyyy"
-                let date = formatter.date(from: key) ?? Date.distantPast
-                return (key, value, date)
-            }
-            .sorted {
-                $0.2 > $1.2
-            }
-            .map {
-                ($0.0, $0.1)
-            }
-    }
-    
-    var firstTransactionPerMonthSorted: [Transaction] {
-        groupedByMonthSorted.compactMap { $0.1.first }
-    }
     
     // MARK: - Public Methods
     
@@ -64,9 +39,10 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchTransactions() {
-        transactions = repository?.fetchAll() ?? []
+        allTransactions = repository?.fetchAll() ?? []
+        months = allMonthsForFilter()
         
-        groupedByMonthTransactions()
+        filterPerMonth(with: nil)
     }
     
     func requestNotificationPermission() {
@@ -75,16 +51,35 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    func filterPerMonth(with month: Date?) {
+        let calendar = Calendar.current
+        let now = month ?? Date()
+        transactions = allTransactions.filter { transaction in
+            let components = calendar.dateComponents([.year, .month], from: transaction.dueDate)
+            let nowComponents = calendar.dateComponents([.year, .month], from: now)
+            return components.year == nowComponents.year && components.month == nowComponents.month
+        }
+    }
+    
     // MARK: - Private Methods
     
-    private func groupedByMonthTransactions() {
-        let grouped = Dictionary(grouping: transactions) { transaction in
-            return transaction.dueDate.formatToMonthYear()
+    private func allMonthsForFilter() -> [Date] {
+        var allDates: [Date] = []
+        
+        for transaction in allTransactions {
+            allDates.append(transaction.dueDate)
         }
         
-        groupedByMonth = grouped.mapValues {
-            $0.sorted {
-                $0.dueDate > $1.dueDate
+        var seen = Set<String>()
+        let calendar = Calendar.current
+        return allDates.filter { date in
+            let components = calendar.dateComponents([.year, .month], from: date)
+            let key = "\(components.year!)-\(components.month!)"
+            if seen.contains(key) {
+                return false
+            } else {
+                seen.insert(key)
+                return true
             }
         }
     }
