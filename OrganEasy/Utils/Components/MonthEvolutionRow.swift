@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MonthEvolutionRow: View {
     let month: String
-    let evolutions: [Evolution]
     let total: Double
     let onTap: () -> Void
 

@@ -16,7 +16,7 @@ struct EvolutionHomeView: View {
     var body: some View {
         NavigationStack(path: $navManager.path) {
             Group {
-                if viewModel.groupedByMonth.isEmpty {
+                if viewModel.monthsWithTotal.isEmpty {
                     EmptyStateView(
                         imageName: "tray",
                         title: "label_empty_data",
@@ -34,19 +34,13 @@ struct EvolutionHomeView: View {
                             .background(Color.clear)
                             .padding(.bottom, 24)
                         ) {
-                            let months = Array(viewModel.groupedByMonth.keys.sorted())
-                            
-                            ForEach(months, id: \.self) { month in
-                                let evolutions = viewModel.groupedByMonth[month] ?? []
-                                
+                            ForEach(viewModel.monthsWithTotal.reversed(), id: \.0) { month in
+                                let monthString = month.0.formatToMonthYear()
                                 MonthEvolutionRow(
-                                    month: month,
-                                    evolutions: evolutions,
-                                    total: viewModel.getTotalByMonth(month: month)
+                                    month: monthString,
+                                    total: month.1
                                 ) {
-                                    if let first = evolutions.first, let dateFormatted = first.date?.formatToMonthYear() {
-                                        navManager.path.append(EvolutionRouter.month(dateFormatted))
-                                    }
+                                    navManager.path.append(EvolutionRouter.month(monthString))
                                 }
                             }
                         }
