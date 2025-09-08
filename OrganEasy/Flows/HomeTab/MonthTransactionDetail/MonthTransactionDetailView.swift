@@ -22,6 +22,7 @@ struct MonthTransactionDetailView: View {
                     input: viewModel.input,
                     output: viewModel.output
                 )
+                .padding(.bottom, 24)
                 .listRowInsets(EdgeInsets())
             ) {
                 transactionList

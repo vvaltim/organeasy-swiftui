@@ -32,6 +32,7 @@ struct EvolutionHomeView: View {
                             )
                             .listRowInsets(EdgeInsets())
                             .background(Color.clear)
+                            .padding(.bottom, 24)
                         ) {
                             let months = Array(viewModel.groupedByMonth.keys.sorted())
                             
