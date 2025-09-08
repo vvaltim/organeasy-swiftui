@@ -48,6 +48,8 @@ struct HomeView: View {
                             ForEach(viewModel.transactions, id: \.self) { transaction in
                                 HStack {
                                     Text(transaction.descriptionText)
+                                    Spacer()
+                                    Text(transaction.amount.toBRL())
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .contentShape(Rectangle())
