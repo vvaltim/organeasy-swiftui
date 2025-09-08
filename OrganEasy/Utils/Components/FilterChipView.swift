@@ -23,7 +23,7 @@ struct FilterChipView: View {
                 .clipShape(Capsule())
                 .overlay(
                     Capsule()
-                        .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)
+                        .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 1)
                 )
                 .shadow(color: isSelected ? Color.accentColor.opacity(0.15) : .clear, radius: 4, x: 0, y: 2)
         }
