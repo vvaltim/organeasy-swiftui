@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateEvolutionView: View {
     
     @EnvironmentObject var provider: RepositoryProvider
+    @EnvironmentObject var navManager: EvolutionNavigationManager
     @StateObject var viewModel: CreateEvolutionViewModel = CreateEvolutionViewModel()
     
     var uuid: UUID?
@@ -49,7 +50,7 @@ struct CreateEvolutionView: View {
                     action: {
                         viewModel.saveEvolution()
                         
-                        // dar push aqui
+                        navManager.path.removeLast()
                     }
                 ) {
                     Image(systemName: "checkmark")
