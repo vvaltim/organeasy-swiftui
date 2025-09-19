@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct TransactionDTO {
+struct TransactionDTO: Codable {
     var isIncome: Bool
     var descriptionText: String
     var amount: Double
     var dueDate: Date
     var isSlash: Bool
+    
+    func getTransaction() -> String {
+        return "isIncome: \(isIncome)\ndescriptionText: \(descriptionText)\namount: \(amount)\ndueDate: \(dueDate)\nisSlash: \(isSlash)"
+    }
 }
