@@ -25,7 +25,7 @@ struct IntelligenceView: View {
             .navigationTitle("Assistente")
             .searchable(text: $viewModel.inputText, prompt: Text("Adicione uma despesa de ..."))
             .onSubmit(of: .search) {
-                viewModel.processText()
+                viewModel.verifyIntention()
             }
         }
         .onAppear {
