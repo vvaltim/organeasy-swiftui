@@ -14,6 +14,20 @@ struct TransactionDTO: Codable {
     var dueDate: Date
     var isSlash: Bool
     
+    init(
+        isIncome: Bool,
+        descriptionText: String,
+        amount: Double,
+        dueDate: Date,
+        isSlash: Bool
+    ) {
+        self.isIncome = isIncome
+        self.descriptionText = descriptionText
+        self.amount = amount
+        self.dueDate = dueDate
+        self.isSlash = isSlash
+    }
+    
     func getTransaction() -> String {
         return "isIncome: \(isIncome)\ndescriptionText: \(descriptionText)\namount: \(amount)\ndueDate: \(dueDate)\nisSlash: \(isSlash)"
     }

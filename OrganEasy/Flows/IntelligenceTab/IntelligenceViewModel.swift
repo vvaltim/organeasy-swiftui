@@ -20,14 +20,22 @@ class IntelligenceViewModel: ObservableObject {
     
     @Published public var inputText: String = ""
     @Published public var chatList: [ChatMessage] = []
+    @Published public var isThinking: Bool = false
+    
+    private var repositoryTransaction: TransactionRepositoryProtocol?
     
     private var lastMessage = ""
     private var service = IntelligenceService()
     
-    // MARK: - Methods
+    // MARK: - Public Methods
+    
+    func setupProvider(with provider: RepositoryProvider) {
+        repositoryTransaction = provider.transactionRepository
+    }
     
     func initializeChat() {
         chatList = []
+        isThinking = true
         
         service.initializeChat(
             prompt: "Se apresente para o usuário de forma bem sucinta, e conta o que vc faz"
@@ -57,6 +65,14 @@ class IntelligenceViewModel: ObservableObject {
         lastMessage = inputText
         inputText = ""
         
+        addToChat(
+            with: ChatMessage(
+                text: lastMessage,
+                isSending: true
+            )
+        )
+        isThinking = true
+        
         service.checkIntentions(
             prompt: "Texto: \(lastMessage) Qual a intenção do usuário?"
         ) { [weak self] result in
@@ -65,6 +81,35 @@ class IntelligenceViewModel: ObservableObject {
             switch result {
             case .success(let intention):
                 processIntention(with: intention)
+            case .failure(let error):
+                self.addToChat(
+                    with: ChatMessage(
+                        text: error.localizedDescription,
+                        isSending: false
+                    )
+                )
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func extractTransaction() {
+        service.processTransaction(
+            prompt: "Texto: \(lastMessage) Extraia os campos conforme as instruções."
+        ) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let dto):
+                repositoryTransaction?.add(with: dto)
+                
+                addToChat(
+                    with: ChatMessage(
+                        text: "Certo, eu adicionei a transação \(dto.descriptionText) com vencimento em \(dto.dueDate.formatToMonthYear())!",
+                        isSending: false
+                    )
+                )
             case .failure(let error):
                 self.addToChat(
                     with: ChatMessage(
@@ -90,52 +135,9 @@ class IntelligenceViewModel: ObservableObject {
         }
     }
     
-    func extractTransaction() {
-        if #available(iOS 26.0, *) {
-            let model = SystemLanguageModel.default
-            
-            if !model.isAvailable {
-                return
-            }
-            
-            let instructions = """
-            Você é um assistente que extrai informações estruturadas de despesas a partir de um texto em português.
-            - amount (Double)
-            - descriptionText (String)
-            - dueDate (Date, formato ISO 8601)
-            - isIncome (Bool)
-            Se algum campo não estiver presente, use null ou false.
-            """
-            let session = LanguageModelSession(instructions: instructions)
-            
-            let prompt = """
-            Texto: "\(lastMessage)"
-            Extraia os campos conforme as instruções.
-            """
-            
-            Task {
-                do {
-                    let options = GenerationOptions(temperature: 0.2)
-                    let response = try await session.respond(to: prompt, generating: TransactionGenerable.self, options: options)
-                    
-                    addToChat(with: ChatMessage(text: "Certo, vou adicionar essa despesa!", isSending: false))
-                    addToChat(with: ChatMessage(text: response.content.getTransaction(), isSending: false))
-                } catch {
-                    addToChat(with: ChatMessage(text: "Erro ao gerar resposta: \(error)", isSending: false))
-                }
-            }
-        } else {
-            print("Não suportado na versão da API da Apple")
-        }
-        
-    }
-    
     private func addToChat(with message: ChatMessage) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            self.chatList.append(message)
-        }
+        chatList.append(message)
+        isThinking = false
     }
 }
 
