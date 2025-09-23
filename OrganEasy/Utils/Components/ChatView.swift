@@ -28,7 +28,7 @@ struct ChatView: View {
                 Spacer()
             }
         }
-        .padding(chat.isSending ? .trailing : .leading, 16)
+        .padding(chat.isSending ? .trailing : .leading, 0)
     }
 }
 

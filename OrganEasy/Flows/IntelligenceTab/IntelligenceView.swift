@@ -14,26 +14,41 @@ struct IntelligenceView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                List {
-                    ForEach(viewModel.chatList, id: \.uuid) { item in
-                        ChatView(chat: item)
-                            .listRowSeparator(.hidden)
-                            .listRowBackground(Color.clear)
-                    }
-                    
-                    if viewModel.isThinking {
-                        HStack {
-                            ChatLoadingView()
-                            
-                            Spacer()
+            ZStack {
+                VStack {
+                    ScrollViewReader { proxy in
+                        List {
+                            ForEach(viewModel.chatList, id: \.uuid) { item in
+                                ChatView(chat: item)
+                                    .listRowSeparator(.hidden)
+                                    .listRowBackground(Color.clear)
+                                    .id(item.uuid)
+                            }
                         }
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
+                        .scrollContentBackground(.hidden)
+                        .background(Color(.systemBackground))
+                        .onChange(of: viewModel.chatList.count) {
+                            if let last = viewModel.chatList.last {
+                                withAnimation {
+                                    proxy.scrollTo(last.uuid, anchor: .bottom)
+                                }
+                            }
+                        }
                     }
                 }
-                .scrollContentBackground(.hidden)
-                .background(Color(.systemBackground))
+                
+                if viewModel.isThinking {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            ChatLoadingView()
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                    }
+                    .transition(.move(edge: .bottom))
+                    .animation(.easeInOut, value: viewModel.isThinking)
+                }
             }
         }
         .searchable(text: $viewModel.inputText, prompt: Text("Adicionar transação"))
