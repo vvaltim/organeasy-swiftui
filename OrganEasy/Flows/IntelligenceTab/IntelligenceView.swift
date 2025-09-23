@@ -24,7 +24,8 @@ struct IntelligenceView: View {
                     
                     if viewModel.isThinking {
                         HStack {
-                            ProgressView()
+                            ChatLoadingView()
+                            
                             Spacer()
                         }
                         .listRowSeparator(.hidden)

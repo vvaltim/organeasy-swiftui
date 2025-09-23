@@ -32,6 +32,26 @@ struct ChatView: View {
     }
 }
 
+struct ChatLoadingView: View {
+
+    var body: some View {
+        HStack {
+            Image(systemName: "ellipsis")
+                .symbolEffect(.breathe)
+                .padding(10)
+                .background(
+                    Color(UIColor.systemIndigo)
+                )
+                .foregroundColor(.white)
+                .cornerRadius(16, corners: [.topLeft, .topRight, .bottomRight])
+                .frame(maxWidth: 250, alignment: .leading)
+            
+            Spacer()
+        }
+        .padding(.leading, 16)
+    }
+}
+
 fileprivate struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
