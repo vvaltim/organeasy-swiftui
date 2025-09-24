@@ -5,6 +5,7 @@
 //  Created by Walter Vânio dos Reis Júnior on 18/09/25.
 //
 
+import FirebaseAnalytics
 import Foundation
 import FoundationModels
 
@@ -51,7 +52,7 @@ class IntelligenceViewModel: ObservableObject {
                     )
                 )
             case .failure(let error):
-                self.addToChat(
+                self.showError(
                     with: ChatMessage(
                         text: error.localizedDescription,
                         isSending: false
@@ -82,7 +83,7 @@ class IntelligenceViewModel: ObservableObject {
             case .success(let intention):
                 processIntention(with: intention)
             case .failure(let error):
-                self.addToChat(
+                self.showError(
                     with: ChatMessage(
                         text: error.localizedDescription,
                         isSending: false
@@ -111,7 +112,7 @@ class IntelligenceViewModel: ObservableObject {
                     )
                 )
             case .failure(let error):
-                self.addToChat(
+                self.showError(
                     with: ChatMessage(
                         text: error.localizedDescription,
                         isSending: false
@@ -126,7 +127,7 @@ class IntelligenceViewModel: ObservableObject {
         case "cadastrar_transacao":
             extractTransaction()
         default:
-            addToChat(
+            showError(
                 with: ChatMessage(
                     text: "Eu ainda n sei fazer isso",
                     isSending: false
@@ -138,6 +139,18 @@ class IntelligenceViewModel: ObservableObject {
     private func addToChat(with message: ChatMessage) {
         chatList.append(message)
         isThinking = false
+    }
+    
+    private func showError(with message: ChatMessage) {
+        Analytics.logEvent(
+            "pergunta_sem_resposta",
+            parameters: [
+                "pergunta": lastMessage,
+                "resposta": message.text
+            ]
+        )
+        
+        addToChat(with: message)
     }
 }
 

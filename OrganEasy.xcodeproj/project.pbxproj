@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D1AAAE072E423F60000E710E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D1AAAE062E423F60000E710E /* FirebaseCrashlytics */; };
 		D1AAAE092E423F60000E710E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D1AAAE082E423F60000E710E /* FirebaseRemoteConfig */; };
+		D1FCB8BD2E8459E800F1E556 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D1FCB8BC2E8459E800F1E556 /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 			files = (
 				D1AAAE072E423F60000E710E /* FirebaseCrashlytics in Frameworks */,
 				D1AAAE092E423F60000E710E /* FirebaseRemoteConfig in Frameworks */,
+				D1FCB8BD2E8459E800F1E556 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +136,7 @@
 			packageProductDependencies = (
 				D1AAAE062E423F60000E710E /* FirebaseCrashlytics */,
 				D1AAAE082E423F60000E710E /* FirebaseRemoteConfig */,
+				D1FCB8BC2E8459E800F1E556 /* FirebaseAnalytics */,
 			);
 			productName = OrganEasy;
 			productReference = D135BEA42DDE3957005B1325 /* OrganEasy.app */;
@@ -622,6 +625,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		D1FCB8BC2E8459E800F1E556 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -66,7 +66,7 @@ class IntelligenceService: IntelligenceServicing {
                     }
                 } catch {
                     await MainActor.run {
-                        completion(.failure(IntelligenceServiceError.error("Erro ao classificar intenção: \(error)")))
+                        completion(.failure(IntelligenceServiceError.error("Erro ao processar transação: \(error)")))
                     }
                 }
             }
@@ -137,7 +137,7 @@ class IntelligenceService: IntelligenceServicing {
                     }
                 } catch {
                     await MainActor.run {
-                        completion(.failure(IntelligenceServiceError.error("Erro ao classificar intenção: \(error)")))
+                        completion(.failure(IntelligenceServiceError.error("Erro ao inicializar chat: \(error)")))
                     }
                 }
             }

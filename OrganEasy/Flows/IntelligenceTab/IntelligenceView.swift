@@ -20,6 +20,7 @@ struct IntelligenceView: View {
                         List {
                             ForEach(viewModel.chatList, id: \.uuid) { item in
                                 ChatView(chat: item)
+                                    .listRowInsets(EdgeInsets())
                                     .listRowSeparator(.hidden)
                                     .listRowBackground(Color.clear)
                                     .id(item.uuid)
@@ -45,9 +46,26 @@ struct IntelligenceView: View {
                             Spacer()
                         }
                         .padding(.horizontal)
+                        .padding(.leading, 3)
                     }
                     .transition(.move(edge: .bottom))
                     .animation(.easeInOut, value: viewModel.isThinking)
+                }
+            }
+            .navigationTitle("Easynhe")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 6) {
+                        Text("Easynhe")
+                        Text("BETA")
+                            .font(.caption2)
+                            .bold()
+                            .foregroundColor(.orange)
+                            .padding(.horizontal, 4)
+                            .background(Color.orange.opacity(0.15))
+                            .cornerRadius(4)
+                    }
                 }
             }
         }
@@ -55,7 +73,6 @@ struct IntelligenceView: View {
         .onSubmit(of: .search) {
             viewModel.verifyIntention()
         }
-        .navigationTitle(Text("Easynhe"))
         .onAppear {
             viewModel.setupProvider(with: provider)
             
