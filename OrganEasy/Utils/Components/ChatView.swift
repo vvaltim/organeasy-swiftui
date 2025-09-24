@@ -12,21 +12,24 @@ struct ChatView: View {
     let chat: ChatMessage
 
     var body: some View {
-        HStack {
-            if chat.isSending {
-                Spacer()
+        VStack {
+            HStack {
+                if chat.isSending {
+                    Spacer()
+                }
+                Text(chat.text)
+                    .padding(10)
+                    .background(
+                        !chat.isSending ? Color(UIColor.systemIndigo) : Color(UIColor.systemGray)
+                    )
+                    .foregroundColor(.white)
+                    .cornerRadius(16, corners: !chat.isSending ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft])
+                    .frame(maxWidth: 250, alignment: chat.isSending ? .trailing : .leading)
+                if !chat.isSending {
+                    Spacer()
+                }
             }
-            Text(chat.text)
-                .padding(10)
-                .background(
-                    !chat.isSending ? Color(UIColor.systemIndigo) : Color(UIColor.systemGray)
-                )
-                .foregroundColor(.white)
-                .cornerRadius(16, corners: !chat.isSending ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft])
-                .frame(maxWidth: 250, alignment: chat.isSending ? .trailing : .leading)
-            if !chat.isSending {
-                Spacer()
-            }
+            .padding(.vertical, 8)
         }
     }
 }

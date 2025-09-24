@@ -41,7 +41,9 @@ class IntelligenceService: IntelligenceServicing {
                 return
             }
             
-            let instructions = "Você é um assistente que extrai informações estruturadas de despesas a partir de um texto em português. - amount (Double) - descriptionText (String) - dueDate (Date, formato dd/MM/yyyy) - isIncome (Bool) Se algum campo não estiver presente, use null ou false."
+            let date = Date()
+            
+            let instructions = "Você é um assistente que extrai informações estruturadas de despesas a partir de um texto em português. - amount (Double) - descriptionText (String) - dueDate (Date, formato dd/MM/yyyy) - isIncome (Bool) Se algum campo não estiver presente, use null ou false. Se a data informada não tiver ano, assuma que o dia de hoje é \(date.formatTo())"
             let session = LanguageModelSession(instructions: instructions)
             
             Task {

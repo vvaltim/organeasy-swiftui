@@ -53,10 +53,10 @@ class HomeViewModel: ObservableObject {
     
     func filterPerMonth(with month: Date?) {
         let calendar = Calendar.current
-        let now = month ?? Date()
+        let now = month ?? months.first
         transactions = allTransactions.filter { transaction in
             let components = calendar.dateComponents([.year, .month], from: transaction.dueDate)
-            let nowComponents = calendar.dateComponents([.year, .month], from: now)
+            let nowComponents = calendar.dateComponents([.year, .month], from: now ?? Date())
             return components.year == nowComponents.year && components.month == nowComponents.month
         }
     }
