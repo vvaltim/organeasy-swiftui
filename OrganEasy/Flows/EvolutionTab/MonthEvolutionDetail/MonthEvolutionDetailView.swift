@@ -31,6 +31,7 @@ struct MonthEvolutionDetailView: View {
                         Spacer()
                         Text(evolution.value.toBRL())
                     }
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         navManager.path.append(EvolutionRouter.evolution(evolution.id))
                     }

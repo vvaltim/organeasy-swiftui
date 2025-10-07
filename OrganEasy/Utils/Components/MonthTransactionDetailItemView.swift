@@ -67,7 +67,9 @@ struct MonthTransactionDetailItemView: View {
                 }
                 .padding(.top, 8)
                 .padding(.bottom, 8)
-            }.onTapGesture {
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
                 onTap(.tap)
             }
             .swipeActions(edge: .leading, allowsFullSwipe: true) {
