@@ -19,7 +19,7 @@ struct TransactionGenerable {
     @Guide(description: "A data de vencimento no formato dd/MM/yyyy")
     var dueDate: String
     
-    @Guide(description: "Se é uma transactão de entrada ou saída")
+    @Guide(description: "Se é uma transactão de entrada ou saída (true para entrada, false para saída), onde por exemplo, pagar uma conta ou cadastrar um débito é saída, e receber um dinheiro ou informar um recebimento é entrada")
     var isIncome: Bool
     
     func getTransaction() -> String {

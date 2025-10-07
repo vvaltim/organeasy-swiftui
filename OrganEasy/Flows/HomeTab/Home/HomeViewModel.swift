@@ -15,6 +15,7 @@ class HomeViewModel: ObservableObject {
     
     private var repository: TransactionRepositoryProtocol?
     private var allTransactions: [Transaction] = []
+    private var selectedFilter: Date?
     
     // MARK: - Items View
     
@@ -26,7 +27,27 @@ class HomeViewModel: ObservableObject {
     @Published var goToTransactionView = false
     @Published var goToTransactionDetailView = false
     
-    // MARK: - Computed Variable
+    // MARK: Computable Variable
+    
+    var input: Double {
+        var sum: Double = 0
+        for item in transactions {
+            if item.isIncome {
+                sum += item.amount
+            }
+        }
+        return sum
+    }
+    
+    var output: Double {
+        var sum: Double = 0
+        for item in transactions {
+            if !item.isIncome {
+                sum += item.amount
+            }
+        }
+        return sum
+    }
     
     // MARK: - Public Methods
     
@@ -54,11 +75,30 @@ class HomeViewModel: ObservableObject {
     func filterPerMonth(with month: Date?) {
         let calendar = Calendar.current
         let now = month ?? months.first
+        selectedFilter = now
         transactions = allTransactions.filter { transaction in
             let components = calendar.dateComponents([.year, .month], from: transaction.dueDate)
             let nowComponents = calendar.dateComponents([.year, .month], from: now ?? Date())
             return components.year == nowComponents.year && components.month == nowComponents.month
         }
+    }
+    
+    func markToPaid(transaction: Transaction) {
+        repository?.markToPaid(with: transaction)
+        
+        refreshData()
+    }
+    
+    func delete(transaction: Transaction) {
+        repository?.remove(with: transaction)
+        
+        refreshData()
+    }
+    
+    func changeSlash(transaction: Transaction) {
+        repository?.changeSlash(with: transaction)
+        
+        refreshData()
     }
     
     // MARK: - Private Methods
@@ -82,5 +122,11 @@ class HomeViewModel: ObservableObject {
                 return true
             }
         }
+    }
+    
+    private func refreshData() {
+        allTransactions = repository?.fetchAll() ?? []
+        
+        filterPerMonth(with: selectedFilter)
     }
 }

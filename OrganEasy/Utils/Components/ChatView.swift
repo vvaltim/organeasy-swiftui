@@ -23,7 +23,7 @@ struct ChatView: View {
                         !chat.isSending ? Color(UIColor.systemIndigo) : Color(UIColor.systemGray)
                     )
                     .foregroundColor(.white)
-                    .cornerRadius(16, corners: !chat.isSending ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft])
+                    .cornerRadius(16)
                     .frame(maxWidth: 250, alignment: chat.isSending ? .trailing : .leading)
                 if !chat.isSending {
                     Spacer()
@@ -45,31 +45,11 @@ struct ChatLoadingView: View {
                     Color(UIColor.systemIndigo)
                 )
                 .foregroundColor(.white)
-                .cornerRadius(16, corners: [.topLeft, .topRight, .bottomRight])
+                .cornerRadius(16)
                 .frame(maxWidth: 250, alignment: .leading)
             
             Spacer()
         }
-    }
-}
-
-fileprivate struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(
-            roundedRect: rect,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: radius, height: radius)
-        )
-        return Path(path.cgPath)
-    }
-}
-
-fileprivate extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
 

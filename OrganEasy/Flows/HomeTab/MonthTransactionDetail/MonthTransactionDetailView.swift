@@ -67,46 +67,19 @@ struct MonthTransactionDetailView: View {
                 paymentDate: transaction.paymentDate?.formatTo(dateFormat: "dd/MM"),
                 ammount: transaction.amount.toBRL(),
                 isIncome: transaction.isIncome,
-                isSlash: transaction.isSlash
-            )
-            .onTapGesture {
-                navManager.path.append(HomeRouter.transaction(transaction.id))
-            }
-            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                if transaction.canPay() {
-                    Button {
-                        viewModel.markToPaid(transaction: transaction)
-                    } label: {
-                        Label(
-                            "button_pay",
-                            systemImage: "checkmark.circle"
-                        )
-                    }
-                    .tint(.green)
-                }
-                
-                if transaction.canSlash() {
-                    Button {
-                        viewModel.changeSlash(
-                            transaction: transaction
-                        )
-                    } label: {
-                        Label(
-                            transaction.isSlash ? "button_strikethrough_off" : "button_strikethrough_on" ,
-                            systemImage: transaction.isSlash ? "pencil" : "pencil.slash"
-                        )
-                    }
-                    .tint(.gray)
-                }
-            }
-            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                Button(role: .destructive) {
+                isSlash: transaction.isSlash,
+                canPay: transaction.canPay(),
+                canSlash: transaction.canSlash()
+            ) { type in
+                switch type {
+                case .tap:
+                    navManager.path.append(HomeRouter.transaction(transaction.id))
+                case .paid:
+                    viewModel.markToPaid(transaction: transaction)
+                case .slash:
+                    viewModel.changeSlash(transaction: transaction)
+                case .delete:
                     viewModel.delete(transaction: transaction)
-                } label: {
-                    Label(
-                        "button_delete",
-                        systemImage: "trash.fill"
-                    )
                 }
             }
         }
