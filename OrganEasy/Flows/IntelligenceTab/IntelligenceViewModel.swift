@@ -25,6 +25,8 @@ class IntelligenceViewModel: ObservableObject {
     @Published public var showHelp: Bool = false
     
     private var repositoryTransaction: TransactionRepositoryProtocol?
+    private var repositoryBank: BankRepositoryProtocol?
+    private var repositoryEvolution: EvolutionRepositoryProtocol?
     
     private var lastMessage = ""
     private var service = IntelligenceService()
@@ -33,13 +35,15 @@ class IntelligenceViewModel: ObservableObject {
     
     func setupProvider(with provider: RepositoryProvider) {
         repositoryTransaction = provider.transactionRepository
+        repositoryBank = provider.bankRepository
+        repositoryEvolution = provider.evolutionRepository
     }
     
-    func initializeChat() {
+    func initializeChat(prompt: String = "Pergunta como vc pode ajudar hoje") {
         isThinking = true
         
         service.initializeChat(
-            prompt: "Pergunta como vc pode ajudar hoje"
+            prompt: prompt
         ) { [weak self] result in
             guard let self = self else { return }
             
@@ -99,6 +103,14 @@ class IntelligenceViewModel: ObservableObject {
     
     // MARK: - Private Methods
     
+    private func initializeBanks() {
+        guard let bankList = repositoryBank?.fetchAll() else {
+            return
+        }
+        
+        service.setupBankList(bankList: bankList)
+    }
+    
     private func extractTransaction() {
         service.processTransaction(
             prompt: "Texto: \(lastMessage) Extraia os campos conforme as instruções."
@@ -111,7 +123,35 @@ class IntelligenceViewModel: ObservableObject {
                 
                 addToChat(
                     with: ChatMessage(
-                        text: "Certo, eu adicionei a transação \(dto.descriptionText) com vencimento em \(dto.dueDate.formatToMonthYear())!",
+                        text: "Certo, eu adicionei na aba de home o item \(dto.descriptionText) com vencimento em \(dto.dueDate.formatToMonthYear())!",
+                        isSending: false
+                    )
+                )
+            case .failure(let error):
+                self.showError(
+                    with: ChatMessage(
+                        text: error.localizedDescription,
+                        isSending: false
+                    )
+                )
+            }
+        }
+    }
+    
+    private func extractEvolution() {
+        initializeBanks()
+        service.processEvolituon(
+            prompt: "Texto: \(lastMessage) Extraia os campos conforme as instruções."
+        ) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let dto):
+                repositoryEvolution?.add(with: dto)
+                
+                addToChat(
+                    with: ChatMessage(
+                        text: "Certo, eu adicionei na aba de evolução o item \(dto.bank.name ?? "unknown") com o valor de \(dto.value.toBRL()) na data de  \(dto.date.formatTo())!",
                         isSending: false
                     )
                 )
@@ -130,6 +170,12 @@ class IntelligenceViewModel: ObservableObject {
         switch intention {
         case "cadastrar_transacao":
             extractTransaction()
+        case "cadastrar_evolucao":
+            extractEvolution()
+        case "outra":
+            initializeChat(
+                prompt: "Explica que vc não consegue executar fazer isso aqui que ele pediu (\(lastMessage)), e depois explica quais são suas capacidades."
+            )
         default:
             showError(
                 with: ChatMessage(

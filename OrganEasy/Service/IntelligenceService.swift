@@ -11,6 +11,7 @@ import FoundationModels
 typealias InitializeChatCompletion = (Result<String, Error>) -> Void
 typealias CheckIntentionsCompletion = (Result<String, Error>) -> Void
 typealias ProcessTransactionCompletion = (Result<TransactionDTO, Error>) -> Void
+typealias ProcessEvolutionCompletion = (Result<EvolutionDTO, Error>) -> Void
 
 enum IntelligenceServiceError: LocalizedError {
     case unavailable
@@ -27,12 +28,79 @@ enum IntelligenceServiceError: LocalizedError {
 }
 
 protocol IntelligenceServicing {
+    func setupBankList(bankList: [Bank])
     func initializeChat(prompt: String, completion: @escaping InitializeChatCompletion)
     func checkIntentions(prompt: String, completion: @escaping CheckIntentionsCompletion)
     func processTransaction(prompt: String, completion: @escaping ProcessTransactionCompletion)
+    func processEvolituon(prompt: String, completion: @escaping ProcessEvolutionCompletion)
 }
 
 class IntelligenceService: IntelligenceServicing {
+    // MARK:  Private
+    private var bankList: [Bank] = []
+    
+    private func getBankListName() -> String {
+        return bankList.map { "\($0.name) (\($0.id?.uuidString ?? ""))" }.joined(separator: ", ")
+    }
+    
+    private func getBankByID(_ id: String) -> Bank {
+        for item in bankList {
+            if item.id?.uuidString == id {
+                return item
+            }
+        }
+        
+        return bankList.first!
+    }
+    
+    func setupBankList(bankList: [Bank]) {
+        self.bankList = bankList
+    }
+    
+    func processEvolituon(prompt: String, completion: @escaping ProcessEvolutionCompletion) {
+        if bankList.isEmpty {
+            completion(.failure(IntelligenceServiceError.error("Configure os bancos no app em Ajustes -> Bancos, para usar essa função")))
+            return
+        }
+        
+        let model = SystemLanguageModel.default
+        if !model.isAvailable {
+            completion(.failure(IntelligenceServiceError.unavailable))
+            return
+        }
+        
+        let date = Date()
+        
+        let instructions = "Você é um assistente que extrai informações estruturadas de evolução de patrimônio a partir de um texto em português. - amount (Double) - name (String) - date (Date, formato dd/MM/yyyy). Se algum campo não estiver presente, use null ou false. Tambem existe essa lista de bancos, onde tenho o nome e entre parenteses tenho o id dele \(getBankListName()), se o usuário informar um desses bancos, coloque o bankId no campo, se não deixe nulo. Se a data informada não tiver ano, assuma que o dia de hoje é \(date.formatTo())"
+        let session = LanguageModelSession(instructions: instructions)
+        
+        Task {
+            do {
+                let options = GenerationOptions(temperature: 0.2)
+                let response = try await session.respond(
+                    to: prompt,
+                    generating: EvolutionGenerable.self,
+                    options: options
+                )
+                
+                let dto = EvolutionDTO(
+                    id: UUID(),
+                    value: response.content.amount,
+                    date: response.content.date.stringToDate() ?? Date(),
+                    bank: getBankByID(response.content.bankId)
+                )
+                
+                await MainActor.run {
+                    completion(.success(dto))
+                }
+            } catch {
+                await MainActor.run {
+                    completion(.failure(IntelligenceServiceError.error("Erro ao processar evolução: \(error)")))
+                }
+            }
+        }
+    }
+    
     func processTransaction(prompt: String, completion: @escaping ProcessTransactionCompletion) {
         if #available(iOS 26.0, *) {
             let model = SystemLanguageModel.default
@@ -125,7 +193,7 @@ class IntelligenceService: IntelligenceServicing {
                 return
             }
             
-            let instructions = "Voçê é um assistente pessoal chamada Easynhe, que ajuda as pessoas a gerenciar suas financas. Você fala de forma bastante descontraida, mas de forma sucinta, no maximo umas 20 palavras. Suas principais funcionalidades são cadastrar transações de entrada ou saida, cadastrar evoluções do dinheiro guardado, cadastrar banco, para que a lista de evoluções fique mais detalhada, e em breve você conseguirar cadastrar lembretes de contas recorrentes, como Contas de Energia, Agua e Internet."
+            let instructions = "Voçê é um assistente pessoal chamada Easynhe, que ajuda as pessoas a gerenciar suas financas. Você fala de forma bastante descontraida, mas de forma sucinta, no maximo umas 20 palavras. Suas principais funcionalidades são cadastrar transações de entrada ou saida, cadastrar evoluções do dinheiro guardado, para que a lista de evoluções fique mais detalhada."
             let session = LanguageModelSession(instructions: instructions)
             
             Task {
