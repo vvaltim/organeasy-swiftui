@@ -22,6 +22,7 @@ class IntelligenceViewModel: ObservableObject {
     @Published public var inputText: String = ""
     @Published public var chatList: [ChatMessage] = []
     @Published public var isThinking: Bool = false
+    @Published public var showHelp: Bool = false
     
     private var repositoryTransaction: TransactionRepositoryProtocol?
     
@@ -35,11 +36,10 @@ class IntelligenceViewModel: ObservableObject {
     }
     
     func initializeChat() {
-        chatList = []
         isThinking = true
         
         service.initializeChat(
-            prompt: "Se apresente para o usuário de forma bem sucinta, e conta o que vc faz"
+            prompt: "Pergunta como vc pode ajudar hoje"
         ) { [weak self] result in
             guard let self = self else { return }
             
@@ -91,6 +91,10 @@ class IntelligenceViewModel: ObservableObject {
                 )
             }
         }
+    }
+    
+    func showHelpView() {
+        showHelp = true
     }
     
     // MARK: - Private Methods

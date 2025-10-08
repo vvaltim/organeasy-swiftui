@@ -67,6 +67,19 @@ struct IntelligenceView: View {
                             .cornerRadius(4)
                     }
                 }
+                
+                ToolbarItem {
+                    Button(action: {
+                        viewModel.showHelpView()
+                    }) {
+                        Image(systemName: "questionmark")
+                    }
+                }
+            }
+            .sheet(isPresented: $viewModel.showHelp) {
+                NavigationStack {
+                    HelpView()
+                }
             }
         }
         .searchable(text: $viewModel.inputText, prompt: Text("Adicionar transação"))

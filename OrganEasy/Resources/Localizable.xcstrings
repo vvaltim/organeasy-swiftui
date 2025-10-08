@@ -4,6 +4,12 @@
     "" : {
 
     },
+    "“Adicione uma transação de entrada chamada Netflix, no valor de trinta e três reais, com vencimento no dia 10 de janeiro.”" : {
+
+    },
+    "• Adicionar uma transação na aba Home." : {
+
+    },
     "0,00" : {
 
     },
@@ -19,6 +25,9 @@
       }
     },
     "Adicionar transação" : {
+
+    },
+    "Ajuda do Chat" : {
 
     },
     "Ajustes" : {
@@ -184,6 +193,9 @@
         }
       }
     },
+    "Como usar:" : {
+
+    },
     "currency_textfield_value" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -223,6 +235,9 @@
     "Easynhe" : {
 
     },
+    "Em breve:" : {
+
+    },
     "Evolução" : {
 
     },
@@ -258,6 +273,9 @@
           }
         }
       }
+    },
+    "Funcionalidades atuais:" : {
+
     },
     "Gerenciar" : {
 
@@ -374,6 +392,15 @@
           }
         }
       }
+    },
+    "Novas funcionalidades serão adicionadas ao chat. Fique atento às atualizações!" : {
+
+    },
+    "O chat do app permite que você adicione transações de forma rápida e prática usando comandos de texto." : {
+
+    },
+    "Para adicionar uma transação, siga o padrão abaixo:" : {
+
     },
     "picker_input" : {
       "extractionState" : "manual",
