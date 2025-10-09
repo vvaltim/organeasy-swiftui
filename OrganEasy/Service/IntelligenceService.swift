@@ -87,7 +87,8 @@ class IntelligenceService: IntelligenceServicing {
                     id: UUID(),
                     value: response.content.amount,
                     date: response.content.date.stringToDate() ?? Date(),
-                    bank: getBankByID(response.content.bankId)
+                    bank: getBankByID(response.content.bankId),
+                    addWithIA: true
                 )
                 
                 await MainActor.run {
@@ -128,7 +129,8 @@ class IntelligenceService: IntelligenceServicing {
                         descriptionText: response.content.name,
                         amount: response.content.amount,
                         dueDate: response.content.dueDate.stringToDate() ?? Date(),
-                        isSlash: false
+                        isSlash: false,
+                        addWithIA: true
                     )
                     
                     await MainActor.run {

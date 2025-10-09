@@ -22,6 +22,7 @@ extension Transaction {
     @NSManaged public var isIncome: Bool
     @NSManaged public var paymentDate: Date?
     @NSManaged public var isSlash: Bool
+    @NSManaged public var addWithIA: Bool
 
     func canSlash() -> Bool {
         return paymentDate == nil

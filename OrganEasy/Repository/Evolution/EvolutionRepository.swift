@@ -45,6 +45,7 @@ class EvolutionRepository: EvolutionRepositoryProtocol {
         evolution.date = dto.date
         evolution.value = dto.value
         evolution.bank = dto.bank
+        evolution.addWithIA = dto.addWithIA
         
         save()
     }

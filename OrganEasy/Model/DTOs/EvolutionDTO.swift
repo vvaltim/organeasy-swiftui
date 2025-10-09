@@ -12,4 +12,5 @@ struct EvolutionDTO {
     var value: Double
     var date: Date
     var bank: Bank
+    var addWithIA: Bool = false
 }

@@ -74,6 +74,7 @@ struct HomeView: View {
                                             viewModel.delete(transaction: transaction)
                                         }
                                     }
+                                    .listRowBackground(rowBackground(for: transaction))
                                 }
                             }
                         }
@@ -120,6 +121,16 @@ struct HomeView: View {
             }
         }
         .environmentObject(navManager)
+    }
+    
+    private func rowBackground(for transaction: Transaction) -> some View {
+        if transaction.addWithIA {
+            return AnyView(
+                AppleIntelligenceGradientBackground()
+            )
+        } else {
+            return AnyView(Color(UIColor.secondarySystemGroupedBackground))
+        }
     }
 }
 

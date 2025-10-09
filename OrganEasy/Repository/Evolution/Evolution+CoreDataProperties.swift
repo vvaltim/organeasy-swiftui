@@ -20,25 +20,9 @@ extension Evolution {
     @NSManaged public var value: Double
     @NSManaged public var date: Date?
     @NSManaged public var bank: Bank?
+    @NSManaged public var addWithIA: Bool
 
 }
-
-//// MARK: Generated accessors for bank
-//extension Evolution {
-//
-//    @objc(addBankObject:)
-//    @NSManaged public func addToBank(_ value: Bank)
-//
-//    @objc(removeBankObject:)
-//    @NSManaged public func removeFromBank(_ value: Bank)
-//
-//    @objc(addBank:)
-//    @NSManaged public func addToBank(_ values: NSSet)
-//
-//    @objc(removeBank:)
-//    @NSManaged public func removeFromBank(_ values: NSSet)
-//
-//}
 
 extension Evolution : Identifiable {
 
