@@ -176,6 +176,25 @@ class IntelligenceService: IntelligenceServicing {
                     await MainActor.run {
                         completion(.success(userIntent))
                     }
+                } catch let error as LanguageModelSession.GenerationError {
+                    let mainMessage: String
+                    switch error {
+                    case .guardrailViolation(let context):
+                        mainMessage = context.debugDescription
+                    case .decodingFailure(let context):
+                        mainMessage = context.debugDescription
+                    case .rateLimited(let context):
+                        mainMessage = context.debugDescription
+                    default:
+                        mainMessage = "Não sei o que fazer sobre a sua pergunta."
+                    }
+                    let failureReason = error.failureReason
+                    let recoverySuggestion = error.recoverySuggestion
+                    let errorMessage = [mainMessage, failureReason, recoverySuggestion].compactMap { $0 }.joined(separator: "\n")
+                    
+                    await MainActor.run {
+                        completion(.failure(IntelligenceServiceError.error(errorMessage)))
+                    }
                 } catch {
                     await MainActor.run {
                         completion(.failure(IntelligenceServiceError.error("Erro ao classificar intenção: \(error)")))
