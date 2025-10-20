@@ -7,6 +7,9 @@
     "“Adicione uma transação de entrada chamada Netflix, no valor de trinta e três reais, com vencimento no dia 10 de janeiro.”" : {
 
     },
+    "• Adicionar uma entrada na aba Evolução." : {
+
+    },
     "• Adicionar uma transação na aba Home." : {
 
     },
@@ -235,9 +238,6 @@
     "Easynhe" : {
 
     },
-    "Em breve:" : {
-
-    },
     "Evolução" : {
 
     },
@@ -393,9 +393,6 @@
         }
       }
     },
-    "Novas funcionalidades serão adicionadas ao chat. Fique atento às atualizações!" : {
-
-    },
     "O chat do app permite que você adicione transações de forma rápida e prática usando comandos de texto." : {
 
     },
@@ -492,9 +489,6 @@
           }
         }
       }
-    },
-    "Status" : {
-
     },
     "System Colors" : {
 

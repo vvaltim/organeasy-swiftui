@@ -22,6 +22,8 @@ struct HelpView: View {
                     .font(.headline)
                 Text("• Adicionar uma transação na aba Home.")
                     .font(.body)
+                Text("• Adicionar uma entrada na aba Evolução.")
+                    .font(.body)
             }
             
             // Exemplo de comando
@@ -33,14 +35,6 @@ struct HelpView: View {
                 Text("“Adicione uma transação de entrada chamada Netflix, no valor de trinta e três reais, com vencimento no dia 10 de janeiro.”")
                     .italic()
                     .padding(.leading)
-            }
-            
-            // Espaço para futuras funcionalidades
-            VStack(alignment: .trailing, spacing: 8) {
-                Text("Em breve:")
-                    .font(.headline)
-                Text("Novas funcionalidades serão adicionadas ao chat. Fique atento às atualizações!")
-                    .font(.body)
             }
             
             Spacer()

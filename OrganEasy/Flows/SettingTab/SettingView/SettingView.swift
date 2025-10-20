@@ -49,7 +49,7 @@ struct SettingView: View {
                 
                 Section(header: Text("Apple Intelligence")) {
                     VStack(alignment: .leading) {
-                        Text("Status")
+                        Text("Easynhe")
                             .font(.headline)
                         Spacer()
                         Text(viewModel.appleIntelligenceStatus)
