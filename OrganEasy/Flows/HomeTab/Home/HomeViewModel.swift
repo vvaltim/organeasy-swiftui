@@ -49,6 +49,12 @@ class HomeViewModel: ObservableObject {
         return sum
     }
     
+    var showDuplicateButton: Bool {
+        let now = Date()
+        let currentMonth = now.formatToMonthYear()
+        return currentMonth == selectedFilter?.formatToMonthYear() ?? ""
+    }
+    
     // MARK: - Public Methods
     
     func setupProvider(with provider: RepositoryProvider) {
@@ -99,6 +105,34 @@ class HomeViewModel: ObservableObject {
         repository?.changeSlash(with: transaction)
         
         refreshData()
+    }
+    
+    func duplicateMonth() {
+        guard let repository = repository else { return }
+        let calendar = Calendar.current
+
+        var newMonth: Date?
+        
+        for transaction in transactions {
+            guard let newDueDate = calendar.date(byAdding: .month, value: 1, to: transaction.dueDate) else { continue }
+
+            let dto = TransactionDTO(
+                isIncome: transaction.isIncome,
+                descriptionText: transaction.descriptionText,
+                amount: transaction.amount,
+                dueDate: newDueDate,
+                isSlash: transaction.isSlash
+            )
+            repository.add(with: dto)
+            
+            newMonth = newDueDate
+        }
+        
+        if let newMonth = newMonth {
+            selectedFilter = newMonth
+        }
+        
+        fetchTransactions()
     }
     
     // MARK: - Private Methods

@@ -12,6 +12,7 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     @StateObject private var navManager = HomeNavigationManager()
     @State private var selectedMonth: Date? = Date()
+    @State var showAlertDuplicate = false
     
     var body: some View {
         NavigationStack(path: $navManager.path) {
@@ -84,7 +85,21 @@ struct HomeView: View {
             .navigationTitle(Text("tab_home"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                if viewModel.showDuplicateButton {
+                    ToolbarItem {
+                        Button(
+                            action: {
+                                showAlertDuplicate = true
+                            }
+                        ) {
+                            Image(systemName: "doc.on.doc")
+                        }
+                    }
+                    
+                    ToolbarSpacer(.fixed)
+                }
+                
+                ToolbarItem {
                     Button(
                         action: {
                             navManager.path.append(HomeRouter.transaction(nil))
@@ -110,6 +125,17 @@ struct HomeView: View {
                         transactionID: id
                     )
                 }
+            }
+            .alert(isPresented: $showAlertDuplicate) {
+                Alert(
+                    title: Text("Deseja mesmo duplicar os itens do mês selecionado, e inserir no mês atual?"),
+                    primaryButton: .destructive(Text("button_yes")) {
+                        viewModel.duplicateMonth()
+                    },
+                    secondaryButton: .cancel(Text("button_no")) {
+                        showAlertDuplicate = false
+                    }
+                )
             }
             .onAppear {
                 viewModel.setupProvider(with: provider)
