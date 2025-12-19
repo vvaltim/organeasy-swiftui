@@ -12,6 +12,7 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     @StateObject private var navManager = HomeNavigationManager()
     @State private var selectedMonth: Date? = Date()
+    @State var showAlertDuplicate = false
     
     var body: some View {
         NavigationStack(path: $navManager.path) {
@@ -25,36 +26,56 @@ struct HomeView: View {
                         action: { }
                     )
                 } else {
-                    List {
-                        Section(
-                            header:
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 12) {
-                                        ForEach(viewModel.months, id: \.self) { month in
-                                            FilterChipView(
-                                                label: month.formatToMonthYear(),
-                                                isSelected: selectedMonth == month,
-                                                action: {
-                                                    selectedMonth = month
-                                                    viewModel.filterPerMonth(with: month)
-                                                }
-                                            )
+                    VStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(viewModel.months, id: \.self) { month in
+                                    FilterChipView(
+                                        label: month.formatToMonthYear(),
+                                        isSelected: selectedMonth == month,
+                                        action: {
+                                            selectedMonth = month
+                                            viewModel.filterPerMonth(with: month)
+                                        }
+                                    )
+                                }
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                        }
+                        
+                        List {
+                            Section(
+                                header: FinanceSummaryCard(
+                                    input: viewModel.input,
+                                    output: viewModel.output
+                                )
+                                .padding(.vertical, 20)
+                                .listRowInsets(EdgeInsets())
+                            ) {
+                                ForEach(viewModel.transactions, id: \.objectID) { transaction in
+                                    MonthTransactionDetailItemView(
+                                        descriptionText: transaction.descriptionText,
+                                        dueDate: transaction.dueDate.formatTo(dateFormat: "dd/MM"),
+                                        paymentDate: transaction.paymentDate?.formatTo(dateFormat: "dd/MM"),
+                                        ammount: transaction.amount.toBRL(),
+                                        isIncome: transaction.isIncome,
+                                        isSlash: transaction.isSlash,
+                                        canPay: transaction.canPay(),
+                                        canSlash: transaction.canSlash()
+                                    ) { type in
+                                        switch type {
+                                        case .tap:
+                                            navManager.path.append(HomeRouter.transaction(transaction.id))
+                                        case .paid:
+                                            viewModel.markToPaid(transaction: transaction)
+                                        case .slash:
+                                            viewModel.changeSlash(transaction: transaction)
+                                        case .delete:
+                                            viewModel.delete(transaction: transaction)
                                         }
                                     }
-                                    .padding(.vertical, 16)
-                                }
-                                .padding(.horizontal, -20)
-                        ) {
-                            ForEach(viewModel.transactions, id: \.self) { transaction in
-                                HStack {
-                                    Text(transaction.descriptionText)
-                                    Spacer()
-                                    Text(transaction.amount.toBRL())
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    navManager.path.append(HomeRouter.month(transaction.dueDate.formatToMonthYear()))
+                                    .listRowBackground(rowBackground(for: transaction))
                                 }
                             }
                         }
@@ -62,8 +83,23 @@ struct HomeView: View {
                 }
             }
             .navigationTitle(Text("tab_home"))
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                if viewModel.showDuplicateButton {
+                    ToolbarItem {
+                        Button(
+                            action: {
+                                showAlertDuplicate = true
+                            }
+                        ) {
+                            Image(systemName: "doc.on.doc")
+                        }
+                    }
+                    
+                    ToolbarSpacer(.fixed)
+                }
+                
+                ToolbarItem {
                     Button(
                         action: {
                             navManager.path.append(HomeRouter.transaction(nil))
@@ -90,6 +126,17 @@ struct HomeView: View {
                     )
                 }
             }
+            .alert(isPresented: $showAlertDuplicate) {
+                Alert(
+                    title: Text("Deseja mesmo duplicar os itens do mês selecionado, e inserir no mês atual?"),
+                    primaryButton: .destructive(Text("button_yes")) {
+                        viewModel.duplicateMonth()
+                    },
+                    secondaryButton: .cancel(Text("button_no")) {
+                        showAlertDuplicate = false
+                    }
+                )
+            }
             .onAppear {
                 viewModel.setupProvider(with: provider)
                 
@@ -100,6 +147,16 @@ struct HomeView: View {
             }
         }
         .environmentObject(navManager)
+    }
+    
+    private func rowBackground(for transaction: Transaction) -> some View {
+        if transaction.addWithIA {
+            return AnyView(
+                AppleIntelligenceGradientBackground()
+            )
+        } else {
+            return AnyView(Color(UIColor.secondarySystemGroupedBackground))
+        }
     }
 }
 

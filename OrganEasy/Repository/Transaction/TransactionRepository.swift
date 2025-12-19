@@ -51,6 +51,7 @@ class TransactionRepository: TransactionRepositoryProtocol {
         transaction.amount = dto.amount
         transaction.isIncome = dto.isIncome
         transaction.isSlash = dto.isSlash
+        transaction.addWithIA = dto.addWithIA
         
         save()
     }

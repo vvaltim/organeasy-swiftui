@@ -38,18 +38,32 @@ struct SettingView: View {
                 }
                 
                 Section(header: Text("section_icloud_sync")) {
-                    HStack {
+                    VStack(alignment: .leading) {
                         Text("label_icloud")
+                            .font(.headline)
                         Spacer()
                         Text(viewModel.iCloudStatus)
+                            .font(.subheadline)
+                    }
+                }
+                
+                Section(header: Text("Apple Intelligence")) {
+                    VStack(alignment: .leading) {
+                        Text("Easynhe")
+                            .font(.headline)
+                        Spacer()
+                        Text(viewModel.appleIntelligenceStatus)
+                            .font(.subheadline)
                     }
                 }
                 
                 Section(header: Text("section_about")) {
                     HStack {
                         Text("label_version")
+                            .font(.headline)
                         Spacer()
                         Text(viewModel.version)
+                            .font(.subheadline)
                     }
                 }
                 

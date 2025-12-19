@@ -4,6 +4,15 @@
     "" : {
 
     },
+    "“Adicione uma transação de entrada chamada Netflix, no valor de trinta e três reais, com vencimento no dia 10 de janeiro.”" : {
+
+    },
+    "• Adicionar uma entrada na aba Evolução." : {
+
+    },
+    "• Adicionar uma transação na aba Home." : {
+
+    },
     "0,00" : {
 
     },
@@ -18,6 +27,15 @@
         }
       }
     },
+    "Adicionar transação" : {
+
+    },
+    "Ajuda do Chat" : {
+
+    },
+    "Ajustes" : {
+
+    },
     "alert_sure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -28,6 +46,12 @@
           }
         }
       }
+    },
+    "Apple Intelligence" : {
+
+    },
+    "BETA" : {
+
     },
     "button_bank_management" : {
       "extractionState" : "manual",
@@ -172,6 +196,9 @@
         }
       }
     },
+    "Como usar:" : {
+
+    },
     "currency_textfield_value" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -208,6 +235,12 @@
     "Deseja mesmo duplicar os itens do mês selecionado, e inserir no mês atual?" : {
 
     },
+    "Easynhe" : {
+
+    },
+    "Evolução" : {
+
+    },
     "finance_summary_card_balance" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -240,6 +273,9 @@
           }
         }
       }
+    },
+    "Funcionalidades atuais:" : {
+
     },
     "Gerenciar" : {
 
@@ -276,6 +312,9 @@
           }
         }
       }
+    },
+    "Início" : {
+
     },
     "label_empty_data" : {
       "extractionState" : "manual",
@@ -353,6 +392,12 @@
           }
         }
       }
+    },
+    "O chat do app permite que você adicione transações de forma rápida e prática usando comandos de texto." : {
+
+    },
+    "Para adicionar uma transação, siga o padrão abaixo:" : {
+
     },
     "picker_input" : {
       "extractionState" : "manual",

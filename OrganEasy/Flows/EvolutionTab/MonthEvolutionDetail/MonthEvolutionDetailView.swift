@@ -17,40 +17,66 @@ struct MonthEvolutionDetailView: View {
     
     var body: some View {
         List {
-            Section(
-                header: MonthEvolutionHeaderView(
-                    label: "header_evolution_sum",
-                    value: viewModel.total
-                )
-                .listRowInsets(EdgeInsets())
-                .background(Color.clear)
-            ) {
+            Section(header: headerView) {
                 ForEach(viewModel.evolutions, id: \.objectID) { evolution in
-                    HStack {
-                        Text(evolution.bank?.name ?? "")
-                        Spacer()
-                        Text(evolution.value.toBRL())
-                    }
-                    .onTapGesture {
-                        navManager.path.append(EvolutionRouter.evolution(evolution.id))
-                    }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(role: .destructive) {
-                            viewModel.delete(with: evolution)
-                        } label: {
-                            Label(
-                                "button_delete",
-                                systemImage: "trash.fill"
-                            )
+                    EvolutionRow(evolution: evolution)
+                        .contentShape(Rectangle())
+                        .listRowBackground(rowBackground(for: evolution))
+                        .onTapGesture {
+                            navManager.path.append(EvolutionRouter.evolution(evolution.id))
                         }
-                    }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                viewModel.delete(with: evolution)
+                            } label: {
+                                Label(
+                                    "button_delete",
+                                    systemImage: "trash.fill"
+                                )
+                            }
+                        }
                 }
             }
-            .navigationTitle(Text(viewModel.evolutions.first?.date?.formatTo() ?? ""))
-            .onAppear {
-                viewModel.setupProvider(with: provider)
-                viewModel.month = month
-                viewModel.getEvolutionsPerMonth()
+        }
+        .navigationTitle(titleText)
+        .onAppear {
+            viewModel.setupProvider(with: provider)
+            viewModel.month = month
+            viewModel.getEvolutionsPerMonth()
+        }
+    }
+    
+    private var headerView: some View {
+        MonthEvolutionHeaderView(
+            label: "header_evolution_sum",
+            value: viewModel.total
+        )
+        .listRowInsets(EdgeInsets())
+        .background(Color.clear)
+    }
+
+    private var titleText: String {
+        viewModel.evolutions.first?.date?.formatTo() ?? ""
+    }
+
+    private func rowBackground(for evolution: Evolution) -> some View {
+        if evolution.addWithIA {
+            return AnyView(
+                AppleIntelligenceGradientBackground()
+            )
+        } else {
+            return AnyView(Color(UIColor.secondarySystemGroupedBackground))
+        }
+    }
+    
+    private struct EvolutionRow: View {
+        let evolution: Evolution
+
+        var body: some View {
+            HStack {
+                Text(evolution.bank?.name ?? "")
+                Spacer()
+                Text(evolution.value.toBRL())
             }
         }
     }

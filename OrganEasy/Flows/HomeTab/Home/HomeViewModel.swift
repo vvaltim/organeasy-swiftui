@@ -15,6 +15,7 @@ class HomeViewModel: ObservableObject {
     
     private var repository: TransactionRepositoryProtocol?
     private var allTransactions: [Transaction] = []
+    private var selectedFilter: Date?
     
     // MARK: - Items View
     
@@ -26,7 +27,33 @@ class HomeViewModel: ObservableObject {
     @Published var goToTransactionView = false
     @Published var goToTransactionDetailView = false
     
-    // MARK: - Computed Variable
+    // MARK: Computable Variable
+    
+    var input: Double {
+        var sum: Double = 0
+        for item in transactions {
+            if item.isIncome {
+                sum += item.amount
+            }
+        }
+        return sum
+    }
+    
+    var output: Double {
+        var sum: Double = 0
+        for item in transactions {
+            if !item.isIncome {
+                sum += item.amount
+            }
+        }
+        return sum
+    }
+    
+    var showDuplicateButton: Bool {
+        let now = Date()
+        let currentMonth = now.formatToMonthYear()
+        return currentMonth == selectedFilter?.formatToMonthYear() ?? ""
+    }
     
     // MARK: - Public Methods
     
@@ -53,12 +80,59 @@ class HomeViewModel: ObservableObject {
     
     func filterPerMonth(with month: Date?) {
         let calendar = Calendar.current
-        let now = month ?? Date()
+        let now = month ?? months.first
+        selectedFilter = now
         transactions = allTransactions.filter { transaction in
             let components = calendar.dateComponents([.year, .month], from: transaction.dueDate)
-            let nowComponents = calendar.dateComponents([.year, .month], from: now)
+            let nowComponents = calendar.dateComponents([.year, .month], from: now ?? Date())
             return components.year == nowComponents.year && components.month == nowComponents.month
         }
+    }
+    
+    func markToPaid(transaction: Transaction) {
+        repository?.markToPaid(with: transaction)
+        
+        refreshData()
+    }
+    
+    func delete(transaction: Transaction) {
+        repository?.remove(with: transaction)
+        
+        refreshData()
+    }
+    
+    func changeSlash(transaction: Transaction) {
+        repository?.changeSlash(with: transaction)
+        
+        refreshData()
+    }
+    
+    func duplicateMonth() {
+        guard let repository = repository else { return }
+        let calendar = Calendar.current
+
+        var newMonth: Date?
+        
+        for transaction in transactions {
+            guard let newDueDate = calendar.date(byAdding: .month, value: 1, to: transaction.dueDate) else { continue }
+
+            let dto = TransactionDTO(
+                isIncome: transaction.isIncome,
+                descriptionText: transaction.descriptionText,
+                amount: transaction.amount,
+                dueDate: newDueDate,
+                isSlash: transaction.isSlash
+            )
+            repository.add(with: dto)
+            
+            newMonth = newDueDate
+        }
+        
+        if let newMonth = newMonth {
+            selectedFilter = newMonth
+        }
+        
+        fetchTransactions()
     }
     
     // MARK: - Private Methods
@@ -82,5 +156,11 @@ class HomeViewModel: ObservableObject {
                 return true
             }
         }
+    }
+    
+    private func refreshData() {
+        allTransactions = repository?.fetchAll() ?? []
+        
+        filterPerMonth(with: selectedFilter)
     }
 }
