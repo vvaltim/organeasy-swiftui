@@ -40,7 +40,7 @@ class IntelligenceService: IntelligenceServicing {
     private var bankList: [Bank] = []
     
     private func getBankListName() -> String {
-        return bankList.map { "\($0.name) (\($0.id?.uuidString ?? ""))" }.joined(separator: ", ")
+        return bankList.map { "\($0.name ?? "") (\($0.id?.uuidString ?? ""))" }.joined(separator: ", ")
     }
     
     private func getBankByID(_ id: String) -> Bank {

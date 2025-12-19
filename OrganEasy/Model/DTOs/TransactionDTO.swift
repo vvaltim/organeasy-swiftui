@@ -14,6 +14,7 @@ struct TransactionDTO: Codable {
     var dueDate: Date
     var isSlash: Bool
     var addWithIA: Bool
+    var paymentDate: Date?
     
     init(
         isIncome: Bool,
@@ -21,7 +22,8 @@ struct TransactionDTO: Codable {
         amount: Double,
         dueDate: Date,
         isSlash: Bool,
-        addWithIA: Bool = false
+        addWithIA: Bool = false,
+        paymentDate: Date? = nil
     ) {
         self.isIncome = isIncome
         self.descriptionText = descriptionText
@@ -29,6 +31,7 @@ struct TransactionDTO: Codable {
         self.dueDate = dueDate
         self.isSlash = isSlash
         self.addWithIA = addWithIA
+        self.paymentDate = paymentDate
     }
     
     func getTransaction() -> String {
