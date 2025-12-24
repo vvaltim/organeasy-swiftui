@@ -45,6 +45,10 @@ struct HomeView: View {
                         }
                         
                         List {
+                            Section {
+                                
+                            }
+                            
                             Section(
                                 header: FinanceSummaryCard(
                                     input: viewModel.input,
