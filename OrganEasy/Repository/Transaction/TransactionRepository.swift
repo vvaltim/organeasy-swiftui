@@ -9,6 +9,7 @@ import CoreData
 
 protocol TransactionRepositoryProtocol {
     func fetchAll() -> [Transaction]
+    func fetchAllDTO() -> [TransactionDTO]
     func add(with dto: TransactionDTO)
     func remove(with transaction: Transaction)
     func markToPaid(with transaction: Transaction)
@@ -37,6 +38,30 @@ class TransactionRepository: TransactionRepositoryProtocol {
             let transactions = try context.fetch(request)
             
             return transactions
+        } catch {
+            print("Error fetching transactions: \(error)")
+            return []
+        }
+    }
+    
+    func fetchAllDTO() -> [TransactionDTO] {
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(keyPath: \Transaction.dueDate, ascending: false)
+        ]
+        
+        do {
+            let transactions = try context.fetch(request)
+            
+            return transactions.map {
+                TransactionDTO(
+                    isIncome: $0.isIncome,
+                    descriptionText: $0.descriptionText,
+                    amount: $0.amount,
+                    dueDate: $0.dueDate,
+                    isSlash: $0.isSlash
+                )
+            }
         } catch {
             print("Error fetching transactions: \(error)")
             return []

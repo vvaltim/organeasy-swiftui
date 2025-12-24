@@ -13,8 +13,11 @@ struct TransactionTool: Tool {
     let description: String = "Encontrar informações sobre suas transações a vencer."
     let transactions: [TransactionDTO]
     
-    func call() async throws -> String {
-        let nextTransactions = transactions.filter { $0.paymentDate != nil }
+    @Generable
+    struct Arguments { }
+    
+    func call(arguments: Arguments) async throws -> String {
+        let nextTransactions = transactions.filter { $0.paymentDate == nil && $0.isIncome == false }
         
         
         if nextTransactions.isEmpty {
@@ -23,7 +26,7 @@ struct TransactionTool: Tool {
             return transactions.map { transaction in
                 let dueDateString = transaction.dueDate.formatTo()
                 let paymentString = transaction.paymentDate != nil ? "pago no dia \(transaction.paymentDate?.formatTo() ?? "")" : "em aberto"
-                return "\(transaction.descriptionText) no valor de \(transaction.amount) com vencimento no dia \(dueDateString) \(paymentString)"
+                return "\(transaction.descriptionText) no valor de \(transaction.amount.toBRL()) com vencimento no dia \(dueDateString) \(paymentString)"
             }.joined(separator: ", ")
         }
     }

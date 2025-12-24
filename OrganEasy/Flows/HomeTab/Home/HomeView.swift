@@ -5,6 +5,7 @@
 //  Created by Walter Vânio dos Reis Júnior on 21/05/25.
 //
 
+import FoundationModels
 import SwiftUI
 
 struct HomeView: View {
@@ -13,6 +14,13 @@ struct HomeView: View {
     @StateObject private var navManager = HomeNavigationManager()
     @State private var selectedMonth: Date? = Date()
     @State var showAlertDuplicate = false
+    @State private var session: LanguageModelSession?
+    @State private var alert = ""
+    let instruction = Instructions {
+        "Você é uma assistente financeira que ajuda as pessoas a manter a vida financeira organizada."
+        "Responda de forma clara e sucinta para facilitar a organização financeira."
+        "Usa a ferramente 'transactionTool' para encontrar as transações que ainda não foram pagas"
+    }
     
     var body: some View {
         NavigationStack(path: $navManager.path) {
@@ -45,8 +53,16 @@ struct HomeView: View {
                         }
                         
                         List {
-                            Section {
-                                
+                            if session?.isResponding == true {
+                                Section {
+                                    ProgressView()
+                                }
+                            }
+                            
+                            if !alert.isEmpty {
+                                Section {
+                                    Text(alert)
+                                }
                             }
                             
                             Section(
@@ -148,6 +164,20 @@ struct HomeView: View {
                 viewModel.requestNotificationPermission()
                 
                 selectedMonth = viewModel.months.first
+                
+                Task {
+                    
+                    session = LanguageModelSession(
+                        tools: [
+                            TransactionTool(
+                                transactions: provider.transactionRepository.fetchAllDTO()
+                            )
+                        ],
+                        instructions: instruction
+                    )
+                    
+                    try await verifyTransactions()
+                }
             }
         }
         .environmentObject(navManager)
@@ -161,6 +191,12 @@ struct HomeView: View {
         } else {
             return AnyView(Color(UIColor.secondarySystemGroupedBackground))
         }
+    }
+    
+    private func verifyTransactions() async throws {
+        guard let session = session else { return }
+        let response = try await session.respond(to: "Quais as transações que ainda não foram pagas?")
+        alert = response.content.description
     }
 }
 
