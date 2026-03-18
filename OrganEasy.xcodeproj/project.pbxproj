@@ -13,6 +13,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D11C52C52F6AEE6C001D3BD0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D135BE9C2DDE3957005B1325 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D11C52B72F6AEE6A001D3BD0;
+			remoteInfo = "OrganEasy MacOS";
+		};
+		D11C52CF2F6AEE6C001D3BD0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D135BE9C2DDE3957005B1325 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D11C52B72F6AEE6A001D3BD0;
+			remoteInfo = "OrganEasy MacOS";
+		};
 		D135BEB22DDE3958005B1325 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D135BE9C2DDE3957005B1325 /* Project object */;
@@ -30,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D11C52B82F6AEE6A001D3BD0 /* OrganEasy MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OrganEasy MacOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D11C52C42F6AEE6C001D3BD0 /* OrganEasy MacOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OrganEasy MacOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D11C52CE2F6AEE6C001D3BD0 /* OrganEasy MacOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OrganEasy MacOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D135BEA42DDE3957005B1325 /* OrganEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrganEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D135BEB12DDE3958005B1325 /* OrganEasyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrganEasyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D135BEBB2DDE3958005B1325 /* OrganEasyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrganEasyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +63,21 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D11C52B92F6AEE6A001D3BD0 /* OrganEasy MacOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "OrganEasy MacOS";
+			sourceTree = "<group>";
+		};
+		D11C52C72F6AEE6C001D3BD0 /* OrganEasy MacOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "OrganEasy MacOSTests";
+			sourceTree = "<group>";
+		};
+		D11C52D12F6AEE6C001D3BD0 /* OrganEasy MacOSUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "OrganEasy MacOSUITests";
+			sourceTree = "<group>";
+		};
 		D135BEA62DDE3957005B1325 /* OrganEasy */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -67,6 +99,27 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D11C52B52F6AEE6A001D3BD0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D11C52C12F6AEE6C001D3BD0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D11C52CB2F6AEE6C001D3BD0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D135BEA12DDE3957005B1325 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,6 +153,9 @@
 				D135BEA62DDE3957005B1325 /* OrganEasy */,
 				D135BEB42DDE3958005B1325 /* OrganEasyTests */,
 				D135BEBE2DDE3958005B1325 /* OrganEasyUITests */,
+				D11C52B92F6AEE6A001D3BD0 /* OrganEasy MacOS */,
+				D11C52C72F6AEE6C001D3BD0 /* OrganEasy MacOSTests */,
+				D11C52D12F6AEE6C001D3BD0 /* OrganEasy MacOSUITests */,
 				D135BEA52DDE3957005B1325 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,6 +166,9 @@
 				D135BEA42DDE3957005B1325 /* OrganEasy.app */,
 				D135BEB12DDE3958005B1325 /* OrganEasyTests.xctest */,
 				D135BEBB2DDE3958005B1325 /* OrganEasyUITests.xctest */,
+				D11C52B82F6AEE6A001D3BD0 /* OrganEasy MacOS.app */,
+				D11C52C42F6AEE6C001D3BD0 /* OrganEasy MacOSTests.xctest */,
+				D11C52CE2F6AEE6C001D3BD0 /* OrganEasy MacOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,6 +176,74 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D11C52B72F6AEE6A001D3BD0 /* OrganEasy MacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D11C52DC2F6AEE6C001D3BD0 /* Build configuration list for PBXNativeTarget "OrganEasy MacOS" */;
+			buildPhases = (
+				D11C52B42F6AEE6A001D3BD0 /* Sources */,
+				D11C52B52F6AEE6A001D3BD0 /* Frameworks */,
+				D11C52B62F6AEE6A001D3BD0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D11C52B92F6AEE6A001D3BD0 /* OrganEasy MacOS */,
+			);
+			name = "OrganEasy MacOS";
+			packageProductDependencies = (
+			);
+			productName = "OrganEasy MacOS";
+			productReference = D11C52B82F6AEE6A001D3BD0 /* OrganEasy MacOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D11C52C32F6AEE6C001D3BD0 /* OrganEasy MacOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D11C52DD2F6AEE6C001D3BD0 /* Build configuration list for PBXNativeTarget "OrganEasy MacOSTests" */;
+			buildPhases = (
+				D11C52C02F6AEE6C001D3BD0 /* Sources */,
+				D11C52C12F6AEE6C001D3BD0 /* Frameworks */,
+				D11C52C22F6AEE6C001D3BD0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D11C52C62F6AEE6C001D3BD0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D11C52C72F6AEE6C001D3BD0 /* OrganEasy MacOSTests */,
+			);
+			name = "OrganEasy MacOSTests";
+			packageProductDependencies = (
+			);
+			productName = "OrganEasy MacOSTests";
+			productReference = D11C52C42F6AEE6C001D3BD0 /* OrganEasy MacOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D11C52CD2F6AEE6C001D3BD0 /* OrganEasy MacOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D11C52DE2F6AEE6C001D3BD0 /* Build configuration list for PBXNativeTarget "OrganEasy MacOSUITests" */;
+			buildPhases = (
+				D11C52CA2F6AEE6C001D3BD0 /* Sources */,
+				D11C52CB2F6AEE6C001D3BD0 /* Frameworks */,
+				D11C52CC2F6AEE6C001D3BD0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D11C52D02F6AEE6C001D3BD0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D11C52D12F6AEE6C001D3BD0 /* OrganEasy MacOSUITests */,
+			);
+			name = "OrganEasy MacOSUITests";
+			packageProductDependencies = (
+			);
+			productName = "OrganEasy MacOSUITests";
+			productReference = D11C52CE2F6AEE6C001D3BD0 /* OrganEasy MacOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		D135BEA32DDE3957005B1325 /* OrganEasy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D135BEC52DDE3958005B1325 /* Build configuration list for PBXNativeTarget "OrganEasy" */;
@@ -195,9 +322,20 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1630;
+				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					D11C52B72F6AEE6A001D3BD0 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					D11C52C32F6AEE6C001D3BD0 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = D11C52B72F6AEE6A001D3BD0;
+					};
+					D11C52CD2F6AEE6C001D3BD0 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = D11C52B72F6AEE6A001D3BD0;
+					};
 					D135BEA32DDE3957005B1325 = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -232,11 +370,35 @@
 				D135BEA32DDE3957005B1325 /* OrganEasy */,
 				D135BEB02DDE3958005B1325 /* OrganEasyTests */,
 				D135BEBA2DDE3958005B1325 /* OrganEasyUITests */,
+				D11C52B72F6AEE6A001D3BD0 /* OrganEasy MacOS */,
+				D11C52C32F6AEE6C001D3BD0 /* OrganEasy MacOSTests */,
+				D11C52CD2F6AEE6C001D3BD0 /* OrganEasy MacOSUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D11C52B62F6AEE6A001D3BD0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D11C52C22F6AEE6C001D3BD0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D11C52CC2F6AEE6C001D3BD0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D135BEA22DDE3957005B1325 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,6 +423,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D11C52B42F6AEE6A001D3BD0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D11C52C02F6AEE6C001D3BD0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D11C52CA2F6AEE6C001D3BD0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D135BEA02DDE3957005B1325 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,6 +468,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D11C52C62F6AEE6C001D3BD0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D11C52B72F6AEE6A001D3BD0 /* OrganEasy MacOS */;
+			targetProxy = D11C52C52F6AEE6C001D3BD0 /* PBXContainerItemProxy */;
+		};
+		D11C52D02F6AEE6C001D3BD0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D11C52B72F6AEE6A001D3BD0 /* OrganEasy MacOS */;
+			targetProxy = D11C52CF2F6AEE6C001D3BD0 /* PBXContainerItemProxy */;
+		};
 		D135BEB32DDE3958005B1325 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D135BEA32DDE3957005B1325 /* OrganEasy */;
@@ -298,6 +491,160 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D11C52D62F6AEE6C001D3BD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.waltervreis.OrganEasy-MacOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D11C52D72F6AEE6C001D3BD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.waltervreis.OrganEasy-MacOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D11C52D82F6AEE6C001D3BD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.waltervreis.OrganEasy-MacOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrganEasy MacOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OrganEasy MacOS";
+			};
+			name = Debug;
+		};
+		D11C52D92F6AEE6C001D3BD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.waltervreis.OrganEasy-MacOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrganEasy MacOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OrganEasy MacOS";
+			};
+			name = Release;
+		};
+		D11C52DA2F6AEE6C001D3BD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.waltervreis.OrganEasy-MacOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "OrganEasy MacOS";
+			};
+			name = Debug;
+		};
+		D11C52DB2F6AEE6C001D3BD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.waltervreis.OrganEasy-MacOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "OrganEasy MacOS";
+			};
+			name = Release;
+		};
 		D135BEC32DDE3958005B1325 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -429,7 +776,7 @@
 				CODE_SIGN_ENTITLEMENTS = OrganEasy/OrganEasy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -463,7 +810,7 @@
 				CODE_SIGN_ENTITLEMENTS = OrganEasy/OrganEasy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -564,6 +911,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D11C52DC2F6AEE6C001D3BD0 /* Build configuration list for PBXNativeTarget "OrganEasy MacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D11C52D62F6AEE6C001D3BD0 /* Debug */,
+				D11C52D72F6AEE6C001D3BD0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D11C52DD2F6AEE6C001D3BD0 /* Build configuration list for PBXNativeTarget "OrganEasy MacOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D11C52D82F6AEE6C001D3BD0 /* Debug */,
+				D11C52D92F6AEE6C001D3BD0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D11C52DE2F6AEE6C001D3BD0 /* Build configuration list for PBXNativeTarget "OrganEasy MacOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D11C52DA2F6AEE6C001D3BD0 /* Debug */,
+				D11C52DB2F6AEE6C001D3BD0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D135BE9F2DDE3957005B1325 /* Build configuration list for PBXProject "OrganEasy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
