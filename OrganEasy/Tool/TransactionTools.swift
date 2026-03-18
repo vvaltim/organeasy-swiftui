@@ -23,10 +23,8 @@ struct TransactionTool: Tool {
         if nextTransactions.isEmpty {
             return "Não há transações há vencer no momento."
         } else {
-            return transactions.map { transaction in
-                let dueDateString = transaction.dueDate.formatTo()
-                let paymentString = transaction.paymentDate != nil ? "pago no dia \(transaction.paymentDate?.formatTo() ?? "")" : "em aberto"
-                return "\(transaction.descriptionText) no valor de \(transaction.amount.toBRL()) com vencimento no dia \(dueDateString) \(paymentString)"
+            return nextTransactions.map { transaction in
+                return " \(transaction.descriptionText) no valor de \(transaction.amount.toBRL()) com vencimento em \(transaction.dueDate.formatTo())"
             }.joined(separator: ", ")
         }
     }

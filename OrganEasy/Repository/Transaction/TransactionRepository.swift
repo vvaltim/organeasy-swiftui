@@ -59,7 +59,8 @@ class TransactionRepository: TransactionRepositoryProtocol {
                     descriptionText: $0.descriptionText,
                     amount: $0.amount,
                     dueDate: $0.dueDate,
-                    isSlash: $0.isSlash
+                    isSlash: $0.isSlash,
+                    paymentDate: $0.paymentDate
                 )
             }
         } catch {
