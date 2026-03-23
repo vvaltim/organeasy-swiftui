@@ -1,0 +1,118 @@
+//
+//  SettingView.swift
+//  OrganEasy
+//
+//  Created by Walter Vânio dos Reis Júnior on 21/05/25.
+//
+
+import SwiftUI
+internal import Combine
+
+struct SettingView: View {
+    
+    let persistenceController = PersistenceController.shared
+    
+    @EnvironmentObject var remoteConfigManager: RemoteConfigManager
+    
+    @ObservedObject var viewModel: SettingViewModel = SettingViewModel()
+    
+    @StateObject private var navManager = SettingNavigationManager()
+    @State private var showDeleteAlert = false
+    
+    var body: some View {
+        NavigationStack(path: $navManager.path) {
+            List {
+                Section(header: Text("Gerenciar")) {
+                    Button {
+                        navManager.path.append(SettingRouter.bank)
+                    } label: {
+                        Text("button_bank_management")
+                    }
+                    
+                    if remoteConfigManager.isFeatureEnabled(.isEnableRecurrence) {
+                        Button {
+                            navManager.path.append(SettingRouter.recurringBillList)
+                        } label: {
+                            Text("button_recurring_bill")
+                        }
+                    }
+                }
+                
+                Section(header: Text("section_icloud_sync")) {
+                    VStack(alignment: .leading) {
+                        Text("label_icloud")
+                            .font(.headline)
+                        Spacer()
+                        Text(viewModel.iCloudStatus)
+                            .font(.subheadline)
+                    }
+                }
+                
+                Section(header: Text("Apple Intelligence")) {
+                    VStack(alignment: .leading) {
+                        Text("Easynhe")
+                            .font(.headline)
+                        Spacer()
+                        Text(viewModel.appleIntelligenceStatus)
+                            .font(.subheadline)
+                    }
+                }
+                
+                Section(header: Text("section_about")) {
+                    HStack {
+                        Text("label_version")
+                            .font(.headline)
+                        Spacer()
+                        Text(viewModel.version)
+                            .font(.subheadline)
+                    }
+                }
+                
+                Section(header: Text("section_data")) {
+                    Button(role: .destructive) {
+                        showDeleteAlert = true
+                    } label: {
+                        Text("button_clear_data")
+                    }
+                }
+                .alert("alert_sure", isPresented: $showDeleteAlert) {
+                    Button("button_delete", role: .destructive) {
+                        viewModel.clearAllData()
+                    }
+                    Button("button_cancel", role: .cancel) { }
+                } message: {
+                    Text("action_delete_all_data")
+                }
+            }
+            .navigationTitle(Text("tab_settings"))
+            .navigationDestination(for: SettingRouter.self) { router in
+                switch router {
+                case .bank:
+                    BankListView()
+                case .recurringBillList:
+                    RecurrenceListView()
+                case .recurringBillForm(let id):
+                    RecurringBillFormView(
+                        onClose: {
+                            navManager.path.removeLast()
+                        },
+                        recurringBillID: id
+                    )
+                }
+            }
+        }
+        .environmentObject(navManager)
+    }
+}
+
+#Preview {
+    let mock = SettingViewModel()
+    
+    let context = PersistenceController.preview.container.viewContext
+    let provider = RepositoryProvider(context: context)
+    let remoteConfig = RemoteConfigManager()
+    
+    SettingView(viewModel: mock)
+        .environmentObject(provider)
+        .environmentObject(remoteConfig)
+}

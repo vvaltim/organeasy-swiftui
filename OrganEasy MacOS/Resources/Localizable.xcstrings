@@ -33,9 +33,6 @@
     "Ajuda do Chat" : {
 
     },
-    "Ajustes" : {
-
-    },
     "alert_sure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -238,9 +235,6 @@
     "Easynhe" : {
 
     },
-    "Evolução" : {
-
-    },
     "finance_summary_card_balance" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -312,9 +306,6 @@
           }
         }
       }
-    },
-    "Início" : {
-
     },
     "label_empty_data" : {
       "extractionState" : "manual",
@@ -489,6 +480,9 @@
           }
         }
       }
+    },
+    "Selecione uma opção" : {
+
     },
     "tab_evolution" : {
       "extractionState" : "manual",

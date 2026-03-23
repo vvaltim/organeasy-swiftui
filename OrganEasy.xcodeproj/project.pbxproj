@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		D1AAAE072E423F60000E710E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D1AAAE062E423F60000E710E /* FirebaseCrashlytics */; };
 		D1AAAE092E423F60000E710E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D1AAAE082E423F60000E710E /* FirebaseRemoteConfig */; };
+		D1F7DFB72F71B5920065D9BD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D1F7DFB62F71B5920065D9BD /* FirebaseAnalytics */; };
+		D1F7DFB92F71B59F0065D9BD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D1F7DFB82F71B59F0065D9BD /* FirebaseCrashlytics */; };
+		D1F7DFBB2F71B5A40065D9BD /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D1F7DFBA2F71B5A40065D9BD /* FirebaseRemoteConfig */; };
 		D1FCB8BD2E8459E800F1E556 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D1FCB8BC2E8459E800F1E556 /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +63,83 @@
 			);
 			target = D135BEA32DDE3957005B1325 /* OrganEasy */;
 		};
+		D1F7DF9A2F71B4480065D9BD /* Exceptions for "Shared" folder in "OrganEasy MacOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Flows/EvolutionTab/CreateEvolution/CreateEvolutionView.swift,
+				Flows/EvolutionTab/CreateEvolution/CreateEvolutionViewModel.swift,
+				Flows/EvolutionTab/EvolutionHomeView/EvolutionHomeView.swift,
+				Flows/EvolutionTab/EvolutionHomeView/EvolutionHomeViewModel.swift,
+				Flows/EvolutionTab/EvolutionRouter.swift,
+				Flows/EvolutionTab/MonthEvolutionDetail/MonthEvolutionDetailView.swift,
+				Flows/EvolutionTab/MonthEvolutionDetail/MonthEvolutionDetailViewModel.swift,
+				Flows/HomeTab/CreateTransaction/TransactionView.swift,
+				Flows/HomeTab/CreateTransaction/TransactionViewModel.swift,
+				Flows/HomeTab/Home/HomeView.swift,
+				Flows/HomeTab/Home/HomeViewModel.swift,
+				Flows/HomeTab/HomeRouter.swift,
+				Flows/HomeTab/MonthTransactionDetail/MonthTransactionDetailView.swift,
+				Flows/HomeTab/MonthTransactionDetail/MonthTransactionDetailViewModel.swift,
+				Flows/IntelligenceTab/HelpView.swift,
+				Flows/IntelligenceTab/IntelligenceView.swift,
+				Flows/IntelligenceTab/IntelligenceViewModel.swift,
+				Flows/SettingTab/Bank/BankList/BankListView.swift,
+				Flows/SettingTab/Bank/BankList/BankListViewModel.swift,
+				Flows/SettingTab/Bank/CreateBank/CreateBankView.swift,
+				Flows/SettingTab/Bank/CreateBank/CreateBankViewModel.swift,
+				Flows/SettingTab/RecurringBill/RecurringBillForm/RecurringBillFormView.swift,
+				Flows/SettingTab/RecurringBill/RecurringBillForm/RecurringBillFormViewModel.swift,
+				Flows/SettingTab/RecurringBill/RecurringBillList/RecurrenceListView.swift,
+				Flows/SettingTab/RecurringBill/RecurringBillList/RecurrenceListViewModel.swift,
+				Flows/SettingTab/SettingRouter.swift,
+				Flows/SettingTab/SettingView/SettingView.swift,
+				Flows/SettingTab/SettingView/SettingViewModel.swift,
+				Model/DTOs/BankDTO.swift,
+				Model/DTOs/EvolutionDTO.swift,
+				Model/DTOs/RecurringBillDTO.swift,
+				Model/DTOs/TransactionDTO.swift,
+				Model/Generables/EvolutionGenerable.swift,
+				Model/Generables/TransactionGenerable.swift,
+				Model/ViewModel/TestValues.swift,
+				Repository/Architeture/OrganEasy.xcdatamodeld,
+				Repository/Architeture/PersistenceController.swift,
+				Repository/Architeture/RepositoryProvider.swift,
+				"Repository/Bank/Bank+CoreDataClass.swift",
+				"Repository/Bank/Bank+CoreDataProperties.swift",
+				Repository/Bank/BankRepository.swift,
+				"Repository/Evolution/Evolution+CoreDataClass.swift",
+				"Repository/Evolution/Evolution+CoreDataProperties.swift",
+				Repository/Evolution/EvolutionRepository.swift,
+				"Repository/RecurringBill/RecurringBill+CoreDataClass.swift",
+				"Repository/RecurringBill/RecurringBill+CoreDataProperties.swift",
+				Repository/RecurringBill/RecurringBillRepository.swift,
+				"Repository/Transaction/Transaction+CoreDataClass.swift",
+				"Repository/Transaction/Transaction+CoreDataProperties.swift",
+				Repository/Transaction/TransactionRepository.swift,
+				Service/IntelligenceService.swift,
+				Tool/RegisterTransactionTool.swift,
+				Tool/TransactionTools.swift,
+				Utils/Components/AppleIntelligenceGradientBackground.swift,
+				Utils/Components/ChatView.swift,
+				Utils/Components/CurrencyTextField.swift,
+				Utils/Components/EmptyStateView.swift,
+				Utils/Components/FilterChipView.swift,
+				Utils/Components/FinanceSummaryCard.swift,
+				Utils/Components/GlassEffectIfAvailable.swift,
+				Utils/Components/HeaderChartView.swift,
+				Utils/Components/MonthEvolutionHeaderView.swift,
+				Utils/Components/MonthEvolutionRow.swift,
+				Utils/Components/MonthTransactionDetailItemView.swift,
+				Utils/Components/NativeColorsView.swift,
+				Utils/Components/RecurringBillItemView.swift,
+				"Utils/Extensions/Color+extensions.swift",
+				"Utils/Extensions/Date+extensions.swift",
+				"Utils/Extensions/Double+extensions.swift",
+				"Utils/Extensions/Strings+extensions.swift",
+				Utils/FeatureFlags/RemoteConfigManager.swift,
+			);
+			target = D11C52B72F6AEE6A001D3BD0 /* OrganEasy MacOS */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -76,6 +156,14 @@
 		D11C52D12F6AEE6C001D3BD0 /* OrganEasy MacOSUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "OrganEasy MacOSUITests";
+			sourceTree = "<group>";
+		};
+		D11C52E22F6AF4F1001D3BD0 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D1F7DF9A2F71B4480065D9BD /* Exceptions for "Shared" folder in "OrganEasy MacOS" target */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		D135BEA62DDE3957005B1325 /* OrganEasy */ = {
@@ -103,6 +191,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F7DFBB2F71B5A40065D9BD /* FirebaseRemoteConfig in Frameworks */,
+				D1F7DFB72F71B5920065D9BD /* FirebaseAnalytics in Frameworks */,
+				D1F7DFB92F71B59F0065D9BD /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,12 +241,14 @@
 		D135BE9B2DDE3957005B1325 = {
 			isa = PBXGroup;
 			children = (
+				D11C52E22F6AF4F1001D3BD0 /* Shared */,
 				D135BEA62DDE3957005B1325 /* OrganEasy */,
 				D135BEB42DDE3958005B1325 /* OrganEasyTests */,
 				D135BEBE2DDE3958005B1325 /* OrganEasyUITests */,
 				D11C52B92F6AEE6A001D3BD0 /* OrganEasy MacOS */,
 				D11C52C72F6AEE6C001D3BD0 /* OrganEasy MacOSTests */,
 				D11C52D12F6AEE6C001D3BD0 /* OrganEasy MacOSUITests */,
+				D1F7DFB52F71B5920065D9BD /* Frameworks */,
 				D135BEA52DDE3957005B1325 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -171,6 +264,13 @@
 				D11C52CE2F6AEE6C001D3BD0 /* OrganEasy MacOSUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D1F7DFB52F71B5920065D9BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +293,9 @@
 			);
 			name = "OrganEasy MacOS";
 			packageProductDependencies = (
+				D1F7DFB62F71B5920065D9BD /* FirebaseAnalytics */,
+				D1F7DFB82F71B59F0065D9BD /* FirebaseCrashlytics */,
+				D1F7DFBA2F71B5A40065D9BD /* FirebaseRemoteConfig */,
 			);
 			productName = "OrganEasy MacOS";
 			productReference = D11C52B82F6AEE6A001D3BD0 /* OrganEasy MacOS.app */;
@@ -257,6 +360,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				D11C52E22F6AF4F1001D3BD0 /* Shared */,
 				D135BEA62DDE3957005B1325 /* OrganEasy */,
 			);
 			name = OrganEasy;
@@ -494,8 +598,9 @@
 		D11C52D62F6AEE6C001D3BD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "OrganEasy Colors";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "OrganEasy MacOS/OrganEasy MacOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -528,8 +633,9 @@
 		D11C52D72F6AEE6C001D3BD0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "OrganEasy Colors";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "OrganEasy MacOS/OrganEasy MacOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -994,6 +1100,21 @@
 			productName = FirebaseCrashlytics;
 		};
 		D1AAAE082E423F60000E710E /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		D1F7DFB62F71B5920065D9BD /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		D1F7DFB82F71B59F0065D9BD /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		D1F7DFBA2F71B5A40065D9BD /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D1AAAE052E423F60000E710E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
