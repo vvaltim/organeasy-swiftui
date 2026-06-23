@@ -16,7 +16,7 @@ struct HomePage: View {
     @State private var isPresentingEditSheet = false
     @State private var selectedEntry: MonthlyEntry? = nil
 
-    @State private var referenceOffset: Int = 0 // -1 = previous, 0 = current, 1 = next
+    @State private var referenceOffset: Int = 0
 
     private var currentReference: String {
         let now = Date()
@@ -30,31 +30,56 @@ struct HomePage: View {
         allEntries.filter { $0.referenceMonth == currentReference }
             .sorted { $0.dueDate < $1.dueDate }
     }
+    
+    private var income: Double {
+        entriesForCurrentReference.filter { $0.type == .income }.map(\.amount).reduce(0, +)
+    }
+    
+    private var expense: Double {
+        entriesForCurrentReference.filter { $0.type == .expense }.map(\.amount).reduce(0, +)
+    }
+    
+    private var monthFormatted: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "pt_BR")
+        formatter.dateFormat = "MMMM yyyy"
+        
+        let now = Date()
+        var comps = Calendar.current.dateComponents([.year, .month], from: now)
+        
+        if let month = comps.month {
+            comps.month = month + referenceOffset
+        }
+        
+        let date = Calendar.current.date(from: comps) ?? now
+        
+        return formatter.string(from: date)
+            .capitalized
+    }
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 12) {
-                // Reference selector with a subtle Liquid Glass background
                 HStack(spacing: 12) {
                     Button {
-                        withAnimation(.snappy) { referenceOffset -= 1 }
+                        withAnimation(.snappy) { referenceOffset += 1 }
                     } label: {
                         Image(systemName: "chevron.left")
                     }
                     .buttonStyle(.bordered)
 
                     VStack(spacing: 2) {
-                        Text("Referencia")
+                        Text("Referência")
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(currentReference)
+                        Text(monthFormatted)
                             .font(.headline)
                             .monospaced()
                     }
                     .frame(maxWidth: .infinity)
 
                     Button {
-                        withAnimation(.snappy) { referenceOffset += 1 }
+                        withAnimation(.snappy) { referenceOffset -= 1 }
                     } label: {
                         Image(systemName: "chevron.right")
                     }
@@ -71,12 +96,44 @@ struct HomePage: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     List {
-                        ForEach(entriesForCurrentReference, id: \.id) { entry in
-                            EntryRow(entry: entry) {
-                                selectedEntry = entry
-                                isPresentingEditSheet = true
-                            } onTogglePaid: {
-                                togglePayment(for: entry)
+                        Section {
+                            HomeSummaryHeaderView(
+                                income: income,
+                                expense: expense
+                            )
+                        }
+                        
+                        Section("A pagar") {
+                            let unpaid = entriesForCurrentReference.filter { $0.paymentDate == nil }
+                            if unpaid.isEmpty {
+                                Text("Nenhum item a pagar")
+                                    .foregroundStyle(.secondary)
+                            } else {
+                                ForEach(unpaid, id: \.id) { entry in
+                                    EntryRow(entry: entry) {
+                                        selectedEntry = entry
+                                        isPresentingEditSheet = true
+                                    } onTogglePaid: {
+                                        togglePayment(for: entry)
+                                    }
+                                }
+                            }
+                        }
+
+                        Section("Pago") {
+                            let paid = entriesForCurrentReference.filter { $0.paymentDate != nil }
+                            if paid.isEmpty {
+                                Text("Nenhum item pago")
+                                    .foregroundStyle(.secondary)
+                            } else {
+                                ForEach(paid, id: \.id) { entry in
+                                    EntryRow(entry: entry) {
+                                        selectedEntry = entry
+                                        isPresentingEditSheet = true
+                                    } onTogglePaid: {
+                                        togglePayment(for: entry)
+                                    }
+                                }
                             }
                         }
                     }

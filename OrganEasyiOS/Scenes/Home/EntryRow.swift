@@ -17,31 +17,22 @@ struct EntryRow: View {
         Button(action: onEdit) {
             HStack {
                 ZStack {
-                    Image(systemName: entry.type == .income ? "arrow.down.circle" : "arrow.up.circle")
-                        .foregroundStyle(entry.type == .income ? .green : .red)
+                    Text(entry.dueDate, format: Date.FormatStyle().day())
+                        .font(.title3)
+                        .monospacedDigit()
+                        .frame(width: 36, alignment: .leading)
                 }
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(entry.name)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-                    Text(entry.dueDate, format: Date.FormatStyle().day().month(.wide))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+                Text(entry.name)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
 
                 Spacer()
 
-                VStack(alignment: .trailing, spacing: 4) {
-                    Text(entry.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                        .font(.subheadline)
-                        .monospacedDigit()
-                    HStack(spacing: 6) {
-                        Text(entry.paymentDate == nil ? "Aberto" : "Pago")
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                    }
-                }
+                Text((entry.type == .expense ? -1 : 1) * (entry.amount), format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    .font(.subheadline)
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
             }
         }
         .buttonStyle(.plain)
