@@ -13,6 +13,8 @@ struct NewMonthlyEntrySheet: View {
     @State private var paymentDate: Date? = nil
     
     @State private var showPaymentDate: Bool = false
+    @FocusState private var isAmountFocused: Bool
+    @State private var amountInCents: Int = 0
     
     var entryToEdit: MonthlyEntry? = nil
     
@@ -36,30 +38,50 @@ struct NewMonthlyEntrySheet: View {
             _showPaymentDate = State(initialValue: entry.paymentDate != nil)
             _textAmount = State(initialValue: "")
         }
+        
+        let initialCents = Int((self._amount.wrappedValue * 100.0).rounded())
+        self._amountInCents = State(initialValue: max(0, initialCents))
     }
     
     var body: some View {
         NavigationStack {
             Form {
                 Section(header: Text(entryToEdit == nil ? "Nova Entrada" : "Editar Entrada")) {
-                    TextField("Nome", text: $title)
-                        .textContentType(.name)
-                        .autocapitalization(.words)
-                    
-                    TextField("Valor", text: $textAmount)
-                        .keyboardType(.decimalPad)
-                        .onChange(of: textAmount) { oldValue, newValue in
-                            let cleanString = newValue
-                                .replacingOccurrences(of: "[^0-9,]", with: "", options: .regularExpression)
-                                .replacingOccurrences(of: ",", with: ".")
+                    TextField("Valor", text: Binding(
+                        get: { textAmount },
+                        set: { newValue in
+                            let digits = newValue.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+
+                            let cents = Int(digits) ?? 0
+                            amountInCents = cents
                             
-                            if let number = Double(cleanString) {
-                                amount = number
+                            amount = Double(cents) / 100.0
+                            
+                            if isAmountFocused {
+                                textAmount = digits
+                            } else {
+                                textAmount = currencyFormatter.string(from: NSNumber(value: amount)) ?? ""
                             }
                         }
-                        .onAppear {
-                            textAmount = currencyFormatter.string(for: amount as NSNumber) ?? ""
+                    ))
+                    .keyboardType(.numberPad)
+                    .focused($isAmountFocused)
+                    .onChange(of: isAmountFocused) { old, isFocused in
+                        if isFocused {
+                            let digits = String(amountInCents)
+                            textAmount = digits == "0" ? "" : digits
+                        } else {
+                            amount = Double(amountInCents) / 100.0
+                            textAmount = currencyFormatter.string(from: NSNumber(value: amount)) ?? ""
                         }
+                    }
+                    .onAppear {
+                        amountInCents = Int((amount * 100.0).rounded())
+                        textAmount = currencyFormatter.string(from: NSNumber(value: amount)) ?? ""
+                    }
+                    
+                    TextField("Descrição", text: $title)
+                        .autocapitalization(.words)
                     
                     DatePicker("Vencimento", selection: $dueDate, displayedComponents: .date)
                     
