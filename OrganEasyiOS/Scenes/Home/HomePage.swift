@@ -12,8 +12,7 @@ struct HomePage: View {
     @Environment(\.modelContext) private var modelContext
     @Query<MonthlyEntry>(sort: [SortDescriptor(\MonthlyEntry.dueDate, order: .forward)]) private var allEntries: [MonthlyEntry]
 
-    @State private var isPresentingNewEntrySheet = false
-    @State private var isPresentingEditSheet = false
+    @State private var isPresentingMonthlyEntrySheet = false
     @State private var selectedEntry: MonthlyEntry? = nil
 
     @State private var referenceOffset: Int = 0
@@ -64,7 +63,7 @@ struct HomePage: View {
                     Button {
                         withAnimation(.snappy) { referenceOffset += 1 }
                     } label: {
-                        Image(systemName: "chevron.left")
+                        Image(systemName: Icon.chevronLeft.rawValue)
                     }
                     .buttonStyle(.bordered)
 
@@ -81,7 +80,7 @@ struct HomePage: View {
                     Button {
                         withAnimation(.snappy) { referenceOffset -= 1 }
                     } label: {
-                        Image(systemName: "chevron.right")
+                        Image(systemName: Icon.chevronRight.rawValue)
                     }
                     .buttonStyle(.bordered)
                 }
@@ -90,7 +89,7 @@ struct HomePage: View {
                 if entriesForCurrentReference.isEmpty {
                     ContentUnavailableView(
                         "Sem lancamentos",
-                        systemImage: "list.bullet.rectangle.portrait",
+                        systemImage: Icon.listBulletRectanglePortrait.rawValue,
                         description: Text("Adicione um novo item, ou tente outro mês.")
                     )
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -112,7 +111,7 @@ struct HomePage: View {
                                 ForEach(unpaid, id: \.id) { entry in
                                     EntryRow(entry: entry) {
                                         selectedEntry = entry
-                                        isPresentingEditSheet = true
+                                        isPresentingMonthlyEntrySheet = true
                                     } onTogglePaid: {
                                         togglePayment(for: entry)
                                     }
@@ -129,7 +128,7 @@ struct HomePage: View {
                                 ForEach(paid, id: \.id) { entry in
                                     EntryRow(entry: entry) {
                                         selectedEntry = entry
-                                        isPresentingEditSheet = true
+                                        isPresentingMonthlyEntrySheet = true
                                     } onTogglePaid: {
                                         togglePayment(for: entry)
                                     }
@@ -145,21 +144,17 @@ struct HomePage: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        isPresentingNewEntrySheet = true
+                        selectedEntry = nil
+                        isPresentingMonthlyEntrySheet = true
                     } label: {
-                        Image(systemName: "plus")
+                        Image(systemName: Icon.plus.rawValue)
                     }
                     .accessibilityLabel("Add entry")
                 }
             }
         }
-        .sheet(isPresented: $isPresentingNewEntrySheet) {
-            NewMonthlyEntrySheet()
-        }
-        .sheet(isPresented: $isPresentingEditSheet) {
-            if let selectedEntry {
-                NewMonthlyEntrySheet(entryToEdit: selectedEntry)
-            }
+        .sheet(isPresented: $isPresentingMonthlyEntrySheet) {
+            MonthlyEntrySheet(entryToEdit: selectedEntry)
         }
     }
 
