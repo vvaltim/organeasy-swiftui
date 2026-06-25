@@ -16,6 +16,8 @@ struct NewMonthlyEntrySheet: View {
     @FocusState private var isAmountFocused: Bool
     @State private var amountInCents: Int = 0
     
+    @State private var isShowingDeleteConfirmation: Bool = false
+    
     var entryToEdit: MonthlyEntry? = nil
     
     let currencyFormatter: NumberFormatter = {
@@ -99,6 +101,29 @@ struct NewMonthlyEntrySheet: View {
                             get: { paymentDate ?? .now },
                             set: { paymentDate = $0 }
                         ), displayedComponents: .date)
+                    }
+                }
+                
+                if let entry = entryToEdit {
+                    Section {
+                        Button(role: .destructive) {
+                            isShowingDeleteConfirmation = true
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "trash")
+                                Text("Excluir entrada")
+                                Spacer()
+                            }
+                        }
+                    }
+                    .confirmationDialog("Tem certeza que deseja excluir esta entrada?", isPresented: $isShowingDeleteConfirmation, titleVisibility: .visible) {
+                        Button("Excluir", role: .destructive) {
+                            modelContext.delete(entry)
+                            try? modelContext.save()
+                            dismiss()
+                        }
+                        Button("Cancelar", role: .cancel) {}
                     }
                 }
             }
