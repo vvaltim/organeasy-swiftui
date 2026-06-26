@@ -5,7 +5,7 @@ import SwiftData
 struct OrganEasyAppiOS: App {
     var body: some Scene {
         WindowGroup {
-            HomePage()
+            MonthlyEntryListView()
         }
         .modelContainer(OrganEasyModelContainer.shared)
     }

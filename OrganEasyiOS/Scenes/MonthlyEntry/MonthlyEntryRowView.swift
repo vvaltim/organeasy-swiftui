@@ -1,13 +1,6 @@
-//
-//  EntryRow.swift
-//  OrganEasy
-//
-//  Created by Walter Vânio dos Reis Júnior on 19/06/26.
-//
-
 import SwiftUI
 
-struct EntryRow: View {
+struct MonthlyEntryRowView: View {
     @Environment(\.colorScheme) private var colorScheme
     let entry: MonthlyEntry
     let onEdit: () -> Void
@@ -44,8 +37,10 @@ struct EntryRow: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
-    EntryRow(
+    MonthlyEntryRowView(
         entry: MonthlyEntry(
             name: "Nubank",
             amount: 12344.56,
