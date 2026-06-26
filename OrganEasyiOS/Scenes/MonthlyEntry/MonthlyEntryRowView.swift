@@ -13,7 +13,7 @@ struct MonthlyEntryRowView: View {
                     Text(entry.dueDate, format: Date.FormatStyle().day())
                         .font(.title3)
                         .monospacedDigit()
-                        .frame(width: 36, alignment: .leading)
+                        .frame(width: Size.x36.rawValue, alignment: .leading)
                 }
 
                 Text(entry.name)

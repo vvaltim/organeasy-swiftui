@@ -1,10 +1,3 @@
-//
-//  ModelContainer.swift
-//  OrganEasy
-//
-//  Created by Walter Vânio dos Reis Júnior on 09/06/26.
-//
-
 import SwiftData
 import Foundation
 

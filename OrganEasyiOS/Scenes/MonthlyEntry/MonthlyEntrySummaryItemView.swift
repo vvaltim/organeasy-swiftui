@@ -6,7 +6,7 @@ struct MonthlyEntrySummaryItemView: View {
     let color: Color
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Size.x4.rawValue) {
             Text(title)
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -24,7 +24,7 @@ struct MonthlyEntrySummaryItemView: View {
 // MARK: - Preview
 
 #Preview("HomeSummaryHeaderView") {
-    VStack(spacing: 16) {
+    VStack(spacing: Size.x16.rawValue) {
         MonthlyEntrySummaryItemView(title: "Entradas", value: 1234.56, color: .red)
         MonthlyEntrySummaryItemView(title: "Saídas", value: 1234.56, color: .green)
     }

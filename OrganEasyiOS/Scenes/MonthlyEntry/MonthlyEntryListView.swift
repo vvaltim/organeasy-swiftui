@@ -51,7 +51,7 @@ struct MonthlyEntryListView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 12) {
+            VStack(spacing: Size.x12.rawValue) {
                 monthSelector
                     .padding(.horizontal)
                 
@@ -97,7 +97,7 @@ struct MonthlyEntryListView: View {
     // MARK: - Selector View
     
     var monthSelector: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: Size.x12.rawValue) {
             Button {
                 withAnimation(.snappy) { addMonth() }
             } label: {
@@ -105,7 +105,7 @@ struct MonthlyEntryListView: View {
             }
             .buttonStyle(.bordered)
             
-            VStack(spacing: 2) {
+            VStack(spacing: Size.x2.rawValue) {
                 Text("Referência")
                     .font(.caption)
                     .foregroundStyle(.secondary)

@@ -7,13 +7,13 @@ struct MonthlyEntrySummaryHeaderView: View {
     private var balance: Double { income - expense }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 16) {
+        HStack(alignment: .top, spacing: Size.x16.rawValue) {
             MonthlyEntrySummaryItemView(title: "Entradas", value: income, color: .green)
             Divider()
-                .frame(height: 44)
+                .frame(height: Size.x48.rawValue)
             MonthlyEntrySummaryItemView(title: "Saídas", value: expense, color: .red)
             Divider()
-                .frame(height: 44)
+                .frame(height: Size.x48.rawValue)
             MonthlyEntrySummaryItemView(title: "Saldo", value: balance, color: balanceColor)
         }
         .accessibilityElement(children: .combine)
@@ -30,7 +30,7 @@ struct MonthlyEntrySummaryHeaderView: View {
 // MARK: - Preview
 
 #Preview("HomeSummaryHeaderView") {
-    VStack(spacing: 16) {
+    VStack(spacing: Size.x16.rawValue) {
         MonthlyEntrySummaryHeaderView(income: 2500, expense: 1750)
         MonthlyEntrySummaryHeaderView(income: 1200.75, expense: 1800.20)
         MonthlyEntrySummaryHeaderView(income: 1000, expense: 1000)

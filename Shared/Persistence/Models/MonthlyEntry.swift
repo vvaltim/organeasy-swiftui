@@ -1,11 +1,3 @@
-//
-//  MonthlyEntry.swift
-//  MyApp
-//
-//  Created by Walter Vânio dos Reis Júnior on 09/06/26.
-//
-//
-
 import Foundation
 import SwiftData
 
