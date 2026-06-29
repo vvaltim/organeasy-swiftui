@@ -55,7 +55,6 @@ struct MonthlyEntryFormView: View {
                             Button("Cancelar", role: .cancel) {}
                         }
                 }
-                deleteSection
             }
             .navigationTitle("Nova Entrada")
             .toolbar {

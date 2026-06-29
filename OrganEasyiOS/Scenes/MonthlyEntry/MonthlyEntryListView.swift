@@ -2,6 +2,10 @@ import SwiftData
 import SwiftUI
 
 struct MonthlyEntryListView: View {
+
+    // MARK:  Scene Phase
+    
+    @Environment(\.scenePhase) private var scenePhase
     
     // MARK: - Model Container
     
@@ -16,13 +20,18 @@ struct MonthlyEntryListView: View {
     
     @State private var isPresentingMonthlyEntrySheet = false
     @State private var selectedEntry: MonthlyEntry? = nil
-    
     @State private var referenceOffset: Int = 0
+    
+    // MARK: - App Storage
+    
+    @AppStorage("MonthlyEntryReferenceDate") private var referenceDate: Date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())) ?? Date()
     
     // MARK: - Computed Variables
     
-    private var entriesForCurrentReference: [MonthlyEntry] {
-        let currentReference = Date().getCurrentReference(with: referenceOffset)
+    var entriesForCurrentReference: [MonthlyEntry] {
+        let base = referenceDate
+        let current = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
+        let currentReference = current.getCurrentReference(with: 0)
         return allEntries.filter { $0.referenceMonth == currentReference }
     }
     
@@ -34,16 +43,9 @@ struct MonthlyEntryListView: View {
         entriesForCurrentReference.filter { $0.type == .expense }.map(\.amount).reduce(0, +)
     }
     
-    private var monthFormatted: String {
-        let now = Date()
-        var comps = Calendar.current.dateComponents([.year, .month], from: now)
-        
-        if let month = comps.month {
-            comps.month = month + referenceOffset
-        }
-        
-        let date = Calendar.current.date(from: comps) ?? now
-        
+    var monthFormatted: String {
+        let base = referenceDate
+        let date = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
         return date.getDateFormatted(with: .MMMMyyyy)
     }
     
@@ -92,6 +94,10 @@ struct MonthlyEntryListView: View {
         .sheet(isPresented: $isPresentingMonthlyEntrySheet) {
             MonthlyEntryFormView(entryToEdit: nil)
         }
+        .onDisappear { commitOffsetToReferenceDate() }
+        .onChange(of: scenePhase) { _, newValue in
+            if newValue != .active { commitOffsetToReferenceDate() }
+        }
     }
     
     // MARK: - Selector View
@@ -103,7 +109,7 @@ struct MonthlyEntryListView: View {
             } label: {
                 Image(systemName: Icon.chevronLeft.rawValue)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.glass)
             
             VStack(spacing: Size.x2.rawValue) {
                 Text("Referência")
@@ -120,7 +126,7 @@ struct MonthlyEntryListView: View {
             } label: {
                 Image(systemName: Icon.chevronRight.rawValue)
             }
-            .buttonStyle(.bordered)
+            .buttonStyle(.glass)
         }
     }
     
@@ -200,6 +206,13 @@ struct MonthlyEntryListView: View {
         } else {
             isPresentingMonthlyEntrySheet = true
         }
+    }
+    
+    private func commitOffsetToReferenceDate() {
+        guard referenceOffset != 0 else { return }
+        let newDate = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: referenceDate) ?? referenceDate
+        referenceDate = newDate
+        referenceOffset = 0
     }
 }
 
