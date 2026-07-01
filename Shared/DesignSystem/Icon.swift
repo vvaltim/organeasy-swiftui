@@ -6,4 +6,6 @@ enum Icon: String {
     case plus = "plus"
     case trash = "trash"
     case xmark = "xmark"
+    case listNumber = "list.number"
+    case ellipsis = "ellipsis"
 }

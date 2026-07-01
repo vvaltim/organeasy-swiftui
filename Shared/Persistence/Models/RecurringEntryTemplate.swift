@@ -15,13 +15,12 @@ final class RecurringEntryTemplate {
     var type: EntryType = EntryType.expense
     
     init(
-        id: UUID,
         dueDay: Int,
         enabled: Bool,
         name: String,
         type: EntryType
     ) {
-        self.id = id
+        self.id = UUID()
         self.dueDay = dueDay
         self.enabled = enabled
         self.name = name

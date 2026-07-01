@@ -13,6 +13,8 @@ struct MonthlyEntryFormView: View {
     @State private var paymentDate: Date? = nil
     
     @State private var showPaymentDate: Bool = false
+    @State private var isRecurrent: Bool = false
+    
     @FocusState private var isAmountFocused: Bool
     @State private var amountInCents: Int = 0
     
@@ -45,6 +47,8 @@ struct MonthlyEntryFormView: View {
                 formSection
                 
                 paymentDateSection
+                
+                recurrenceSection
                 
                 if let entry = entryToEdit {
                     deleteSection
@@ -141,6 +145,14 @@ struct MonthlyEntryFormView: View {
         }
     }
     
+    // MARK: Recurrence Section
+    
+    var recurrenceSection: some View {
+        Section {
+            Toggle("Recorrente", isOn: $isRecurrent.animation())
+        }
+    }
+    
     // MARK: Delete Section
     
     var deleteSection: some View {
@@ -185,6 +197,8 @@ struct MonthlyEntryFormView: View {
             modelContext.insert(entry)
         }
         
+        saveTemplate()
+        
         dismiss()
     }
     
@@ -192,6 +206,42 @@ struct MonthlyEntryFormView: View {
         modelContext.delete(entry)
         try? modelContext.save()
         dismiss()
+    }
+    
+    private func saveTemplate() {
+        if !isRecurrent {
+            return
+        }
+        
+        let dueDayString: String = dueDate.formatted(.dateTime.day())
+        let dueDay = Int(dueDayString) ?? 1
+
+        if templateExists(name: title, type: type, dueDay: dueDay) {
+            return
+        }
+        
+        let template = RecurringEntryTemplate(
+            dueDay: dueDay,
+            enabled: true,
+            name: title,
+            type: type
+        )
+        modelContext.insert(template)
+    }
+    
+    private func templateExists(name: String, type: EntryType, dueDay: Int) -> Bool {
+        let descriptor = FetchDescriptor<RecurringEntryTemplate>(
+            predicate: #Predicate { template in
+                template.name == name && template.type == type && template.dueDay == dueDay
+            },
+            sortBy: []
+        )
+        do {
+            let count = try modelContext.fetchCount(descriptor)
+            return count > 0
+        } catch {
+            return false
+        }
     }
 }
 

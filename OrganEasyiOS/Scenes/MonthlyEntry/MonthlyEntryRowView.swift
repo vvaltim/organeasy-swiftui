@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct MonthlyEntryRowView: View {
-    @Environment(\.colorScheme) private var colorScheme
     let entry: MonthlyEntry
     let onEdit: () -> Void
     let onTogglePaid: () -> Void

@@ -58,12 +58,8 @@ struct MonthlyEntryListView: View {
                     .padding(.horizontal)
                 
                 if entriesForCurrentReference.isEmpty {
-                    ContentUnavailableView(
-                        "Sem lancamentos",
-                        systemImage: Icon.listBulletRectanglePortrait.rawValue,
-                        description: Text("Adicione um novo item, ou tente outro mês.")
-                    )
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    emptyView
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     List {
                         headerSection
@@ -85,6 +81,23 @@ struct MonthlyEntryListView: View {
                         Image(systemName: Icon.plus.rawValue)
                     }
                     .accessibilityLabel("Add entry")
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        // Navegação para Templates
+                        NavigationLink {
+                            TemplateListView()
+                        } label: {
+                            Label("Templates", systemImage: Icon.listNumber.rawValue)
+                        }
+
+                        // Você pode adicionar mais ações aqui, por exemplo:
+                        // Button(role: .destructive) { ... } label: { Label("Apagar tudo", systemImage: "trash") }
+                    } label: {
+                        Image(systemName: Icon.ellipsis.rawValue)
+                    }
+                    .accessibilityLabel("Mais opções")
                 }
             }
         }
@@ -179,6 +192,16 @@ struct MonthlyEntryListView: View {
                 }
             }
         }
+    }
+    
+    // MARK:  Empty View
+    
+    private var emptyView: some View {
+        ContentUnavailableView(
+            "Sem lancamentos",
+            systemImage: Icon.listBulletRectanglePortrait.rawValue,
+            description: Text("Adicione um novo item, ou tente outro mês.")
+        )
     }
     
     // MARK: - Functions

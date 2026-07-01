@@ -56,6 +56,20 @@ public struct OrganEasyModelContainer {
             )
             context.insert(income)
             
+            // MARK: Mock dos templates
+            
+            for index in 0..<10 {
+                let indexNumber = index + 1
+                
+                let template = RecurringEntryTemplate(
+                    dueDay: indexNumber,
+                    enabled: index.isMultiple(of: 2),
+                    name: "Template \(indexNumber)",
+                    type: .income
+                )
+                context.insert(template)
+            }
+            
             try context.save()
             
             return container
