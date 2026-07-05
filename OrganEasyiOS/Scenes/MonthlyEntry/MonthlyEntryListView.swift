@@ -92,7 +92,7 @@ struct MonthlyEntryListView: View {
                         }
 
                         Button {
-                            print("Criar com os templates")
+                            insertRecurrences()
                         } label: {
                             Label("Aplicar recorrências", systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
                         }
@@ -253,7 +253,55 @@ struct MonthlyEntryListView: View {
     }
     
     private func insertRecurrences() {
-        
+        let base = referenceDate
+        let current = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
+        let currentReference = current.getCurrentReference(with: 0)
+
+        let descriptor = FetchDescriptor<RecurringEntryTemplate>(
+            predicate: #Predicate { $0.enabled == true }
+        )
+
+        do {
+            let templates = try modelContext.fetch(descriptor)
+
+            let existingForReference = entriesForCurrentReference
+
+            for template in templates {
+                let calendar = Calendar.current
+                let comps = calendar.dateComponents([.year, .month], from: current)
+                let range = calendar.range(of: .day, in: .month, for: current)
+                let lastDay = range?.count ?? template.dueDay
+                let clampedDay = min(max(template.dueDay, 1), lastDay)
+                var dueComps = DateComponents()
+                dueComps.year = comps.year
+                dueComps.month = comps.month
+                dueComps.day = clampedDay
+                let dueDate = calendar.date(from: dueComps) ?? current
+
+                let alreadyExists = existingForReference.contains { entry in
+                    entry.name == template.name &&
+                    entry.type == template.type &&
+                    entry.referenceMonth == currentReference &&
+                    calendar.isDate(entry.dueDate, inSameDayAs: dueDate)
+                }
+
+                guard !alreadyExists else { continue }
+
+                let newEntry = MonthlyEntry(
+                    name: template.name,
+                    amount: 0,
+                    referenceMonth: currentReference,
+                    dueDate: dueDate,
+                    type: template.type
+                )
+
+                modelContext.insert(newEntry)
+            }
+
+            try modelContext.save()
+        } catch {
+            print("Failed to apply recurrences: \(error)")
+        }
     }
 }
 
