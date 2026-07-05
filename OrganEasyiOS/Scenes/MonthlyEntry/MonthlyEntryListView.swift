@@ -85,15 +85,17 @@ struct MonthlyEntryListView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        // Navegação para Templates
                         NavigationLink {
                             TemplateListView()
                         } label: {
-                            Label("Templates", systemImage: Icon.listNumber.rawValue)
+                            Label("Recorrerência", systemImage: Icon.listNumber.rawValue)
                         }
 
-                        // Você pode adicionar mais ações aqui, por exemplo:
-                        // Button(role: .destructive) { ... } label: { Label("Apagar tudo", systemImage: "trash") }
+                        Button {
+                            print("Criar com os templates")
+                        } label: {
+                            Label("Aplicar recorrências", systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
+                        }
                     } label: {
                         Image(systemName: Icon.ellipsis.rawValue)
                     }
@@ -197,11 +199,23 @@ struct MonthlyEntryListView: View {
     // MARK:  Empty View
     
     private var emptyView: some View {
-        ContentUnavailableView(
-            "Sem lancamentos",
-            systemImage: Icon.listBulletRectanglePortrait.rawValue,
-            description: Text("Adicione um novo item, ou tente outro mês.")
-        )
+        ContentUnavailableView {
+            Label {
+                Text("Sem lancamentos")
+                    .font(.title3)
+            } icon: {
+                Image(systemName: Icon.listBulletRectanglePortrait.rawValue)
+            }
+        } description: {
+            Text("Adicione um lançamento manualmente ou aplique suas recorrências.")
+                .font(.caption)
+        }actions: {
+            Button {
+                insertRecurrences()
+            } label: {
+                Label("Aplicar recorrências", systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
+            }
+        }
     }
     
     // MARK: - Functions
@@ -236,6 +250,10 @@ struct MonthlyEntryListView: View {
         let newDate = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: referenceDate) ?? referenceDate
         referenceDate = newDate
         referenceOffset = 0
+    }
+    
+    private func insertRecurrences() {
+        
     }
 }
 

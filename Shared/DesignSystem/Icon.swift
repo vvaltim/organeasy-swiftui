@@ -8,4 +8,5 @@ enum Icon: String {
     case xmark = "xmark"
     case listNumber = "list.number"
     case ellipsis = "ellipsis"
+    case squareAndArrowDownOnSquare = "square.and.arrow.down.on.square"
 }

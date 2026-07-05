@@ -33,8 +33,7 @@ struct TemplateListView: View {
                 enableSection
             }
         }
-        .navigationTitle("Templates")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Modelos")
     }
     
     // MARK: - Not Paid Section
