@@ -164,18 +164,22 @@ struct MonthlyEntryListView: View {
             if unpaid.isEmpty {
                 Text("Nenhum item a pagar")
                     .foregroundStyle(.secondary)
+                    .transition(.opacity)
             } else {
-                ForEach(unpaid) { entry in
+                ForEach(unpaid, id: \.id) { entry in
                     MonthlyEntryRowView(entry: entry) {
                         openMonthlyEntry(with: entry)
                     } onTogglePaid: {
-                        togglePayment(for: entry)
+                        withAnimation(.snappy) {
+                            togglePayment(for: entry)
+                        }
                     }
                 }
+                .transition(.opacity)
             }
         }
     }
-    
+
     // MARK: - Paid Section
     
     var paidSection: some View {
@@ -184,14 +188,18 @@ struct MonthlyEntryListView: View {
             if paid.isEmpty {
                 Text("Nenhum item pago")
                     .foregroundStyle(.secondary)
+                    .transition(.opacity)
             } else {
-                ForEach(paid) { entry in
+                ForEach(paid, id: \.id) { entry in
                     MonthlyEntryRowView(entry: entry) {
                         openMonthlyEntry(with: entry)
                     } onTogglePaid: {
-                        togglePayment(for: entry)
+                        withAnimation(.snappy) {
+                            togglePayment(for: entry)
+                        }
                     }
                 }
+                .transition(.opacity)
             }
         }
     }
