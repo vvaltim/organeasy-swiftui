@@ -64,9 +64,7 @@ struct MonthlyEntryListView: View {
                     List {
                         headerSection
                         
-                        notPaidSection
-                        
-                        paidSection
+                        itensSection
                     }
                     .listStyle(.insetGrouped)
                 }
@@ -158,48 +156,19 @@ struct MonthlyEntryListView: View {
     
     // MARK: - Not Paid Section
     
-    var notPaidSection: some View {
-        Section("A pagar") {
-            let unpaid = entriesForCurrentReference.filter { $0.paymentDate == nil }
-            if unpaid.isEmpty {
-                Text("Nenhum item a pagar")
+    var itensSection: some View {
+        Section {
+            if entriesForCurrentReference.isEmpty {
+                Text("Nenhum item")
                     .foregroundStyle(.secondary)
-                    .transition(.opacity)
             } else {
-                ForEach(unpaid, id: \.id) { entry in
+                ForEach(entriesForCurrentReference, id: \.id) { entry in
                     MonthlyEntryRowView(entry: entry) {
                         openMonthlyEntry(with: entry)
                     } onTogglePaid: {
-                        withAnimation(.snappy) {
-                            togglePayment(for: entry)
-                        }
+                        togglePayment(for: entry)
                     }
                 }
-                .transition(.opacity)
-            }
-        }
-    }
-
-    // MARK: - Paid Section
-    
-    var paidSection: some View {
-        Section("Pago") {
-            let paid = entriesForCurrentReference.filter { $0.paymentDate != nil }
-            if paid.isEmpty {
-                Text("Nenhum item pago")
-                    .foregroundStyle(.secondary)
-                    .transition(.opacity)
-            } else {
-                ForEach(paid, id: \.id) { entry in
-                    MonthlyEntryRowView(entry: entry) {
-                        openMonthlyEntry(with: entry)
-                    } onTogglePaid: {
-                        withAnimation(.snappy) {
-                            togglePayment(for: entry)
-                        }
-                    }
-                }
-                .transition(.opacity)
             }
         }
     }
