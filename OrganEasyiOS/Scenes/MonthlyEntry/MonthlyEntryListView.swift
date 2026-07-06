@@ -54,9 +54,6 @@ struct MonthlyEntryListView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: Size.x12.rawValue) {
-                monthSelector
-                    .padding(.horizontal)
-                
                 if entriesForCurrentReference.isEmpty {
                     emptyView
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -101,6 +98,31 @@ struct MonthlyEntryListView: View {
                 }
             }
         }
+        .safeAreaInset(edge: .bottom) {
+            HStack(spacing: Size.x12.rawValue) {
+                monthSelector
+                    .padding(.horizontal, Size.x12.rawValue)
+                    .padding(.vertical, Size.x8.rawValue)
+                    .background(.ultraThinMaterial, in: Capsule())
+                    .overlay(
+                        Capsule().strokeBorder(.white.opacity(0.2))
+                    )
+
+                Button {
+                    openMonthlyEntry()
+                } label: {
+                    Image(systemName: Icon.plus.rawValue)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(width: 44, height: 44)
+                }
+                .buttonStyle(.plain)
+                .glassEffect(in: .circle)
+                .accessibilityLabel("Add entry")
+            }
+            .padding(.horizontal)
+            .padding(.bottom, Size.x4.rawValue)
+        }
         .sheet(item: $selectedEntry) { entry in
             MonthlyEntryFormView(entryToEdit: entry)
         }
@@ -121,12 +143,14 @@ struct MonthlyEntryListView: View {
                 withAnimation(.snappy) { addMonth() }
             } label: {
                 Image(systemName: Icon.chevronLeft.rawValue)
+                    .font(.title3)
+                    .fontWeight(.semibold)
             }
-            .buttonStyle(.glass)
+            .buttonStyle(.plain)
             
             VStack(spacing: Size.x2.rawValue) {
                 Text("Referência")
-                    .font(.caption)
+                    .font(.caption2)
                     .foregroundStyle(.secondary)
                 Text(monthFormatted)
                     .font(.headline)
@@ -138,8 +162,10 @@ struct MonthlyEntryListView: View {
                 withAnimation(.snappy) { subtractMonth() }
             } label: {
                 Image(systemName: Icon.chevronRight.rawValue)
+                    .font(.title3)
+                    .fontWeight(.semibold)
             }
-            .buttonStyle(.glass)
+            .buttonStyle(.plain)
         }
     }
     
