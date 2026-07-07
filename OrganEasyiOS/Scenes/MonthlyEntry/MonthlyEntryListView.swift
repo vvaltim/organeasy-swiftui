@@ -24,23 +24,31 @@ struct MonthlyEntryListView: View {
     
     // MARK: - App Storage
     
-    @AppStorage("MonthlyEntryReferenceDate") private var referenceDate: Date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())) ?? Date()
+    @AppStorage(AppStorageConstants.monthlyEntryReferenceDate.rawValue) private var referenceDate: Date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())) ?? Date()
+    
+    // MARK:  Constnats
+    
+    enum Constants {
+        static let emptyViewBottom: CGFloat = 60
+        static let listViewBottom: CGFloat = 80
+        static let buttonSize: CGFloat = 44
+    }
     
     // MARK: - Computed Variables
     
     var entriesForCurrentReference: [MonthlyEntry] {
         let base = referenceDate
         let current = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
-        let currentReference = current.getCurrentReference(with: 0)
+        let currentReference = current.getCurrentReference(with: .zero)
         return allEntries.filter { $0.referenceMonth == currentReference }
     }
     
     private var income: Double {
-        entriesForCurrentReference.filter { $0.type == .income }.map(\.amount).reduce(0, +)
+        entriesForCurrentReference.filter { $0.type == .income }.map(\.amount).reduce(.zero, +)
     }
     
     private var expense: Double {
-        entriesForCurrentReference.filter { $0.type == .expense }.map(\.amount).reduce(0, +)
+        entriesForCurrentReference.filter { $0.type == .expense }.map(\.amount).reduce(.zero, +)
     }
     
     var monthFormatted: String {
@@ -57,6 +65,7 @@ struct MonthlyEntryListView: View {
                 if entriesForCurrentReference.isEmpty {
                     emptyView
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding(.bottom, Constants.emptyViewBottom)
                 } else {
                     List {
                         headerSection
@@ -64,20 +73,12 @@ struct MonthlyEntryListView: View {
                         itensSection
                     }
                     .listStyle(.insetGrouped)
+                    .safeAreaPadding(.bottom, Constants.listViewBottom)
                 }
             }
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        openMonthlyEntry()
-                    } label: {
-                        Image(systemName: Icon.plus.rawValue)
-                    }
-                    .accessibilityLabel("Add entry")
-                }
-                
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         NavigationLink {
@@ -111,7 +112,7 @@ struct MonthlyEntryListView: View {
                     Image(systemName: Icon.plus.rawValue)
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .frame(width: 44, height: 44)
+                        .frame(width: Constants.buttonSize, height: Constants.buttonSize)
                         .contentShape(Rectangle())
                         .padding(.horizontal, Size.x12.rawValue)
                         .padding(.vertical, Size.x8.rawValue)
@@ -147,7 +148,7 @@ struct MonthlyEntryListView: View {
                 Image(systemName: Icon.chevronLeft.rawValue)
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .frame(width: 44, height: 44)
+                    .frame(width: Constants.buttonSize, height: Constants.buttonSize)
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
@@ -173,7 +174,7 @@ struct MonthlyEntryListView: View {
                 Image(systemName: Icon.chevronRight.rawValue)
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .frame(width: 44, height: 44)
+                    .frame(width: Constants.buttonSize, height: Constants.buttonSize)
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
@@ -182,38 +183,6 @@ struct MonthlyEntryListView: View {
         }
         .padding(.vertical, Size.x4.rawValue)
     }
-    
-    /*var monthSelector: some View {
-        HStack(spacing: Size.x12.rawValue) {
-            Button {
-                withAnimation(.snappy) { addMonth() }
-            } label: {
-                Image(systemName: Icon.chevronLeft.rawValue)
-                    .font(.title3)
-                    .fontWeight(.semibold)
-            }
-            .buttonStyle(.plain)
-            
-            VStack(spacing: Size.x2.rawValue) {
-                Text("Referência")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                Text(monthFormatted)
-                    .font(.headline)
-                    .monospaced()
-            }
-            .frame(maxWidth: .infinity)
-            
-            Button {
-                withAnimation(.snappy) { subtractMonth() }
-            } label: {
-                Image(systemName: Icon.chevronRight.rawValue)
-                    .font(.title3)
-                    .fontWeight(.semibold)
-            }
-            .buttonStyle(.plain)
-        }
-    }*/
     
     // MARK: - Header View
     
@@ -295,16 +264,16 @@ struct MonthlyEntryListView: View {
     }
     
     private func commitOffsetToReferenceDate() {
-        guard referenceOffset != 0 else { return }
+        guard referenceOffset != .zero else { return }
         let newDate = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: referenceDate) ?? referenceDate
         referenceDate = newDate
-        referenceOffset = 0
+        referenceOffset = .zero
     }
     
     private func insertRecurrences() {
         let base = referenceDate
         let current = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
-        let currentReference = current.getCurrentReference(with: 0)
+        let currentReference = current.getCurrentReference(with: .zero)
 
         let descriptor = FetchDescriptor<RecurringEntryTemplate>(
             predicate: #Predicate { $0.enabled == true }
@@ -338,7 +307,7 @@ struct MonthlyEntryListView: View {
 
                 let newEntry = MonthlyEntry(
                     name: template.name,
-                    amount: 0,
+                    amount: .zero,
                     referenceMonth: currentReference,
                     dueDate: dueDate,
                     type: template.type
