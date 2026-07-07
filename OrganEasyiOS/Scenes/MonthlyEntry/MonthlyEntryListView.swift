@@ -112,6 +112,9 @@ struct MonthlyEntryListView: View {
                         .font(.title3)
                         .fontWeight(.semibold)
                         .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                        .padding(.horizontal, Size.x12.rawValue)
+                        .padding(.vertical, Size.x8.rawValue)
                 }
                 .buttonStyle(.plain)
                 .glassEffect(in: .circle)
@@ -134,7 +137,53 @@ struct MonthlyEntryListView: View {
     
     // MARK: - Selector View
     
-    var monthSelector: some View {
+    private var monthSelector: some View {
+        HStack(spacing: Size.x8.rawValue) {
+            Button {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                withAnimation(.snappy) { addMonth() }
+            } label: {
+                Image(systemName: Icon.chevronLeft.rawValue)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .glassEffect(.clear)
+            .accessibilityLabel("Previous month")
+
+            VStack(spacing: Size.x2.rawValue) {
+                Text("Referência")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                Text(monthFormatted)
+                    .font(.headline)
+                    .monospaced()
+            }
+            .frame(maxWidth: .infinity)
+            .allowsHitTesting(false)
+
+            Button {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                withAnimation(.snappy) { subtractMonth() }
+            } label: {
+                Image(systemName: Icon.chevronRight.rawValue)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .glassEffect(.clear)
+            .accessibilityLabel("Next month")
+        }
+        .padding(.vertical, Size.x4.rawValue)
+    }
+    
+    /*var monthSelector: some View {
         HStack(spacing: Size.x12.rawValue) {
             Button {
                 withAnimation(.snappy) { addMonth() }
@@ -164,7 +213,7 @@ struct MonthlyEntryListView: View {
             }
             .buttonStyle(.plain)
         }
-    }
+    }*/
     
     // MARK: - Header View
     
