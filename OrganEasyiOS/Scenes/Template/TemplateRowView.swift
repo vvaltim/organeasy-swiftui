@@ -9,7 +9,11 @@ import SwiftUI
 
 struct TemplateRowView: View {
     var template: RecurringEntryTemplate
-    let onDelete: () -> Void
+    let onToggleEnabled: () -> Void
+    
+    var isStrike: Bool {
+        !template.enabled
+    }
     
     var body: some View {
         HStack {
@@ -18,19 +22,21 @@ struct TemplateRowView: View {
                     .font(.title3)
                     .monospacedDigit()
                     .frame(width: Size.x36.rawValue, alignment: .leading)
+                    .strikethrough(isStrike)
             }
 
             Text(template.name)
                 .font(.headline)
                 .foregroundStyle(.primary)
+                .strikethrough(isStrike)
             
             Spacer()
         }
         .buttonStyle(.plain)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(role: .destructive) {
-                onDelete()
-            }
+            Button(template.enabled ? "Desativar" : "Ativar") {
+                onToggleEnabled()
+            }.tint(.blue)
         }
     }
 }
@@ -43,7 +49,7 @@ struct TemplateRowView: View {
             name: "Nubank",
             type: .expense
         ),
-        onDelete: {
+        onToggleEnabled: {
             
         }
     )

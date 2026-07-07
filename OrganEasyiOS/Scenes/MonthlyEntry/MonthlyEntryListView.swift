@@ -65,7 +65,6 @@ struct MonthlyEntryListView: View {
                 if entriesForCurrentReference.isEmpty {
                     emptyView
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(.bottom, Constants.emptyViewBottom)
                 } else {
                     List {
                         headerSection
@@ -73,7 +72,6 @@ struct MonthlyEntryListView: View {
                         itensSection
                     }
                     .listStyle(.insetGrouped)
-                    .safeAreaPadding(.bottom, Constants.listViewBottom)
                 }
             }
             .navigationTitle("Home")
@@ -98,31 +96,31 @@ struct MonthlyEntryListView: View {
                     .accessibilityLabel("Mais opções")
                 }
             }
-        }
-        .safeAreaInset(edge: .bottom) {
-            HStack(spacing: Size.x12.rawValue) {
-                monthSelector
-                    .padding(.horizontal, Size.x12.rawValue)
-                    .padding(.vertical, Size.x8.rawValue)
-                    .glassEffect()
-
-                Button {
-                    openMonthlyEntry()
-                } label: {
-                    Image(systemName: Icon.plus.rawValue)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .frame(width: Constants.buttonSize, height: Constants.buttonSize)
-                        .contentShape(Rectangle())
+            .safeAreaInset(edge: .bottom) {
+                HStack(spacing: Size.x12.rawValue) {
+                    monthSelector
                         .padding(.horizontal, Size.x12.rawValue)
                         .padding(.vertical, Size.x8.rawValue)
+                        .glassEffect()
+
+                    Button {
+                        openMonthlyEntry()
+                    } label: {
+                        Image(systemName: Icon.plus.rawValue)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .frame(width: Constants.buttonSize, height: Constants.buttonSize)
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, Size.x12.rawValue)
+                            .padding(.vertical, Size.x8.rawValue)
+                    }
+                    .buttonStyle(.plain)
+                    .glassEffect(in: .circle)
+                    .accessibilityLabel("Add entry")
                 }
-                .buttonStyle(.plain)
-                .glassEffect(in: .circle)
-                .accessibilityLabel("Add entry")
+                .padding(.horizontal)
+                .padding(.bottom, Size.x4.rawValue)
             }
-            .padding(.horizontal)
-            .padding(.bottom, Size.x4.rawValue)
         }
         .sheet(item: $selectedEntry) { entry in
             MonthlyEntryFormView(entryToEdit: entry)
@@ -227,7 +225,7 @@ struct MonthlyEntryListView: View {
         } description: {
             Text("Adicione um lançamento manualmente ou aplique suas recorrências.")
                 .font(.caption)
-        }actions: {
+        } actions: {
             Button {
                 insertRecurrences()
             } label: {

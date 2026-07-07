@@ -19,41 +19,51 @@ struct TemplateListView: View {
         ]
     ) private var allTemplates: [RecurringEntryTemplate]
     
-    // MARK: - Computed Variables
-    
-    var enableTemplate: [RecurringEntryTemplate] {
-        allTemplates.filter{ $0.enabled }
-    }
-    
     // MARK: - Main View
     
     var body: some View {
         VStack {
-            List {
-                enableSection
+            if allTemplates.isEmpty {
+                emptyState
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                List {
+                    enableSection
+                }
             }
         }
-        .navigationTitle("Modelos")
+        .navigationTitle("Recorrências")
     }
     
     // MARK: - Not Paid Section
     
     var enableSection: some View {
-        Section("Ativos") {
-            if enableTemplate.isEmpty {
-                Text("Nenhum item pago")
-                    .foregroundStyle(.secondary)
-            } else {
-                ForEach(enableTemplate) { template in
-                    TemplateRowView(
-                        template: template,
-                        onDelete: {
-                            print("Deletar essa merda")
-                        }
-                    )
-                }
+        Section {
+            ForEach(allTemplates) { template in
+                TemplateRowView(
+                    template: template,
+                    onToggleEnabled: {
+                        toggleEnabled(template: template)
+                    }
+                )
             }
         }
+    }
+    
+    var emptyState: some View {
+        ContentUnavailableView(
+            "Sem recorrencias",
+            systemImage: Icon.listBulletRectanglePortrait.rawValue,
+            description: Text("Suas recorrencias aparecerão aqui.").font(.caption)
+        )
+    }
+    
+    // MARK: Functions
+    
+    private func toggleEnabled(template: RecurringEntryTemplate) {
+        template.enabled.toggle()
+        
+        try? modelContext.save()
     }
 }
 
