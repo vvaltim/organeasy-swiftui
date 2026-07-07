@@ -103,10 +103,7 @@ struct MonthlyEntryListView: View {
                 monthSelector
                     .padding(.horizontal, Size.x12.rawValue)
                     .padding(.vertical, Size.x8.rawValue)
-                    .background(.ultraThinMaterial, in: Capsule())
-                    .overlay(
-                        Capsule().strokeBorder(.white.opacity(0.2))
-                    )
+                    .glassEffect()
 
                 Button {
                     openMonthlyEntry()
