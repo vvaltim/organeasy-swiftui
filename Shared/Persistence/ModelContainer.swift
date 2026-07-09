@@ -29,11 +29,11 @@ public struct OrganEasyModelContainer {
             for index in 0..<10 {
                 let indexNumber = index + 1
                 
-                var newDate = Date()
+                let newDate = Date()
                 var comps = Calendar.current.dateComponents([.year, .month], from: newDate)
                 if let day = comps.day { comps.day = day + indexNumber }
                 let date = Calendar.current.date(from: comps) ?? newDate
-                var referenceMonth = date.getReferenceMonth()
+                let referenceMonth = date.getReferenceMonth()
                 
                 let monthly = MonthlyEntry(
                     name: "Conta \(indexNumber)",

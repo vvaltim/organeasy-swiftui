@@ -8,16 +8,16 @@ struct MonthlyEntrySummaryHeaderView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: Size.x16.rawValue) {
-            MonthlyEntrySummaryItemView(title: "Entradas", value: income, color: .green)
+            MonthlyEntrySummaryItemView(title: OrganEasyStrings.Summary.incomes, value: income, color: .green)
             Divider()
                 .frame(height: Size.x48.rawValue)
-            MonthlyEntrySummaryItemView(title: "Saídas", value: expense, color: .red)
+            MonthlyEntrySummaryItemView(title: OrganEasyStrings.Summary.expenses, value: expense, color: .red)
             Divider()
                 .frame(height: Size.x48.rawValue)
-            MonthlyEntrySummaryItemView(title: "Saldo", value: balance, color: balanceColor)
+            MonthlyEntrySummaryItemView(title: OrganEasyStrings.Summary.balance, value: balance, color: balanceColor)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Resumo: Entradas, Saídas e Restante")
+        .accessibilityLabel(OrganEasyStrings.Summary.a11yLabel)
     }
 
     private var balanceColor: Color {

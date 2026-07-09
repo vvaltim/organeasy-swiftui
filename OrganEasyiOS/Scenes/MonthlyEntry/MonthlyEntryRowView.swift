@@ -37,7 +37,7 @@ struct MonthlyEntryRowView: View {
         }
         .buttonStyle(.plain)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(entry.paymentDate == nil ? "Mark Paid" : "Unmark") {
+            Button(entry.paymentDate == nil ? OrganEasyStrings.Row.markPaid : OrganEasyStrings.Row.unmark) {
                 onTogglePaid()
             }.tint(.blue)
         }

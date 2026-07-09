@@ -52,15 +52,15 @@ struct MonthlyEntryFormView: View {
                 
                 if let entry = entryToEdit {
                     deleteSection
-                        .confirmationDialog("Tem certeza que deseja excluir esta entrada?", isPresented: $isShowingDeleteConfirmation, titleVisibility: .visible) {
-                            Button("Excluir", role: .destructive) {
+                        .confirmationDialog(OrganEasyStrings.Form.deleteConfirmTitle, isPresented: $isShowingDeleteConfirmation, titleVisibility: .visible) {
+                            Button(OrganEasyStrings.Form.delete, role: .destructive) {
                                 deleteEntry(with: entry)
                             }
-                            Button("Cancelar", role: .cancel) {}
+                            Button(OrganEasyStrings.Form.cancel, role: .cancel) {}
                         }
                 }
             }
-            .navigationTitle("Nova Entrada")
+            .navigationTitle(OrganEasyStrings.Form.newEntry)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
@@ -84,8 +84,8 @@ struct MonthlyEntryFormView: View {
     // MARK: Form Section
     
     var formSection: some View {
-        Section(header: Text(entryToEdit == nil ? "Nova Entrada" : "Editar Entrada")) {
-            TextField("Valor", text: Binding(
+        Section(header: Text(entryToEdit == nil ? OrganEasyStrings.Form.newEntry : OrganEasyStrings.Form.editEntry)) {
+            TextField(OrganEasyStrings.Form.valuePlaceholder, text: Binding(
                 get: { textAmount },
                 set: { newValue in
                     let digits = newValue.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
@@ -118,14 +118,14 @@ struct MonthlyEntryFormView: View {
                 textAmount = amount.formatted(.currency(code: "BRL"))
             }
             
-            TextField("Descrição", text: $title)
+            TextField(OrganEasyStrings.Form.descriptionPlaceholder, text: $title)
                 .autocapitalization(.words)
             
-            DatePicker("Vencimento", selection: $dueDate, displayedComponents: .date)
+            DatePicker(OrganEasyStrings.Form.dueDate, selection: $dueDate, displayedComponents: .date)
             
-            Picker("Tipo", selection: $type) {
-                Text("Receita").tag(EntryType.income)
-                Text("Despesa").tag(EntryType.expense)
+            Picker(OrganEasyStrings.Form.type, selection: $type) {
+                Text(OrganEasyStrings.Form.typeIncome).tag(EntryType.income)
+                Text(OrganEasyStrings.Form.typeExpense).tag(EntryType.expense)
             }
             .pickerStyle(.segmented)
         }
@@ -135,9 +135,9 @@ struct MonthlyEntryFormView: View {
     
     var paymentDateSection: some View {
         Section {
-            Toggle("Adicionar data de pagamento", isOn: $showPaymentDate.animation())
+            Toggle(OrganEasyStrings.Form.addPaymentDate, isOn: $showPaymentDate.animation())
             if showPaymentDate {
-                DatePicker("Pagamento", selection: Binding(
+                DatePicker(OrganEasyStrings.Form.payment, selection: Binding(
                     get: { paymentDate ?? .now },
                     set: { paymentDate = $0 }
                 ), displayedComponents: .date)
@@ -149,7 +149,7 @@ struct MonthlyEntryFormView: View {
     
     var recurrenceSection: some View {
         Section {
-            Toggle("Recorrente", isOn: $isRecurrent.animation())
+            Toggle(OrganEasyStrings.Form.recurrent, isOn: $isRecurrent.animation())
         }
     }
     
@@ -163,7 +163,7 @@ struct MonthlyEntryFormView: View {
                 HStack {
                     Spacer()
                     Image(systemName: Icon.trash.rawValue)
-                    Text("Excluir entrada")
+                    Text(OrganEasyStrings.Form.delete)
                     Spacer()
                 }
             }

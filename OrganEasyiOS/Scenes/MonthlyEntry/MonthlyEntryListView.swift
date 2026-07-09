@@ -74,7 +74,7 @@ struct MonthlyEntryListView: View {
                     .listStyle(.insetGrouped)
                 }
             }
-            .navigationTitle("Home")
+            .navigationTitle(OrganEasyStrings.Home.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -82,18 +82,18 @@ struct MonthlyEntryListView: View {
                         NavigationLink {
                             TemplateListView()
                         } label: {
-                            Label("Recorrerência", systemImage: Icon.listNumber.rawValue)
+                            Label(OrganEasyStrings.Home.recurrenceMenuTitle, systemImage: Icon.listNumber.rawValue)
                         }
 
                         Button {
                             insertRecurrences()
                         } label: {
-                            Label("Aplicar recorrências", systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
+                            Label(OrganEasyStrings.Home.applyRecurrences, systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
                         }
                     } label: {
                         Image(systemName: Icon.ellipsis.rawValue)
                     }
-                    .accessibilityLabel("Mais opções")
+                    .accessibilityLabel(OrganEasyStrings.Home.moreOptionsA11y)
                 }
             }
             .safeAreaInset(edge: .bottom) {
@@ -116,7 +116,7 @@ struct MonthlyEntryListView: View {
                     }
                     .buttonStyle(.plain)
                     .glassEffect(in: .circle)
-                    .accessibilityLabel("Add entry")
+                    .accessibilityLabel(OrganEasyStrings.Home.addEntryA11y)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, Size.x4.rawValue)
@@ -151,10 +151,10 @@ struct MonthlyEntryListView: View {
             }
             .buttonStyle(.plain)
             .glassEffect(.clear)
-            .accessibilityLabel("Previous month")
+            .accessibilityLabel(OrganEasyStrings.Home.previousMonthA11y)
 
             VStack(spacing: Size.x2.rawValue) {
-                Text("Referência")
+                Text(OrganEasyStrings.Home.referenceLabel)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                 Text(monthFormatted)
@@ -177,7 +177,7 @@ struct MonthlyEntryListView: View {
             }
             .buttonStyle(.plain)
             .glassEffect(.clear)
-            .accessibilityLabel("Next month")
+            .accessibilityLabel(OrganEasyStrings.Home.nextMonthA11y)
         }
         .padding(.vertical, Size.x4.rawValue)
     }
@@ -198,7 +198,7 @@ struct MonthlyEntryListView: View {
     var itensSection: some View {
         Section {
             if entriesForCurrentReference.isEmpty {
-                Text("Nenhum item")
+                Text(OrganEasyStrings.Home.noneItem)
                     .foregroundStyle(.secondary)
             } else {
                 ForEach(entriesForCurrentReference, id: \.id) { entry in
@@ -217,19 +217,19 @@ struct MonthlyEntryListView: View {
     private var emptyView: some View {
         ContentUnavailableView {
             Label {
-                Text("Sem lancamentos")
+                Text(OrganEasyStrings.Home.emptyTitle)
                     .font(.title3)
             } icon: {
                 Image(systemName: Icon.listBulletRectanglePortrait.rawValue)
             }
         } description: {
-            Text("Adicione um lançamento manualmente ou aplique suas recorrências.")
+            Text(OrganEasyStrings.Home.emptyDescription)
                 .font(.caption)
         } actions: {
             Button {
                 insertRecurrences()
             } label: {
-                Label("Aplicar recorrências", systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
+                Label(OrganEasyStrings.Home.applyRecurrences, systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
             }
         }
     }
