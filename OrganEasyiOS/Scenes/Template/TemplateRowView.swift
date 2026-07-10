@@ -34,7 +34,7 @@ struct TemplateRowView: View {
         }
         .buttonStyle(.plain)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(template.enabled ? OrganEasyStrings.Template.deactivate  : OrganEasyStrings.Template.activate) {
+            Button(template.enabled ? "Desativar" : "Ativar") {
                 onToggleEnabled()
             }.tint(.blue)
         }

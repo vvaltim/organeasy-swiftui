@@ -32,7 +32,7 @@ struct TemplateListView: View {
                 }
             }
         }
-        .navigationTitle(OrganEasyStrings.Home.recurrenceMenuTitle)
+        .navigationTitle("Recorrências")
     }
     
     // MARK: - Not Paid Section
