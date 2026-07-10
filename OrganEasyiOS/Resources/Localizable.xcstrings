@@ -1,0 +1,133 @@
+{
+  "sourceLanguage" : "pt-BR",
+  "strings" : {
+    "Add entry" : {
+
+    },
+    "Adicionar data de pagamento" : {
+
+    },
+    "Adicionar lancamento mensal" : {
+
+    },
+    "Adicione um lançamento manualmente ou aplique suas recorrências." : {
+
+    },
+    "Adicionei %@ no valor de %@." : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Adicionei %1$@ no valor de %2$@."
+          }
+        }
+      }
+    },
+    "Aplicar recorrências" : {
+
+    },
+    "Ativar" : {
+
+    },
+    "Cancelar" : {
+
+    },
+    "Categoria" : {
+
+    },
+    "Criação de um novo lancamento mensal" : {
+
+    },
+    "Data de vencimento" : {
+
+    },
+    "Desativar" : {
+
+    },
+    "Descrição" : {
+
+    },
+    "Despesa" : {
+
+    },
+    "Editar Entrada" : {
+
+    },
+    "Excluir" : {
+
+    },
+    "Excluir entrada" : {
+
+    },
+    "Home" : {
+
+    },
+    "Mais opções" : {
+
+    },
+    "Mark Paid" : {
+
+    },
+    "Nenhum item" : {
+
+    },
+    "Next month" : {
+
+    },
+    "Nova conta" : {
+
+    },
+    "Nova Entrada" : {
+
+    },
+    "Pagamento" : {
+
+    },
+    "Previous month" : {
+
+    },
+    "Receita" : {
+
+    },
+    "Recorrências" : {
+
+    },
+    "Recorrente" : {
+
+    },
+    "Recorrerência" : {
+
+    },
+    "Referência" : {
+
+    },
+    "Resumo: Entradas, Saídas e Restante" : {
+
+    },
+    "Sem lancamentos" : {
+
+    },
+    "Sem recorrencias" : {
+
+    },
+    "Suas recorrencias aparecerão aqui." : {
+
+    },
+    "Tem certeza que deseja excluir esta entrada?" : {
+
+    },
+    "Tipo" : {
+
+    },
+    "Unmark" : {
+
+    },
+    "Valor" : {
+
+    },
+    "Vencimento" : {
+
+    }
+  },
+  "version" : "1.3"
+}
