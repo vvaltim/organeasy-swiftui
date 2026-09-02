@@ -1,133 +1,246 @@
 {
   "sourceLanguage" : "pt-BR",
+  "version" : "1.3",
   "strings" : {
     "Add entry" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Adicionar lançamento" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Add entry" } }
+      }
     },
     "Adicionar data de pagamento" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Adicionar data de pagamento" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Add payment date" } }
+      }
     },
     "Adicionar lancamento mensal" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Adicionar lancamento mensal" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Add monthly entry" } }
+      }
     },
     "Adicione um lançamento manualmente ou aplique suas recorrências." : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Adicione um lançamento manualmente ou aplique suas recorrências." } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Add an entry manually or apply your recurrences." } }
+      }
     },
     "Adicionei %@ no valor de %@." : {
       "localizations" : {
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Adicionei %1$@ no valor de %2$@."
-          }
-        }
+        "pt-BR" : { "stringUnit" : { "state" : "new", "value" : "Adicionei %1$@ no valor de %2$@." } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "I added %1$@ with the amount of %2$@." } }
       }
     },
     "Aplicar recorrências" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Aplicar recorrências" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Apply recurrences" } }
+      }
     },
     "Ativar" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Ativar" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Enable" } }
+      }
     },
     "Cancelar" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Cancelar" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Cancel" } }
+      }
     },
     "Categoria" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Categoria" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Category" } }
+      }
     },
     "Criação de um novo lancamento mensal" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Criação de um novo lancamento mensal" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Create a new monthly entry" } }
+      }
     },
     "Data de vencimento" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Data de vencimento" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Due date" } }
+      }
     },
     "Desativar" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Desativar" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Disable" } }
+      }
     },
     "Descrição" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Descrição" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Description" } }
+      }
     },
     "Despesa" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Despesa" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Expense" } }
+      }
     },
     "Editar Entrada" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Editar Entrada" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Edit Entry" } }
+      }
     },
     "Excluir" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Excluir" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Delete" } }
+      }
     },
     "Excluir entrada" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Excluir entrada" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Delete Entry" } }
+      }
     },
     "Home" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Home" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Home" } }
+      }
     },
     "Mais opções" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Mais opções" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "More options" } }
+      }
     },
     "Mark Paid" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Marcar como pago" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Mark Paid" } }
+      }
     },
     "Nenhum item" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Nenhum item" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "No items" } }
+      }
     },
     "Next month" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Próximo mês" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Next month" } }
+      }
     },
     "Nova conta" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Nova conta" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "New account" } }
+      }
     },
     "Nova Entrada" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Nova Entrada" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "New Entry" } }
+      }
     },
     "Pagamento" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Pagamento" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Payment" } }
+      }
     },
     "Previous month" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Mês anterior" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Previous month" } }
+      }
     },
     "Receita" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Receita" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Income" } }
+      }
     },
     "Recorrências" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Recorrências" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Recurrences" } }
+      }
     },
     "Recorrente" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Recorrente" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Recurring" } }
+      }
     },
     "Recorrerência" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Recorrerência" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Recurrence" } }
+      }
     },
     "Referência" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Referência" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Reference" } }
+      }
     },
     "Resumo: Entradas, Saídas e Restante" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Resumo: Entradas, Saídas e Restante" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Summary: Income, Expenses and Remaining" } }
+      }
     },
     "Sem lancamentos" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Sem lancamentos" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "No entries" } }
+      }
     },
     "Sem recorrencias" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Sem recorrencias" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "No recurrences" } }
+      }
     },
     "Suas recorrencias aparecerão aqui." : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Suas recorrencias aparecerão aqui." } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Your recurrences will appear here." } }
+      }
     },
     "Tem certeza que deseja excluir esta entrada?" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Tem certeza que deseja excluir esta entrada?" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Are you sure you want to delete this entry?" } }
+      }
     },
     "Tipo" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Tipo" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Type" } }
+      }
     },
     "Unmark" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Desmarcar" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Unmark" } }
+      }
     },
     "Valor" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Valor" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Amount" } }
+      }
     },
     "Vencimento" : {
-
+      "localizations" : {
+        "pt-BR" : { "stringUnit" : { "state": "translated", "value" : "Vencimento" } },
+        "en" : { "stringUnit" : { "state": "translated", "value" : "Due date" } }
+      }
     }
-  },
-  "version" : "1.3"
+  }
 }
