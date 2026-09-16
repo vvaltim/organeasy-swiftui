@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TemplateListView: View {
     
-    // MARK: - Model Container
+    private let store: TemplateStore
     
     @Environment(\.modelContext) private var modelContext
     @Query<RecurringEntryTemplate>(
@@ -18,6 +18,10 @@ struct TemplateListView: View {
             SortDescriptor(\RecurringEntryTemplate.dueDay, order: .forward)
         ]
     ) private var allTemplates: [RecurringEntryTemplate]
+    
+    init(store: TemplateStore) {
+        self.store = store
+    }
     
     // MARK: - Main View
     
@@ -43,7 +47,7 @@ struct TemplateListView: View {
                 TemplateRowView(
                     template: template,
                     onToggleEnabled: {
-                        toggleEnabled(template: template)
+                        store.sent(.toggle(template))
                     }
                 )
             }
@@ -57,17 +61,10 @@ struct TemplateListView: View {
             description: Text("Suas recorrencias aparecerão aqui.").font(.caption)
         )
     }
-    
-    // MARK: Functions
-    
-    private func toggleEnabled(template: RecurringEntryTemplate) {
-        template.enabled.toggle()
-        
-        try? modelContext.save()
-    }
 }
 
 #Preview {
-    TemplateListView()
-        .modelContainer(OrganEasyModelContainer.preview)
+    let modelContext = OrganEasyModelContainer.preview
+    TemplateListView(store: TemplateStore(repository: TemplateRepository(modelContext: modelContext.mainContext)))
+        .modelContainer(modelContext)
 }

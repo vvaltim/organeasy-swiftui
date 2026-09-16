@@ -80,7 +80,7 @@ struct MonthlyEntryListView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         NavigationLink {
-                            TemplateListView()
+                            TemplateFactory.make(modelContext: modelContext)
                         } label: {
                             Label("Recorrerência", systemImage: Icon.listNumber.rawValue)
                         }
