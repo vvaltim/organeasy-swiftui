@@ -77,28 +77,30 @@ struct MonthlyEntryListView: View {
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        NavigationLink {
-                            TemplateFactory.make(modelContext: modelContext)
-                        } label: {
-                            Label("Recorrerência", systemImage: Icon.listNumber.rawValue)
-                        }
-
-                        Button {
-                            insertRecurrences()
-                        } label: {
-                            Label("Aplicar recorrências", systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
-                        }
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    NavigationLink {
+                        TemplateFactory.make(modelContext: modelContext)
                     } label: {
-                        Image(systemName: Icon.ellipsis.rawValue)
+                        Label("Recorrerência", systemImage: Icon.repeatCircle.rawValue)
                     }
-                    .accessibilityLabel("Mais opções")
+
+                    Button {
+                        insertRecurrences()
+                    } label: {
+                        Label("Aplicar recorrências", systemImage: Icon.calendarBadgePlus.rawValue)
+                    }
+                    
+                    Button {
+//                        insertRecurrences()
+                    } label: {
+                        Label("Exportar dados", systemImage: Icon.squareAndArrowUp.rawValue)
+                    }
                 }
             }
             .safeAreaInset(edge: .bottom) {
                 HStack(spacing: Size.x12.rawValue) {
                     monthSelector
+                        .fixedSize(horizontal: true, vertical: false)
                         .padding(.horizontal, Size.x12.rawValue)
                         .padding(.vertical, Size.x8.rawValue)
                         .glassEffect()
