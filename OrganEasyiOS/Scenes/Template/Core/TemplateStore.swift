@@ -69,7 +69,7 @@ enum TemplateState {
 
 struct TemplateReducer {
     static func reduce(state: TemplateState, intent: TemplateIntent) -> (state: TemplateState, effect: TemplateEffect?){
-        let newState = state
+        _ = state
         
         switch intent {
         case .toggle(let template):
