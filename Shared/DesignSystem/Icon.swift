@@ -1,0 +1,15 @@
+enum Icon: String {
+    case checkmark = "checkmark"
+    case chevronLeft = "chevron.left"
+    case chevronRight = "chevron.right"
+    case listBulletRectanglePortrait = "list.bullet.rectangle.portrait"
+    case plus = "plus"
+    case trash = "trash"
+    case xmark = "xmark"
+    case listNumber = "list.number"
+    case ellipsis = "ellipsis"
+    case squareAndArrowDownOnSquare = "square.and.arrow.down.on.square"
+    case repeatCircle = "repeat.circle"
+    case calendarBadgePlus = "calendar.badge.plus"
+    case squareAndArrowUp = "square.and.arrow.up"
+}

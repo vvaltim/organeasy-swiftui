@@ -1,0 +1,331 @@
+import SwiftData
+import SwiftUI
+
+struct MonthlyEntryListView: View {
+
+    // MARK:  Scene Phase
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
+    // MARK: - Model Container
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query<MonthlyEntry>(
+        sort: [
+            SortDescriptor(\MonthlyEntry.dueDate, order: .forward)
+        ]
+    ) private var allEntries: [MonthlyEntry]
+    
+    // MARK: - States
+    
+    @State private var isPresentingMonthlyEntrySheet = false
+    @State private var selectedEntry: MonthlyEntry? = nil
+    @State private var referenceOffset: Int = 0
+    
+    // MARK: - App Storage
+    
+    @AppStorage(AppStorageConstants.monthlyEntryReferenceDate.rawValue) private var referenceDate: Date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Date())) ?? Date()
+    
+    // MARK:  Constnats
+    
+    enum Constants {
+        static let emptyViewBottom: CGFloat = 60
+        static let listViewBottom: CGFloat = 80
+        static let buttonSize: CGFloat = 44
+    }
+    
+    // MARK: - Computed Variables
+    
+    var entriesForCurrentReference: [MonthlyEntry] {
+        let base = referenceDate
+        let current = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
+        let currentReference = current.getCurrentReference(with: .zero)
+        return allEntries.filter { $0.referenceMonth == currentReference }
+    }
+    
+    private var income: Double {
+        entriesForCurrentReference.filter { $0.type == .income }.map(\.amount).reduce(.zero, +)
+    }
+    
+    private var expense: Double {
+        entriesForCurrentReference.filter { $0.type == .expense }.map(\.amount).reduce(.zero, +)
+    }
+    
+    var monthFormatted: String {
+        let base = referenceDate
+        let date = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
+        return date.getDateFormatted(with: .MMMMyyyy)
+    }
+    
+    // MARK: - Main View
+    
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: Size.x12.rawValue) {
+                if entriesForCurrentReference.isEmpty {
+                    emptyView
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    List {
+                        headerSection
+                        
+                        itensSection
+                    }
+                    .listStyle(.insetGrouped)
+                }
+            }
+            .navigationTitle("Home")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    NavigationLink {
+                        TemplateFactory.make(modelContext: modelContext)
+                    } label: {
+                        Label("Recorrerência", systemImage: Icon.repeatCircle.rawValue)
+                    }
+
+                    Button {
+                        insertRecurrences()
+                    } label: {
+                        Label("Aplicar recorrências", systemImage: Icon.calendarBadgePlus.rawValue)
+                    }
+                    
+                    Button {
+//                        insertRecurrences()
+                    } label: {
+                        Label("Exportar dados", systemImage: Icon.squareAndArrowUp.rawValue)
+                    }
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                HStack(spacing: Size.x12.rawValue) {
+                    monthSelector
+                        .fixedSize(horizontal: true, vertical: false)
+                        .padding(.horizontal, Size.x12.rawValue)
+                        .padding(.vertical, Size.x8.rawValue)
+                        .glassEffect()
+
+                    Button {
+                        openMonthlyEntry()
+                    } label: {
+                        Image(systemName: Icon.plus.rawValue)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .frame(width: Constants.buttonSize, height: Constants.buttonSize)
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, Size.x12.rawValue)
+                            .padding(.vertical, Size.x8.rawValue)
+                    }
+                    .buttonStyle(.plain)
+                    .glassEffect(in: .circle)
+                    .accessibilityLabel("Add entry")
+                }
+                .padding(.horizontal)
+                .padding(.bottom, Size.x4.rawValue)
+            }
+        }
+        .sheet(item: $selectedEntry) { entry in
+            MonthlyEntryFormView(entryToEdit: entry)
+        }
+        .sheet(isPresented: $isPresentingMonthlyEntrySheet) {
+            MonthlyEntryFormView(entryToEdit: nil)
+        }
+        .onDisappear { commitOffsetToReferenceDate() }
+        .onChange(of: scenePhase) { _, newValue in
+            if newValue != .active { commitOffsetToReferenceDate() }
+        }
+    }
+    
+    // MARK: - Selector View
+    
+    private var monthSelector: some View {
+        HStack(spacing: Size.x8.rawValue) {
+            Button {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                withAnimation(.snappy) { addMonth() }
+            } label: {
+                Image(systemName: Icon.chevronLeft.rawValue)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .frame(width: Constants.buttonSize, height: Constants.buttonSize)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .glassEffect(.clear)
+            .accessibilityLabel("Previous month")
+
+            VStack(spacing: Size.x2.rawValue) {
+                Text("Referência")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                Text(monthFormatted)
+                    .font(.headline)
+                    .monospaced()
+            }
+            .frame(maxWidth: .infinity)
+            .allowsHitTesting(false)
+
+            Button {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                withAnimation(.snappy) { subtractMonth() }
+            } label: {
+                Image(systemName: Icon.chevronRight.rawValue)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .frame(width: Constants.buttonSize, height: Constants.buttonSize)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .glassEffect(.clear)
+            .accessibilityLabel("Next month")
+        }
+        .padding(.vertical, Size.x4.rawValue)
+    }
+    
+    // MARK: - Header View
+    
+    var headerSection: some View {
+        Section {
+            MonthlyEntrySummaryHeaderView(
+                income: income,
+                expense: expense
+            )
+        }
+    }
+    
+    // MARK: - Not Paid Section
+    
+    var itensSection: some View {
+        Section {
+            if entriesForCurrentReference.isEmpty {
+                Text("Nenhum item")
+                    .foregroundStyle(.secondary)
+            } else {
+                ForEach(entriesForCurrentReference, id: \.id) { entry in
+                    MonthlyEntryRowView(entry: entry) {
+                        openMonthlyEntry(with: entry)
+                    } onTogglePaid: {
+                        togglePayment(for: entry)
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK:  Empty View
+    
+    private var emptyView: some View {
+        ContentUnavailableView {
+            Label {
+                Text("Sem lancamentos")
+                    .font(.title3)
+            } icon: {
+                Image(systemName: Icon.listBulletRectanglePortrait.rawValue)
+            }
+        } description: {
+            Text("Adicione um lançamento manualmente ou aplique suas recorrências.")
+                .font(.caption)
+        } actions: {
+            Button {
+                insertRecurrences()
+            } label: {
+                Label("Aplicar recorrências", systemImage: Icon.squareAndArrowDownOnSquare.rawValue)
+            }
+        }
+    }
+    
+    // MARK: - Functions
+    
+    private func togglePayment(for entry: MonthlyEntry) {
+        if entry.paymentDate == nil {
+            entry.paymentDate = Date()
+        } else {
+            entry.paymentDate = nil
+        }
+        try? modelContext.save()
+    }
+    
+    private func addMonth() {
+        referenceOffset += 1
+    }
+    
+    private func subtractMonth() {
+        referenceOffset -= 1
+    }
+    
+    private func openMonthlyEntry(with entry: MonthlyEntry? = nil) {
+        if let entry {
+            selectedEntry = entry
+        } else {
+            isPresentingMonthlyEntrySheet = true
+        }
+    }
+    
+    private func commitOffsetToReferenceDate() {
+        guard referenceOffset != .zero else { return }
+        let newDate = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: referenceDate) ?? referenceDate
+        referenceDate = newDate
+        referenceOffset = .zero
+    }
+    
+    private func insertRecurrences() {
+        let base = referenceDate
+        let current = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
+        let currentReference = current.getCurrentReference(with: .zero)
+
+        let descriptor = FetchDescriptor<RecurringEntryTemplate>(
+            predicate: #Predicate { $0.enabled == true }
+        )
+
+        do {
+            let templates = try modelContext.fetch(descriptor)
+
+            let existingForReference = entriesForCurrentReference
+
+            for template in templates {
+                let calendar = Calendar.current
+                let comps = calendar.dateComponents([.year, .month], from: current)
+                let range = calendar.range(of: .day, in: .month, for: current)
+                let lastDay = range?.count ?? template.dueDay
+                let clampedDay = min(max(template.dueDay, 1), lastDay)
+                var dueComps = DateComponents()
+                dueComps.year = comps.year
+                dueComps.month = comps.month
+                dueComps.day = clampedDay
+                let dueDate = calendar.date(from: dueComps) ?? current
+
+                let alreadyExists = existingForReference.contains { entry in
+                    entry.name == template.name &&
+                    entry.type == template.type &&
+                    entry.referenceMonth == currentReference &&
+                    calendar.isDate(entry.dueDate, inSameDayAs: dueDate)
+                }
+
+                guard !alreadyExists else { continue }
+
+                let newEntry = MonthlyEntry(
+                    name: template.name,
+                    amount: .zero,
+                    referenceMonth: currentReference,
+                    dueDate: dueDate,
+                    type: template.type
+                )
+
+                modelContext.insert(newEntry)
+            }
+
+            try modelContext.save()
+        } catch {
+            print("Failed to apply recurrences: \(error)")
+        }
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    MonthlyEntryListView()
+        .modelContainer(OrganEasyModelContainer.preview)
+}
