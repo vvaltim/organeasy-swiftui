@@ -129,7 +129,10 @@ struct SummaryAICardView: View {
             #endif
             do {
                 let generated = try await SummaryAssistant.insights(for: prompt)
-                insights = SummaryCardPrompt.isFreeOfNumbers(generated) ? generated : fallback
+                // O título vem do cálculo do app: o modelo às vezes erra o sentido do mês.
+                insights = SummaryCardPrompt.isFreeOfNumbers(generated)
+                    ? MonthInsights(headline: fallback.headline, tips: generated.tips)
+                    : fallback
             } catch {
                 insights = fallback
             }
