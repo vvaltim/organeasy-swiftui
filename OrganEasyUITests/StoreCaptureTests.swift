@@ -99,7 +99,7 @@ final class StoreCaptureTests: XCTestCase {
         pause(1.8)
         app.buttons.element(matching: NSPredicate(format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@ OR label CONTAINS[c] %@", "falta", "left", "?")).firstMatch.tap()
         XCTAssertTrue(element("assistantBubble").waitForExistence(timeout: 90))
-        pause(4)
+        pause(9)
     }
 
     /// Fluxo do usuário grátis com anúncios de teste do Google.
