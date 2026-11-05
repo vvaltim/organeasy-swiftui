@@ -26,11 +26,12 @@ struct AddMonthlyEntryIntent: AppIntent {
         let container = await OrganEasyModelContainer.shared
         let context = ModelContext(container)
         
+        let date = dueDate ?? Date()
         let entry = MonthlyEntry(
             name: title,
             amount: amount,
-            referenceMonth: "",
-            dueDate: dueDate ?? Date(),
+            referenceMonth: await date.getReferenceMonth(),
+            dueDate: date,
             type: category ?? .expense
         )
         

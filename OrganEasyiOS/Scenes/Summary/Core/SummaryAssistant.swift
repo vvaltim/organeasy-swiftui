@@ -36,13 +36,18 @@ nonisolated enum SummaryAssistant {
         return Locale(identifier: "en").localizedString(forLanguageCode: code) ?? "English"
     }
 
-    static func instructions(now: Date) -> String {
+    static func instructions(now: Date, facts: String) -> String {
         let today = now.formatted(date: .long, time: .omitted)
         return """
         You are My AI, a personal assistant for the user's bills. Today is \(today).
         The user's locale is \(Locale.current.identifier). Always answer in \(language).
-        For any question about amounts, call the tool consultarLancamentos first.
-        Copy amounts exactly as the tool returns them. Never calculate or estimate numbers.
+        You have access to the user's finances. Never say you lack their data.
+        When the question is not about money, say briefly that you only help with the user's bills.
+        \(facts)
+        Answer general questions about the current month directly from those facts.
+        For a specific bill, a past month or a past year, call the tool consultarLancamentos.
+        When calling the tool, set name only to the name of a bill. Leave it empty for general questions.
+        Copy amounts exactly as written here or as the tool returns them. Never calculate or estimate numbers.
         If the tool finds nothing, say so. Do not give investment advice.
         Use plain text with no markdown. Answer in at most three sentences.
         """
@@ -99,6 +104,7 @@ nonisolated enum SummaryAnswerGuard {
 /// Guarda o que a ferramenta devolveu, para conferir a resposta do modelo.
 actor EntryLookupLog {
     private(set) var reports: [String] = []
+    private(set) var scope: SummaryQuestionScope?
 
     func add(_ report: String) {
         reports.append(report)
@@ -106,6 +112,12 @@ actor EntryLookupLog {
 
     func clear() {
         reports = []
+    }
+
+    /// Começa uma pergunta nova, com o período e a conta que o app leu nela.
+    func start(_ scope: SummaryQuestionScope) {
+        reports = []
+        self.scope = scope
     }
 }
 
@@ -149,14 +161,26 @@ nonisolated struct EntryLookupTool: Tool {
     }
 
     func call(arguments: Arguments) async throws -> String {
-        let report = Self.report(entries: Self.filter(entries, with: arguments))
+        var filters = arguments
+        if let scope = await log.scope {
+            filters.year = scope.year
+            filters.month = scope.month
+            filters.type = scope.type
+            filters.payment = scope.payment
+            if let name = scope.name {
+                filters.name = name
+            }
+        }
+        let isUnknownBill = await log.scope?.isUnknownBill ?? false
+        let report = Self.report(entries: isUnknownBill ? [] : Self.filter(entries, with: filters))
         await log.add(report)
         return report
     }
 
     static func filter(_ entries: [SummaryEntry], with arguments: Arguments) -> [SummaryEntry] {
         let calendar = Calendar.current
-        let name = arguments.name?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let rawName = arguments.name?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let name = SummaryChatContext.isGenericName(rawName) ? "" : rawName
 
         return entries.filter { entry in
             let date = calendar.dateComponents([.year, .month], from: entry.dueDate)

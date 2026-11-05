@@ -13,6 +13,16 @@ struct OrganEasyShortcut: AppShortcutsProvider {
             shortTitle: "Nova conta",
             systemImageName: "plus.circle"
         )
+
+        AppShortcut(
+            intent: FindBillsIntent(),
+            phrases: [
+                "Consultar minhas contas no \(.applicationName)",
+                "Ver minhas contas no \(.applicationName)"
+            ],
+            shortTitle: "Consultar contas",
+            systemImageName: "magnifyingglass"
+        )
     }
     
 }

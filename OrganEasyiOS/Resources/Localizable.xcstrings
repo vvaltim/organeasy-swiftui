@@ -215,6 +215,62 @@
         }
       }
     },
+    "%@, a pagar, vencimento em %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, to pay, due %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, por pagar, vence el %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, à payer, échéance le %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, da pagare, scadenza %@"
+          }
+        }
+      }
+    },
+    "%@, pago, vencimento em %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, paid, due %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, pagado, vence el %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, payé, échéance le %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, pagato, scadenza %@"
+          }
+        }
+      }
+    },
     "%@: %lld compras somam %@ neste mês. Comprar menos vezes é o corte mais fácil.": {
       "localizations": {
         "en": {
@@ -295,6 +351,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "L’abbonamento si rinnova automaticamente a %@ all’anno fino alla disdetta in Impostazioni con almeno 24 ore di anticipo."
+          }
+        }
+      }
+    },
+    "A próxima conta é %@, de %@, com vencimento em %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The next bill is %@, for %@, due %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La próxima cuenta es %@, de %@, con vencimiento el %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La prochaine facture est %@, de %@, à échéance le %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La prossima bolletta è %@, di %@, in scadenza il %@."
           }
         }
       }
@@ -993,6 +1077,62 @@
           "stringUnit": {
             "state": "translated",
             "value": "Come risparmiare"
+          }
+        }
+      }
+    },
+    "Consultar contas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look up bills"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consultar cuentas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulter les factures"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulta bollette"
+          }
+        }
+      }
+    },
+    "Consultar lançamentos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look up entries"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consultar movimientos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulter les opérations"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulta movimenti"
           }
         }
       }
@@ -1835,6 +1975,34 @@
         }
       }
     },
+    "Já foi pago": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already paid"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya pagado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà payé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già pagato"
+          }
+        }
+      }
+    },
     "Já pago": {
       "localizations": {
         "en": {
@@ -1859,6 +2027,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pagato"
+          }
+        }
+      }
+    },
+    "Lançamento": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entry"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opération"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimento"
           }
         }
       }
@@ -1943,6 +2139,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spese maggiori del mese"
+          }
+        }
+      }
+    },
+    "Maiores: %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Largest: %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mayores: %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les plus importantes : %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le maggiori: %@."
           }
         }
       }
@@ -2256,6 +2480,34 @@
         }
       }
     },
+    "Neste mês: %@ de saídas, %@ de entradas e %@ ainda a pagar.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This month: %@ in expenses, %@ in income and %@ still to pay."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este mes: %@ de gastos, %@ de ingresos y %@ por pagar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce mois-ci : %@ de sorties, %@ d’entrées et %@ encore à payer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo mese: %@ di uscite, %@ di entrate e %@ ancora da pagare."
+          }
+        }
+      }
+    },
     "Next month": {
       "localizations": {
         "en": {
@@ -2314,6 +2566,62 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sulla buona strada"
+          }
+        }
+      }
+    },
+    "Nome": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nome"
+          }
+        }
+      }
+    },
+    "Nome da conta, como luz ou aluguel. Deixe vazio para ver as próximas contas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bill name, like electricity or rent. Leave empty to see upcoming bills."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre de la cuenta, como luz o alquiler. Déjalo vacío para ver las próximas cuentas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom de la facture, comme électricité ou loyer. Laissez vide pour voir les prochaines factures."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nome della bolletta, come luce o affitto. Lascia vuoto per vedere le prossime bollette."
           }
         }
       }
@@ -2902,6 +3210,34 @@
         }
       }
     },
+    "Procura contas e mostra valor, vencimento e se já foram pagas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finds bills and shows the amount, due date and whether they were paid."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca cuentas y muestra el importe, el vencimiento y si ya se pagaron."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche des factures et affiche le montant, l’échéance et si elles sont payées."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca le bollette e mostra importo, scadenza e se sono state pagate."
+          }
+        }
+      }
+    },
     "Próximos vencimentos": {
       "localizations": {
         "en": {
@@ -2926,6 +3262,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prossime scadenze"
+          }
+        }
+      }
+    },
+    "Qual conta você quer ver?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which bill do you want to see?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué cuenta quieres ver?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle facture voulez-vous voir ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quale bolletta vuoi vedere?"
           }
         }
       }
@@ -4028,40 +4392,6 @@
         }
       }
     },
-    "Vencimento": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Due date"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vencimiento"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Échéance"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scadenza"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vencimento"
-          }
-        }
-      }
-    },
     "Ver sugestões": {
       "localizations": {
         "en": {
@@ -4176,6 +4506,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acqua"
+          }
+        }
+      }
+    },
+    "É entrada de dinheiro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is money coming in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es un ingreso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Est une entrée d’argent"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "È un’entrata"
           }
         }
       }

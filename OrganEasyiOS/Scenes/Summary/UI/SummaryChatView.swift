@@ -24,6 +24,7 @@ final class SummaryChatModel: ObservableObject {
 
     private let entries: [SummaryEntry]
     private let log = EntryLookupLog()
+    private let context: SummaryChatContext
     private var session: LanguageModelSession
 
     private var failureMessage: String {
@@ -32,7 +33,8 @@ final class SummaryChatModel: ObservableObject {
 
     init(entries: [SummaryEntry]) {
         self.entries = entries
-        session = Self.makeSession(entries: entries, log: log)
+        context = SummaryChatContext(entries: entries)
+        session = Self.makeSession(entries: entries, log: log, facts: context.facts)
     }
 
     func send(_ text: String) {
@@ -57,14 +59,14 @@ final class SummaryChatModel: ObservableObject {
         }
         #endif
 
-        await log.clear()
+        await log.start(SummaryQuestionScope(question: question, entries: entries, now: .now))
 
         do {
             let answer = try await session.respond(to: question).content
             return await verified(answer, question: question)
         } catch LanguageModelSession.GenerationError.exceededContextWindowSize {
             // A conversa ficou longa: recomeça o contexto e tenta de novo.
-            session = Self.makeSession(entries: entries, log: log)
+            session = Self.makeSession(entries: entries, log: log, facts: context.facts)
             guard let answer = try? await session.respond(to: question).content else {
                 return failureMessage
             }
@@ -74,18 +76,14 @@ final class SummaryChatModel: ObservableObject {
         }
     }
 
-    /// Se algum número não existir nos dados, mostra o relatório calculado pelo app.
     private func verified(_ answer: String, question: String) async -> String {
-        let reports = await log.reports
-        return SummaryAnswerGuard.verified(answer, question: question, reports: reports)
-            ?? reports.last
-            ?? failureMessage
+        context.answer(for: answer, question: question, toolReports: await log.reports)
     }
 
-    private static func makeSession(entries: [SummaryEntry], log: EntryLookupLog) -> LanguageModelSession {
+    private static func makeSession(entries: [SummaryEntry], log: EntryLookupLog, facts: String) -> LanguageModelSession {
         LanguageModelSession(
             tools: [EntryLookupTool(entries: entries, log: log)],
-            instructions: SummaryAssistant.instructions(now: .now)
+            instructions: SummaryAssistant.instructions(now: .now, facts: facts)
         )
     }
 }
