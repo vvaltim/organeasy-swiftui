@@ -2,8 +2,11 @@ import SwiftData
 import SwiftUI
 
 struct MainTabView: View {
+    @Environment(\.modelContext) private var modelContext
+
     var body: some View {
         tabs
+            .task { LegacyDataImporter.runIfNeeded(into: modelContext) }
         #if DEBUG
             .showcaseContainer()
         #endif
