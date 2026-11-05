@@ -98,7 +98,9 @@ struct SummaryChatView: View {
     private let suggestions: [String] = [
         String(localized: "Quanto falta pagar este mês?"),
         String(localized: "Qual foi meu maior gasto este mês?"),
-        String(localized: "Quanto paguei de luz este ano?")
+        String(localized: "Quanto paguei de luz este ano?"),
+        String(localized: "Como posso economizar?"),
+        String(localized: "Qual conta vence primeiro?")
     ]
 
     private enum Constants {
@@ -165,20 +167,20 @@ struct SummaryChatView: View {
 
     private var inputBar: some View {
         VStack(spacing: Size.x8.rawValue) {
-            if model.messages.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: Size.x8.rawValue) {
-                        ForEach(suggestions, id: \.self) { suggestion in
-                            Button(suggestion) {
-                                model.send(suggestion)
-                            }
-                            .buttonStyle(.bordered)
-                            .font(.caption)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: Size.x8.rawValue) {
+                    ForEach(suggestions, id: \.self) { suggestion in
+                        Button(suggestion) {
+                            model.send(suggestion)
                         }
+                        .buttonStyle(.bordered)
+                        .font(.caption)
+                        .disabled(model.isResponding)
                     }
-                    .padding(.horizontal)
                 }
+                .padding(.horizontal)
             }
+            .accessibilityIdentifier("chatShortcuts")
 
             HStack(spacing: Size.x8.rawValue) {
                 TextField("Pergunte sobre suas contas", text: $text, axis: .vertical)

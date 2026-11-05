@@ -1081,6 +1081,34 @@
         }
       }
     },
+    "Como posso economizar?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How can I save money?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Cómo puedo ahorrar?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment économiser ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Come posso risparmiare?"
+          }
+        }
+      }
+    },
     "Consultar contas": {
       "localizations": {
         "en": {
@@ -2185,6 +2213,24 @@
             "state": "translated",
             "value": "Mais opções"
           }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más opciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus d’options"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altre opzioni"
+          }
         }
       }
     },
@@ -3262,6 +3308,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prossime scadenze"
+          }
+        }
+      }
+    },
+    "Qual conta vence primeiro?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which bill is due first?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué cuenta vence primero?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle facture arrive à échéance en premier ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quale bolletta scade per prima?"
           }
         }
       }
