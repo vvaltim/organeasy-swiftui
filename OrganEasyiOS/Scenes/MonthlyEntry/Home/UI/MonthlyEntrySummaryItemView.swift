@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MonthlyEntrySummaryItemView: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: Double
     let color: Color
 

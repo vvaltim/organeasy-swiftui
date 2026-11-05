@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "organeasyfinancas",
+    "public": "hosting/public",
+    "ignore": ["firebase.json", "**/.*"],
+    "cleanUrls": true,
+    "headers": [
+      {"source": "app-ads.txt", "headers": [{"key": "Content-Type", "value": "text/plain; charset=utf-8"}]}
+    ]
+  }
+}

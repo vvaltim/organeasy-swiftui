@@ -98,7 +98,7 @@ struct MonthlyEntryFormView: View {
                     if isAmountFocused {
                         textAmount = digits
                     } else {
-                        textAmount = amount.formatted(.currency(code: "BRL"))
+                        textAmount = amount.formatted(.currency(code: Locale.current.currency?.identifier ?? "BRL"))
                     }
                 }
             ))
@@ -110,12 +110,12 @@ struct MonthlyEntryFormView: View {
                     textAmount = digits == "0" ? "" : digits
                 } else {
                     amount = Double(amountInCents) / 100.0
-                    textAmount = amount.formatted(.currency(code: "BRL"))
+                    textAmount = amount.formatted(.currency(code: Locale.current.currency?.identifier ?? "BRL"))
                 }
             }
             .onAppear {
                 amountInCents = Int((amount * 100.0).rounded())
-                textAmount = amount.formatted(.currency(code: "BRL"))
+                textAmount = amount.formatted(.currency(code: Locale.current.currency?.identifier ?? "BRL"))
             }
             
             TextField("Descrição", text: $title)

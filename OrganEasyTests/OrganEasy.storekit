@@ -1,0 +1,82 @@
+{
+  "identifier": "6A2B8F10",
+  "nonRenewingSubscriptions": [],
+  "products": [],
+  "settings": {
+    "_failTransactionsEnabled": false,
+    "_locale": "pt_BR",
+    "_storefront": "BRA",
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [
+    {
+      "id": "21874170",
+      "localizations": [],
+      "name": "OrganEasy Sem Anuncios",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "49.90",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "6740100001",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Remove os anuncios por um ano",
+              "displayName": "Sem anuncios",
+              "locale": "pt_BR"
+            },
+            {
+              "description": "Removes ads for one year",
+              "displayName": "No ads",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "br.com.vanio.walter.app.noads.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Sem anuncios anual",
+          "subscriptionGroupID": "21874170",
+          "type": "RecurringSubscription"
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "49.90",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "6740100002",
+          "introductoryOffer": {
+            "displayPrice": "9.90",
+            "internalID": "6740100009",
+            "numberOfPeriods": 1,
+            "paymentMode": "payUpFront",
+            "subscriptionPeriod": "P1Y"
+          },
+          "localizations": [
+            {
+              "description": "Remove os anuncios por um ano",
+              "displayName": "Sem anuncios promo",
+              "locale": "pt_BR"
+            },
+            {
+              "description": "Removes ads for one year",
+              "displayName": "No ads",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "br.com.vanio.walter.app.noads.yearly.promo",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Sem anuncios anual promo",
+          "subscriptionGroupID": "21874170",
+          "type": "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
+}

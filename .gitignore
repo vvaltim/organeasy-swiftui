@@ -58,3 +58,7 @@ playground.xcworkspace
 
 # Logs
 *.log
+# Publicação
+*.ipa
+.firebase/
+firebase-debug.log

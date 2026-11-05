@@ -17,7 +17,7 @@ extension Date {
     
     func getDateFormatted(with format: DateFormatConstant) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "pt-BR") //Locale.current Depois ver como pegar automatico com a internalizacionation
+        formatter.locale = Locale.autoupdatingCurrent
         formatter.dateFormat = format.rawValue
 
         return formatter.string(from: self).capitalized
