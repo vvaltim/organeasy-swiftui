@@ -1,5 +1,6 @@
 import SwiftData
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct SummaryView: View {
 
@@ -17,6 +18,10 @@ struct SummaryView: View {
 
     @State private var promotionEnd: Date?
     @State private var isShowingRemoveAds = false
+    @State private var isShowingFilePicker = false
+    @State private var statement: Statement?
+    @State private var importFailure: LocalizedStringKey?
+    @State private var didOpenDebugFile = false
 
     // MARK: - Computed Variables
 
@@ -47,6 +52,18 @@ struct SummaryView: View {
             .navigationTitle("Minha IA")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                if !ShowcaseMode.isEnabled {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Menu {
+                            importButton
+                            ExportEntriesButton()
+                        } label: {
+                            Label("Importar ou exportar dados", systemImage: SummaryIcon.transfer.rawValue)
+                        }
+                        .accessibilityIdentifier("dataMenu")
+                    }
+                }
+
                 if !store.isAdsRemoved && !ShowcaseMode.isEnabled {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("Remover anúncios") {
@@ -65,6 +82,18 @@ struct SummaryView: View {
         .sheet(isPresented: $isShowingRemoveAds) {
             RemoveAdsView(promotionEnd: promotionEnd)
         }
+        .sheet(item: $statement) { statement in
+            StatementImportView(statement: statement)
+        }
+        .fileImporter(isPresented: $isShowingFilePicker, allowedContentTypes: [.data]) { result in
+            handlePickedFile(result)
+        }
+        .alert(
+            importFailure ?? "",
+            isPresented: Binding(get: { importFailure != nil }, set: { if !$0 { importFailure = nil } })
+        ) {
+            Button("OK", role: .cancel) {}
+        }
         .task {
             await store.load()
             await ads.prepare()
@@ -72,6 +101,23 @@ struct SummaryView: View {
         .task {
             await runPromotionClock()
         }
+        #if DEBUG
+        .task {
+            if !didOpenDebugFile, let path = ShowcaseMode.importFilePath {
+                didOpenDebugFile = true
+                handlePickedFile(.success(URL(filePath: path)))
+            }
+        }
+        #endif
+    }
+
+    private var importButton: some View {
+        Button {
+            isShowingFilePicker = true
+        } label: {
+            Label("Importar extrato", systemImage: SummaryIcon.importFile.rawValue)
+        }
+        .accessibilityIdentifier("importStatement")
     }
 
     // MARK: - Content
@@ -105,6 +151,10 @@ struct SummaryView: View {
                 Section {
                     SummaryAICardView(snapshot: snapshot, entries: entries)
                 }
+            }
+
+            if !ShowcaseMode.isEnabled {
+                SummarySavingsSection(entries: entries)
             }
 
             if !snapshot.upcoming.isEmpty {
@@ -167,10 +217,37 @@ struct SummaryView: View {
             Label("Sem dados ainda", systemImage: SummaryIcon.chartBar.rawValue)
         } description: {
             Text("Adicione seus lançamentos para ver o resumo do mês.")
+        } actions: {
+            importButton
+                .buttonStyle(.borderedProminent)
         }
     }
 
     // MARK: - Functions
+
+    private func handlePickedFile(_ result: Result<URL, Error>) {
+        guard case .success(let url) = result else {
+            importFailure = "Não foi possível abrir o arquivo."
+            return
+        }
+
+        let hasAccess = url.startAccessingSecurityScopedResource()
+        defer {
+            if hasAccess { url.stopAccessingSecurityScopedResource() }
+        }
+
+        do {
+            statement = try StatementParser.parse(Data(contentsOf: url))
+        } catch StatementError.tooLarge {
+            importFailure = "O arquivo é grande demais."
+        } catch StatementError.legacyExcel {
+            importFailure = "Este Excel é antigo (.xls). Salve como .xlsx ou baixe o extrato em OFX ou CSV."
+        } catch StatementError.noTransactions {
+            importFailure = "Nenhum lançamento encontrado. Tente o extrato em OFX ou CSV."
+        } catch {
+            importFailure = "Não foi possível ler o arquivo. Tente o extrato em OFX ou CSV."
+        }
+    }
 
     private func markAsPaid(_ entry: SummaryEntry) {
         guard let model = allEntries.first(where: { $0.id == entry.id }) else { return }

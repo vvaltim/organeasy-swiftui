@@ -90,11 +90,7 @@ struct MonthlyEntryListView: View {
                         Label("Aplicar recorrências", systemImage: Icon.calendarBadgePlus.rawValue)
                     }
                     
-                    Button {
-//                        insertRecurrences()
-                    } label: {
-                        Label("Exportar dados", systemImage: Icon.squareAndArrowUp.rawValue)
-                    }
+                    ExportEntriesButton()
                 }
             }
             .safeAreaInset(edge: .bottom) {

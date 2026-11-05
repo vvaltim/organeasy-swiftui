@@ -34,6 +34,8 @@ final class AdsCoordinator: ObservableObject {
         requiresPrivacyOptions = consent.privacyOptionsRequirementStatus == .required
 
         guard consent.canRequestAds else { return }
+        // Vale só para este app: a classificação da conta no AdMob não é alterada.
+        MobileAds.shared.requestConfiguration.maxAdContentRating = .parentalGuidance
         await MobileAds.shared.start()
         canShowAds = true
     }

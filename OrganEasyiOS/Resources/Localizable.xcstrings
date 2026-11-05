@@ -69,6 +69,34 @@
         }
       }
     },
+    "%@ está %@ acima da sua média. Veja o que mudou.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is %@ above your average. See what changed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ está %@ por encima de tu media. Mira qué cambió."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dépasse votre moyenne de %@. Regardez ce qui a changé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ è %@ sopra la tua media. Guarda cosa è cambiato."
+          }
+        }
+      }
+    },
     "%@ no primeiro ano": {
       "localizations": {
         "en": {
@@ -125,6 +153,34 @@
         }
       }
     },
+    "%@ se repete todo mês e custa %@ por ano. Veja se ainda vale a pena.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ repeats every month and costs %@ a year. See if it’s still worth it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ se repite cada mes y cuesta %@ al año. Mira si aún vale la pena."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ revient chaque mois et coûte %@ par an. Vérifiez si cela vaut encore la peine."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ si ripete ogni mese e costa %@ all’anno. Vedi se ne vale ancora la pena."
+          }
+        }
+      }
+    },
     "%@ é o maior gasto do mês, com %@.": {
       "localizations": {
         "en": {
@@ -155,6 +211,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ é o maior gasto do mês, com %2$@."
+          }
+        }
+      }
+    },
+    "%@: %lld compras somam %@ neste mês. Comprar menos vezes é o corte mais fácil.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld purchases add up to %@ this month. Buying less often is the easiest cut."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld compras suman %@ este mes. Comprar menos veces es el recorte más fácil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %lld achats totalisent %@ ce mois-ci. Acheter moins souvent est l’économie la plus simple."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld acquisti per un totale di %@ questo mese. Comprare meno spesso è il taglio più facile."
           }
         }
       }
@@ -699,30 +783,30 @@
         }
       }
     },
-    "Assista ao vídeo até o fim para liberar a IA.": {
+    "Assista ao vídeo até o fim para continuar.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Watch the video to the end to unlock the AI."
+            "value": "Watch the video to the end to continue."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mira el vídeo hasta el final para desbloquear la IA."
+            "value": "Mira el vídeo hasta el final para continuar."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regardez la vidéo jusqu’au bout pour débloquer l’IA."
+            "value": "Regardez la vidéo jusqu’au bout pour continuer."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Guarda il video fino alla fine per sbloccare l’IA."
+            "value": "Guarda il video fino alla fine per continuare."
           }
         }
       }
@@ -881,6 +965,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Categoria"
+          }
+        }
+      }
+    },
+    "Como economizar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How to save"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cómo ahorrar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment économiser"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Come risparmiare"
           }
         }
       }
@@ -1139,6 +1251,34 @@
         }
       }
     },
+    "E mais %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "And %lld more"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Y %lld más"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Et %lld de plus"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E altri %lld"
+          }
+        }
+      }
+    },
     "E mais ^[%lld conta](inflect: true)": {
       "localizations": {
         "en": {
@@ -1253,6 +1393,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Invia"
+          }
+        }
+      }
+    },
+    "Este Excel é antigo (.xls). Salve como .xlsx ou baixe o extrato em OFX ou CSV.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is an old Excel file (.xls). Save it as .xlsx or download the statement as OFX or CSV."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este Excel es antiguo (.xls). Guárdalo como .xlsx o descarga el extracto en OFX o CSV."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce fichier Excel est ancien (.xls). Enregistrez-le en .xlsx ou téléchargez le relevé en OFX ou CSV."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo file Excel è vecchio (.xls). Salvalo come .xlsx o scarica l’estratto conto in OFX o CSV."
           }
         }
       }
@@ -1437,6 +1605,34 @@
         }
       }
     },
+    "Formato": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formato"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formato"
+          }
+        }
+      }
+    },
     "Home": {
       "localizations": {
         "en": {
@@ -1471,6 +1667,90 @@
         }
       }
     },
+    "Importar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa"
+          }
+        }
+      }
+    },
+    "Importar extrato": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import statement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar extracto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer un relevé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa estratto conto"
+          }
+        }
+      }
+    },
+    "Importar ou exportar dados": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import or export data"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar o exportar datos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer ou exporter les données"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa o esporta i dati"
+          }
+        }
+      }
+    },
     "Internet": {
       "localizations": {
         "en": {
@@ -1499,6 +1779,62 @@
         }
       }
     },
+    "Inverter entradas e saídas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swap income and expenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invertir ingresos y gastos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inverser entrées et sorties"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inverti entrate e uscite"
+          }
+        }
+      }
+    },
+    "Já existentes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already added"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya existentes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà présentes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già presenti"
+          }
+        }
+      }
+    },
     "Já pago": {
       "localizations": {
         "en": {
@@ -1523,6 +1859,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pagato"
+          }
+        }
+      }
+    },
+    "Lançamentos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entries"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimientos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opérations"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimenti"
           }
         }
       }
@@ -1836,6 +2200,34 @@
         }
       }
     },
+    "Nenhum lançamento encontrado. Tente o extrato em OFX ou CSV.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No entries found. Try the statement as OFX or CSV."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontraron movimientos. Prueba el extracto en OFX o CSV."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune opération trouvée. Essayez le relevé en OFX ou CSV."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun movimento trovato. Prova l’estratto conto in OFX o CSV."
+          }
+        }
+      }
+    },
     "Nenhuma assinatura encontrada.": {
       "localizations": {
         "en": {
@@ -2022,6 +2414,34 @@
         }
       }
     },
+    "Novos lançamentos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New entries"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimientos nuevos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelles opérations"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuovi movimenti"
+          }
+        }
+      }
+    },
     "Não consegui analisar agora. Tente novamente.": {
       "localizations": {
         "en": {
@@ -2078,6 +2498,34 @@
         }
       }
     },
+    "Não foi possível abrir o arquivo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t open the file."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo abrir el archivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’ouvrir le fichier."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile aprire il file."
+          }
+        }
+      }
+    },
     "Não foi possível concluir a compra.": {
       "localizations": {
         "en": {
@@ -2106,6 +2554,34 @@
         }
       }
     },
+    "Não foi possível ler o arquivo. Tente o extrato em OFX ou CSV.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t read the file. Try the statement as OFX or CSV."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer el archivo. Prueba el extracto en OFX o CSV."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire le fichier. Essayez le relevé en OFX ou CSV."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere il file. Prova l’estratto conto in OFX o CSV."
+          }
+        }
+      }
+    },
     "Não foi possível restaurar as compras.": {
       "localizations": {
         "en": {
@@ -2130,6 +2606,90 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossibile ripristinare gli acquisti."
+          }
+        }
+      }
+    },
+    "Não foi possível salvar os lançamentos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t save the entries."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudieron guardar los movimientos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’enregistrer les opérations."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile salvare i movimenti."
+          }
+        }
+      }
+    },
+    "O arquivo é grande demais.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file is too large."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El archivo es demasiado grande."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fichier est trop volumineux."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il file è troppo grande."
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
           }
         }
       }
@@ -2192,6 +2752,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pagamento"
+          }
+        }
+      }
+    },
+    "Para fechar o mês no azul, faltam %@ em cortes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To end the month in the black, you need to cut %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para cerrar el mes en positivo, debes recortar %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour finir le mois dans le vert, il faut réduire de %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per chiudere il mese in positivo, devi tagliare %@."
           }
         }
       }
@@ -2558,6 +3146,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recorrências"
+          }
+        }
+      }
+    },
+    "Reduzir %@ em um décimo economiza %@ por mês.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cutting %@ by a tenth saves %@ a month."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reducir %@ en una décima parte ahorra %@ al mes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réduire %@ d’un dixième permet d’économiser %@ par mois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ridurre %@ di un decimo fa risparmiare %@ al mese."
           }
         }
       }
@@ -3176,6 +3792,34 @@
         }
       }
     },
+    "Um vídeo curto libera estes recursos por 30 minutos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A short video unlocks these features for 30 minutes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un vídeo corto desbloquea estas funciones durante 30 minutos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une courte vidéo débloque ces fonctions pendant 30 minutes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un breve video sblocca queste funzioni per 30 minuti."
+          }
+        }
+      }
+    },
     "Unmark": {
       "localizations": {
         "en": {
@@ -3206,6 +3850,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desmarcar"
+          }
+        }
+      }
+    },
+    "Use se os gastos aparecerem como entradas. Tudo entra como pago, na data do extrato.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use this if expenses show up as income. Everything is added as paid, on the statement date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Úsalo si los gastos aparecen como ingresos. Todo se añade como pagado, en la fecha del extracto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À utiliser si les dépenses apparaissent comme des entrées. Tout est ajouté comme payé, à la date du relevé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usalo se le spese appaiono come entrate. Tutto viene aggiunto come pagato, alla data dell’estratto conto."
           }
         }
       }
@@ -3390,30 +4062,30 @@
         }
       }
     },
-    "Ver um vídeo e liberar": {
+    "Ver sugestões": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Watch a video to unlock"
+            "value": "See suggestions"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ver un vídeo y desbloquear"
+            "value": "Ver sugerencias"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regarder une vidéo pour débloquer"
+            "value": "Voir les suggestions"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Guarda un video per sbloccare"
+            "value": "Vedi suggerimenti"
           }
         }
       }

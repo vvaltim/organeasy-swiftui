@@ -118,12 +118,86 @@ final class StoreCaptureTests: XCTestCase {
         app.navigationBars.buttons.firstMatch.tap()
         pause(1.5)
 
-        let unlock = app.buttons["unlockAI"]
-        XCTAssertTrue(unlock.waitForExistence(timeout: 5))
-        unlock.tap()
+        // O botão é o mesmo de quem não vê anúncios: o vídeo vem antes de navegar.
+        let chat = app.buttons["openChat"]
+        XCTAssertTrue(chat.waitForExistence(timeout: 5))
+        chat.tap()
         pause(8)
         capture("ads_3_video")
         pause(32)
         capture("ads_4_video_fim")
+        closeRewardedAd()
+        pause(2)
+        capture("ads_5_chat_apos_video")
+    }
+
+    /// Importa um extrato de exemplo e abre as sugestões de economia.
+    func testStatementImportAndSavings() throws {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        let today = formatter.string(from: .now)
+        let lastMonth = formatter.string(from: Calendar.current.date(byAdding: .month, value: -1, to: .now)!)
+        let csv = """
+        Conta ;12345
+        Saldo ;1.000,00
+
+        Data;Descrição;Valor;Saldo
+        \(today);Mercado;-890,50;100,00
+        \(today);Lanche;-30,00;70,00
+        \(today);Lanche;-30,00;40,00
+        \(today);Lanche;-30,00;10,00
+        \(today);Lanche;-30,00;0,00
+        \(today);Salário;5.000,00;5.000,00
+        \(lastMonth);Mercado;-500,00;500,00
+        """
+        let url = FileManager.default.temporaryDirectory.appending(path: "extrato.csv")
+        try csv.write(to: url, atomically: true, encoding: .utf8)
+
+        launch(["-forceAICard", "-importFile", url.path(percentEncoded: false)])
+        aiTab.tap()
+
+        let confirm = app.buttons["confirmImport"]
+        XCTAssertTrue(confirm.waitForExistence(timeout: 15))
+        pause(1)
+        capture("import_1_revisao")
+        confirm.tap()
+        pause(3)
+        capture("import_2_minha_ia")
+
+        let savings = app.buttons["savingsButton"]
+        for _ in 0..<4 where !savings.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(savings.waitForExistence(timeout: 5))
+        capture("import_3_botao")
+        savings.tap()
+        pause(40)
+        closeRewardedAd()
+        pause(2)
+        capture("import_4_sugestoes")
+    }
+
+    /// O botão da Home precisa abrir o compartilhamento com o arquivo.
+    func testExportOpensShareSheet() {
+        launch(["-showcase"])
+        pause(2)
+        let export = app.buttons["Exportar dados"].firstMatch
+        if !export.waitForExistence(timeout: 3) {
+            app.navigationBars.buttons.element(boundBy: app.navigationBars.buttons.count - 1).tap()
+            pause(1)
+        }
+        XCTAssertTrue(export.waitForExistence(timeout: 5))
+        export.tap()
+        pause(3)
+        capture("export_share")
+        XCTAssertTrue(app.otherElements["ActivityListView"].exists || app.collectionViews.count > 0)
+    }
+
+    private func closeRewardedAd() {
+        for name in ["Close", "Close Ad", "Fechar", "Fechar anúncio"] where app.buttons[name].exists {
+            app.buttons[name].tap()
+            return
+        }
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.93, dy: 0.08)).tap()
     }
 }

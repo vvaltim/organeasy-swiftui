@@ -20,6 +20,19 @@ final class SummaryAIAccess: ObservableObject {
         return unlockedUntil > .now
     }
 
+    /// Com acesso, age na hora. Sem acesso, o vídeo vem antes da mesma ação.
+    func perform(hasAccess: Bool, action: @escaping @MainActor () -> Void) {
+        guard !hasAccess else {
+            action()
+            return
+        }
+
+        Task {
+            await watchVideo()
+            if isUnlocked { action() }
+        }
+    }
+
     func watchVideo() async {
         guard !isLoadingVideo else { return }
         isLoadingVideo = true

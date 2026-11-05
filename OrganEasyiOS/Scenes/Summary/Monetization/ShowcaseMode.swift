@@ -19,6 +19,15 @@ enum ShowcaseMode {
         #endif
     }
 
+    /// Abre um extrato direto na revisão, porque o seletor de arquivos não é automatizável.
+    static var importFilePath: String? {
+        #if DEBUG
+        UserDefaults.standard.string(forKey: "importFile")
+        #else
+        nil
+        #endif
+    }
+
     /// Reinicia o prazo da promoção nos testes automatizados.
     static var resetsPromotion: Bool {
         #if DEBUG

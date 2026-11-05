@@ -27,11 +27,7 @@ struct SummaryAICardView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
-            if hasAccess {
-                unlockedActions
-            } else {
-                unlockButton
-            }
+            actions
 
             if isAnalyzing {
                 ProgressView()
@@ -52,46 +48,32 @@ struct SummaryAICardView: View {
 
     // MARK: - Actions
 
-    private var unlockButton: some View {
+    private var actions: some View {
         VStack(alignment: .leading, spacing: Size.x8.rawValue) {
-            Button {
-                Task { await access.watchVideo() }
-            } label: {
-                Text("Ver um vídeo e liberar")
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .disabled(access.isLoadingVideo)
-            .accessibilityIdentifier("unlockAI")
+            HStack(spacing: Size.x8.rawValue) {
+                Button {
+                    access.perform(hasAccess: hasAccess) { analyze() }
+                } label: {
+                    Text("Analisar meu mês")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .disabled(isAnalyzing || access.isLoadingVideo)
+                .accessibilityIdentifier("analyzeMonth")
 
-            if access.wasVideoDismissed {
-                Text("Assista ao vídeo até o fim para liberar a IA.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                Button {
+                    access.perform(hasAccess: hasAccess) { isChatOpen = true }
+                } label: {
+                    Text("Conversar")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(access.isLoadingVideo)
+                .accessibilityIdentifier("openChat")
             }
-        }
-    }
 
-    private var unlockedActions: some View {
-        HStack(spacing: Size.x8.rawValue) {
-            Button(action: analyze) {
-                Text("Analisar meu mês")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.bordered)
-            .disabled(isAnalyzing)
-            .accessibilityIdentifier("analyzeMonth")
-
-            Button {
-                isChatOpen = true
-            } label: {
-                Text("Conversar")
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .accessibilityIdentifier("openChat")
+            SummaryVideoNotice(hasAccess: hasAccess)
         }
     }
 
