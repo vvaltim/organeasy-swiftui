@@ -62,3 +62,4 @@ playground.xcworkspace
 *.ipa
 .firebase/
 firebase-debug.log
+__pycache__/
