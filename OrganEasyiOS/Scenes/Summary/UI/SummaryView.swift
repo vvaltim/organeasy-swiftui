@@ -21,7 +21,7 @@ struct SummaryView: View {
     }
 
     private var isPromotionVisible: Bool {
-        guard let promotionEnd, !store.isAdsRemoved, !ShowcaseMode.isEnabled else { return false }
+        guard let promotionEnd, !store.isAdsRemoved, !ads.adsUnavailableHere, !ShowcaseMode.isEnabled else { return false }
         return promotionEnd > .now
     }
 
@@ -53,7 +53,7 @@ struct SummaryView: View {
                     }
                 }
 
-                if !store.isAdsRemoved && !ShowcaseMode.isEnabled {
+                if !store.isAdsRemoved && !ads.adsUnavailableHere && !ShowcaseMode.isEnabled {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("Remover anúncios") {
                             isShowingRemoveAds = true

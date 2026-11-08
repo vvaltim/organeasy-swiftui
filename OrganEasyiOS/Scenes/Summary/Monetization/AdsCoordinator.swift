@@ -4,12 +4,22 @@ import SwiftUI
 import UIKit
 import UserMessagingPlatform
 
+/// Ads run only outside Europe. In the EEA, the UK and Switzerland the app
+/// shows no ads and no consent form. The app does not track users, so there is
+/// no ATT prompt, and every ad request is non-personalized.
 @MainActor
 final class AdsCoordinator: ObservableObject {
     static let shared = AdsCoordinator()
 
+    private static let europeanRegions: Set<String> = [
+        "AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB",
+        "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO",
+        "PL", "PT", "RO", "SE", "SI", "SK",
+    ]
+
     @Published private(set) var canShowAds = false
-    @Published private(set) var requiresPrivacyOptions = false
+    /// True in Europe, where the app has no ads and nothing to remove.
+    @Published private(set) var adsUnavailableHere = false
 
     private var didPrepare = false
     private var rewardedPresenter: RewardedPresenter?
@@ -18,28 +28,30 @@ final class AdsCoordinator: ObservableObject {
         guard !didPrepare, !ShowcaseMode.isEnabled else { return }
         didPrepare = true
 
-        let consent = ConsentInformation.shared
-        do {
-            try await consent.requestConsentInfoUpdate(with: nil)
-            if let controller = UIApplication.shared.topViewController {
-                try await ConsentForm.loadAndPresentIfRequired(from: controller)
-            }
-        } catch {
-            print("Failed to update ad consent: \(error)")
+        if await Self.isInEurope() {
+            adsUnavailableHere = true
+            return
         }
 
-        requiresPrivacyOptions = consent.privacyOptionsRequirementStatus == .required
-
-        guard consent.canRequestAds else { return }
         MobileAds.shared.requestConfiguration.maxAdContentRating = .parentalGuidance
         await MobileAds.shared.start()
         canShowAds = true
     }
 
-    func showPrivacyOptions() async {
-        guard let controller = UIApplication.shared.topViewController else { return }
-        try? await ConsentForm.presentPrivacyOptionsForm(from: controller)
-        canShowAds = ConsentInformation.shared.canRequestAds
+    /// Uses the device region and Google's location check. The form is never shown.
+    private static func isInEurope() async -> Bool {
+        if let region = Locale.current.region?.identifier.uppercased(),
+           europeanRegions.contains(region) {
+            return true
+        }
+        let consent = ConsentInformation.shared
+        do {
+            try await consent.requestConsentInfoUpdate(with: nil)
+        } catch {
+            print("Failed to check ad region: \(error)")
+            return false
+        }
+        return consent.consentStatus == .required || consent.consentStatus == .obtained
     }
 
     func presentRewarded() async -> RewardedOutcome {

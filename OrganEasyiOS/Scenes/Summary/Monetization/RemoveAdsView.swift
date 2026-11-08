@@ -6,7 +6,6 @@ struct RemoveAdsView: View {
 
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var store = PurchaseStore.shared
-    @ObservedObject private var ads = AdsCoordinator.shared
 
     @State private var isWorking = false
     @State private var message: LocalizedStringKey?
@@ -55,12 +54,6 @@ struct RemoveAdsView: View {
                 Section {
                     Button("Restaurar compras", action: restore)
                         .disabled(isWorking)
-
-                    if ads.requiresPrivacyOptions {
-                        Button("Privacidade dos anúncios") {
-                            Task { await ads.showPrivacyOptions() }
-                        }
-                    }
 
                     Link("Termos de uso", destination: LegalURL.terms)
                     Link("Política de privacidade", destination: LegalURL.privacy)
