@@ -2159,6 +2159,34 @@
         }
       }
     },
+    "Em alta hoje": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Up today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En alza hoy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En hausse aujourd’hui"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In rialzo oggi"
+          }
+        }
+      }
+    },
     "Em queda": {
       "localizations": {
         "en": {
@@ -3237,6 +3265,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Movimenti"
+          }
+        }
+      }
+    },
+    "Limpar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borrar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Effacer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancella"
           }
         }
       }
@@ -5312,6 +5368,34 @@
     "ROE": {
       "shouldTranslate": false
     },
+    "ROE acima de 15%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ROE above 15%"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ROE superior al 15%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ROE supérieur à 15 %"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ROE sopra il 15%"
+          }
+        }
+      }
+    },
     "ROE mínimo: %lld%%": {
       "localizations": {
         "en": {
@@ -6267,6 +6351,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Solo titoli in rialzo oggi"
+          }
+        }
+      }
+    },
+    "Só com lucro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profitable only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo con beneficios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rentables seulement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo in utile"
           }
         }
       }

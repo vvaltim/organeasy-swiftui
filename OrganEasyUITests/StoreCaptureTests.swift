@@ -102,6 +102,37 @@ final class StoreCaptureTests: XCTestCase {
         pause(9)
     }
 
+    /// Telas de Investimentos para a loja: perfil, ranking grátis e fundamentos.
+    func testInvestmentScreens() {
+        launch(["-showcase"])
+        let investments = app.buttons.matching(NSPredicate(format: "label IN %@", ["Investimentos", "Investments", "Inversiones", "Investissements", "Investimenti"])).firstMatch
+        investments.tap()
+        pause(1)
+        app.buttons["onboardingStart"].tap()
+        pause(1)
+        app.buttons["risk_moderate"].tap()
+        pause(1)
+        capture("8_perfil")
+        app.buttons["onboardingRiskContinue"].tap()
+        pause(1)
+        app.buttons["sector_finance"].tap()
+        app.buttons["onboardingFinish"].tap()
+        XCTAssertTrue(app.buttons["assetRow"].firstMatch.waitForExistence(timeout: 40), "ranking sem dados")
+        pause(4)
+        capture("6_invest")
+
+        app.terminate()
+        launch(["-showcase", "-forcePremium"])
+        investments.tap()
+        XCTAssertTrue(app.buttons["assetRow"].firstMatch.waitForExistence(timeout: 40))
+        pause(2)
+        app.buttons["assetRow"].firstMatch.tap()
+        pause(2)
+        app.swipeUp()
+        pause(1.5)
+        capture("7_detalhe")
+    }
+
     /// Fluxo do usuário grátis com anúncios de teste do Google.
     func testFreeUserFlowWithTestAds() {
         launch(["-forceAICard", "-resetPromotion"])

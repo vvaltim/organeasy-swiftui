@@ -71,6 +71,7 @@ struct InvestmentListView: View {
                     heroCard
                     indicatorsRow
                     sectorSelector
+                    filterBar
 
                     switch model.state {
                     case .loading:
@@ -228,6 +229,80 @@ struct InvestmentListView: View {
             }
         }
         .scrollClipDisabled()
+    }
+
+    // MARK: - Filtros
+
+    /// Visível para todos; no plano grátis cada chip leva à assinatura.
+    private var filterBar: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: Size.x8.rawValue) {
+                if store.isPremium {
+                    Menu {
+                        Picker("Ordenar por", selection: $filters.sort) {
+                            ForEach(InvestmentFilters.Sort.allCases) { sort in
+                                Text(sort.title).tag(sort)
+                            }
+                        }
+                    } label: {
+                        filterChip(icon: "arrow.up.arrow.down", isOn: filters.sort != .score) {
+                            Text(filters.sort.title)
+                        }
+                    }
+                    .accessibilityIdentifier("sortMenu")
+                } else {
+                    Button { openPaywall(.filters) } label: {
+                        filterChip(icon: "arrow.up.arrow.down", isOn: false) {
+                            Text("Ordenar por")
+                        }
+                    }
+                    .accessibilityIdentifier("sortMenu")
+                }
+
+                toggleChip("Só com lucro", icon: "checkmark.seal", isOn: filters.onlyProfitable) {
+                    filters.onlyProfitable.toggle()
+                }
+                toggleChip("Em alta hoje", icon: "arrow.up.right", isOn: filters.onlyRising) {
+                    filters.onlyRising.toggle()
+                }
+                toggleChip("ROE acima de 15%", icon: "percent", isOn: filters.minimumROE >= 15) {
+                    filters.minimumROE = filters.minimumROE >= 15 ? .zero : 15
+                }
+
+                if store.isPremium && filters.isActive {
+                    Button("Limpar") { filters = InvestmentFilters() }
+                        .font(.footnote)
+                }
+            }
+        }
+        .scrollClipDisabled()
+        .onChange(of: filters) { _, value in
+            InvestmentEvent.filterChanged(value.sort.rawValue).log()
+        }
+    }
+
+    private func toggleChip(_ title: LocalizedStringKey, icon: String, isOn: Bool, action: @escaping () -> Void) -> some View {
+        Button {
+            store.isPremium ? withAnimation { action() } : openPaywall(.filters)
+        } label: {
+            filterChip(icon: icon, isOn: isOn) { Text(title) }
+        }
+        .accessibilityIdentifier("filterChip")
+    }
+
+    private func filterChip<Content: View>(icon: String, isOn: Bool, @ViewBuilder title: () -> Content) -> some View {
+        HStack(spacing: Size.x4.rawValue) {
+            Image(systemName: store.isPremium ? icon : "lock.fill")
+                .font(.caption2)
+            title()
+                .font(.footnote)
+                .fontWeight(.medium)
+        }
+        .padding(.horizontal, Size.x12.rawValue)
+        .padding(.vertical, Size.x8.rawValue)
+        .foregroundStyle(isOn ? .white : (store.isPremium ? .primary : .secondary))
+        .background(isOn ? Color.blue : Color(.secondarySystemGroupedBackground), in: Capsule())
+        .overlay { Capsule().stroke(Color(.separator).opacity(isOn ? 0 : 0.6), lineWidth: 1) }
     }
 
     // MARK: - Lista
