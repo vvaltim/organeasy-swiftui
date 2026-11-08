@@ -1,6 +1,5 @@
 import Foundation
 
-/// Lançamento lido de um extrato. O valor é sempre positivo; `type` diz se entrou ou saiu.
 struct StatementTransaction: Equatable, Sendable {
     let date: Date
     let name: String
@@ -24,8 +23,6 @@ enum StatementError: Error, Equatable {
     case noTransactions
 }
 
-/// Lê OFX/QFX, CSV/TXT, Excel (.xlsx) e tabelas HTML salvas como .xls.
-/// As colunas são achadas pelo nome, porque cada banco usa um layout e o muda sem aviso.
 enum StatementParser {
     static let maxFileSize = 20 * 1024 * 1024
 
@@ -53,8 +50,6 @@ enum StatementParser {
         return statement
     }
 
-    // MARK: - Texto
-
     static func decode(_ data: Data) -> String {
         if data.starts(with: [0xFF, 0xFE]), let text = String(data: data, encoding: .utf16LittleEndian) {
             return text.replacingOccurrences(of: "\u{FEFF}", with: "")
@@ -62,14 +57,11 @@ enum StatementParser {
         if data.starts(with: [0xFE, 0xFF]), let text = String(data: data, encoding: .utf16BigEndian) {
             return text.replacingOccurrences(of: "\u{FEFF}", with: "")
         }
-        // Bancos brasileiros ainda geram muito arquivo em Windows-1252.
         let text = String(data: data, encoding: .utf8)
             ?? String(data: data, encoding: .windowsCP1252)
             ?? String(decoding: data, as: UTF8.self)
         return text.replacingOccurrences(of: "\u{FEFF}", with: "")
     }
-
-    // MARK: - OFX
 
     private static func parseOFX(_ text: String) -> [StatementTransaction] {
         let blocks = text
@@ -101,8 +93,6 @@ enum StatementParser {
         return value.isEmpty ? nil : value
     }
 
-    // MARK: - HTML
-
     private static func parseHTMLTable(_ text: String) -> [[String]] {
         matches(of: "<tr[^>]*>(.*?)</tr>", in: text).map { row in
             matches(of: "<t[dh][^>]*>(.*?)</t[dh]>", in: row).map { cell in
@@ -126,8 +116,6 @@ enum StatementParser {
         [("&nbsp;", " "), ("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"), ("&quot;", "\""), ("&#39;", "'")]
             .reduce(text) { $0.replacingOccurrences(of: $1.0, with: $1.1, options: .caseInsensitive) }
     }
-
-    // MARK: - CSV
 
     static func parseDelimited(_ text: String) -> [[String]] {
         let delimiter = detectDelimiter(in: text)
@@ -173,7 +161,6 @@ enum StatementParser {
         return rows
     }
 
-    /// `;` vem primeiro porque, com vírgula decimal, a vírgula não é separador.
     private static func detectDelimiter(in text: String) -> Character {
         let sample = text.split(whereSeparator: \.isNewline).prefix(30)
         guard !sample.isEmpty else { return "," }
@@ -186,8 +173,6 @@ enum StatementParser {
         let pipes = sample.reduce(0) { $0 + $1.filter { $0 == "|" }.count }
         return pipes > commas ? "|" : ","
     }
-
-    // MARK: - Colunas
 
     private struct Columns {
         var date: Int
@@ -264,10 +249,7 @@ enum StatementParser {
         )
     }
 
-    // MARK: - Linhas
-
     static func transactions(fromRows rows: [[String]]) -> [StatementTransaction] {
-        // Vários bancos põem conta, período e saldo antes da tabela.
         for (index, row) in rows.prefix(40).enumerated() {
             if let columns = detectColumns(in: row) {
                 return transactions(from: rows.dropFirst(index + 1), columns: columns)
@@ -314,7 +296,6 @@ enum StatementParser {
 
         if isSingleColumn && (columns.isCard || looksLikeCard) {
             return parsed.compactMap { item in
-                // Na fatura, compra é positiva e o pagamento da fatura não é gasto novo.
                 if item.amount < .zero, normalized(item.name).contains("pagamento") { return nil }
                 return makeTransaction(date: item.date, name: item.name, signedAmount: -item.amount)
             }
@@ -322,7 +303,6 @@ enum StatementParser {
         return parsed.map { makeTransaction(date: $0.date, name: $0.name, signedAmount: $0.amount) }
     }
 
-    /// Para arquivos sem cabeçalho, como `25/10/2026;PIX ENVIADO;-50,00`.
     private static func headerlessTransactions(from rows: [[String]]) -> [StatementTransaction] {
         rows.compactMap { row in
             let cells = row.filter { !$0.isEmpty }
@@ -353,9 +333,6 @@ enum StatementParser {
         )
     }
 
-    // MARK: - Valores
-
-    /// Aceita `R$ 1.234,56`, `1,234.56`, `-12,34`, `12,34-`, `(12,34)` e `12,34 D`.
     static func parseAmount(_ raw: String) -> Double? {
         var text = raw
             .replacingOccurrences(of: "\u{2212}", with: "-")
@@ -413,7 +390,6 @@ enum StatementParser {
         return isNegative ? -value : value
     }
 
-    /// Dia, mês e ano vêm nessa ordem nos bancos brasileiros. Sem data válida, a linha é ignorada.
     static func parseDate(_ raw: String) -> Date? {
         let text = raw.trimmingCharacters(in: .whitespaces)
         guard !text.isEmpty else { return nil }
@@ -441,7 +417,6 @@ enum StatementParser {
         return makeDate(year: year, month: parts[1], day: parts[0])
     }
 
-    /// Meio-dia evita que o fuso mude o dia do lançamento.
     private static func makeDate(year: Int, month: Int, day: Int) -> Date? {
         var components = DateComponents(year: year, month: month, day: day, hour: 12)
         let calendar = Calendar(identifier: .gregorian)

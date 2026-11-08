@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// Primeira entrada abre o onboarding; depois, a lista do perfil escolhido.
 struct InvestmentsView: View {
     @ObservedObject private var profile = InvestorProfileStore.shared
 

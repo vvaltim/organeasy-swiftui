@@ -1,7 +1,5 @@
 import Foundation
 
-/// Reúne os dados públicos. Fundamentos e Tesouro vêm de arquivos gerados por
-/// `tool/build_fundamentals.py`, porque as fontes originais são pesadas para o celular.
 actor MarketDataService {
     enum ServiceError: Error {
         case unavailable
@@ -85,7 +83,6 @@ actor MarketDataService {
         return components.url!
     }
 
-    /// Sem fundamentos a lista ainda funciona, só com menos dados.
     private func loadFundamentals() async throws -> [String: AssetFundamentals] {
         if let fundamentals { return fundamentals }
         guard let data = try? await data(Source.fundamentals) else { return [:] }
@@ -107,8 +104,6 @@ actor MarketDataService {
         return data
     }
 }
-
-// MARK: - Leitura das respostas
 
 nonisolated enum MarketParser {
     private struct MarketResponse: Decodable {
@@ -155,7 +150,6 @@ nonisolated enum MarketParser {
 
     static func market(from data: Data, kind: AssetKind) throws -> [InvestmentAsset] {
         try JSONDecoder().decode(MarketResponse.self, from: data).stocks
-            // Fracionário repete a mesma empresa.
             .filter { !$0.stock.hasSuffix("F") }
             .map { item in
                 InvestmentAsset(

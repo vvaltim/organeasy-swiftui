@@ -103,8 +103,6 @@ final class LegacyDataImporterTests: XCTestCase {
         XCTAssertFalse(defaults.bool(forKey: LegacyDataImporter.completedKey))
     }
 
-    // MARK: - Banco antigo
-
     private func insertTransaction(id: UUID?, name: String, amount: Double, due: Date, paid: Date?, income: Bool) {
         let object = NSEntityDescription.insertNewObject(forEntityName: "Transaction", into: legacy.viewContext)
         object.setValue(id, forKey: "id")
@@ -121,7 +119,6 @@ final class LegacyDataImporterTests: XCTestCase {
         object.setValue(due, forKey: "dueDate")
     }
 
-    /// Mesmas entidades do modelo da versão 1.x que o importador lê.
     private static let legacyModel: NSManagedObjectModel = {
         func attribute(_ name: String, _ type: NSAttributeType) -> NSAttributeDescription {
             let attribute = NSAttributeDescription()

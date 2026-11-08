@@ -1,7 +1,6 @@
 import StoreKit
 import SwiftUI
 
-/// Tela de assinatura. Mostra preço, período e renovação antes da compra, como a Apple exige.
 struct RemoveAdsView: View {
     let promotionEnd: Date?
 
@@ -91,8 +90,6 @@ struct RemoveAdsView: View {
         }
     }
 
-    // MARK: - Price
-
     @ViewBuilder
     private var priceView: some View {
         if let product {
@@ -147,8 +144,6 @@ struct RemoveAdsView: View {
         }
         return Text("A assinatura renova automaticamente por \(product.displayPrice) ao ano, até ser cancelada nos Ajustes com pelo menos 24 horas de antecedência.")
     }
-
-    // MARK: - Functions
 
     private func purchase() {
         guard let product else { return }

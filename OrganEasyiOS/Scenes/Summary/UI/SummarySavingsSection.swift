@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// Avisa, sem mudar os botões, que um vídeo vem antes de usar os recursos da IA.
 struct SummaryVideoNotice: View {
     let hasAccess: Bool
 

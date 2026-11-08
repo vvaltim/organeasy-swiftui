@@ -1,6 +1,5 @@
 import XCTest
 
-/// Percorre o app de verdade no simulador. Gera as capturas da loja e o roteiro do vídeo.
 final class StoreCaptureTests: XCTestCase {
     private var app: XCUIApplication!
 
@@ -102,7 +101,6 @@ final class StoreCaptureTests: XCTestCase {
         pause(9)
     }
 
-    /// Telas de Investimentos para a loja: perfil, ranking grátis e fundamentos.
     func testInvestmentScreens() {
         launch(["-showcase"])
         let investments = app.buttons.matching(NSPredicate(format: "label IN %@", ["Investimentos", "Investments", "Inversiones", "Investissements", "Investimenti"])).firstMatch
@@ -133,7 +131,6 @@ final class StoreCaptureTests: XCTestCase {
         capture("7_detalhe")
     }
 
-    /// Fluxo do usuário grátis com anúncios de teste do Google.
     func testFreeUserFlowWithTestAds() {
         launch(["-forceAICard", "-resetPromotion"])
         pause(2)
@@ -149,7 +146,6 @@ final class StoreCaptureTests: XCTestCase {
         app.navigationBars.buttons.firstMatch.tap()
         pause(1.5)
 
-        // O botão é o mesmo de quem não vê anúncios: o vídeo vem antes de navegar.
         let chat = app.buttons["openChat"]
         XCTAssertTrue(chat.waitForExistence(timeout: 5))
         chat.tap()
@@ -162,7 +158,6 @@ final class StoreCaptureTests: XCTestCase {
         capture("ads_5_chat_apos_video")
     }
 
-    /// Importa um extrato de exemplo e abre as sugestões de economia.
     func testStatementImportAndSavings() throws {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
@@ -208,7 +203,6 @@ final class StoreCaptureTests: XCTestCase {
         capture("import_4_sugestoes")
     }
 
-    /// O botão da Home precisa abrir o compartilhamento com o arquivo.
     func testExportOpensShareSheet() {
         launch(["-showcase"])
         pause(2)

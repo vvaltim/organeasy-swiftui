@@ -1,4 +1,3 @@
-"""Ficha da App Store nos 5 idiomas. Valida os limites da Apple e grava publicacao/FICHA_APP_STORE.txt."""
 import json
 import os
 

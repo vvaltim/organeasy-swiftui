@@ -1,7 +1,6 @@
 #if DEBUG
 import Foundation
 
-/// Respostas de exemplo do modo vitrine, usadas só quando o simulador não tem o modelo de IA.
 enum SummarySampleReplies {
     static var isActive: Bool {
         (ShowcaseMode.isEnabled || ShowcaseMode.forcesAICard) && !SummaryAssistantAvailability.isModelReady

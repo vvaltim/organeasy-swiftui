@@ -1,8 +1,6 @@
 import Foundation
 import Security
 
-/// Guarda quando o usuário abriu o Resumo pela primeira vez. Fica no Keychain,
-/// que sobrevive à reinstalação, para o prazo de 24 horas ser único e real.
 enum PromotionClock {
     static let duration: TimeInterval = 24 * 60 * 60
 

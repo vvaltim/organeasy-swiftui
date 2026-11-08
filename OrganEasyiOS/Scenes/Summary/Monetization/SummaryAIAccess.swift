@@ -1,7 +1,6 @@
 import Combine
 import Foundation
 
-/// Um vídeo premiado libera a IA por 30 minutos. Assinantes têm acesso direto.
 @MainActor
 final class SummaryAIAccess: ObservableObject {
     static let shared = SummaryAIAccess()
@@ -20,7 +19,6 @@ final class SummaryAIAccess: ObservableObject {
         return unlockedUntil > .now
     }
 
-    /// Com acesso, age na hora. Sem acesso, o vídeo vem antes da mesma ação.
     func perform(hasAccess: Bool, action: @escaping @MainActor () -> Void) {
         guard !hasAccess else {
             action()
@@ -41,7 +39,6 @@ final class SummaryAIAccess: ObservableObject {
 
         switch await AdsCoordinator.shared.presentRewarded() {
         case .earned, .unavailable:
-            // Sem vídeo disponível, o usuário não fica bloqueado por falha do anúncio.
             unlockedUntil = Date.now.addingTimeInterval(Constants.unlockDuration)
         case .dismissed:
             wasVideoDismissed = true

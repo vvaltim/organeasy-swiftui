@@ -2,7 +2,6 @@ import CoreTransferable
 import Foundation
 import UniformTypeIdentifiers
 
-/// CSV com `;` e vírgula decimal, que abre direto no Excel e volta pelo Importar extrato.
 struct EntriesCSVFile: Transferable {
     struct Row {
         let date: Date

@@ -50,8 +50,6 @@ struct SummaryUpcomingRowView: View {
     }
 }
 
-// MARK: - Preview
-
 #Preview {
     List {
         SummaryUpcomingRowView(

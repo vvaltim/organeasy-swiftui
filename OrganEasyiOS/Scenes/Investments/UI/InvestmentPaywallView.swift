@@ -30,6 +30,14 @@ struct InvestmentPaywallView: View {
 
     private var selected: Product? { store.products[selectedID] }
 
+    private func displayPrice(_ id: String) -> String? {
+        if let product = store.products[id] { return product.displayPrice }
+        #if DEBUG
+        if ShowcaseMode.isEnabled { return id == PurchaseProductID.premiumYearly ? "R$ 149,90" : "R$ 19,90" }
+        #endif
+        return nil
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -97,7 +105,7 @@ struct InvestmentPaywallView: View {
 
     @ViewBuilder
     private var plans: some View {
-        if store.products[PurchaseProductID.premiumYearly] == nil, store.products[PurchaseProductID.premiumMonthly] == nil {
+        if displayPrice(PurchaseProductID.premiumYearly) == nil, displayPrice(PurchaseProductID.premiumMonthly) == nil {
             ProgressView()
         } else {
             VStack(spacing: Size.x8.rawValue) {
@@ -109,7 +117,7 @@ struct InvestmentPaywallView: View {
 
     @ViewBuilder
     private func plan(_ id: String, _ title: LocalizedStringKey, isHighlighted: Bool) -> some View {
-        if let product = store.products[id] {
+        if let price = displayPrice(id) {
             let isSelected = selectedID == id
 
             Button {
@@ -130,7 +138,7 @@ struct InvestmentPaywallView: View {
                                     .background(.green, in: Capsule())
                             }
                         }
-                        Text(product.displayPrice)
+                        Text(price)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -162,15 +170,15 @@ struct InvestmentPaywallView: View {
         }
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
-        .disabled(selected == nil || isWorking)
+        .disabled((selected == nil && displayPrice(selectedID) == nil) || isWorking)
         .accessibilityIdentifier("premiumSubscribe")
     }
 
     private var legal: some View {
         VStack(spacing: Size.x8.rawValue) {
-            if let selected {
-                let period: LocalizedStringKey = selected.id == PurchaseProductID.premiumYearly ? "ano" : "mês"
-                Text("\(selected.displayPrice) por \(Text(period)). A assinatura renova automaticamente até ser cancelada nos Ajustes, com pelo menos 24 horas de antecedência.")
+            if let price = displayPrice(selectedID) {
+                let period: LocalizedStringKey = selectedID == PurchaseProductID.premiumYearly ? "ano" : "mês"
+                Text("\(price) por \(Text(period)). A assinatura renova automaticamente até ser cancelada nos Ajustes, com pelo menos 24 horas de antecedência.")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)

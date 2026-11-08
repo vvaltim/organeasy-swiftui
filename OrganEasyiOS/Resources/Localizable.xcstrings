@@ -1324,34 +1324,6 @@
         }
       }
     },
-    "Bancos e finanças": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Banks and finance"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bancos y finanzas"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Banques et finance"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Banche e finanza"
-          }
-        }
-      }
-    },
     "CDI": {
       "shouldTranslate": false
     },
@@ -2699,6 +2671,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Filtri per utile, ROE, P/E e tendenza"
+          }
+        }
+      }
+    },
+    "Finanças e imóveis": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finance and real estate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finanzas e inmuebles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finance et immobilier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finanza e immobili"
           }
         }
       }

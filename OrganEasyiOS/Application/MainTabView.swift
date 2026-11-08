@@ -8,7 +8,6 @@ struct MainTabView: View {
         case investments
     }
 
-    /// Quem instala agora começa em Investimentos. Quem já usava continua na Home.
     private enum FirstLaunch {
         static let key = "didOpenAppTabs"
 
@@ -26,7 +25,6 @@ struct MainTabView: View {
     @Query private var entries: [MonthlyEntry]
     @State private var selectedTab = FirstLaunch.initialTab()
 
-    /// Muda quando um lançamento entra, sai, é editado ou pago.
     private var indexSignature: Int {
         var hasher = Hasher()
         for entry in entries {
@@ -67,8 +65,6 @@ struct MainTabView: View {
         }
     }
 }
-
-// MARK: - Preview
 
 #Preview {
     MainTabView()

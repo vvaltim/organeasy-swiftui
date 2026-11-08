@@ -4,7 +4,6 @@ import FirebaseCore
 import FirebaseFirestore
 import Foundation
 
-/// Conexão com o Firebase. O Analytics roda sem identificador de publicidade.
 @MainActor
 enum InvestmentFirebase {
     private static var isStarted = false
@@ -21,7 +20,6 @@ enum InvestmentFirebase {
         ])
     }
 
-    /// Conta anônima: guarda as preferências sem pedir nome nem e-mail.
     static func save(_ fields: [String: Any]) async {
         guard isStarted else { return }
         do {
@@ -45,8 +43,6 @@ enum InvestmentFirebase {
         return (snapshot?.data()?["watchlist"] as? [String]).map(Set.init)
     }
 }
-
-// MARK: - Analytics
 
 enum InvestmentEvent {
     case onboardingStarted

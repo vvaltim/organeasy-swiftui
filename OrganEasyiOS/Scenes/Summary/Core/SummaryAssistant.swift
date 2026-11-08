@@ -1,8 +1,6 @@
 import Foundation
 import FoundationModels
 
-// MARK: - Availability
-
 enum SummaryAssistantAvailability {
     static var isModelReady: Bool {
         guard case .available = SystemLanguageModel.default.availability else { return false }
@@ -14,8 +12,6 @@ enum SummaryAssistantAvailability {
     }
 }
 
-// MARK: - Insights
-
 @Generable
 struct MonthInsights: Sendable {
     @Guide(description: "One short neutral sentence about the month, with no digits.")
@@ -25,12 +21,7 @@ struct MonthInsights: Sendable {
     var tips: [String]
 }
 
-// MARK: - Assistant
-
-/// Roda no próprio aparelho. Os valores vêm sempre do app e toda resposta é conferida
-/// por `SummaryAnswerGuard`, porque o modelo pode errar números.
 nonisolated enum SummaryAssistant {
-
     private static var language: String {
         let code = Locale.current.language.languageCode?.identifier ?? "en"
         return Locale(identifier: "en").localizedString(forLanguageCode: code) ?? "English"
@@ -63,11 +54,7 @@ nonisolated enum SummaryAssistant {
     }
 }
 
-// MARK: - Answer guard
-
-/// Só deixa passar respostas cujos números existem nos dados consultados.
 nonisolated enum SummaryAnswerGuard {
-
     static func clean(_ text: String) -> String {
         text.replacingOccurrences(of: "**", with: "")
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -81,7 +68,6 @@ nonisolated enum SummaryAnswerGuard {
         })
     }
 
-    /// Devolve a resposta quando ela é confiável; caso contrário, nulo.
     static func verified(_ reply: String, question: String, reports: [String]) -> String? {
         let text = clean(reply)
         let found = numbers(in: text)
@@ -99,9 +85,6 @@ nonisolated enum SummaryAnswerGuard {
     }
 }
 
-// MARK: - Tool
-
-/// Guarda o que a ferramenta devolveu, para conferir a resposta do modelo.
 actor EntryLookupLog {
     private(set) var reports: [String] = []
     private(set) var scope: SummaryQuestionScope?
@@ -114,7 +97,6 @@ actor EntryLookupLog {
         reports = []
     }
 
-    /// Começa uma pergunta nova, com o período e a conta que o app leu nela.
     func start(_ scope: SummaryQuestionScope) {
         reports = []
         self.scope = scope

@@ -1,8 +1,5 @@
 import Foundation
 
-// MARK: - Entry
-
-/// Cópia de valor de um `MonthlyEntry`, para os cálculos não dependerem do SwiftData.
 nonisolated struct SummaryEntry: Identifiable, Sendable, Hashable {
     let id: UUID
     let name: String
@@ -29,10 +26,7 @@ extension SummaryEntry {
     }
 }
 
-// MARK: - Snapshot
-
 struct SummarySnapshot {
-
     struct Forecast {
         let income: Double
         let expense: Double
@@ -66,13 +60,11 @@ struct SummarySnapshot {
     }
 
     let forecast: Forecast
-    /// Despesas do mês ainda sem valor, como as geradas pelas recorrências.
     let expensesWithoutAmount: Int
     let upcoming: [SummaryEntry]
     let evolution: [MonthTotals]
     let comparison: Comparison?
     let topExpenses: [SummaryEntry]
-    /// Nota de 0 a 100: 60% contas em dia e 40% saldo do mês. Nula sem despesas no mês.
     let score: Int?
 
     init(entries: [SummaryEntry], now: Date = .now, calendar: Calendar = .current) {

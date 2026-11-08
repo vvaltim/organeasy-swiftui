@@ -1,6 +1,5 @@
 import AppIntents
 
-/// Responde perguntas como "quando vence a luz?" com dados do app, sem passar pelo modelo.
 struct FindBillsIntent: AppIntent {
     private enum Constants {
         static let visibleLimit = 5

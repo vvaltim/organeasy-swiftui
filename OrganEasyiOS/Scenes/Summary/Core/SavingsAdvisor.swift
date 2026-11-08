@@ -5,8 +5,6 @@ struct SavingsSuggestion: Identifiable, Equatable {
     let text: String
 }
 
-/// Sugestões calculadas pelo app a partir dos gastos, sem passar pelo modelo de IA:
-/// todo valor mostrado sai direto dos lançamentos.
 enum SavingsAdvisor {
     private enum Constants {
         static let limit = 4
@@ -107,7 +105,6 @@ enum SavingsAdvisor {
         group.months[month]?.total ?? 0
     }
 
-    /// Junta variações como `LANCHE 1` e `Lanche 2`, comuns em extratos de banco.
     private static func makeGroups(_ entries: [SummaryEntry]) -> [Group] {
         var groups: [String: Group] = [:]
         for entry in entries {

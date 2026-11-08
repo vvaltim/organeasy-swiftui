@@ -242,7 +242,6 @@ final class StatementParserTests: XCTestCase {
     }
 }
 
-/// Monta um .xlsx mínimo com arquivos sem compressão.
 private enum XLSXFixture {
     static func make(rows: [[String]]) -> Data {
         var shared: [String] = []

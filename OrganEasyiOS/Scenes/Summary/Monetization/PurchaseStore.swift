@@ -3,12 +3,9 @@ import Foundation
 import StoreKit
 
 enum PurchaseProductID {
-    /// Assinatura anual sem desconto.
     static let yearly = "br.com.vanio.walter.app.noads.yearly"
-    /// Mesmo preço anual, com oferta de introdução de 80% no primeiro ano.
     static let yearlyPromo = "br.com.vanio.walter.app.noads.yearly.promo"
 
-    /// Plano Premium da aba Investimentos. Também remove os anúncios.
     static let premiumMonthly = "br.com.vanio.walter.app.premium.monthly"
     static let premiumYearly = "br.com.vanio.walter.app.premium.yearly"
 
@@ -18,7 +15,6 @@ enum PurchaseProductID {
 
 @MainActor
 final class PurchaseStore: ObservableObject {
-
     enum PurchaseResult {
         case purchased
         case pending
@@ -47,6 +43,7 @@ final class PurchaseStore: ObservableObject {
 
     func load() async {
         await refreshEntitlements()
+        guard !ShowcaseMode.isEnabled else { return }
         do {
             let loaded = try await Product.products(for: PurchaseProductID.all)
             products = Dictionary(uniqueKeysWithValues: loaded.map { ($0.id, $0) })

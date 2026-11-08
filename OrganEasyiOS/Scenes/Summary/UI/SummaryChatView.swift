@@ -2,8 +2,6 @@ import Combine
 import FoundationModels
 import SwiftUI
 
-// MARK: - Message
-
 struct SummaryChatMessage: Identifiable, Equatable {
     enum Role {
         case user
@@ -14,8 +12,6 @@ struct SummaryChatMessage: Identifiable, Equatable {
     let role: Role
     let text: String
 }
-
-// MARK: - Model
 
 @MainActor
 final class SummaryChatModel: ObservableObject {
@@ -65,7 +61,6 @@ final class SummaryChatModel: ObservableObject {
             let answer = try await session.respond(to: question).content
             return await verified(answer, question: question)
         } catch LanguageModelSession.GenerationError.exceededContextWindowSize {
-            // A conversa ficou longa: recomeça o contexto e tenta de novo.
             session = Self.makeSession(entries: entries, log: log, facts: context.facts)
             guard let answer = try? await session.respond(to: question).content else {
                 return failureMessage
@@ -87,8 +82,6 @@ final class SummaryChatModel: ObservableObject {
         )
     }
 }
-
-// MARK: - View
 
 struct SummaryChatView: View {
     @StateObject private var model: SummaryChatModel

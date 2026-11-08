@@ -1,8 +1,6 @@
 import Foundation
 import SwiftData
 
-/// Separa o que é novo do que já está no app, para reimportar sem duplicar.
-/// A contagem por chave preserva duas compras iguais feitas no mesmo dia.
 struct StatementImportPlan {
     let newTransactions: [StatementTransaction]
     let duplicateCount: Int
@@ -31,7 +29,6 @@ struct StatementImportPlan {
         duplicateCount = duplicates
     }
 
-    /// Extrato traz o que já aconteceu, então tudo entra como pago e não como conta atrasada.
     func apply(to context: ModelContext) throws {
         for item in newTransactions {
             let entry = MonthlyEntry(

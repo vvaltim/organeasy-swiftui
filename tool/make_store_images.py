@@ -1,8 +1,3 @@
-"""Gera as imagens da App Store a partir das capturas do simulador.
-
-Uso: uv run --with pillow python -I tool/make_store_images.py <pasta_capturas> publicacao
-As capturas se chamam <aparelho>_<idioma>_<cena>.png (aparelho = iphone | ipad13).
-"""
 import os
 import sys
 
@@ -105,8 +100,7 @@ def banner(raws, size, title, subtitle):
 def main(raw_dir, out_dir):
     for lang, captions in CAPTIONS.items():
         targets = [('iphone', PHONE if lang == 'pt-BR' else PHONE[:1])]
-        if lang in ('pt-BR', 'en'):
-            targets.append(('ipad13', TABLET if lang == 'pt-BR' else TABLET[2:3]))
+        targets.append(('ipad13', TABLET if lang == 'pt-BR' else TABLET[2:3]))
         for device, sizes in targets:
             for folder, size in sizes:
                 out = os.path.join(out_dir, 'imagens', lang, folder)

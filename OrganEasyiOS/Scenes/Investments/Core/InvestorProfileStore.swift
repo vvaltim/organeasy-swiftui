@@ -1,7 +1,6 @@
 import Combine
 import Foundation
 
-/// Perfil do investidor. Fica no aparelho e é copiado para o Firebase.
 @MainActor
 final class InvestorProfileStore: ObservableObject {
     static let shared = InvestorProfileStore()
@@ -42,7 +41,6 @@ final class InvestorProfileStore: ObservableObject {
         }
     }
 
-    /// Trocar de setor na lista é recurso Premium.
     func changeSector(_ sector: InvestmentSector) {
         guard let risk else { return }
         save(risk: risk, sector: sector)

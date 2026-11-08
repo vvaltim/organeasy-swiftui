@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// Nota do mês, calculada com contas em dia e saldo.
 struct SummaryScoreView: View {
     let score: Int
 

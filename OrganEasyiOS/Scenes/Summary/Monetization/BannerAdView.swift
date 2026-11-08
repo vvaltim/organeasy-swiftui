@@ -1,7 +1,6 @@
 import GoogleMobileAds
 import SwiftUI
 
-/// Banner adaptativo fixo acima da barra de abas. Só existe dentro da aba Resumo.
 struct BannerAdView: View {
     var body: some View {
         GeometryReader { proxy in

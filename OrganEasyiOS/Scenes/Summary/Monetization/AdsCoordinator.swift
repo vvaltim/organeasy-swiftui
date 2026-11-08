@@ -4,11 +4,8 @@ import SwiftUI
 import UIKit
 import UserMessagingPlatform
 
-/// Só é iniciado nas abas Minha IA e Investimentos: as outras telas não carregam anúncios
-/// nem pedem consentimento. O formulário do Google aparece apenas onde a lei obriga.
 @MainActor
 final class AdsCoordinator: ObservableObject {
-
     static let shared = AdsCoordinator()
 
     @Published private(set) var canShowAds = false
@@ -34,7 +31,6 @@ final class AdsCoordinator: ObservableObject {
         requiresPrivacyOptions = consent.privacyOptionsRequirementStatus == .required
 
         guard consent.canRequestAds else { return }
-        // Vale só para este app: a classificação da conta no AdMob não é alterada.
         MobileAds.shared.requestConfiguration.maxAdContentRating = .parentalGuidance
         await MobileAds.shared.start()
         canShowAds = true
@@ -46,7 +42,6 @@ final class AdsCoordinator: ObservableObject {
         canShowAds = ConsentInformation.shared.canRequestAds
     }
 
-    /// Mostra o vídeo premiado e devolve o resultado.
     func presentRewarded() async -> RewardedOutcome {
         guard canShowAds, let controller = UIApplication.shared.topViewController else {
             return .unavailable
@@ -65,7 +60,6 @@ final class AdsCoordinator: ObservableObject {
         }
     }
 
-    /// Todos os anúncios são não personalizados: o app não rastreia ninguém.
     static func request() -> Request {
         let request = Request()
         let extras = Extras()
@@ -74,8 +68,6 @@ final class AdsCoordinator: ObservableObject {
         return request
     }
 }
-
-// MARK: - Rewarded
 
 enum RewardedOutcome {
     case earned
@@ -123,8 +115,6 @@ private final class RewardedPresenter: NSObject, FullScreenContentDelegate {
         continuation = nil
     }
 }
-
-// MARK: - Top controller
 
 extension UIApplication {
     var topViewController: UIViewController? {

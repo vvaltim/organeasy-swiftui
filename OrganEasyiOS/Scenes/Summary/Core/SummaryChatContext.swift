@@ -1,15 +1,11 @@
 import Foundation
 
-/// Dados do mês que a IA recebe em toda conversa. Assim ela não depende de decidir
-/// consultar a ferramenta para saber dos gastos do usuário.
 struct SummaryChatContext {
     private enum Constants {
         static let largestLimit = 5
     }
 
-    /// Texto em inglês para o modelo, com os valores já calculados.
     let facts: String
-    /// Resposta pronta para o usuário quando o modelo não usar os dados.
     let brief: String
 
     private let entries: [SummaryEntry]
@@ -50,8 +46,6 @@ struct SummaryChatContext {
         brief = answer
     }
 
-    /// Escolhe o que mostrar. O modelo só pode citar números que existem nos dados,
-    /// e uma pergunta de valor nunca termina em "não sei".
     func answer(for reply: String, question: String, toolReports: [String]) -> String {
         if Self.asksHowToSave(question), let tips = savingsTips {
             return tips
@@ -67,17 +61,14 @@ struct SummaryChatContext {
         }
 
         let fallback = toolReports.last ?? calculatedReport(for: question)
-        // Com a consulta feita, só os números dela valem: o resumo do mês responde outra pergunta.
         let trusted = toolReports.isEmpty ? [facts, calculatedReport(for: question)] : toolReports
         guard let text = SummaryAnswerGuard.verified(reply, question: question, reports: trusted) else {
             return fallback
         }
 
-        // Às vezes o modelo escreve a chamada da ferramenta como texto.
         if text.contains("{") || text.contains("}") { return fallback }
 
         let numbers = SummaryAnswerGuard.numbers(in: text)
-        // Com vários valores na frase, o modelo já trocou um rótulo por outro nos testes.
         if numbers.count > 1 { return fallback }
         return numbers.isEmpty && Self.asksForAmount(question) ? fallback : text
     }
@@ -97,7 +88,6 @@ struct SummaryChatContext {
         return tips.isEmpty ? nil : tips.joined(separator: "\n")
     }
 
-    /// Resposta do próprio app, usada quando o modelo não consulta os dados.
     private func calculatedReport(for question: String) -> String {
         let scope = SummaryQuestionScope(question: question, entries: entries, now: now)
         guard let name = scope.name else { return brief }
@@ -107,8 +97,6 @@ struct SummaryChatContext {
         arguments.month = scope.month
         return EntryLookupTool.report(entries: EntryLookupTool.filter(entries, with: arguments))
     }
-
-    // MARK: - Termos
 
     private static let genericTerms: Set<String> = [
         "gasto", "gastos", "despesa", "despesas", "conta", "contas", "saida", "saidas", "lancamento", "lancamentos",
@@ -141,7 +129,6 @@ struct SummaryChatContext {
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    /// "Gastos" não é o nome de uma conta: filtrar por essa palavra esconderia tudo.
     nonisolated static func isGenericName(_ name: String) -> Bool {
         genericTerms.contains(name.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: nil)
             .trimmingCharacters(in: .whitespacesAndNewlines))
@@ -153,17 +140,12 @@ struct SummaryChatContext {
     }
 }
 
-// MARK: - Escopo da pergunta
-
-/// Período e conta citados na pergunta, decididos pelo app. O modelo inventa o mês quando
-/// a pergunta não cita nenhum, e um filtro errado faz ele responder que não há dados.
 nonisolated struct SummaryQuestionScope: Sendable {
     let year: Int?
     let month: Int?
     let name: String?
     let type: EntryLookupTool.EntryTypeFilter
     let payment: EntryLookupTool.PaymentFilter
-    /// A pergunta cita algo, como "com academia", que não existe nos lançamentos.
     let isUnknownBill: Bool
 
     private static let months: [[String]] = [

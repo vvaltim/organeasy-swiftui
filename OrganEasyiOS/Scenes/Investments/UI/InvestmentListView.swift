@@ -131,8 +131,6 @@ struct InvestmentListView: View {
         }
     }
 
-    // MARK: - Topo
-
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
         ToolbarItemGroup(placement: .topBarTrailing) {
@@ -231,9 +229,6 @@ struct InvestmentListView: View {
         .scrollClipDisabled()
     }
 
-    // MARK: - Filtros
-
-    /// Visível para todos; no plano grátis cada chip leva à assinatura.
     private var filterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: Size.x8.rawValue) {
@@ -304,8 +299,6 @@ struct InvestmentListView: View {
         .background(isOn ? Color.blue : Color(.secondarySystemGroupedBackground), in: Capsule())
         .overlay { Capsule().stroke(Color(.separator).opacity(isOn ? 0 : 0.6), lineWidth: 1) }
     }
-
-    // MARK: - Lista
 
     @ViewBuilder
     private var list: some View {

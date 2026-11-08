@@ -1,6 +1,5 @@
 import Foundation
 
-/// Modo vitrine: usado só em debug para capturas e vídeos da loja, com a experiência sem anúncios.
 enum ShowcaseMode {
     static var isEnabled: Bool {
         #if DEBUG
@@ -10,7 +9,6 @@ enum ShowcaseMode {
         #endif
     }
 
-    /// Mostra o cartão da IA no simulador, que não tem o modelo.
     static var forcesAICard: Bool {
         #if DEBUG
         ProcessInfo.processInfo.arguments.contains("-forceAICard")
@@ -19,7 +17,6 @@ enum ShowcaseMode {
         #endif
     }
 
-    /// Abre um extrato direto na revisão, porque o seletor de arquivos não é automatizável.
     static var importFilePath: String? {
         #if DEBUG
         UserDefaults.standard.string(forKey: "importFile")
@@ -28,7 +25,6 @@ enum ShowcaseMode {
         #endif
     }
 
-    /// Simula a assinatura Premium nos testes. Não existe no build da loja.
     static var forcesPremium: Bool {
         #if DEBUG
         ProcessInfo.processInfo.arguments.contains("-forcePremium")
@@ -37,7 +33,6 @@ enum ShowcaseMode {
         #endif
     }
 
-    /// Reinicia o prazo da promoção nos testes automatizados.
     static var resetsPromotion: Bool {
         #if DEBUG
         ProcessInfo.processInfo.arguments.contains("-resetPromotion")

@@ -27,7 +27,6 @@ enum InvestmentFormat {
         return "\(value.formatted(.number.sign(strategy: .always()).precision(.fractionLength(2))))%"
     }
 
-    /// Selic e IPCA somam a taxa ao indexador; o prefixado é a taxa inteira.
     static func treasuryRate(_ asset: InvestmentAsset) -> String {
         guard let rate = asset.rate else { return "–" }
         let value = percent(rate)
@@ -37,7 +36,6 @@ enum InvestmentFormat {
     }
 }
 
-/// Logo do ativo, ou as iniciais quando não há imagem.
 struct InvestmentTile: View {
     let asset: InvestmentAsset
     let tint: Color
@@ -173,7 +171,6 @@ struct InvestmentRow: View {
     }
 }
 
-/// Linha bloqueada. Não leva dado real, para o conteúdo Premium não ficar na tela.
 struct InvestmentLockedRow: View {
     let position: Int
     let tint: Color

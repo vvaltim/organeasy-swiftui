@@ -1,7 +1,5 @@
 import SwiftUI
 
-/// Cartão da IA pessoal. Só aparece em aparelhos com o modelo disponível,
-/// para ninguém assistir a um vídeo sem poder usar o recurso.
 struct SummaryAICardView: View {
     let snapshot: SummarySnapshot
     let entries: [SummaryEntry]
@@ -45,8 +43,6 @@ struct SummaryAICardView: View {
             SummaryChatView(entries: entries)
         }
     }
-
-    // MARK: - Actions
 
     private var actions: some View {
         VStack(alignment: .leading, spacing: Size.x8.rawValue) {
@@ -92,8 +88,6 @@ struct SummaryAICardView: View {
         .accessibilityIdentifier("insights")
     }
 
-    // MARK: - Functions
-
     private func analyze() {
         isAnalyzing = true
         hasFailed = false
@@ -111,7 +105,6 @@ struct SummaryAICardView: View {
             #endif
             do {
                 let generated = try await SummaryAssistant.insights(for: prompt)
-                // O título vem do cálculo do app: o modelo às vezes erra o sentido do mês.
                 insights = SummaryCardPrompt.isFreeOfNumbers(generated)
                     ? MonthInsights(headline: fallback.headline, tips: generated.tips)
                     : fallback
@@ -121,8 +114,6 @@ struct SummaryAICardView: View {
         }
     }
 }
-
-// MARK: - Prompt
 
 enum SummaryCardPrompt {
     static func make(from snapshot: SummarySnapshot) -> String {
@@ -145,7 +136,6 @@ enum SummaryCardPrompt {
         !([insights.headline] + insights.tips).contains { $0.contains(where: \.isNumber) }
     }
 
-    /// Observações calculadas pelo app, usadas quando o modelo escreve números ou falha.
     static func calculatedInsights(from snapshot: SummarySnapshot) -> MonthInsights {
         let forecast = snapshot.forecast
         let headline = forecast.projectedBalance >= .zero

@@ -1,7 +1,5 @@
 import Foundation
 
-/// Nota de 0 a 100 dentro do setor, calculada só com dados públicos.
-/// Compara os ativos entre si: não prevê retorno nem indica compra.
 enum InvestmentRanking {
     private struct Weights {
         let size: Double
@@ -43,7 +41,6 @@ enum InvestmentRanking {
                 (value[asset.id], weights.value),
                 (momentum[asset.id], weights.momentum)
             ]
-            // Ativo sem um dado não perde nota: o peso daquele dado é redistribuído.
             let available = parts.compactMap { part in part.0.map { ($0, part.1) } }
             let total = available.reduce(0) { $0 + $1.1 }
             guard total > .zero else { return (asset, 50) }
@@ -57,7 +54,6 @@ enum InvestmentRanking {
             .map { RankedAsset(asset: $0.element.0, position: $0.offset + 1, score: $0.element.1) }
     }
 
-    /// Perfil conservador não vê empresa com prejuízo ou ativo sem liquidez.
     private static func eligible(_ assets: [InvestmentAsset], risk: RiskProfile) -> [InvestmentAsset] {
         let priced = assets.filter { ($0.price ?? 0) > .zero }
         guard risk == .conservative else { return priced }
@@ -68,7 +64,6 @@ enum InvestmentRanking {
         }
     }
 
-    /// Título pós-fixado curto é o menos sensível a oscilações antes do vencimento.
     private static func treasuryScore(_ asset: InvestmentAsset, rate: Double, risk: RiskProfile) -> Int {
         let isFloating = asset.name.localizedCaseInsensitiveContains("Selic")
         let stability = isFloating ? 1.0 : 0.4
@@ -81,7 +76,6 @@ enum InvestmentRanking {
         return Int((score * 100).rounded())
     }
 
-    /// Posição relativa de cada ativo, de 0 a 1. Valores ausentes ficam de fora.
     private static func percentiles(
         _ assets: [InvestmentAsset],
         value: (InvestmentAsset) -> Double?
@@ -96,8 +90,6 @@ enum InvestmentRanking {
         }
         return result
     }
-
-    // MARK: - Filtros
 
     static func apply(_ filters: InvestmentFilters, to ranked: [RankedAsset]) -> [RankedAsset] {
         let filtered = ranked.filter { item in

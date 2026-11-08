@@ -1,7 +1,6 @@
 import Compression
 import Foundation
 
-/// Lê a primeira planilha de um .xlsx, que é um ZIP com XML dentro.
 enum XLSXReader {
     enum ReadError: Error {
         case invalidFile
@@ -19,8 +18,6 @@ enum XLSXReader {
         guard let sheetName, let sheet = files[sheetName] else { throw ReadError.invalidFile }
         return SheetParser.parse(sheet, sharedStrings: sharedStrings)
     }
-
-    // MARK: - ZIP
 
     private static func unzip(_ data: Data) throws -> [String: Data] {
         let bytes = [UInt8](data)
@@ -81,8 +78,6 @@ enum XLSXReader {
         return Data(output)
     }
 }
-
-// MARK: - XML
 
 private final class SharedStringsParser: NSObject, XMLParserDelegate {
     private var strings: [String] = []
@@ -170,7 +165,6 @@ private final class SheetParser: NSObject, XMLParserDelegate {
         }
     }
 
-    /// Converte a referência da célula (`C12`) na posição da coluna.
     private static func columnIndex(_ reference: String?) -> Int? {
         guard let reference else { return nil }
         var index = 0

@@ -38,8 +38,6 @@ struct InvestmentOnboardingView: View {
         .task { InvestmentEvent.onboardingStarted.log() }
     }
 
-    // MARK: - Intro
-
     private var intro: some View {
         VStack(spacing: Size.x24.rawValue) {
             Spacer()
@@ -86,8 +84,6 @@ struct InvestmentOnboardingView: View {
         }
         .font(.subheadline)
     }
-
-    // MARK: - Risco
 
     private var riskStep: some View {
         VStack(alignment: .leading, spacing: Size.x16.rawValue) {
@@ -151,8 +147,6 @@ struct InvestmentOnboardingView: View {
         .accessibilityIdentifier("risk_\(option.rawValue)")
     }
 
-    // MARK: - Setor
-
     private var sectorStep: some View {
         VStack(alignment: .leading, spacing: Size.x16.rawValue) {
             header("Qual setor mais te interessa?", "Escolha 1 para começar.")
@@ -198,8 +192,6 @@ struct InvestmentOnboardingView: View {
         .buttonStyle(.plain)
         .accessibilityIdentifier("sector_\(option.rawValue)")
     }
-
-    // MARK: - Finalização
 
     private var building: some View {
         VStack(spacing: Size.x16.rawValue) {

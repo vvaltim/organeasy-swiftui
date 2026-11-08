@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// Oferta de 80% válida por 24 horas a partir do primeiro acesso ao Resumo.
 struct SummaryPromotionBanner: View {
     let endDate: Date
     let onTap: () -> Void

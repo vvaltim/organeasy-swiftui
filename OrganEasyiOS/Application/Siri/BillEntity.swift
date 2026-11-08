@@ -2,8 +2,6 @@ import AppIntents
 import CoreSpotlight
 import SwiftData
 
-/// Lançamento visível para a Siri e para o Spotlight. O índice semântico é o que
-/// permite à Siri AI achar uma conta pelo sentido da pergunta, sem frase fixa.
 struct BillEntity: IndexedEntity {
     static let typeDisplayRepresentation = TypeDisplayRepresentation(name: "Lançamento")
     static let defaultQuery = BillEntityQuery()
@@ -89,13 +87,11 @@ struct BillEntityQuery: EnumerableEntityQuery, EntityStringQuery {
     }
 }
 
-/// Lê os lançamentos e mantém o índice do Spotlight em dia.
 @MainActor
 enum BillStore {
     static let suggestionLimit = 10
     private static let indexLimit = 500
 
-    /// Pendentes primeiro, depois os mais recentes.
     static func bills(context: ModelContext? = nil) throws -> [BillEntity] {
         let context = context ?? ModelContext(OrganEasyModelContainer.shared)
         return try context.fetch(FetchDescriptor<MonthlyEntry>())

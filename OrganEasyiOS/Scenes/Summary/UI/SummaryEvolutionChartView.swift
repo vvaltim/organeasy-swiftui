@@ -38,8 +38,6 @@ struct SummaryEvolutionChartView: View {
     }
 }
 
-// MARK: - Preview
-
 #Preview {
     let calendar = Calendar.current
     let months = (0..<6).reversed().compactMap { monthsAgo -> SummarySnapshot.MonthTotals? in

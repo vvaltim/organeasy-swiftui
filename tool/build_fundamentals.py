@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""Gera fundamentos das empresas da B3 a partir dos dados abertos da CVM.
-
-Uso: python3 tool/build_fundamentals.py 2025
-Publica depois com: firebase deploy --only hosting --project invest-fc7e9 --config firebase.invest.json
-"""
 import csv
 import datetime
 import io
@@ -28,7 +23,6 @@ def rows(archive, name):
     with archive.open(name) as raw:
         yield from csv.DictReader(io.TextIOWrapper(raw, encoding="latin-1"), delimiter=";")
 
-
 TREASURY_URL = (
     "https://www.tesourotransparente.gov.br/ckan/dataset/df56aa42-484a-4a59-8184-7676580c81e3/"
     "resource/796d2059-14e9-44e3-80c9-2d9e30b405c1/download/PrecoTaxaTesouroDireto.csv"
@@ -43,7 +37,6 @@ def number(value):
 
 
 def build_treasury():
-    """Mantém só os títulos da data mais recente, porque o arquivo traz todo o histórico."""
     request = urllib.request.Request(TREASURY_URL, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(request, timeout=180) as response:
         text = response.read().decode("latin-1")
@@ -80,7 +73,6 @@ def tickers_by_company(year):
 
 
 def statement(archive, year, kind, scope):
-    """Devolve {cnpj: {conta: valor}} do último exercício."""
     values = {}
     for row in rows(archive, f"dfp_cia_aberta_{kind}_{scope}_{year}.csv"):
         if row.get("ORDEM_EXERC") != "ÚLTIMO":
@@ -106,7 +98,6 @@ def net_income(accounts):
 
 
 def equity_of(accounts):
-    """Bancos usam outro plano de contas, então a busca é pelo nome da conta."""
     for code, (amount, label) in accounts.items():
         if code.startswith("2.") and code.count(".") == 1 and "patrim" in label.lower() and "quido" in label.lower():
             return amount

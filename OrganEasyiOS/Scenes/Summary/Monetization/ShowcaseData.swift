@@ -2,9 +2,7 @@
 import SwiftData
 import SwiftUI
 
-/// Dados de exemplo do modo vitrine. Não entra em builds de release.
 enum ShowcaseData {
-
     static let container: ModelContainer = {
         let schema = Schema([MonthlyEntry.self, RecurringEntryTemplate.self])
         let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)

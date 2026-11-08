@@ -120,8 +120,6 @@ final class PromotionClockTests: XCTestCase {
         XCTAssertEqual(PromotionClock.duration, 86_400)
     }
 
-    // MARK: - Contexto do chat
-
     private func chatEntries(now: Date) -> [SummaryEntry] {
         func make(_ name: String, _ amount: Double, _ type: EntryType, paid: Bool) -> SummaryEntry {
             SummaryEntry(

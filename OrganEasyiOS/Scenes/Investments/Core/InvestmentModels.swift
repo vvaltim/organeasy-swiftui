@@ -1,8 +1,6 @@
 import Foundation
 import SwiftUI
 
-// MARK: - Perfil
-
 enum RiskProfile: String, CaseIterable, Identifiable, Codable, Sendable {
     case conservative
     case moderate
@@ -51,8 +49,6 @@ enum RiskProfile: String, CaseIterable, Identifiable, Codable, Sendable {
     }
 }
 
-// MARK: - Setor
-
 enum InvestmentSector: String, CaseIterable, Identifiable, Codable, Sendable {
     case finance
     case technology
@@ -68,7 +64,7 @@ enum InvestmentSector: String, CaseIterable, Identifiable, Codable, Sendable {
 
     var title: LocalizedStringKey {
         switch self {
-        case .finance: "Bancos e finanças"
+        case .finance: "Finanças e imóveis"
         case .technology: "Tecnologia"
         case .energy: "Energia"
         case .consumer: "Varejo e consumo"
@@ -108,7 +104,6 @@ enum InvestmentSector: String, CaseIterable, Identifiable, Codable, Sendable {
         }
     }
 
-    /// Setores como vêm da fonte de dados da bolsa.
     var marketSectors: Set<String> {
         switch self {
         case .finance: ["Finance"]
@@ -121,8 +116,6 @@ enum InvestmentSector: String, CaseIterable, Identifiable, Codable, Sendable {
         }
     }
 }
-
-// MARK: - Ativos
 
 struct AssetFundamentals: Codable, Hashable, Sendable {
     var year: Int?
@@ -155,11 +148,9 @@ struct InvestmentAsset: Identifiable, Hashable, Sendable {
     var marketCap: Double?
     var imageURL: URL?
     var fundamentals: AssetFundamentals?
-    /// Taxa do título do Tesouro em pontos percentuais.
     var rate: Double?
     var maturity: Date?
 
-    /// Preço sobre lucro. Só existe com lucro positivo.
     var priceEarnings: Double? {
         guard let marketCap, let profit = fundamentals?.netIncome, profit > .zero else { return nil }
         return marketCap / profit
@@ -213,15 +204,11 @@ struct RankedAsset: Identifiable, Hashable, Sendable {
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }
 
-// MARK: - Indicadores
-
 struct MarketIndicators: Sendable, Equatable {
     var selic: Double?
     var inflation: Double?
     var cdi: Double?
 }
-
-// MARK: - Filtros
 
 struct InvestmentFilters: Equatable {
     enum Sort: String, CaseIterable, Identifiable {

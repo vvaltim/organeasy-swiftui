@@ -3,11 +3,6 @@ import OSLog
 import SQLite3
 import SwiftData
 
-/// Traz os dados da versão 1.x (Core Data) para a versão atual (SwiftData).
-///
-/// O banco antigo nunca é alterado: a leitura acontece numa cópia temporária.
-/// Bancos e evoluções não têm equivalente no modelo atual e continuam só no
-/// arquivo antigo, que fica guardado no aparelho.
 enum LegacyDataImporter {
     struct Result: Equatable {
         var entries = 0
@@ -24,7 +19,6 @@ enum LegacyDataImporter {
         URL.applicationSupportDirectory.appending(path: "OrganEasy.sqlite")
     }
 
-    /// Roda uma vez. Se falhar, tenta de novo na próxima abertura do app.
     static func runIfNeeded(
         into context: ModelContext,
         storeURL: URL = defaultStoreURL,
@@ -84,8 +78,6 @@ enum LegacyDataImporter {
         return result
     }
 
-    // MARK: - Chaves de duplicidade
-
     private static func entryKey(_ entry: MonthlyEntry) -> String {
         "\(entry.name)|\(entry.amount)|\(entry.dueDate.timeIntervalSinceReferenceDate)"
     }
@@ -93,8 +85,6 @@ enum LegacyDataImporter {
     private static func templateKey(_ template: RecurringEntryTemplate) -> String {
         "\(template.name)|\(template.dueDay)"
     }
-
-    // MARK: - Leitura do banco antigo
 
     private struct Rows {
         var transactions: [TransactionRow] = []
@@ -122,7 +112,6 @@ enum LegacyDataImporter {
         try fileManager.createDirectory(at: folder, withIntermediateDirectories: true)
         defer { try? fileManager.removeItem(at: folder) }
 
-        // O WAL guarda gravações recentes, então os três arquivos são copiados juntos.
         let copyURL = folder.appending(path: storeURL.lastPathComponent)
         for suffix in ["", "-wal", "-shm"] {
             let source = URL(filePath: storeURL.path(percentEncoded: false) + suffix)
@@ -167,7 +156,7 @@ enum LegacyDataImporter {
         defer { sqlite3_finalize(statement) }
 
         let prepared = sqlite3_prepare_v2(database, "SELECT * FROM \(table)", -1, &statement, nil)
-        if prepared == SQLITE_ERROR { return } // Tabela criada só em versões posteriores.
+        if prepared == SQLITE_ERROR { return }
         guard prepared == SQLITE_OK else { throw ImportError.unreadableStore(message(from: database)) }
 
         let row = LegacyRow(statement: statement)
@@ -184,7 +173,6 @@ enum LegacyDataImporter {
     }
 }
 
-/// Lê a linha atual pelo nome da coluna, para aceitar bancos sem colunas mais novas.
 private struct LegacyRow {
     private let statement: OpaquePointer?
     private let columns: [String: Int32]
@@ -214,7 +202,6 @@ private struct LegacyRow {
         index(name).map { sqlite3_column_double(statement, $0) }
     }
 
-    /// O Core Data grava datas em segundos desde 1º de janeiro de 2001.
     func date(_ name: String) -> Date? {
         double(name).map(Date.init(timeIntervalSinceReferenceDate:))
     }

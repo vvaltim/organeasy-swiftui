@@ -3,18 +3,11 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct SummaryView: View {
-
-    // MARK: - Model Container
-
     @Environment(\.modelContext) private var modelContext
     @Query<MonthlyEntry> private var allEntries: [MonthlyEntry]
 
-    // MARK: - Monetization
-
     @ObservedObject private var ads = AdsCoordinator.shared
     @ObservedObject private var store = PurchaseStore.shared
-
-    // MARK: - States
 
     @State private var promotionEnd: Date?
     @State private var isShowingRemoveAds = false
@@ -22,8 +15,6 @@ struct SummaryView: View {
     @State private var statement: Statement?
     @State private var importFailure: LocalizedStringKey?
     @State private var didOpenDebugFile = false
-
-    // MARK: - Computed Variables
 
     private var entries: [SummaryEntry] {
         allEntries.map(SummaryEntry.init(entry:))
@@ -37,8 +28,6 @@ struct SummaryView: View {
     private var isBannerVisible: Bool {
         ads.canShowAds && !store.isAdsRemoved && !ShowcaseMode.isEnabled
     }
-
-    // MARK: - Main View
 
     var body: some View {
         NavigationStack {
@@ -119,8 +108,6 @@ struct SummaryView: View {
         }
         .accessibilityIdentifier("importStatement")
     }
-
-    // MARK: - Content
 
     private func content(entries: [SummaryEntry]) -> some View {
         let snapshot = SummarySnapshot(entries: entries)
@@ -210,8 +197,6 @@ struct SummaryView: View {
         .foregroundStyle(.secondary)
     }
 
-    // MARK: - Empty View
-
     private var emptyView: some View {
         ContentUnavailableView {
             Label("Sem dados ainda", systemImage: SummaryIcon.chartBar.rawValue)
@@ -222,8 +207,6 @@ struct SummaryView: View {
                 .buttonStyle(.borderedProminent)
         }
     }
-
-    // MARK: - Functions
 
     private func handlePickedFile(_ result: Result<URL, Error>) {
         guard case .success(let url) = result else {
@@ -255,7 +238,6 @@ struct SummaryView: View {
         try? modelContext.save()
     }
 
-    /// Inicia o prazo no primeiro acesso e tira a oferta da tela quando ele termina.
     private func runPromotionClock() async {
         if ShowcaseMode.resetsPromotion {
             PromotionClock.reset()
@@ -271,8 +253,6 @@ struct SummaryView: View {
         promotionEnd = end
     }
 }
-
-// MARK: - Preview
 
 #Preview {
     SummaryView()

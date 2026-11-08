@@ -49,8 +49,6 @@ struct SummaryForecastView: View {
     }
 }
 
-// MARK: - Preview
-
 #Preview {
     List {
         SummaryForecastView(
