@@ -4,8 +4,8 @@ import SwiftUI
 import UIKit
 import UserMessagingPlatform
 
-/// Só é iniciado quando a aba Resumo aparece: nenhuma outra tela carrega anúncios
-/// nem pede consentimento. O formulário do Google aparece apenas onde a lei obriga.
+/// Só é iniciado nas abas Minha IA e Investimentos: as outras telas não carregam anúncios
+/// nem pedem consentimento. O formulário do Google aparece apenas onde a lei obriga.
 @MainActor
 final class AdsCoordinator: ObservableObject {
 

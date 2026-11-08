@@ -8,7 +8,12 @@ enum PurchaseProductID {
     /// Mesmo preço anual, com oferta de introdução de 80% no primeiro ano.
     static let yearlyPromo = "br.com.vanio.walter.app.noads.yearly.promo"
 
-    static let all: Set<String> = [yearly, yearlyPromo]
+    /// Plano Premium da aba Investimentos. Também remove os anúncios.
+    static let premiumMonthly = "br.com.vanio.walter.app.premium.monthly"
+    static let premiumYearly = "br.com.vanio.walter.app.premium.yearly"
+
+    static let premium: Set<String> = [premiumMonthly, premiumYearly]
+    static let all: Set<String> = [yearly, yearlyPromo, premiumMonthly, premiumYearly]
 }
 
 @MainActor
@@ -24,6 +29,7 @@ final class PurchaseStore: ObservableObject {
 
     @Published private(set) var products: [String: Product] = [:]
     @Published private(set) var isAdsRemoved = false
+    @Published private(set) var isPremium = false
 
     private var updatesTask: Task<Void, Never>?
 
@@ -70,14 +76,17 @@ final class PurchaseStore: ObservableObject {
 
     func refreshEntitlements() async {
         var hasEntitlement = false
+        var hasPremium = false
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
                PurchaseProductID.all.contains(transaction.productID),
                transaction.revocationDate == nil {
                 hasEntitlement = true
+                hasPremium = hasPremium || PurchaseProductID.premium.contains(transaction.productID)
             }
         }
-        isAdsRemoved = hasEntitlement
+        isAdsRemoved = hasEntitlement || ShowcaseMode.forcesPremium
+        isPremium = hasPremium || ShowcaseMode.forcesPremium
     }
 
     private func handle(_ result: VerificationResult<Transaction>) async {

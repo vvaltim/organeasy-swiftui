@@ -71,6 +71,58 @@
           "referenceName": "Sem anuncios anual promo",
           "subscriptionGroupID": "21874170",
           "type": "RecurringSubscription"
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "149.90",
+          "familyShareable": false,
+          "groupNumber": 3,
+          "internalID": "6740100021",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Remove os anuncios por um ano",
+              "displayName": "Premium anual",
+              "locale": "pt_BR"
+            },
+            {
+              "description": "Removes ads for one year",
+              "displayName": "Premium anual",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "br.com.vanio.walter.app.premium.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Premium anual",
+          "subscriptionGroupID": "21874170",
+          "type": "RecurringSubscription"
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "19.90",
+          "familyShareable": false,
+          "groupNumber": 4,
+          "internalID": "6740100022",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Remove os anuncios por um ano",
+              "displayName": "Premium mensal",
+              "locale": "pt_BR"
+            },
+            {
+              "description": "Removes ads for one year",
+              "displayName": "Premium mensal",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "br.com.vanio.walter.app.premium.monthly",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Premium mensal",
+          "subscriptionGroupID": "21874170",
+          "type": "RecurringSubscription"
         }
       ]
     }

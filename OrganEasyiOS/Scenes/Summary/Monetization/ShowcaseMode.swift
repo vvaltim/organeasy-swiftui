@@ -28,6 +28,15 @@ enum ShowcaseMode {
         #endif
     }
 
+    /// Simula a assinatura Premium nos testes. Não existe no build da loja.
+    static var forcesPremium: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-forcePremium")
+        #else
+        false
+        #endif
+    }
+
     /// Reinicia o prazo da promoção nos testes automatizados.
     static var resetsPromotion: Bool {
         #if DEBUG
