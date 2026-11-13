@@ -28,6 +28,7 @@ actor MarketDataService {
     }
 
     private var cache: [InvestmentSector: CacheEntry] = [:]
+    private var allStocksCache: CacheEntry?
     private var fundamentals: [String: AssetFundamentals]?
     private let session: URLSession
 
@@ -62,6 +63,16 @@ actor MarketDataService {
 
         guard !assets.isEmpty else { throw ServiceError.unavailable }
         cache[sector] = CacheEntry(date: .now, assets: assets)
+        return assets
+    }
+
+    func allStocks() async throws -> [InvestmentAsset] {
+        if let allStocksCache, Date.now.timeIntervalSince(allStocksCache.date) < Constants.cacheLifetime {
+            return allStocksCache.assets
+        }
+        let assets = try MarketParser.market(from: await data(marketURL(type: "stock")), kind: .stock)
+        guard !assets.isEmpty else { throw ServiceError.unavailable }
+        allStocksCache = CacheEntry(date: .now, assets: assets)
         return assets
     }
 
