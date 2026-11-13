@@ -63,3 +63,4 @@ playground.xcworkspace
 .firebase/
 firebase-debug.log
 __pycache__/
+.superpowers/
