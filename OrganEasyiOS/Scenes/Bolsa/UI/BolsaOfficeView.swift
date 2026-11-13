@@ -41,7 +41,16 @@ struct BolsaOfficeView: View {
     }
 
     private func grid(tick: Bool) -> some View {
-        ForEach(Array(desks.enumerated()), id: \.element.id) { index, desk in
+        ZStack(alignment: .topLeading) {
+            ForEach(Array(desks.enumerated()), id: \.element.id) { index, desk in
+                cell(desk, at: index, tick: tick)
+            }
+        }
+        .frame(width: width, height: height, alignment: .topLeading)
+    }
+
+    private func cell(_ desk: BolsaDesk, at index: Int, tick: Bool) -> some View {
+        Group {
             let column = index % columns
             let row = index / columns
             Button { onSelect(desk) } label: {
