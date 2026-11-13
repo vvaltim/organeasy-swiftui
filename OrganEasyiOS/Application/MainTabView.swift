@@ -6,6 +6,7 @@ struct MainTabView: View {
         case home
         case assistant
         case investments
+        case bolsa
     }
 
     private enum FirstLaunch {
@@ -61,6 +62,10 @@ struct MainTabView: View {
 
             Tab("Investimentos", systemImage: "chart.line.uptrend.xyaxis", value: AppTab.investments) {
                 InvestmentsView()
+            }
+
+            Tab("Bolsa", systemImage: "building.2", value: AppTab.bolsa) {
+                BolsaView { selectedTab = .investments }
             }
         }
     }

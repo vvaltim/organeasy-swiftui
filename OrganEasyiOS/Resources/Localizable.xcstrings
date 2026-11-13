@@ -274,6 +274,62 @@
         }
       }
     },
+    "%@, alta de %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, up %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, sube %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, en hausse de %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, in rialzo del %2$@"
+          }
+        }
+      }
+    },
+    "%@, baixa de %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, down %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, baja %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, en baisse de %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, in ribasso del %2$@"
+          }
+        }
+      }
+    },
     "%@, pago, vencimento em %@": {
       "localizations": {
         "en": {
@@ -330,6 +386,34 @@
         }
       }
     },
+    "%lld altas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld up"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld al alza"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld en hausse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld in rialzo"
+          }
+        }
+      }
+    },
     "%lld ativos analisados em %@": {
       "localizations": {
         "en": {
@@ -354,6 +438,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld titoli analizzati in %@"
+          }
+        }
+      }
+    },
+    "%lld baixas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld down"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld a la baja"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld en baisse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld in ribasso"
           }
         }
       }
@@ -1240,6 +1352,34 @@
         }
       }
     },
+    "Atualizado às %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updated at %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizado a las %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis à jour à %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiornato alle %@"
+          }
+        }
+      }
+    },
     "Balanço": {
       "localizations": {
         "en": {
@@ -1320,6 +1460,62 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bilancio %@ della CVM. Quotazioni B3 tramite brapi."
+          }
+        }
+      }
+    },
+    "Bolsa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stocks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bolsa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bourse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borsa"
+          }
+        }
+      }
+    },
+    "Bolsa hoje": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stocks today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bolsa hoy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La Bourse aujourd'hui"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borsa oggi"
           }
         }
       }
@@ -3493,6 +3689,34 @@
         }
       }
     },
+    "Maiores altas e baixas entre as ações mais negociadas, com dados públicos e atraso. Não é recomendação de investimento.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biggest gainers and losers among the most traded Brazilian stocks, using delayed public data. Not investment advice."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mayores alzas y bajas entre las acciones más negociadas de Brasil, con datos públicos y retraso. No es una recomendación de inversión."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus fortes hausses et baisses parmi les actions brésiliennes les plus échangées, avec des données publiques différées. Ceci n'est pas un conseil en investissement."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maggiori rialzi e ribassi tra le azioni brasiliane più scambiate, con dati pubblici in ritardo. Non è una raccomandazione di investimento."
+          }
+        }
+      }
+    },
     "Maiores gastos do mês": {
       "localizations": {
         "en": {
@@ -3782,6 +4006,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mercato"
+          }
+        }
+      }
+    },
+    "Mercado fechado: mostrando o último pregão": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market closed: showing the last session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mercado cerrado: mostrando la última sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marché fermé : dernière séance affichée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mercato chiuso: ultima seduta"
           }
         }
       }
@@ -5001,6 +5253,34 @@
         }
       }
     },
+    "Preço": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Price"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prix"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prezzo"
+          }
+        }
+      }
+    },
     "Preço do título": {
       "localizations": {
         "en": {
@@ -5137,6 +5417,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prossime scadenze"
+          }
+        }
+      }
+    },
+    "Puxe para atualizar mais tarde.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pull to refresh later."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza para actualizar más tarde."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirez pour actualiser plus tard."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina per aggiornare più tardi."
           }
         }
       }
@@ -6181,6 +6489,34 @@
         }
       }
     },
+    "Sem variações no último pregão": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No changes in the last session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin variaciones en la última sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune variation lors de la dernière séance"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna variazione nell'ultima seduta"
+          }
+        }
+      }
+    },
     "Seu mês está no azul.": {
       "localizations": {
         "en": {
@@ -6917,6 +7253,34 @@
         }
       }
     },
+    "Variação no dia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day change"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variación del día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variation du jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variazione del giorno"
+          }
+        }
+      }
+    },
     "Veja a lista completa, com filtros e fundamentos": {
       "localizations": {
         "en": {
@@ -7109,6 +7473,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vedi bilancio completo"
+          }
+        }
+      }
+    },
+    "Ver em Investimentos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View in Investments"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver en Inversiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir dans Investissements"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vedi in Investimenti"
           }
         }
       }

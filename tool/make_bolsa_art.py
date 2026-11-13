@@ -83,6 +83,14 @@ def draw_desk(up):
     return outline(img)
 
 
+def draw_screen_glow():
+    img = canvas(48, 44)
+    draw = ImageDraw.Draw(img)
+    p = lambda a, b, c: iso(22, 12, a, b, c)
+    draw.polygon([p(5, 1.6, 11), p(5, 7.4, 11), p(5, 7.4, 17), p(5, 1.6, 17)], fill=(255, 255, 255, 255))
+    return img
+
+
 def draw_worker(mood, frame):
     img = canvas(16, 28)
     d = ImageDraw.Draw(img)
@@ -157,6 +165,7 @@ SPRITES = {
     "bolsaFloor": draw_floor,
     "bolsaDeskUp": lambda: draw_desk(True),
     "bolsaDeskDown": lambda: draw_desk(False),
+    "bolsaScreenGlow": draw_screen_glow,
     "bolsaWorkerUp": lambda: draw_worker("up", 0),
     "bolsaWorkerUp2": lambda: draw_worker("up", 1),
     "bolsaWorkerDown": lambda: draw_worker("down", 0),
