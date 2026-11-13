@@ -18,11 +18,12 @@ Uma aba visual e divertida: um escritório em pixel art, visto na diagonal (isom
 
 ## Abordagens consideradas
 1. Pixel art desenhada no código (SwiftUI Canvas): grátis e leve, bonecos mais simples.
-2. Arte gerada no PixelLab e animada no app. **Escolhida pelo usuário.**
-3. Misto. Descartada pela escolha acima.
+2. Arte gerada no PixelLab e animada no app. Descartada: o PixelLab é pago e a arte precisa ser grátis.
+3. Pixel art desenhada por um script no repositório (`tool/make_bolsa_art.py`), gerando PNGs incluídos no app. **Escolhida:** custo zero, sem depender de conta externa e fácil de regerar.
 
 ## Decisões
-- Arte original gerada no PixelLab (a referência é de um pacote pago e não é copiada): piso isométrico, mesa com monitor, funcionário comemorando e funcionário preocupado, plantas e decoração. Imagens incluídas no app.
+- Arte original desenhada pixel a pixel pelo script (a referência é de um pacote pago e não é copiada): piso isométrico, mesa com monitor, funcionário comemorando e funcionário preocupado, plantas e decoração. PNGs incluídos no app e ampliados sem suavização.
+- As peças são mostradas ao usuário para aprovação antes de entrarem no app.
 - No código: cor da tela, etiqueta, leve animação (balanço do boneco, piscar da tela) e toque.
 - Dados: a mesma fonte pública da aba Investimentos (brapi, lista de ações), filtrando pelas mais negociadas antes de escolher altas e baixas.
 
