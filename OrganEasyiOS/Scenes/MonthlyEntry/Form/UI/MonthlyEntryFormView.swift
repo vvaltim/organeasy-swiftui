@@ -61,6 +61,7 @@ struct MonthlyEntryFormView: View {
                 }
             }
             .navigationTitle("Nova Entrada")
+            .analyticsScreen("entry_form", class: "MonthlyEntryFormView")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {

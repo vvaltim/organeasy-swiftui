@@ -39,6 +39,7 @@ struct SummaryView: View {
                 }
             }
             .navigationTitle("Minha IA")
+            .analyticsScreen("assistant", class: "SummaryView")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 if !ShowcaseMode.isEnabled {

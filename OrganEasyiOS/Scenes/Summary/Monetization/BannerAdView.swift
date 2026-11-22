@@ -24,9 +24,22 @@ private struct BannerContainer: UIViewRepresentable {
         let banner = BannerView(adSize: size)
         banner.adUnitID = AdUnits.banner
         banner.rootViewController = UIApplication.shared.topViewController
+        banner.delegate = context.coordinator
         banner.load(AdsCoordinator.request())
         return banner
     }
 
     func updateUIView(_ uiView: BannerView, context: Context) {}
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    final class Coordinator: NSObject, BannerViewDelegate {
+        func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+            Task { @MainActor in AppAnalytics.log("ad_show", ["format": "banner", "placement": "bottom"]) }
+        }
+
+        func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: any Error) {
+            Task { @MainActor in AppAnalytics.log("ad_fail", ["format": "banner", "error": AppAnalytics.error(error)]) }
+        }
+    }
 }

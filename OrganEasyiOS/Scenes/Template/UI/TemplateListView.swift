@@ -37,6 +37,7 @@ struct TemplateListView: View {
             }
         }
         .navigationTitle("Recorrências")
+        .analyticsScreen("recurrences", class: "TemplateListView")
     }
     
     // MARK: - Not Paid Section

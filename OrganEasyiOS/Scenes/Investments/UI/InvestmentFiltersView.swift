@@ -34,6 +34,7 @@ struct InvestmentFiltersView: View {
                 }
             }
             .navigationTitle("Filtros")
+            .analyticsScreen("invest_filters", class: "InvestmentFiltersView")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

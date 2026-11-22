@@ -36,6 +36,7 @@ struct InvestmentOnboardingView: View {
         .padding(.top, Size.x8.rawValue)
         .background(Color(.systemGroupedBackground))
         .task { InvestmentEvent.onboardingStarted.log() }
+        .analyticsScreen("invest_onboarding", class: "InvestmentOnboardingView")
     }
 
     private var intro: some View {

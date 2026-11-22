@@ -24,6 +24,8 @@ struct MainTabView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var entries: [MonthlyEntry]
     @State private var selectedTab = FirstLaunch.initialTab()
+    @State private var isPresentingNewEntry = false
+    @Environment(\.scenePhase) private var scenePhase
 
     private var indexSignature: Int {
         var hasher = Hasher()
@@ -33,7 +35,10 @@ struct MainTabView: View {
             hasher.combine(entry.amount)
             hasher.combine(entry.dueDate)
             hasher.combine(entry.paymentDate)
+            hasher.combine(entry.type)
+            hasher.combine(entry.referenceMonth)
         }
+        hasher.combine(Calendar.current.startOfDay(for: .now))
         return hasher.finalize()
     }
 
@@ -43,7 +48,26 @@ struct MainTabView: View {
                 InvestmentFirebase.start()
                 LegacyDataImporter.runIfNeeded(into: modelContext)
             }
-            .task(id: indexSignature) { await BillStore.reindex(entries) }
+            .task(id: indexSignature) {
+                WidgetSync.update(with: entries)
+                await BillStore.reindex(entries)
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { WidgetSync.update(with: entries) }
+            }
+            .onOpenURL { url in
+                guard url.scheme == "organeasy" else { return }
+                selectedTab = .home
+                if url.host() == "nova" {
+                    isPresentingNewEntry = true
+                    AppAnalytics.log("widget_open", ["action": "new_entry"])
+                } else {
+                    AppAnalytics.log("widget_open", ["action": url.host() ?? "home"])
+                }
+            }
+            .sheet(isPresented: $isPresentingNewEntry) {
+                MonthlyEntryFormView(entryToEdit: nil)
+            }
         #if DEBUG
             .showcaseContainer()
         #endif

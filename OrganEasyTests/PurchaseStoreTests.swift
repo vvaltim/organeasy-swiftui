@@ -34,7 +34,7 @@ final class PurchaseStoreTests: XCTestCase {
         XCTAssertFalse(store.isAdsRemoved)
 
         let product = try XCTUnwrap(store.products[PurchaseProductID.yearlyPromo])
-        let result = try await store.purchase(product)
+        let result = try await store.purchase(product, source: "test")
         guard case .purchased = result else { return XCTFail("compra não concluída") }
         XCTAssertTrue(store.isAdsRemoved)
 

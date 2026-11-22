@@ -31,6 +31,7 @@ struct InvestmentDetailView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle(asset.symbol)
+            .analyticsScreen("invest_asset_detail", class: "InvestmentDetailView")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

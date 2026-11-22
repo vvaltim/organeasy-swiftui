@@ -59,6 +59,7 @@ struct StatementImportView: View {
                 }
             }
             .navigationTitle("Importar extrato")
+            .analyticsScreen("statement_import", class: "StatementImportView")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

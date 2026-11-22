@@ -22,6 +22,8 @@ struct InvestmentPaywallView: View {
     @State private var selectedID = PurchaseProductID.premiumYearly
     @State private var isWorking = false
     @State private var message: LocalizedStringKey?
+    @State private var openedAt = Date.now
+    @State private var didPurchase = false
 
     private enum LegalURL {
         static let terms = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
@@ -60,9 +62,22 @@ struct InvestmentPaywallView: View {
                 Button("OK", role: .cancel) {}
             }
         }
+        .analyticsScreen("paywall_premium", class: "InvestmentPaywallView")
         .task {
-            InvestmentEvent.paywallViewed(source.rawValue).log()
+            openedAt = .now
             await store.load()
+            InvestmentEvent.paywallViewed(source.rawValue).log()
+            AppAnalytics.log("paywall_view", [
+                "source": source.rawValue,
+                "products": [PurchaseProductID.premiumYearly, PurchaseProductID.premiumMonthly].joined(separator: ",")
+            ])
+        }
+        .onDisappear {
+            guard !didPurchase else { return }
+            AppAnalytics.log("paywall_close", [
+                "source": source.rawValue,
+                "seconds": Int(Date.now.timeIntervalSince(openedAt))
+            ])
         }
     }
 
@@ -201,8 +216,9 @@ struct InvestmentPaywallView: View {
         Task {
             defer { isWorking = false }
             do {
-                if case .purchased = try await store.purchase(selected) {
+                if case .purchased = try await store.purchase(selected, source: "premium_\(source.rawValue)") {
                     InvestmentEvent.purchaseCompleted(selected.id).log()
+                    didPurchase = true
                     dismiss()
                 }
             } catch {

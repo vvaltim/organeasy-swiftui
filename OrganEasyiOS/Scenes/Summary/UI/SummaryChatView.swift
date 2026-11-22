@@ -132,6 +132,7 @@ struct SummaryChatView: View {
             inputBar
         }
         .navigationTitle("Minha IA")
+        .analyticsScreen("assistant_chat", class: "SummaryChatView")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
     }

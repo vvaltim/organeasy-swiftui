@@ -38,9 +38,16 @@ final class SummaryAIAccess: ObservableObject {
         defer { isLoadingVideo = false }
 
         switch await AdsCoordinator.shared.presentRewarded() {
-        case .earned, .unavailable:
+        case .earned:
+            AppAnalytics.log("ad_show", ["format": "rewarded", "placement": "assistant_unlock"])
+            AppAnalytics.log("ad_reward", ["placement": "assistant_unlock"])
+            unlockedUntil = Date.now.addingTimeInterval(Constants.unlockDuration)
+        case .unavailable:
+            AppAnalytics.log("ad_fail", ["format": "rewarded", "error": "unavailable"])
             unlockedUntil = Date.now.addingTimeInterval(Constants.unlockDuration)
         case .dismissed:
+            AppAnalytics.log("ad_show", ["format": "rewarded", "placement": "assistant_unlock"])
+            AppAnalytics.log("ad_offer_declined", ["placement": "assistant_unlock"])
             wasVideoDismissed = true
         }
     }

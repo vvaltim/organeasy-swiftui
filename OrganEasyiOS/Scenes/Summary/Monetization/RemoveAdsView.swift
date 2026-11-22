@@ -9,6 +9,8 @@ struct RemoveAdsView: View {
 
     @State private var isWorking = false
     @State private var message: LocalizedStringKey?
+    @State private var openedAt = Date.now
+    @State private var didPurchase = false
 
     private enum LegalURL {
         static let terms = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
@@ -79,7 +81,22 @@ struct RemoveAdsView: View {
                     .accessibilityLabel("Fechar")
                 }
             }
-            .task { await store.load() }
+            .analyticsScreen("paywall_remove_ads", class: "RemoveAdsView")
+            .task {
+                openedAt = .now
+                await store.load()
+                AppAnalytics.log("paywall_view", [
+                    "source": "remove_ads_button",
+                    "products": (isPromotionActive ? PurchaseProductID.yearlyPromo : PurchaseProductID.yearly)
+                ])
+            }
+            .onDisappear {
+                guard !didPurchase else { return }
+                AppAnalytics.log("paywall_close", [
+                    "source": "remove_ads_button",
+                    "seconds": Int(Date.now.timeIntervalSince(openedAt))
+                ])
+            }
         }
     }
 
@@ -145,8 +162,10 @@ struct RemoveAdsView: View {
         Task {
             defer { isWorking = false }
             do {
-                switch try await store.purchase(product) {
-                case .purchased: dismiss()
+                switch try await store.purchase(product, source: "remove_ads_button") {
+                case .purchased:
+                    didPurchase = true
+                    dismiss()
                 case .pending: message = "Sua compra está aguardando aprovação."
                 case .cancelled: break
                 }

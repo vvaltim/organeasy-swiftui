@@ -43,14 +43,6 @@ struct MonthlyEntryListView: View {
         return allEntries.filter { $0.referenceMonth == currentReference }
     }
     
-    private var income: Double {
-        entriesForCurrentReference.filter { $0.type == .income }.map(\.amount).reduce(.zero, +)
-    }
-    
-    private var expense: Double {
-        entriesForCurrentReference.filter { $0.type == .expense }.map(\.amount).reduce(.zero, +)
-    }
-    
     var monthFormatted: String {
         let base = referenceDate
         let date = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
@@ -75,6 +67,7 @@ struct MonthlyEntryListView: View {
                 }
             }
             .navigationTitle("Home")
+            .analyticsScreen("home", class: "MonthlyEntryListView")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -184,30 +177,62 @@ struct MonthlyEntryListView: View {
     
     var headerSection: some View {
         Section {
-            MonthlyEntrySummaryHeaderView(
-                income: income,
-                expense: expense
+            MonthlyEntryInsightsHeaderView(
+                entries: entriesForCurrentReference,
+                monthDate: currentMonthDate
             )
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets(top: .zero, leading: Size.x4.rawValue, bottom: .zero, trailing: Size.x4.rawValue))
         }
     }
-    
-    // MARK: - Not Paid Section
-    
+
+    // MARK: - Items grouped by day
+
+    private var entriesByDay: [(day: Date, entries: [MonthlyEntry])] {
+        let calendar = Calendar.current
+        let groups = Dictionary(grouping: entriesForCurrentReference) { calendar.startOfDay(for: $0.dueDate) }
+        return groups.keys.sorted().map { day in (day, groups[day] ?? []) }
+    }
+
+    @ViewBuilder
     var itensSection: some View {
-        Section {
-            if entriesForCurrentReference.isEmpty {
-                Text("Nenhum item")
-                    .foregroundStyle(.secondary)
-            } else {
-                ForEach(entriesForCurrentReference, id: \.id) { entry in
+        ForEach(entriesByDay, id: \.day) { group in
+            Section {
+                ForEach(group.entries, id: \.id) { entry in
                     MonthlyEntryRowView(entry: entry) {
                         openMonthlyEntry(with: entry)
                     } onTogglePaid: {
                         togglePayment(for: entry)
                     }
                 }
+            } header: {
+                dayHeader(group.day, entries: group.entries)
             }
         }
+    }
+
+    private func dayHeader(_ day: Date, entries: [MonthlyEntry]) -> some View {
+        let total = entries.map { $0.type == .income ? $0.amount : -$0.amount }.reduce(.zero, +)
+        return HStack {
+            Text(day, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated))
+                .textCase(.uppercase)
+            if Calendar.current.isDateInToday(day) {
+                Text("Hoje")
+                    .textCase(.uppercase)
+                    .foregroundStyle(.tint)
+            }
+            Spacer()
+            Text(total, format: .currency(code: Locale.current.currency?.identifier ?? "BRL").sign(strategy: .always()))
+                .monospacedDigit()
+        }
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(.secondary)
+    }
+
+    private var currentMonthDate: Date {
+        let base = referenceDate
+        let date = Calendar.current.date(byAdding: DateComponents(month: referenceOffset), to: base) ?? base
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: date)) ?? date
     }
     
     // MARK:  Empty View

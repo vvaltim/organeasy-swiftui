@@ -358,6 +358,34 @@
         }
       }
     },
+    "%lld%% pago": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%% paid"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%% pagado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%% payé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%% pagato"
+          }
+        }
+      }
+    },
     "+%lld ativos no ranking": {
       "localizations": {
         "en": {
@@ -1240,6 +1268,34 @@
         }
       }
     },
+    "Atrasada há %lld dias": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld days overdue"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atrasada hace %lld días"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En retard de %lld jours"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In ritardo di %lld giorni"
+          }
+        }
+      }
+    },
     "Balanço": {
       "localizations": {
         "en": {
@@ -1901,6 +1957,34 @@
         }
       }
     },
+    "Despesas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gastos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépenses"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spese"
+          }
+        }
+      }
+    },
     "Deve sobrar neste mês": {
       "localizations": {
         "en": {
@@ -1925,6 +2009,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dovrebbe avanzare questo mese"
+          }
+        }
+      }
+    },
+    "Dia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giorno"
           }
         }
       }
@@ -2535,6 +2647,34 @@
         }
       }
     },
+    "Farmácia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pharmacy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farmacia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pharmacie"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farmacia"
+          }
+        }
+      }
+    },
     "Fechar": {
       "localizations": {
         "en": {
@@ -2839,6 +2979,62 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fondi quotati"
+          }
+        }
+      }
+    },
+    "Gastos por dia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spending per day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gastos por día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépenses par jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spese al giorno"
+          }
+        }
+      }
+    },
+    "Hoje": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd'hui"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oggi"
           }
         }
       }
@@ -3558,12 +3754,6 @@
             "value": "More options"
           }
         },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mais opções"
-          }
-        },
         "es": {
           "stringUnit": {
             "state": "translated",
@@ -3580,6 +3770,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Altre opzioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mais opções"
           }
         }
       }
@@ -3954,6 +4150,34 @@
         }
       }
     },
+    "Média": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Average"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyenne"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Media"
+          }
+        }
+      }
+    },
     "Mês": {
       "localizations": {
         "en": {
@@ -4180,6 +4404,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Questo mese: %@ di uscite, %@ di entrate e %@ ancora da pagare."
+          }
+        }
+      }
+    },
+    "Netflix": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netflix"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netflix"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netflix"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netflix"
           }
         }
       }
@@ -4793,6 +5045,34 @@
     "OrganEasy Premium": {
       "shouldTranslate": false
     },
+    "Outros": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Others"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autres"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altro"
+          }
+        }
+      }
+    },
     "Pagamento": {
       "localizations": {
         "en": {
@@ -4823,6 +5103,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pagamento"
+          }
+        }
+      }
+    },
+    "Pago": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paid"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Payé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagato"
           }
         }
       }
@@ -5508,6 +5816,34 @@
         }
       }
     },
+    "Recebido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Received"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recibido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reçu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ricevuto"
+          }
+        }
+      }
+    },
     "Receita": {
       "localizations": {
         "en": {
@@ -5538,6 +5874,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Receita"
+          }
+        }
+      }
+    },
+    "Receitas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Income"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingresos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenus"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrate"
           }
         }
       }
@@ -5910,6 +6274,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saldo"
+          }
+        }
+      }
+    },
+    "Saldo do mês": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Month balance"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo del mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solde du mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo del mese"
           }
         }
       }
@@ -6810,7 +7202,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Importe"
+            "value": "Valor"
           }
         },
         "fr": {
@@ -6990,7 +7382,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Échéance demain"
+            "value": "À payer demain"
           }
         },
         "it": {
@@ -7018,7 +7410,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Échéance dans %lld jours"
+            "value": "À payer dans %lld jours"
           }
         },
         "it": {
@@ -7046,7 +7438,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Échéance aujourd’hui"
+            "value": "À payer aujourd'hui"
           }
         },
         "it": {
@@ -7311,6 +7703,34 @@
           "stringUnit": {
             "state": "translated",
             "value": "anno"
+          }
+        }
+      }
+    },
+    "média %@/dia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "avg %@/day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "media %@/día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "moy. %@/jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "media %@/giorno"
           }
         }
       }

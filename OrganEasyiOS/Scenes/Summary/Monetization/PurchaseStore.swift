@@ -49,26 +49,58 @@ final class PurchaseStore: ObservableObject {
             products = Dictionary(uniqueKeysWithValues: loaded.map { ($0.id, $0) })
         } catch {
             print("Failed to load products: \(error)")
+            AppAnalytics.log("products_load_fail", ["error": AppAnalytics.error(error)])
+            return
+        }
+        if products.isEmpty {
+            AppAnalytics.log("products_load_fail", ["error": "empty"])
         }
     }
 
-    func purchase(_ product: Product) async throws -> PurchaseResult {
-        switch try await product.purchase() {
-        case .success(let verification):
-            await handle(verification)
-            return .purchased
-        case .pending:
-            return .pending
-        case .userCancelled:
-            return .cancelled
-        @unknown default:
-            return .cancelled
+    func purchase(_ product: Product, source: String) async throws -> PurchaseResult {
+        let base: [String: Any] = ["product_id": product.id, "source": source]
+        AppAnalytics.log("purchase_start", base.merging([
+            "price": NSDecimalNumber(decimal: product.price).doubleValue,
+            "currency": product.priceFormatStyle.currencyCode
+        ]) { $1 })
+        do {
+            switch try await product.purchase() {
+            case .success(let verification):
+                guard case .verified = verification else {
+                    AppAnalytics.log("purchase_fail", base.merging(["error": "unverified"]) { $1 })
+                    return .cancelled
+                }
+                await handle(verification)
+                AppAnalytics.log("purchase_success", base.merging([
+                    "value": NSDecimalNumber(decimal: product.price).doubleValue,
+                    "currency": product.priceFormatStyle.currencyCode
+                ]) { $1 })
+                return .purchased
+            case .pending:
+                AppAnalytics.log("purchase_pending", base)
+                return .pending
+            case .userCancelled:
+                AppAnalytics.log("purchase_cancel", base)
+                return .cancelled
+            @unknown default:
+                return .cancelled
+            }
+        } catch {
+            AppAnalytics.log("purchase_fail", base.merging(["error": AppAnalytics.error(error)]) { $1 })
+            throw error
         }
     }
 
     func restore() async throws {
-        try await AppStore.sync()
+        AppAnalytics.log("restore_start")
+        do {
+            try await AppStore.sync()
+        } catch {
+            AppAnalytics.log("restore_fail", ["error": AppAnalytics.error(error)])
+            throw error
+        }
         await refreshEntitlements()
+        AppAnalytics.log("restore_success", ["restored": (isAdsRemoved || isPremium) ? 1 : 0])
     }
 
     func refreshEntitlements() async {
@@ -84,6 +116,7 @@ final class PurchaseStore: ObservableObject {
         }
         isAdsRemoved = hasEntitlement || ShowcaseMode.forcesPremium
         isPremium = hasPremium || ShowcaseMode.forcesPremium
+        AppAnalytics.setPremium(isPremium)
     }
 
     private func handle(_ result: VerificationResult<Transaction>) async {

@@ -18,6 +18,8 @@ enum InvestmentFirebase {
             .adPersonalization: .denied,
             .analyticsStorage: .granted
         ])
+        AppAnalytics.setLanguage()
+        AppAnalytics.setPremium(PurchaseStore.shared.isPremium)
     }
 
     static func save(_ fields: [String: Any]) async {
@@ -60,12 +62,11 @@ enum InvestmentEvent {
 
     @MainActor
     func log() {
-        guard !ShowcaseMode.isEnabled, FirebaseApp.app() != nil else { return }
-        Analytics.logEvent(name, parameters: parameters)
+        AppAnalytics.log(name, parameters)
 
         if case .onboardingCompleted(let risk, let sector) = self {
-            Analytics.setUserProperty(risk.rawValue, forName: "risk_profile")
-            Analytics.setUserProperty(sector.rawValue, forName: "sector")
+            AppAnalytics.setUserProperty(risk.rawValue, "risk_profile")
+            AppAnalytics.setUserProperty(sector.rawValue, "sector")
         }
     }
 

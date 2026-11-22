@@ -4,35 +4,52 @@ struct MonthlyEntryRowView: View {
     let entry: MonthlyEntry
     let onEdit: () -> Void
     let onTogglePaid: () -> Void
-    
-    private var isStrike: Bool {
-        entry.paymentDate != nil
+
+    private var isPaid: Bool { entry.paymentDate != nil }
+    private var isIncome: Bool { entry.type == .income }
+    private var currencyCode: String { Locale.current.currency?.identifier ?? "BRL" }
+
+    private var daysUntilDue: Int {
+        let calendar = Calendar.current
+        return calendar.dateComponents(
+            [.day],
+            from: calendar.startOfDay(for: .now),
+            to: calendar.startOfDay(for: entry.dueDate)
+        ).day ?? .zero
     }
 
     var body: some View {
         Button(action: onEdit) {
-            HStack {
-                ZStack {
-                    Text(entry.dueDate, format: Date.FormatStyle().day())
-                        .font(.title3)
-                        .monospacedDigit()
-                        .frame(width: Size.x36.rawValue, alignment: .leading)
-                        .strikethrough(isStrike)
+            HStack(spacing: Size.x12.rawValue) {
+                EntryIconTile(name: entry.name, isIncome: isIncome)
+                    .overlay(alignment: .bottomTrailing) {
+                        if isPaid {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.system(size: 13, weight: .bold))
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(.white, .green)
+                                .offset(x: 4, y: 4)
+                        }
+                    }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(entry.name)
+                        .font(.body.weight(.medium))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                    status
+                        .font(.caption)
                 }
 
-                Text(entry.name)
-                    .font(.headline)
-                    .foregroundStyle(.primary)
-                    .strikethrough(isStrike)
+                Spacer(minLength: Size.x8.rawValue)
 
-                Spacer()
-
-                Text((entry.type == .expense ? -1 : 1) * (entry.amount), format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                    .font(.subheadline)
+                Text((isIncome ? 1 : -1) * entry.amount, format: .currency(code: currencyCode).sign(strategy: .always()))
+                    .font(.body.weight(.semibold))
                     .monospacedDigit()
-                    .foregroundStyle(.secondary)
-                    .strikethrough(isStrike)
+                    .foregroundStyle(isIncome ? Color.green : Color.primary)
+                    .strikethrough(isPaid && !isIncome, color: .secondary)
             }
+            .opacity(isPaid ? 0.55 : 1)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -42,24 +59,36 @@ struct MonthlyEntryRowView: View {
             }.tint(.blue)
         }
     }
+
+    @ViewBuilder
+    private var status: some View {
+        if isPaid {
+            Text(isIncome ? "Recebido" : "Pago")
+                .foregroundStyle(.secondary)
+        } else if daysUntilDue < 0 {
+            Text("Atrasada há \(-daysUntilDue) dias")
+                .foregroundStyle(.red)
+        } else if daysUntilDue == 0 {
+            Text("Vence hoje")
+                .foregroundStyle(.orange)
+        } else if daysUntilDue == 1 {
+            Text("Vence amanhã")
+                .foregroundStyle(.orange)
+        } else {
+            Text("Vence em \(daysUntilDue) dias")
+                .foregroundStyle(.secondary)
+        }
+    }
 }
 
 // MARK: - Preview
 
 #Preview {
-    MonthlyEntryRowView(
-        entry: MonthlyEntry(
-            name: "Nubank",
-            amount: 12344.56,
-            referenceMonth: "26/06",
-            dueDate: Date.now,
-            type: .expense
-        ),
-        onEdit: {
-            
-        },
-        onTogglePaid: {
-            
-        }
-    )
+    List {
+        MonthlyEntryRowView(
+            entry: MonthlyEntry(name: "Cartão Nubank", amount: 1234.56, referenceMonth: "26/06", dueDate: .now, type: .expense),
+            onEdit: {},
+            onTogglePaid: {}
+        )
+    }
 }

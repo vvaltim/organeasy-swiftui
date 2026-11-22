@@ -91,6 +91,7 @@ struct InvestmentListView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Investimentos")
+            .analyticsScreen("investments", class: "InvestmentListView")
             .toolbar { toolbar }
             .overlay(alignment: .bottom) {
                 if lockedCount > .zero, model.state == .loaded {

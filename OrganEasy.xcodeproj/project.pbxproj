@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0000000000000000000001 /* OrganEasyWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DD0000000000000000000003 /* OrganEasyWidgets.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AA0000000000000000000005 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000003 /* GoogleMobileAds */; };
 		AA0000000000000000000006 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000004 /* GoogleUserMessagingPlatform */; };
-		AA0000000000000000000014 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000011 /* FirebaseAnalyticsCore */; };
+		AA0000000000000000000014 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000011 /* FirebaseAnalytics */; };
 		AA0000000000000000000015 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000012 /* FirebaseAuth */; };
 		AA0000000000000000000016 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000013 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DD000000000000000000000B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000000000000000000000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD0000000000000000000010;
+			remoteInfo = OrganEasyWidgets;
+		};
 		BB000000000000000000000B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 000000000000000000000000 /* Project object */;
@@ -31,7 +39,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DD0000000000000000000020 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DD0000000000000000000001 /* OrganEasyWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		DD0000000000000000000003 /* OrganEasyWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OrganEasyWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0000000000000000000003 /* OrganEasyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrganEasyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0000000000000000000003 /* OrganEasyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrganEasyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		000000000000000000000120 /* OrganEasy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrganEasy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +63,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		DD0000000000000000000004 /* OrganEasyWidgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = OrganEasyWidgets;
+			sourceTree = "<group>";
+		};
+		DD0000000000000000000005 /* WidgetShared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WidgetShared;
+			sourceTree = "<group>";
+		};
 		000000000000000000000010 /* OrganEasyiOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OrganEasyiOS;
@@ -63,12 +96,17 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DD0000000000000000000006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 		000000000000000130000000 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				AA0000000000000000000005 /* GoogleMobileAds in Frameworks */,
 				AA0000000000000000000006 /* GoogleUserMessagingPlatform in Frameworks */,
-				AA0000000000000000000014 /* FirebaseAnalyticsCore in Frameworks */,
+				AA0000000000000000000014 /* FirebaseAnalytics in Frameworks */,
 				AA0000000000000000000015 /* FirebaseAuth in Frameworks */,
 				AA0000000000000000000016 /* FirebaseFirestore in Frameworks */,
 			);
@@ -92,6 +130,8 @@
 				D183ED4F2FE9D51200396B36 /* OrganEasy-Info.plist */,
 				D16817D42FD89A200073C0D8 /* Shared */,
 				000000000000000000000010 /* OrganEasyiOS */,
+				DD0000000000000000000005 /* WidgetShared */,
+				DD0000000000000000000004 /* OrganEasyWidgets */,
 				BB0000000000000000000002 /* OrganEasyTests */,
 				CC0000000000000000000002 /* OrganEasyUITests */,
 				000000000000000000000020 /* Products */,
@@ -105,6 +145,7 @@
 				000000000000000000000120 /* OrganEasy.app */,
 				BB0000000000000000000003 /* OrganEasyTests.xctest */,
 				CC0000000000000000000003 /* OrganEasyUITests.xctest */,
+				DD0000000000000000000003 /* OrganEasyWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +153,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DD0000000000000000000010 /* OrganEasyWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD0000000000000000000011 /* Build configuration list for PBXNativeTarget "OrganEasyWidgets" */;
+			buildPhases = (
+				DD0000000000000000000007 /* Sources */,
+				DD0000000000000000000006 /* Frameworks */,
+				DD0000000000000000000008 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				DD0000000000000000000004 /* OrganEasyWidgets */,
+				DD0000000000000000000005 /* WidgetShared */,
+			);
+			name = OrganEasyWidgets;
+			productName = OrganEasyWidgets;
+			productReference = DD0000000000000000000003 /* OrganEasyWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		000000000000000100000000 /* OrganEasy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 000000000000000110000000 /* Build configuration list for PBXNativeTarget "OrganEasy" */;
@@ -119,18 +179,23 @@
 				000000000000000120000000 /* Sources */,
 				000000000000000130000000 /* Frameworks */,
 				000000000000000140000000 /* Resources */,
+				DD0000000000000000000020 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
+			);
+			dependencies = (
+				DD000000000000000000000A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				000000000000000000000010 /* OrganEasyiOS */,
 				D16817D42FD89A200073C0D8 /* Shared */,
+				DD0000000000000000000005 /* WidgetShared */,
 			);
 			name = OrganEasy;
 			packageProductDependencies = (
 				AA0000000000000000000003 /* GoogleMobileAds */,
 				AA0000000000000000000004 /* GoogleUserMessagingPlatform */,
-				AA0000000000000000000011 /* FirebaseAnalyticsCore */,
+				AA0000000000000000000011 /* FirebaseAnalytics */,
 				AA0000000000000000000012 /* FirebaseAuth */,
 				AA0000000000000000000013 /* FirebaseFirestore */,
 			);
@@ -221,11 +286,17 @@
 				000000000000000100000000 /* OrganEasy */,
 				BB0000000000000000000001 /* OrganEasyTests */,
 				CC0000000000000000000001 /* OrganEasyUITests */,
+				DD0000000000000000000010 /* OrganEasyWidgets */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DD0000000000000000000008 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
 		000000000000000140000000 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
@@ -244,6 +315,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DD0000000000000000000007 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 		000000000000000120000000 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
@@ -262,6 +338,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DD000000000000000000000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = DD0000000000000000000010 /* OrganEasyWidgets */;
+			targetProxy = DD000000000000000000000B /* PBXContainerItemProxy */;
+		};
 		BB000000000000000000000A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 000000000000000100000000 /* OrganEasy */;
@@ -275,6 +357,74 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		DD0000000000000000000012 /* Debug configuration for PBXNativeTarget "OrganEasyWidgets" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = OrganEasyWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "OrganEasyWidgets-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = OrganEasy;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.2;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		DD0000000000000000000013 /* Release configuration for PBXNativeTarget "OrganEasyWidgets" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = OrganEasyWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = R34UAPPFD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "OrganEasyWidgets-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = OrganEasy;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.2;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		000000000000000011000000 /* Debug configuration for PBXProject "OrganEasy" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -415,7 +565,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "OrganEasy Colors";
 				CODE_SIGN_ENTITLEMENTS = OrganEasy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
@@ -435,7 +585,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -457,7 +607,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "OrganEasy Colors";
 				CODE_SIGN_ENTITLEMENTS = OrganEasy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
@@ -477,7 +627,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -497,11 +647,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app.OrganEasyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -518,11 +668,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app.OrganEasyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -539,11 +689,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app.OrganEasyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -558,11 +708,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = R34UAPPFD3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.vanio.walter.app.OrganEasyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -576,6 +726,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DD0000000000000000000011 /* Build configuration list for PBXNativeTarget "OrganEasyWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD0000000000000000000012 /* Debug configuration for PBXNativeTarget "OrganEasyWidgets" */,
+				DD0000000000000000000013 /* Release configuration for PBXNativeTarget "OrganEasyWidgets" */,
+			);
+			defaultConfigurationName = Release;
+		};
 		000000000000000010000000 /* Build configuration list for PBXProject "OrganEasy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -648,10 +806,10 @@
 			package = AA0000000000000000000002 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
 			productName = GoogleUserMessagingPlatform;
 		};
-		AA0000000000000000000011 /* FirebaseAnalyticsCore */ = {
+		AA0000000000000000000011 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA0000000000000000000010 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsCore;
+			productName = FirebaseAnalytics;
 		};
 		AA0000000000000000000012 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
