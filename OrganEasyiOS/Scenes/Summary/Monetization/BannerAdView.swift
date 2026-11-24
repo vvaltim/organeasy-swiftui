@@ -34,6 +34,10 @@ private struct BannerContainer: UIViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator() }
 
     final class Coordinator: NSObject, BannerViewDelegate {
+        func bannerView(_ bannerView: BannerView, didRecordPaidEventWith adValue: AdValue) {
+            Task { @MainActor in AdsCoordinator.logImpression(adValue, format: "banner", placement: "bottom") }
+        }
+
         func bannerViewDidReceiveAd(_ bannerView: BannerView) {
             Task { @MainActor in AppAnalytics.log("ad_show", ["format": "banner", "placement": "bottom"]) }
         }

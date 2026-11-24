@@ -8,6 +8,7 @@ struct SummaryView: View {
 
     @ObservedObject private var ads = AdsCoordinator.shared
     @ObservedObject private var store = PurchaseStore.shared
+    @ObservedObject private var engagement = Engagement.shared
 
     @State private var promotionEnd: Date?
     @State private var isShowingRemoveAds = false
@@ -26,7 +27,7 @@ struct SummaryView: View {
     }
 
     private var isBannerVisible: Bool {
-        ads.canShowAds && !store.isAdsRemoved && !ShowcaseMode.isEnabled
+        ads.isBannerEnabled && !store.isAdsRemoved && !ShowcaseMode.isEnabled
     }
 
     var body: some View {
@@ -47,6 +48,14 @@ struct SummaryView: View {
                         Menu {
                             importButton
                             ExportEntriesButton()
+                            Button {
+                                Task { await engagement.setReminders(!engagement.remindersEnabled) }
+                            } label: {
+                                Label(
+                                    engagement.remindersEnabled ? "Desligar lembrete diário" : "Ligar lembrete diário",
+                                    systemImage: engagement.remindersEnabled ? "bell.slash" : "bell"
+                                )
+                            }
                         } label: {
                             Label("Importar ou exportar dados", systemImage: SummaryIcon.transfer.rawValue)
                         }

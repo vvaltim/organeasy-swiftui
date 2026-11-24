@@ -46,6 +46,9 @@ struct MainTabView: View {
         tabs
             .task {
                 InvestmentFirebase.start()
+                AdsConfig.fetch()
+                await PurchaseStore.shared.load()
+                await AdsCoordinator.shared.prepare()
                 LegacyDataImporter.runIfNeeded(into: modelContext)
             }
             .task(id: indexSignature) {
@@ -54,6 +57,7 @@ struct MainTabView: View {
             }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active { WidgetSync.update(with: entries) }
+                Task { await AdsCoordinator.shared.scenePhaseChanged(active: phase == .active) }
             }
             .onOpenURL { url in
                 guard url.scheme == "organeasy" else { return }

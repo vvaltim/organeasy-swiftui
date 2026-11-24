@@ -174,6 +174,7 @@ struct MonthlyEntryFormView: View {
     // MARK:  Functions
     
     private func saveEntry() {
+        var isNewEntry = false
         let referenceMonth = dueDate.getReferenceMonth()
         
         if let entry = entryToEdit {
@@ -196,11 +197,16 @@ struct MonthlyEntryFormView: View {
                 entry.paymentDate = paymentDate
             }
             modelContext.insert(entry)
+            isNewEntry = true
         }
         
         saveTemplate()
         
         dismiss()
+        if isNewEntry {
+            Engagement.shared.entrySaved()
+        }
+        AdsCoordinator.shared.actionCompleted()
     }
     
     private func deleteEntry(with entry: MonthlyEntry) {

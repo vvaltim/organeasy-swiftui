@@ -49,7 +49,7 @@ struct InvestmentListView: View {
     @State private var isConfirmingReset = false
 
     private var isBannerVisible: Bool {
-        ads.canShowAds && !store.isAdsRemoved && !ShowcaseMode.isEnabled
+        ads.isBannerEnabled && !store.isAdsRemoved && !ShowcaseMode.isEnabled
     }
 
     private var items: [RankedAsset] {
